@@ -1,17 +1,117 @@
 [gd_scene format=3 uid="uid://do7604my6ffoh"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_hsx7o"]
+[ext_resource type="Script" uid="uid://csk36hqgr0qpy" path="res://player.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bsu7qvfxp2gjy" path="res://clue_tablet.gd" id="2_0xm2m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
 size = Vector3(3, 0.2, 8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hsx7o"]
 size = Vector3(3, 0.2, 8)
 
+[sub_resource type="BoxMesh" id="BoxMesh_hsx7o"]
+size = Vector3(3, 0.2, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(0.31764707, 0.29411766, 0.2627451, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
+size = Vector3(0.2, 4, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_om671"]
+size = Vector3(0.2, 3, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_272bh"]
+size = Vector3(0.2, 3, 8)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hsx7o"]
+radius = 0.3
+height = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_61ryg"]
+size = Vector3(0.08, 0.6, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_61ryg"]
+size = Vector3(0.08, 0.6, 0.8)
+
 [node name="main" type="Node3D" unique_id=1027819120]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1464587181]
-mesh = SubResource("BoxMesh_hsx7o")
+mesh = SubResource("BoxMesh_0xm2m")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=2020941483]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=2006738414]
 shape = SubResource("BoxShape3D_hsx7o")
+
+[node name="Ceiling" type="MeshInstance3D" parent="." unique_id=876373144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 0)
+mesh = SubResource("BoxMesh_hsx7o")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ceiling" unique_id=863085576]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling/StaticBody3D" unique_id=943430671]
+shape = SubResource("BoxShape3D_hsx7o")
+
+[node name="LeftWall" type="MeshInstance3D" parent="." unique_id=2027206492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 1.6, 0)
+material_override = SubResource("StandardMaterial3D_ig7tw")
+mesh = SubResource("BoxMesh_1bvp3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LeftWall" unique_id=619553074]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftWall/StaticBody3D" unique_id=2104783947]
+shape = SubResource("BoxShape3D_om671")
+
+[node name="RightWall" type="MeshInstance3D" parent="." unique_id=1409220519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 1.6, 0)
+material_override = SubResource("StandardMaterial3D_ig7tw")
+mesh = SubResource("BoxMesh_272bh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RightWall" unique_id=1974502806]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightWall/StaticBody3D" unique_id=1738873700]
+shape = SubResource("BoxShape3D_om671")
+
+[node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 3)
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2089584757]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_hsx7o")
+
+[node name="Camera3D" type="Camera3D" parent="player" unique_id=1116402234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="player/Camera3D" unique_id=1471761672]
+light_energy = 3.0
+shadow_enabled = true
+spot_range = 12.0
+
+[node name="InteractRay" type="RayCast3D" parent="player/Camera3D" unique_id=2079870308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+target_position = Vector3(0, 0, -2)
+
+[node name="ClueTablet" type="MeshInstance3D" parent="." unique_id=855525326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 1.4, -1.5)
+mesh = SubResource("BoxMesh_61ryg")
+script = ExtResource("2_0xm2m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ClueTablet" unique_id=1619279671]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClueTablet/StaticBody3D" unique_id=440817063]
+shape = SubResource("BoxShape3D_61ryg")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=623784391]
+
+[node name="InteractPrompt" type="Label" parent="HUD" unique_id=846209084]
+visible = false
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 118.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 24
+text = "按 E 阅读石板"
