@@ -2,6 +2,7 @@ extends Node3D
 
 ## Cascading rising-spike trap for an east-west corridor span.
 ## Mid trigger -> floor shake -> rows rise from +X (right) to -X (left), slow then fast.
+## Place under an unscaled parent (scene root). Scaled ancestors break Area3D overlap.
 
 @export var corridor_length := 11.0
 @export var corridor_width := 3.0
@@ -31,6 +32,7 @@ var _respawn_busy := false
 
 var _floor_root: Node3D
 var _floor_base_pos := Vector3.ZERO
+var _trigger: Area3D
 var _rows: Array[Dictionary] = []
 var _prompt: Label
 var _rng := RandomNumberGenerator.new()
@@ -40,8 +42,9 @@ func _ready() -> void:
 	_rng.randomize()
 	_prompt = _resolve_prompt()
 	_build_geometry()
-	var trigger: Area3D = $TriggerArea
-	trigger.body_entered.connect(_on_trigger_entered)
+	if _trigger:
+		_trigger.body_entered.connect(_on_trigger_entered)
+		_trigger.set_deferred("monitoring", true)
 
 
 func _resolve_prompt() -> Label:
@@ -55,6 +58,13 @@ func _resolve_prompt() -> Label:
 		if label is Label:
 			return label
 	return null
+
+
+func _configure_area(area: Area3D) -> void:
+	area.collision_layer = 1
+	area.collision_mask = 1
+	area.monitoring = true
+	area.monitorable = false
 
 
 func _build_geometry() -> void:
@@ -86,6 +96,8 @@ func _build_geometry() -> void:
 
 	var floor_body := StaticBody3D.new()
 	floor_body.name = "FloorBody"
+	floor_body.collision_layer = 1
+	floor_body.collision_mask = 1
 	var floor_cs := CollisionShape3D.new()
 	var floor_shape := BoxShape3D.new()
 	floor_shape.size = Vector3(corridor_length, floor_thickness, corridor_width)
@@ -93,18 +105,22 @@ func _build_geometry() -> void:
 	floor_body.add_child(floor_cs)
 	_floor_root.add_child(floor_body)
 
-	# Mid-span trigger volume (player walks to middle).
-	var trigger := Area3D.new()
-	trigger.name = "TriggerArea"
-	trigger.monitoring = true
-	trigger.monitorable = false
+	# Mid-span trigger: ~45% of length, full width, tall — reliable under physics poll.
+	_trigger = Area3D.new()
+	_trigger.name = "TriggerArea"
+	_configure_area(_trigger)
 	var trigger_cs := CollisionShape3D.new()
 	var trigger_shape := BoxShape3D.new()
-	trigger_shape.size = Vector3(maxf(1.6, corridor_length * 0.28), 1.4, corridor_width * 0.85)
+	trigger_shape.size = Vector3(
+		maxf(2.5, corridor_length * 0.45),
+		2.0,
+		maxf(1.5, corridor_width * 0.95)
+	)
 	trigger_cs.shape = trigger_shape
-	trigger_cs.position = Vector3(0.0, 0.7, 0.0)
-	trigger.add_child(trigger_cs)
-	add_child(trigger)
+	trigger_cs.position = Vector3(0.0, 1.0, 0.0)
+	_trigger.add_child(trigger_cs)
+	add_child(_trigger)
+	_trigger.set_deferred("monitoring", true)
 
 	var spike_mesh := CylinderMesh.new()
 	spike_mesh.top_radius = 0.0
@@ -119,7 +135,6 @@ func _build_geometry() -> void:
 	var row_span := usable / float(maxi(row_count - 1, 1))
 
 	for i in range(row_count):
-		var t := float(i) / float(maxi(row_count - 1, 1))
 		var x: float
 		if cascade_from_positive_x:
 			x = half_len - margin - row_span * float(i)
@@ -156,13 +171,13 @@ func _build_geometry() -> void:
 
 		var hit := Area3D.new()
 		hit.name = "HitArea"
+		_configure_area(hit)
 		hit.monitoring = false
-		hit.monitorable = false
 		var hit_cs := CollisionShape3D.new()
 		var hit_shape := BoxShape3D.new()
-		hit_shape.size = Vector3(row_span * 0.95 + 0.15, spike_height * 0.85, corridor_width * 0.92)
+		hit_shape.size = Vector3(row_span * 0.95 + 0.2, spike_height * 0.9, corridor_width * 0.95)
 		hit_cs.shape = hit_shape
-		hit_cs.position = Vector3(0.0, floor_thickness * 0.5 + spike_height * 0.35, 0.0)
+		hit_cs.position = Vector3(0.0, floor_thickness * 0.5 + spike_height * 0.4, 0.0)
 		hit.add_child(hit_cs)
 		row.add_child(hit)
 		hit.body_entered.connect(_on_spike_hit)
@@ -179,12 +194,25 @@ func _build_geometry() -> void:
 		})
 
 
+func _physics_process(_delta: float) -> void:
+	if _triggered or _trigger == null:
+		return
+	if not _trigger.monitoring:
+		return
+	for body in _trigger.get_overlapping_bodies():
+		if body.is_in_group("player"):
+			_on_trigger_entered(body)
+			return
+
+
 func _on_trigger_entered(body: Node) -> void:
 	if _triggered:
 		return
 	if not body.is_in_group("player"):
 		return
 	_triggered = true
+	print("SpikeCascadeTrap: triggered by ", body.name)
+	push_warning("SpikeCascadeTrap: triggered")
 	_start_shake_then_cascade()
 
 
@@ -211,7 +239,6 @@ func _run_cascade() -> void:
 		if delay > 0.0:
 			await get_tree().create_timer(delay).timeout
 		_begin_row_rise(i)
-	# Keep prompt briefly after last row starts rising.
 	await get_tree().create_timer(spike_rise_time + 0.35).timeout
 	_cascading = false
 	if _prompt:
@@ -253,6 +280,7 @@ func _process(delta: float) -> void:
 		var hit: Area3D = info["hit"]
 		if float(info["rise_t"]) >= 0.45 and hit and not hit.monitoring:
 			hit.monitoring = true
+			hit.set_deferred("monitoring", true)
 		if float(info["rise_t"]) >= 1.0:
 			info["rising"] = false
 			info["raised"] = true
@@ -278,12 +306,13 @@ func _on_spike_hit(body: Node) -> void:
 func _respawn(body: Node) -> void:
 	var marker := get_node_or_null(respawn_path)
 	if marker == null:
-		push_warning("SpikeCascadeTrap: respawn_path not set or invalid")
+		push_warning("SpikeCascadeTrap: respawn_path not set or invalid: %s" % str(respawn_path))
 		return
 	if body is Node3D:
 		body.global_position = marker.global_position
 		if body is CharacterBody3D:
 			body.velocity = Vector3.ZERO
+	print("SpikeCascadeTrap: respawned player to ", marker.name)
 	if _prompt:
 		_prompt.visible = true
 		_prompt.text = "Spikes! Sent back."
