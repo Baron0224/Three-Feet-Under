@@ -43,7 +43,7 @@ extends Node3D
 @export var prompt_path: NodePath
 @export var cascade_from_positive_x := true
 @export var respawn_cooldown := 0.9
-@export var show_debug_label := true:
+@export var show_debug_label := false:
 	set(v):
 		show_debug_label = v
 		_editor_rebuild()
@@ -61,10 +61,10 @@ var _trigger: Area3D
 var _segments: Array[Dictionary] = []
 var _prompt: Label
 var _rng := RandomNumberGenerator.new()
-var _panel_mat: StandardMaterial3D
+var _panel_mat: Material
 var _spike_mat: StandardMaterial3D
 var _pit_mat: StandardMaterial3D
-var _seam_mat: StandardMaterial3D
+var _seam_mat: Material
 
 
 func _ready() -> void:
@@ -117,29 +117,29 @@ func _resolve_prompt() -> Label:
 
 
 func _make_materials() -> void:
-	# Bright emissive orange-brown — impossible to miss vs gray brick.
-	_panel_mat = StandardMaterial3D.new()
-	_panel_mat.albedo_color = Color(0.95, 0.45, 0.12)
-	_panel_mat.emission_enabled = true
-	_panel_mat.emission = Color(0.85, 0.35, 0.05)
-	_panel_mat.emission_energy_multiplier = 2.4
-	_panel_mat.roughness = 0.55
-	_panel_mat.metallic = 0.08
+	# Match neighboring corridor floors (Art_floor / world_stone gray brick).
+	var floor_mat := load("res://art/materials/floor.tres")
+	if floor_mat is Material:
+		_panel_mat = floor_mat
+	else:
+		var sm := StandardMaterial3D.new()
+		sm.albedo_color = Color(0.37, 0.35, 0.30)
+		sm.roughness = 0.95
+		_panel_mat = sm
 
-	_seam_mat = StandardMaterial3D.new()
-	_seam_mat.albedo_color = Color(1.0, 0.85, 0.2)
-	_seam_mat.emission_enabled = true
-	_seam_mat.emission = Color(1.0, 0.7, 0.05)
-	_seam_mat.emission_energy_multiplier = 4.0
-	_seam_mat.roughness = 0.3
+	# Subtle mortar-like seam only (no emissive debug glow).
+	var seam := StandardMaterial3D.new()
+	seam.albedo_color = Color(0.22, 0.20, 0.18)
+	seam.roughness = 0.95
+	_seam_mat = seam
 
 	_spike_mat = StandardMaterial3D.new()
-	_spike_mat.albedo_color = Color(0.75, 0.75, 0.8)
-	_spike_mat.metallic = 0.45
-	_spike_mat.roughness = 0.4
+	_spike_mat.albedo_color = Color(0.65, 0.65, 0.70)
+	_spike_mat.metallic = 0.35
+	_spike_mat.roughness = 0.45
 
 	_pit_mat = StandardMaterial3D.new()
-	_pit_mat.albedo_color = Color(0.08, 0.06, 0.05)
+	_pit_mat.albedo_color = Color(0.12, 0.10, 0.09)
 	_pit_mat.roughness = 1.0
 
 

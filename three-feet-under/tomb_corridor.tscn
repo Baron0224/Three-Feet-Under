@@ -4301,7 +4301,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.25, 0.08, -6)
 corridor_length = 39.0
 corridor_width = 4.5
 segment_count = 12
-show_debug_label = true
+show_debug_label = false
 respawn_path = NodePath("../SpikeTrapRespawn")
 
 [node name="SpikeTrapRespawn" type="Marker3D" parent="." unique_id=1343085783]
