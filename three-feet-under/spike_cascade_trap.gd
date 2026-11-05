@@ -127,9 +127,10 @@ func _make_materials() -> void:
 		sm.roughness = 0.95
 		_panel_mat = sm
 
-	# Nearly floor-colored hairline so panels still read as split without drawing the eye.
+	# Seam kept invisible (fully transparent); panels alone define the split.
 	var seam := StandardMaterial3D.new()
-	seam.albedo_color = Color(0.34, 0.32, 0.28)
+	seam.albedo_color = Color(0.37, 0.35, 0.30, 0.0)
+	seam.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	seam.roughness = 0.95
 	_seam_mat = seam
 
@@ -185,10 +186,11 @@ func _build_geometry() -> void:
 	_configure_area(_trigger)
 	var trigger_cs := CollisionShape3D.new()
 	var trigger_shape := BoxShape3D.new()
+	# Width (Z) matches corridor floor exactly (Floor010 world width = corridor_width).
 	trigger_shape.size = Vector3(
 		maxf(3.0, corridor_length * 0.5),
 		2.2,
-		maxf(2.0, corridor_width * 0.95)
+		corridor_width
 	)
 	trigger_cs.shape = trigger_shape
 	trigger_cs.position = Vector3(0.0, 1.1, 0.0)
@@ -199,13 +201,16 @@ func _build_geometry() -> void:
 	else:
 		_trigger.set_deferred("monitoring", true)
 
+	# Invisible placeholder so rebuild clearing still finds a CenterSeam name if needed.
 	var seam := MeshInstance3D.new()
 	seam.name = "CenterSeam"
+	seam.visible = false
 	var seam_mesh := BoxMesh.new()
-	seam_mesh.size = Vector3(corridor_length * 0.98, 0.01, 0.02)
+	seam_mesh.size = Vector3(corridor_length * 0.98, 0.01, 0.01)
 	seam.mesh = seam_mesh
 	seam.material_override = _seam_mat
 	seam.position = Vector3(0.0, panel_y + floor_thickness * 0.5 + 0.006, 0.0)
+	seam.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(seam)
 
 	if show_debug_label:
