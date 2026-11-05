@@ -11,6 +11,7 @@
 [ext_resource type="Material" path="res://art/materials/rock.tres" id="Art_rock"]
 [ext_resource type="Material" path="res://art/materials/coffin.tres" id="Art_coffin"]
 [ext_resource type="PackedScene" path="res://art/art_details.tscn" id="Art_details"]
+[ext_resource type="PackedScene" path="res://art/candles.tscn" id="30_candles"]
 
 [sub_resource type="StandardMaterial3D" id="Stone"]
 
@@ -7816,3 +7817,6 @@ scale = Vector3(0.666666667, 0.666666667, 0.666666667)
 
 [node name="ArtDetails" parent="." instance=ExtResource("Art_details")]
 scale = Vector3(1.5, 1.5, 1.5)
+
+
+[node name="Candles" parent="." instance=ExtResource("30_candles")]

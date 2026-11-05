@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="Material" path="res://art/candles/wax.tres" id="1_wax"]
+[ext_resource type="Material" path="res://art/candles/wick.tres" id="2_wick"]
+[ext_resource type="Material" path="res://art/materials/bronze.tres" id="3_bronze"]
+[ext_resource type="MultiMesh" path="res://art/batches/CandleBodies.tres" id="4_body"]
+[ext_resource type="MultiMesh" path="res://art/batches/CandlePools.tres" id="5_pool"]
+[ext_resource type="MultiMesh" path="res://art/batches/CandleWicks.tres" id="6_wick_batch"]
+[ext_resource type="MultiMesh" path="res://art/batches/CandleDishes.tres" id="7_dish"]
+
+[node name="Candles" type="Node3D"]
+
+[node name="WaxBodies" type="MultiMeshInstance3D" parent="."]
+multimesh = ExtResource("4_body")
+material_override = ExtResource("1_wax")
+
+[node name="WaxPools" type="MultiMeshInstance3D" parent="."]
+multimesh = ExtResource("5_pool")
+material_override = ExtResource("1_wax")
+
+[node name="Wicks" type="MultiMeshInstance3D" parent="."]
+multimesh = ExtResource("6_wick_batch")
+material_override = ExtResource("2_wick")
+
+[node name="Dishes" type="MultiMeshInstance3D" parent="."]
+multimesh = ExtResource("7_dish")
+material_override = ExtResource("3_bronze")
