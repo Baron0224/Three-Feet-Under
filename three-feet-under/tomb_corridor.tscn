@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://csk36hqgr0qpy" path="res://player.gd" id="1_et3i4"]
 [ext_resource type="Script" uid="uid://bsu7qvfxp2gjy" path="res://clue_tablet.gd" id="2_mhnn8"]
+[ext_resource type="PackedScene" path="res://art/candles.tscn" id="30_candles"]
 [ext_resource type="Material" path="res://art/materials/ceiling.tres" id="Art_ceiling"]
 [ext_resource type="Material" path="res://art/materials/coffin.tres" id="Art_coffin"]
 [ext_resource type="PackedScene" path="res://art/art_details.tscn" id="Art_details"]
@@ -6268,3 +6269,5 @@ omni_range = 12.0
 
 [node name="ArtDetails" parent="." unique_id=959751455 instance=ExtResource("Art_details")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Candles" parent="." unique_id=53156746 instance=ExtResource("30_candles")]

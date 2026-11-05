@@ -99,3 +99,48 @@ Audit snapshots / hashes / root transform changes are saved in repository
 Geometry resources and person motion logic are unchanged; only the environment death
 bounds function was adapted. Reproducible checks include tests/environment_scale_check.gd,
 tests/side_wings_check.gd, tests/final_wing_check.gd and the original 58 checks.
+
+
+## Unlit candles (2026-11-05)
+
+The tomb now carries 279 extinguished candles in 17 area groups (entrance corridor,
+hub, west/east wings, abyss banks, hall, tomb chamber, exit stairs, approach corridor).
+They are deliberately unlit: no OmniLight, no emission, no script, no collision. The
+existing 46 Omni lights and the player flashlight are what make them readable.
+
+Static data, not runtime generation:
+
+- Meshes `art/candles/candle_body.tres`, `candle_pool.tres`, `candle_wick.tres`,
+  `candle_dish.tres` are unit-size CylinderMeshes (10/10/6/14 radial segments).
+  Per-instance size lives in the MultiMesh basis, so one mesh serves every candle.
+- Materials `art/candles/wax.tres` (albedo 0.87,0.83,0.72, roughness 0.52) and
+  `art/candles/wick.tres` (near-black, roughness 1.0); saucers reuse
+  `art/materials/bronze.tres`.
+- MultiMesh batches `art/batches/CandleBodies.tres` (279), `CandlePools.tres` (279),
+  `CandleWicks.tres` (279) and `CandleDishes.tres` (79) hold static transform buffers
+  (12 floats per instance) exactly like the other ArtDetails batches.
+- `art/candles.tscn` is a four-child MultiMeshInstance3D scene (WaxBodies, WaxPools,
+  Wicks, Dishes) with material overrides. `tomb_corridor.tscn` instances it as the
+  single root node `Candles` with unit scale: candles are human-scale props, so they
+  must not inherit the 1.5x building scale of ArtDetails.
+
+Placement rules (offline generator, `art/tools/`):
+
+- Perimeter and corner sampling per room footprint; a candidate is kept only when a
+  wall face is found within 0.8m along its outward normal, then pushed 0.36m off that
+  face. Columns, the coffin platform and rocks are cleared by their world boxes.
+- 2-4 candles per cluster on a 0.11-0.17m ring; height 0.20-0.55m skewed to short
+  burned-down stubs; radius 0.040-0.058m; tilt up to 5 degrees; about 30% stand on a
+  bronze saucer and the rest sit on the tiles. Only segments that resolve to real
+  walls receive candles, which is why the tiny 05 shortcut stub stays empty.
+- Pipeline: `dump_scene_boxes.py` (parse the saved scene into a world box dump) ->
+  `place_candles.py` (choose positions) -> `write_candle_batches.py` (write the four
+  .tres batches, `art/candles.tscn`, and the one-line `Candles` hook in the scene;
+  idempotent). Intermediate JSON stays under the OS temp directory.
+
+Verification: the scene loads headless without warnings; the 461-assertion scale
+audit, side-wing (4619 samples / 44 movement legs), final-wing (3860 samples) and the
+original 58 controller checks all still report failures=0. MultiMesh world AABB spans
+x -59.8..82.2, z -108.5..2.2, y 0.11..0.54, i.e. the props sit on the real floors.
+Visual checks used the real OpenGL renderer (`capture_review.gd`): wide shots in
+TEMP/tfu_scale_review_1_5 and close-ups in TEMP/tfu_candle_review.
