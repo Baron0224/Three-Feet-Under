@@ -32,6 +32,8 @@ var standing_probe: CapsuleShape3D
 var has_abyss := false
 var death_overlay: ColorRect
 var death_message: Label
+## Ignore FOCUS_OUT for a short grace period after play starts (editor F6 focus flicker).
+var _capture_grace_until_msec := 0
 
 
 func _ready() -> void:
@@ -45,19 +47,36 @@ func _ready() -> void:
 	floor_snap_length = 0.3
 	has_abyss = get_parent().has_node("EastWing/Chasm07")
 	_create_controls_hud()
-	_set_mouse_capture(true)
+	# Editor F6 often fires FOCUS_OUT during startup; grace + deferred capture keeps look working.
+	_capture_grace_until_msec = Time.get_ticks_msec() + 750
+	call_deferred("_set_mouse_capture", true)
 
 
 func _set_mouse_capture(enabled: bool) -> void:
 	# Keep interaction state explicit; the headless display driver cannot capture a cursor.
 	mouse_captured = enabled
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if enabled else Input.MOUSE_MODE_VISIBLE
+	if enabled:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		# Prefer a normal bordered window so the OS × is available after Esc.
+		if not Engine.is_editor_hint():
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+			var mode := DisplayServer.window_get_mode()
+			if mode == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN 					or mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and is_node_ready():
+		if Time.get_ticks_msec() < _capture_grace_until_msec:
+			return
 		_set_mouse_capture(false)
 		is_reading = false
+	elif what == NOTIFICATION_APPLICATION_FOCUS_IN and is_node_ready():
+		# Re-assert capture if we still expect FPS look (click also works via capture_mouse).
+		if mouse_captured and not is_dead:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func can_interact() -> bool:
@@ -68,16 +87,35 @@ func set_reading(value: bool) -> void:
 	is_reading = value and not is_dead
 
 
+func _wants_release_mouse(event: InputEvent) -> bool:
+	if event.is_action_pressed("release_mouse"):
+		return true
+	# Hard fallback if InputMap device filters break Esc matching.
+	if event is InputEventKey and event.pressed and not event.echo:
+		return event.keycode == KEY_ESCAPE or event.physical_keycode == KEY_ESCAPE
+	return false
+
+
+func _wants_capture_mouse(event: InputEvent) -> bool:
+	if event.is_action_pressed("capture_mouse"):
+		return true
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		return true
+	return false
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead:
 		if reload_failed and event.is_action_pressed("retry_level") and not event.is_echo():
 			_try_reload()
 		return
-	if event.is_action_pressed("release_mouse"):
+	if _wants_release_mouse(event):
 		_set_mouse_capture(false)
 		is_reading = false
-	elif event.is_action_pressed("capture_mouse"):
+		get_viewport().set_input_as_handled()
+	elif _wants_capture_mouse(event):
 		_set_mouse_capture(true)
+		get_viewport().set_input_as_handled()
 	elif event is InputEventMouseMotion and can_interact() and not is_reading:
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		camera.rotation.x = clampf(camera.rotation.x - event.relative.y * MOUSE_SENSITIVITY,
