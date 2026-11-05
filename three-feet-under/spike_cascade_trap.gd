@@ -135,9 +135,10 @@ func _make_materials() -> void:
 	_seam_mat = seam
 
 	_spike_mat = StandardMaterial3D.new()
-	_spike_mat.albedo_color = Color(0.65, 0.65, 0.70)
-	_spike_mat.metallic = 0.35
-	_spike_mat.roughness = 0.45
+	# Rusty iron — orange-brown oxide, rough, little chrome.
+	_spike_mat.albedo_color = Color(0.52, 0.26, 0.12)
+	_spike_mat.metallic = 0.22
+	_spike_mat.roughness = 0.82
 
 	_pit_mat = StandardMaterial3D.new()
 	_pit_mat.albedo_color = Color(0.12, 0.10, 0.09)
@@ -225,11 +226,12 @@ func _build_geometry() -> void:
 		tag.position = Vector3(0.0, 2.0, 0.0)
 		add_child(tag)
 
+	# Sharper, thinner cone template; per-spike scale/jitter applied below.
 	var spike_mesh := CylinderMesh.new()
 	spike_mesh.top_radius = 0.0
-	spike_mesh.bottom_radius = 0.16
-	spike_mesh.height = 0.7
-	spike_mesh.radial_segments = 8
+	spike_mesh.bottom_radius = 0.07
+	spike_mesh.height = 1.05
+	spike_mesh.radial_segments = 7
 	spike_mesh.material = _spike_mat
 
 	for i in range(segment_count):
@@ -287,13 +289,32 @@ func _build_geometry() -> void:
 		if not Engine.is_editor_hint():
 			spike_area.body_entered.connect(_on_spike_entered)
 
-		var coords := [-0.28, 0.0, 0.28]
-		for sx in coords:
-			for sz in coords:
+		# 5 rows across width (was 3, +2) x denser along segment; jittered irregular layout.
+		var rows_x := 4
+		var rows_z := 5
+		var spike_i := 0
+		for ix in range(rows_x):
+			for iz in range(rows_z):
+				var u := (float(ix) + 0.5) / float(rows_x)
+				var v := (float(iz) + 0.5) / float(rows_z)
+				var base_x := lerpf(-seg_len * 0.38, seg_len * 0.38, u)
+				var base_z := lerpf(-corridor_width * 0.38, corridor_width * 0.38, v)
+				var jx := _rng.randf_range(-seg_len * 0.07, seg_len * 0.07)
+				var jz := _rng.randf_range(-corridor_width * 0.07, corridor_width * 0.07)
 				var spike := MeshInstance3D.new()
+				spike.name = "Spike_%d" % spike_i
 				spike.mesh = spike_mesh
-				spike.position = Vector3(sx * seg_len, 0.35, sz * corridor_width)
+				var tall := _rng.randf_range(0.88, 1.18)
+				var thin := _rng.randf_range(0.75, 1.05)
+				spike.scale = Vector3(thin, tall, thin)
+				spike.position = Vector3(base_x + jx, 0.42 * tall, base_z + jz)
+				spike.rotation = Vector3(
+					_rng.randf_range(-0.12, 0.12),
+					_rng.randf_range(0.0, TAU),
+					_rng.randf_range(-0.12, 0.12)
+				)
 				pit.add_child(spike)
+				spike_i += 1
 
 		_segments.append({
 			"root": seg,
