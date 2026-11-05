@@ -17,11 +17,14 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if not player.can_interact():
+		close_reading()
+		return
 	var door := get_node_or_null(door_path)
-	# 靠近门时，把提示交给门脚本
+	# Near the door: let the door script own the prompt.
 	if not reading and door and door.has_method("is_player_near") and door.is_player_near():
 		return
-
+	# Ground-plane distance so looking up/down does not change near range.
 	var offset := player.global_position - global_position
 	offset.y = 0.0
 	var distance := offset.length()
@@ -43,18 +46,26 @@ func _process(_delta: float) -> void:
 		prompt.text = "按 E 阅读石板"
 
 
+func close_reading() -> void:
+	reading = false
+	can_read = false
+	player.set_reading(false)
+	prompt.visible = false
+
+
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.pressed and not event.echo:
-			if event.physical_keycode == KEY_E:
-				var door := get_node_or_null(door_path)
-				if not reading and door and door.has_method("is_player_near") and door.is_player_near():
-					return
-				if reading or can_read:
-					reading = not reading
-					if reading and not _door_unlocked:
-						_unlock_door()
-					get_viewport().set_input_as_handled()
+	if not player.can_interact():
+		return
+	if event.is_action_pressed("interact") and not event.is_echo():
+		var door := get_node_or_null(door_path)
+		if not reading and door and door.has_method("is_player_near") and door.is_player_near():
+			return
+		if reading or can_read:
+			reading = not reading
+			player.set_reading(reading)
+			if reading and not _door_unlocked:
+				_unlock_door()
+			get_viewport().set_input_as_handled()
 
 
 func _unlock_door() -> void:
