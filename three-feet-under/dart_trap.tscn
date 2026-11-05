@@ -1,0 +1,1173 @@
+[gd_scene format=3 uid="uid://ca77fsthcr2py"]
+
+[ext_resource type="Script" path="res://dart_trap.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="MatWall"]
+albedo_color = Color(0.22, 0.2, 0.18, 1)
+
+[sub_resource type="BoxMesh" id="MeshWall"]
+material = SubResource("MatWall")
+size = Vector3(3.2, 1.6, 0.35)
+
+[sub_resource type="StandardMaterial3D" id="MatTarget"]
+albedo_color = Color(0.28, 0.26, 0.22, 1)
+
+[sub_resource type="BoxMesh" id="MeshTarget"]
+material = SubResource("MatTarget")
+size = Vector3(3.2, 1.6, 0.35)
+
+[sub_resource type="BoxShape3D" id="ShapeTrigger"]
+size = Vector3(3.2, 1.6, 2.2)
+
+[sub_resource type="StandardMaterial3D" id="MatDart"]
+albedo_color = Color(0.02, 0.02, 0.02, 1)
+
+[sub_resource type="CylinderMesh" id="MeshDart"]
+material = SubResource("MatDart")
+top_radius = 0.002
+bottom_radius = 0.035
+height = 0.55
+radial_segments = 10
+
+[sub_resource type="SphereShape3D" id="ShapeHit"]
+radius = 0.14
+
+[node name="DartTrap" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="WallBlock" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.2)
+mesh = SubResource("MeshWall")
+
+[node name="TargetWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 4.2)
+mesh = SubResource("MeshTarget")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 1.2)
+shape = SubResource("ShapeTrigger")
+
+[node name="Darts" type="Node3D" parent="."]
+
+[node name="Dart0" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.437, 1.305, -0.079)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart0"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.074, 0, -0.059)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart0"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart0/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart1" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.192, 1.041, -0.078)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart1"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075, 0, 0.108)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart1"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart1/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart2" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.58, 1.223, 0.057)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart2"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, 0, -0.082)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart2"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart2/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart3" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.444, 0.864, -0.036)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart3"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.091, 0, -0.009)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart3"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart3/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart4" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.876, 0.949, -0.105)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart4"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.126, 0, -0.095)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart4"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart4/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart5" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.157, 0.857, 0.145)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart5"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.097, 0, 0.085)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart5"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart5/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart6" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.144, 1.025, 0.072)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart6"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.084, 0, -0.103)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart6"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart6/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart7" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.046, 1.28, -0.024)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart7"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005, 0, -0.028)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart7"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart7/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart8" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.894, 1.084, -0.05)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart8"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033, 0, 0.118)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart8"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart8/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart9" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.754, 0.875, 0.122)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart9"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.047, 0, 0.007)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart9"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart9/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart10" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.824, 0.949, 0.015)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart10"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.144, 0, -0.101)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart10"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart10/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart11" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.646, 1.264, 0.169)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart11"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018, 0, 0.043)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart11"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart11/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart12" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.06, 0.932, -0.104)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart12"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.077, 0, 0.037)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart12"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart12/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart13" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.856, 1.148, 0.1)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart13"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.104, 0, 0.042)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart13"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart13/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart14" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.198, 1.187, -0.082)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart14"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, -0.001)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart14"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart14/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart15" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.542, 0.607, -0.044)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart15"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029, 0, -0.144)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart15"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart15/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart16" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.004, 0.681, -0.012)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart16"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038, 0, 0.021)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart16"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart16/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart17" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.713, 1.209, 0.176)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart17"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.051, 0, -0.065)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart17"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart17/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart18" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.322, 0.811, 0.177)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart18"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.101, 0, 0.012)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart18"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart18/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart19" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.27, 0.995, 0.038)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart19"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049, 0, -0.038)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart19"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart19/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart20" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.455, 1.12, -0.049)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart20"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009, 0, -0.019)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart20"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart20/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart21" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.96, 0.994, 0.141)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart21"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.125, 0, 0.087)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart21"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart21/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart22" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.699, 1.328, 0.06)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart22"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.028, 0, -0.026)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart22"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart22/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart23" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.5, 1.208, 0.148)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart23"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.095, 0, 0.046)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart23"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart23/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart24" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.982, 1.039, 0.112)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart24"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.045, 0, -0.142)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart24"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart24/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart25" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.032, 0.992, 0.037)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart25"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.091, 0, 0.005)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart25"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart25/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart26" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.401, 1.14, -0.095)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart26"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01, 0, 0.039)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart26"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart26/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart27" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.567, 1.211, -0.018)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart27"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, -0.04)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart27"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart27/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart28" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.37, 0.724, 0.126)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart28"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111, 0, -0.126)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart28"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart28/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart29" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.516, 1.009, 0.114)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart29"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105, 0, -0.008)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart29"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart29/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart30" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.364, 0.852, 0.172)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart30"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.046, 0, -0.11)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart30"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart30/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart31" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.224, 0.665, 0.048)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart31"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.121, 0, 0.149)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart31"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart31/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart32" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.631, 0.674, 0.086)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart32"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, 0, 0.026)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart32"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart32/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart33" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.31, 0.554, -0.091)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart33"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018, 0, 0.137)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart33"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart33/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart34" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.382, 1.243, -0.065)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart34"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.045, 0, 0.032)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart34"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart34/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart35" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.183, 1.1, 0.075)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart35"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.078, 0, -0.005)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart35"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart35/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart36" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.495, 1.175, 0.051)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart36"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017, 0, -0.103)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart36"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart36/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart37" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.03, 0.86, -0.042)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart37"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116, 0, 0.099)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart37"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart37/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart38" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.591, 1.035, 0.137)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart38"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.116, 0, 0.075)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart38"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart38/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart39" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.014, 0.612, 0.115)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart39"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.121, 0, -0.057)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart39"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart39/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart40" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.739, 1.041, 0.107)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart40"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.062, 0, -0.008)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart40"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart40/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart41" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.218, 0.571, -0.049)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart41"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.132, 0, -0.05)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart41"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart41/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart42" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.873, 1.206, 0.12)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart42"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.098, 0, 0.004)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart42"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart42/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart43" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.483, 1.207, 0.039)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart43"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048, 0, -0.106)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart43"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart43/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart44" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.601, 1.309, 0.02)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart44"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.103, 0, -0.06)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart44"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart44/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart45" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.541, 0.858, -0.111)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart45"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.138, 0, 0.02)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart45"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart45/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart46" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.047, 0.908, 0.043)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart46"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.112, 0, 0.132)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart46"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart46/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart47" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.836, 0.743, 0.12)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart47"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075, 0, -0.052)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart47"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart47/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart48" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.541, 0.621, -0.059)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart48"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108, 0, -0.036)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart48"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart48/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart49" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.477, 0.952, 0.051)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart49"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.028, 0, -0.136)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart49"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart49/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart50" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.812, 1.321, 0.014)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart50"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026, 0, -0.125)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart50"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart50/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart51" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.227, 0.972, -0.04)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart51"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.023, 0, 0.032)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart51"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart51/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart52" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.39, 1.111, 0.163)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart52"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.121, 0, -0.073)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart52"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart52/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart53" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.249, 0.681, -0.02)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart53"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049, 0, 0.028)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart53"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart53/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart54" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.426, 1.152, -0.098)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart54"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.082, 0, -0.047)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart54"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart54/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart55" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.011, 0.647, 0.085)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart55"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.078, 0, -0.041)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart55"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart55/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart56" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.224, 1.322, 0.006)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart56"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.039, 0, 0)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart56"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart56/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart57" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.066, 0.702, 0.087)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart57"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017, 0, -0.072)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart57"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart57/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart58" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.057, 1.09, 0.056)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart58"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.047, 0, -0.102)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart58"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart58/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart59" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.235, 1.03, -0.022)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart59"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042, 0, 0.137)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart59"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart59/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart60" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.281, 1.325, 0.175)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart60"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048, 0, 0.115)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart60"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart60/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart61" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.093, 1.011, -0.107)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart61"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0, 0.144)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart61"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart61/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart62" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.519, 0.889, -0.096)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart62"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108, 0, 0.02)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart62"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart62/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart63" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.353, 0.759, 0.075)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart63"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0, 0.064)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart63"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart63/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart64" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.148, 1.136, 0.176)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart64"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108, 0, 0.083)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart64"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart64/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart65" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.475, 1.111, 0.103)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart65"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038, 0, 0.012)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart65"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart65/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart66" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.677, 0.829, 0.065)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart66"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124, 0, 0.003)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart66"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart66/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart67" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.957, 0.884, -0.104)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart67"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.016, 0, 0.087)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart67"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart67/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart68" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.506, 0.813, 0.036)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart68"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019, 0, 0.123)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart68"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart68/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart69" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.181, 0.791, 0.062)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart69"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.121, 0, -0.045)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart69"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart69/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart70" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.125, 0.637, -0.004)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart70"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042, 0, 0.106)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart70"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart70/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart71" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.927, 0.931, -0.056)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart71"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048, 0, 0.045)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart71"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart71/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart72" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.714, 1.314, 0.173)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart72"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.107, 0, 0.143)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart72"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart72/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart73" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.198, 1.115, 0.064)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart73"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041, 0, -0.048)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart73"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart73/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart74" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.517, 1.112, -0.045)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart74"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.128, 0, 0.134)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart74"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart74/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart75" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.546, 1.084, -0.05)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart75"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.091, 0, 0.101)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart75"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart75/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart76" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.335, 1.313, -0.094)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart76"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, 0, 0.02)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart76"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart76/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart77" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.353, 0.879, -0.068)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart77"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.078, 0, -0.076)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart77"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart77/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart78" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -1.122, 1.247, 0.121)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart78"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044, 0, 0.118)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart78"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart78/HitArea"]
+shape = SubResource("ShapeHit")
+
+[node name="Dart79" type="Node3D" parent="Darts"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 1.11, 0.572, 0.016)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Darts/Dart79"]
+mesh = SubResource("MeshDart")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.119, 0, 0.031)
+
+[node name="HitArea" type="Area3D" parent="Darts/Dart79"]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Darts/Dart79/HitArea"]
+shape = SubResource("ShapeHit")
+

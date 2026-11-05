@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddkrr4uyln5ho"]
+
+[ext_resource type="Script" uid="uid://btotn4lp431jw" path="res://trap_floor.gd" id="1_th4vv"]
+
+[sub_resource type="StandardMaterial3D" id="MatFloor"]
+albedo_color = Color(0.35, 0.32, 0.28, 1)
+
+[sub_resource type="BoxMesh" id="MeshHalf"]
+material = SubResource("MatFloor")
+size = Vector3(1, 0.1, 2)
+
+[sub_resource type="BoxShape3D" id="ShapeHalf"]
+size = Vector3(1, 0.1, 2)
+
+[sub_resource type="BoxShape3D" id="ShapeTrigger"]
+size = Vector3(1.8, 0.4, 1.8)
+
+[sub_resource type="StandardMaterial3D" id="MatSpike"]
+albedo_color = Color(0.65, 0.65, 0.7, 1)
+
+[sub_resource type="CylinderMesh" id="MeshSpike"]
+material = SubResource("MatSpike")
+top_radius = 0.0
+bottom_radius = 0.18
+height = 0.7
+radial_segments = 8
+
+[sub_resource type="BoxShape3D" id="ShapeSpikeArea"]
+size = Vector3(2.2, 0.8, 2.2)
+
+[sub_resource type="BoxMesh" id="MeshPit"]
+size = Vector3(2.2, 0.05, 2.2)
+
+[node name="TrapFloor" type="Node3D"]
+script = ExtResource("1_th4vv")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("ShapeTrigger")
+
+[node name="LeftPanel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+mesh = SubResource("MeshHalf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LeftPanel"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftPanel/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+shape = SubResource("ShapeHalf")
+
+[node name="RightPanel" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightPanel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+mesh = SubResource("MeshHalf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RightPanel"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightPanel/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+shape = SubResource("ShapeHalf")
+
+[node name="Pit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
+
+[node name="PitFloor" type="MeshInstance3D" parent="Pit"]
+mesh = SubResource("MeshPit")
+
+[node name="SpikeArea" type="Area3D" parent="Pit"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pit/SpikeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("ShapeSpikeArea")
+
+[node name="Spike1" type="MeshInstance3D" parent="Pit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.35, -0.6)
+mesh = SubResource("MeshSpike")
+
+[node name="Spike2" type="MeshInstance3D" parent="Pit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.6)
+mesh = SubResource("MeshSpike")
+
+[node name="Spike3" type="MeshInstance3D" parent="Pit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.35, -0.6)
+mesh = SubResource("MeshSpike")
+
+[node name="Spike4" type="MeshInstance3D" parent="Pit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.35, 0)
+mesh = SubResource("MeshSpike")
+
+[node name="Spike5" type="MeshInstance3D" parent="Pit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+mesh = SubResource("MeshSpike")
+
+[node name="Spike6" type="MeshInstance3D" parent="Pit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.35, 0)
+mesh = SubResource("MeshSpike")
+
+[node name="Spike7" type="MeshInstance3D" parent="Pit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.35, 0.6)
+mesh = SubResource("MeshSpike")
+
+[node name="Spike8" type="MeshInstance3D" parent="Pit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0.6)
+mesh = SubResource("MeshSpike")
+
+[node name="Spike9" type="MeshInstance3D" parent="Pit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.35, 0.6)
+mesh = SubResource("MeshSpike")

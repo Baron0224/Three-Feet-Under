@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://le32go0cdgod"]
+
+[ext_resource type="Script" uid="uid://csk36hqgr0qpy" path="res://player.gd" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://ddkrr4uyln5ho" path="res://trap_floor.tscn" id="2_trap"]
+[ext_resource type="PackedScene" uid="uid://ca77fsthcr2py" path="res://dart_trap.tscn" id="3_dart"]
+
+[sub_resource type="BoxMesh" id="MeshBig"]
+size = Vector3(20, 0.2, 16.8)
+
+[sub_resource type="BoxShape3D" id="ShapeBig"]
+size = Vector3(20, 0.2, 16.8)
+
+[sub_resource type="BoxMesh" id="MeshStrip"]
+size = Vector3(16.8, 0.2, 3.2)
+
+[sub_resource type="BoxShape3D" id="ShapeStrip"]
+size = Vector3(16.8, 0.2, 3.2)
+
+[sub_resource type="BoxMesh" id="MeshCorner"]
+size = Vector3(3.2, 0.2, 3.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_safe"]
+albedo_color = Color(0.25, 0.45, 0.3, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_safe"]
+material = SubResource("StandardMaterial3D_safe")
+size = Vector3(1.2, 0.05, 1.2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.3
+height = 1.8
+
+[node name="TrapTest" type="Node3D" unique_id=171521612]
+
+[node name="FloorMain" type="MeshInstance3D" parent="." unique_id=869397608]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.6)
+mesh = SubResource("MeshBig")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FloorMain" unique_id=1782612396]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorMain/StaticBody3D" unique_id=1259164916]
+shape = SubResource("ShapeBig")
+
+[node name="FloorWestStrip" type="MeshInstance3D" parent="." unique_id=1337197532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, -8)
+mesh = SubResource("MeshStrip")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FloorWestStrip" unique_id=1072409667]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorWestStrip/StaticBody3D" unique_id=1829299255]
+shape = SubResource("ShapeStrip")
+
+[node name="FloorFarCorner" type="MeshInstance3D" parent="." unique_id=1220731814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8)
+visible = false
+mesh = SubResource("MeshCorner")
+
+[node name="SafePad" type="MeshInstance3D" parent="." unique_id=322174937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.12, 8)
+mesh = SubResource("BoxMesh_safe")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=479360215]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 8, 0)
+shadow_enabled = true
+
+[node name="RespawnPoint" type="Marker3D" parent="." unique_id=431751270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.2, 8)
+
+[node name="player" type="CharacterBody3D" parent="." unique_id=1212860866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.2, 8)
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=1084320455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="Camera3D" type="Camera3D" parent="player" unique_id=466821690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="player/Camera3D" unique_id=1828139838]
+light_energy = 3.0
+shadow_enabled = true
+spot_range = 12.0
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=748781739]
+
+[node name="InteractPrompt" type="Label" parent="HUD" unique_id=1645655601]
+visible = false
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 520.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 28
+text = "鎻愮ず"
+
+[node name="TrapFloor" parent="." unique_id=1280637522 instance=ExtResource("2_trap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.05, -8)
+respawn_path = NodePath("../RespawnPoint")
+
+[node name="DartTrap" parent="." unique_id=243599476 instance=ExtResource("3_dart")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+respawn_path = NodePath("../RespawnPoint")

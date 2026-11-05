@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://csk36hqgr0qpy" path="res://player.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bsu7qvfxp2gjy" path="res://clue_tablet.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://f5uxa8cr48de" path="res://door.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dacmauv6omj7" path="res://pressure_plate.tscn" id="4_1bvp3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
 size = Vector3(3, 0.2, 8)
@@ -34,6 +36,12 @@ size = Vector3(0.08, 0.6, 0.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_61ryg"]
 size = Vector3(0.08, 0.6, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t2dwb"]
+size = Vector3(0.8, 3, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t2dwb"]
+size = Vector3(0.3, 3, 8)
 
 [node name="main" type="Node3D" unique_id=1027819120]
 
@@ -92,7 +100,6 @@ shadow_enabled = true
 spot_range = 12.0
 
 [node name="InteractRay" type="RayCast3D" parent="player/Camera3D" unique_id=2079870308]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 target_position = Vector3(0, 0, -2)
 
 [node name="ClueTablet" type="MeshInstance3D" parent="." unique_id=855525326]
@@ -115,3 +122,23 @@ offset_right = 118.0
 offset_bottom = 43.0
 theme_override_font_sizes/font_size = 24
 text = "按 E 阅读石板"
+
+[node name="Door" parent="." unique_id=1121895729 instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.9998751, -0.00018085624, -0.015800027, 0, 0.9999345, -0.011445828, 0.015801063, 0.011444398, 0.9998096, 0.01126726, 1.2412981, -3.8896804)
+
+[node name="WallNew1" type="MeshInstance3D" parent="." unique_id=1449871408]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5629412, 1.753077, -8.341461)
+mesh = SubResource("BoxMesh_t2dwb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallNew1" unique_id=1940578340]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallNew1/StaticBody3D" unique_id=718986188]
+shape = SubResource("BoxShape3D_t2dwb")
+
+[node name="PressurePlate" parent="." unique_id=997466068 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15705884, -0.033223152, -3.2586875)
+door_path = NodePath("../Door")
+
+[node name="PressurePlate2" parent="." unique_id=1479407203 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.060403824, 0.075021744, -3.168284)
+door_path = NodePath("../Door")
