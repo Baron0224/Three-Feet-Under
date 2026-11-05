@@ -26,3 +26,20 @@ Samples standing and jump-apex capsule clearance and floor support in 10-12, the
 the live controller both ways through all three hall lanes, the north side room,
 around the coffin base and up/down the exit stairs. It also checks that columns/coffin
 are solid, box meshes match their colliders and the visible exit wall blocks walkout.
+
+## 1.5x environment regression
+
+The scene metadata provides the authored environment scale. Tests multiply environmental
+coordinates/ground heights and required traversal duration, never capsule radius/height,
+eye offset, speed or jump height. main.tscn remains 1.0x. New commands:
+
+```text
+Godot_v4.7.2-stable_win64_console.exe --headless --path . --fixed-fps 60 --script res://tests/environment_scale_check.gd
+Godot_v4.7.2-stable_win64_console.exe --headless --path . --fixed-fps 60 --script res://tests/side_wings_check.gd
+```
+
+Scale audit checks world transforms (including nested wings and art), real room sizes,
+human physics/flashlight/tablet range, material block sizes and an actual fall from the
+eastern 1.5x bank beyond the old hardcoded bounds followed by scene restart. Side-wing
+checks follow both enlarged west/east routes and shortcuts with the live controller,
+plus 132 no-support/deep-floor/death-volume probes across the enlarged abyss.

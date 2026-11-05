@@ -4,6 +4,14 @@
 
 [ext_resource type="Script" uid="uid://bsu7qvfxp2gjy" path="res://clue_tablet.gd" id="2_mhnn8"]
 
+[ext_resource type="Material" path="res://art/materials/wall.tres" id="Art_wall"]
+[ext_resource type="Material" path="res://art/materials/floor.tres" id="Art_floor"]
+[ext_resource type="Material" path="res://art/materials/ceiling.tres" id="Art_ceiling"]
+[ext_resource type="Material" path="res://art/materials/trim.tres" id="Art_trim"]
+[ext_resource type="Material" path="res://art/materials/rock.tres" id="Art_rock"]
+[ext_resource type="Material" path="res://art/materials/coffin.tres" id="Art_coffin"]
+[ext_resource type="PackedScene" path="res://art/art_details.tscn" id="Art_details"]
+
 [sub_resource type="StandardMaterial3D" id="Stone"]
 
 albedo_color = Color(0.32, 0.30, 0.27, 1)
@@ -2627,15 +2635,19 @@ size = Vector3(3.5, 3.4, 0.25)
 
 [node name="main" type="Node3D" unique_id=1027819120]
 
-metadata/layout_note = "01 south -> 02 north; estimated blockout meters; 03/07/10 doorway stubs only"
+metadata/layout_note = "01-12; 1.5x environment about origin; player and world-space material meters unchanged"
+metadata/environment_scale = 1.5
+metadata/abyss_death_bounds = AABB(19.5, -1000, -42, 27, 992.5, 28.5)
 
 [node name="Floor01" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0, 1.5)
+position = Vector3(0, 0, 2.25)
 
 mesh = SubResource("Mesh_Floor01")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor01"]
 
@@ -2645,11 +2657,13 @@ shape = SubResource("Shape_Floor01")
 
 [node name="Floor02" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0, -7.25)
+position = Vector3(0, 0, -10.875)
 
 mesh = SubResource("Mesh_Floor02")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor02"]
 
@@ -2659,11 +2673,13 @@ shape = SubResource("Shape_Floor02")
 
 [node name="LeftWall" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.65, 1.6, -3.25)
+position = Vector3(-2.475, 2.4, -4.875)
 
 mesh = SubResource("Mesh_LeftWall")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LeftWall"]
 
@@ -2673,11 +2689,13 @@ shape = SubResource("Shape_LeftWall")
 
 [node name="RightWall" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.65, 1.6, -3.25)
+position = Vector3(2.475, 2.4, -4.875)
 
 mesh = SubResource("Mesh_RightWall")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="RightWall"]
 
@@ -2687,11 +2705,13 @@ shape = SubResource("Shape_RightWall")
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 3.2, 1.5)
+position = Vector3(0, 4.8, 2.25)
 
 mesh = SubResource("Mesh_Ceiling")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ceiling"]
 
@@ -2701,11 +2721,13 @@ shape = SubResource("Shape_Ceiling")
 
 [node name="Ceiling2" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 3.2, -7.25)
+position = Vector3(0, 4.8, -10.875)
 
 mesh = SubResource("Mesh_Ceiling2")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ceiling2"]
 
@@ -2715,11 +2737,13 @@ shape = SubResource("Shape_Ceiling2")
 
 [node name="EntranceSouthEnd" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 3.04, 12.55)
+position = Vector3(0, 4.56, 18.825)
 
 mesh = SubResource("Mesh_EntranceSouthEnd")
 
-material_override = SubResource("Cap")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceSouthEnd"]
 
@@ -2729,11 +2753,13 @@ shape = SubResource("Shape_EntranceSouthEnd")
 
 [node name="Hub02Floor" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0, -20)
+position = Vector3(0, 0, -30)
 
 mesh = SubResource("Mesh_Hub02Floor")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02Floor"]
 
@@ -2743,11 +2769,13 @@ shape = SubResource("Shape_Hub02Floor")
 
 [node name="Hub02Ceiling" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 5.2, -20)
+position = Vector3(0, 7.8, -30)
 
 mesh = SubResource("Mesh_Hub02Ceiling")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02Ceiling"]
 
@@ -2757,11 +2785,13 @@ shape = SubResource("Shape_Hub02Ceiling")
 
 [node name="Hub02WestSouth" type="MeshInstance3D" parent="."]
 
-position = Vector3(-8.15, 2.6, -15.25)
+position = Vector3(-12.225, 3.9, -22.875)
 
 mesh = SubResource("Mesh_Hub02WestSouth")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02WestSouth"]
 
@@ -2771,11 +2801,13 @@ shape = SubResource("Shape_Hub02WestSouth")
 
 [node name="Hub02WestNorth" type="MeshInstance3D" parent="."]
 
-position = Vector3(-8.15, 2.6, -27.25)
+position = Vector3(-12.225, 3.9, -40.875)
 
 mesh = SubResource("Mesh_Hub02WestNorth")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02WestNorth"]
 
@@ -2785,11 +2817,13 @@ shape = SubResource("Shape_Hub02WestNorth")
 
 [node name="Hub02WestLintel" type="MeshInstance3D" parent="."]
 
-position = Vector3(-8.15, 4.1, -20)
+position = Vector3(-12.225, 6.15, -30)
 
 mesh = SubResource("Mesh_Hub02WestLintel")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02WestLintel"]
 
@@ -2799,11 +2833,13 @@ shape = SubResource("Shape_Hub02WestLintel")
 
 [node name="Hub02EastNorth" type="MeshInstance3D" parent="."]
 
-position = Vector3(8.15, 2.6, -24.75)
+position = Vector3(12.225, 3.9, -37.125)
 
 mesh = SubResource("Mesh_Hub02EastNorth")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02EastNorth"]
 
@@ -2813,11 +2849,13 @@ shape = SubResource("Shape_Hub02EastNorth")
 
 [node name="Hub02EastLintel" type="MeshInstance3D" parent="."]
 
-position = Vector3(8.15, 4.1, -20)
+position = Vector3(12.225, 6.15, -30)
 
 mesh = SubResource("Mesh_Hub02EastLintel")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02EastLintel"]
 
@@ -2827,11 +2865,13 @@ shape = SubResource("Shape_Hub02EastLintel")
 
 [node name="Hub02SouthLeft" type="MeshInstance3D" parent="."]
 
-position = Vector3(-4.75, 2.6, -11.85)
+position = Vector3(-7.125, 3.9, -17.775)
 
 mesh = SubResource("Mesh_Hub02SouthLeft")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02SouthLeft"]
 
@@ -2841,11 +2881,13 @@ shape = SubResource("Shape_Hub02SouthLeft")
 
 [node name="Hub02SouthRight" type="MeshInstance3D" parent="."]
 
-position = Vector3(4.75, 2.6, -11.85)
+position = Vector3(7.125, 3.9, -17.775)
 
 mesh = SubResource("Mesh_Hub02SouthRight")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02SouthRight"]
 
@@ -2855,11 +2897,13 @@ shape = SubResource("Shape_Hub02SouthRight")
 
 [node name="Hub02SouthLintel" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 4.1, -11.85)
+position = Vector3(0, 6.15, -17.775)
 
 mesh = SubResource("Mesh_Hub02SouthLintel")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02SouthLintel"]
 
@@ -2869,11 +2913,13 @@ shape = SubResource("Shape_Hub02SouthLintel")
 
 [node name="Hub02NorthLeft" type="MeshInstance3D" parent="."]
 
-position = Vector3(-5, 2.6, -28.15)
+position = Vector3(-7.5, 3.9, -42.225)
 
 mesh = SubResource("Mesh_Hub02NorthLeft")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02NorthLeft"]
 
@@ -2883,11 +2929,13 @@ shape = SubResource("Shape_Hub02NorthLeft")
 
 [node name="Hub02NorthRight" type="MeshInstance3D" parent="."]
 
-position = Vector3(5, 2.6, -28.15)
+position = Vector3(7.5, 3.9, -42.225)
 
 mesh = SubResource("Mesh_Hub02NorthRight")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02NorthRight"]
 
@@ -2897,11 +2945,13 @@ shape = SubResource("Shape_Hub02NorthRight")
 
 [node name="Hub02NorthLintel" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 4.1, -28.15)
+position = Vector3(0, 6.15, -42.225)
 
 mesh = SubResource("Mesh_Hub02NorthLintel")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hub02NorthLintel"]
 
@@ -2911,11 +2961,13 @@ shape = SubResource("Shape_Hub02NorthLintel")
 
 [node name="To03Landing" type="MeshInstance3D" parent="."]
 
-position = Vector3(-9.0, 0.0, -20.0)
+position = Vector3(-13.5, 0, -30)
 
 mesh = SubResource("Mesh_To03Landing")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To03Landing"]
 
@@ -2925,11 +2977,13 @@ shape = SubResource("Shape_To03Landing")
 
 [node name="To03Roof" type="MeshInstance3D" parent="."]
 
-position = Vector3(-9.0, 3.2, -20.0)
+position = Vector3(-13.5, 4.8, -30)
 
 mesh = SubResource("Mesh_To03Roof")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To03Roof"]
 
@@ -2939,11 +2993,13 @@ shape = SubResource("Shape_To03Roof")
 
 [node name="To03South" type="MeshInstance3D" parent="."]
 
-position = Vector3(-9.0, 1.6, -18.35)
+position = Vector3(-13.5, 2.4, -27.525)
 
 mesh = SubResource("Mesh_To03South")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To03South"]
 
@@ -2953,11 +3009,13 @@ shape = SubResource("Shape_To03South")
 
 [node name="To03North" type="MeshInstance3D" parent="."]
 
-position = Vector3(-9.0, 1.6, -21.65)
+position = Vector3(-13.5, 2.4, -32.475)
 
 mesh = SubResource("Mesh_To03North")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To03North"]
 
@@ -2967,37 +3025,42 @@ shape = SubResource("Shape_To03North")
 
 [node name="EntryFillLight" type="OmniLight3D" parent="."]
 
-position = Vector3(0, 2.7, 1)
+position = Vector3(0, 4.05, 1.5)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.2
+light_energy = 0.744
 
-omni_range = 7
+omni_range = 10.5
+light_specular = 0.3
 
 [node name="CorridorFillLight" type="OmniLight3D" parent="."]
 
-position = Vector3(0, 2.7, -7)
+position = Vector3(0, 4.05, -10.5)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.2
+light_energy = 0.744
 
-omni_range = 7
+omni_range = 10.5
+light_specular = 0.3
 
 [node name="HubFillLight" type="OmniLight3D" parent="."]
 
-position = Vector3(0, 4.3, -20)
+position = Vector3(0, 6.45, -30)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 2
+light_energy = 1.24
 
-omni_range = 15
+omni_range = 22.5
+shadow_enabled = true
+shadow_bias = 0.04
+light_specular = 0.3
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
 
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64, 11.7)
+transform = Transform3D(1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  2.41,  17.55)
 
 script = ExtResource("1_et3i4")
 
@@ -3027,11 +3090,12 @@ target_position = Vector3(0, 0, -2)
 
 [node name="ClueTablet" type="MeshInstance3D" parent="." unique_id=855525326]
 
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 1.4, -1.5)
+transform = Transform3D(1,  0,  0,  0,  1,  0,  0,  0,  1,  -2.21,  1.45,  -2.25)
 
 mesh = SubResource("BoxMesh_61ryg")
 
 script = ExtResource("2_mhnn8")
+material_override = ExtResource("Art_coffin")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ClueTablet" unique_id=1619279671]
 
@@ -3059,19 +3123,23 @@ text = "按 E 阅读石板"
 
 [node name="EntranceStep01" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, -0.04, 5.725)
+position = Vector3(0, -0.06, 8.5875)
 
 mesh = SubResource("Mesh_EntranceStep01")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft01" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 0.72, 5.725)
+position = Vector3(-2.85, 1.08, 8.5875)
 
 mesh = SubResource("Mesh_StairRailLeft01")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft01"]
 
@@ -3081,11 +3149,13 @@ shape = SubResource("Shape_StairRailLeft01")
 
 [node name="StairRailRight01" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 0.72, 5.725)
+position = Vector3(2.85, 1.08, 8.5875)
 
 mesh = SubResource("Mesh_StairRailRight01")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight01"]
 
@@ -3095,19 +3165,23 @@ shape = SubResource("Shape_StairRailRight01")
 
 [node name="EntranceStep02" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.02, 6.175)
+position = Vector3(0, 0.03, 9.2625)
 
 mesh = SubResource("Mesh_EntranceStep02")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft02" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 0.84, 6.175)
+position = Vector3(-2.85, 1.26, 9.2625)
 
 mesh = SubResource("Mesh_StairRailLeft02")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft02"]
 
@@ -3117,11 +3191,13 @@ shape = SubResource("Shape_StairRailLeft02")
 
 [node name="StairRailRight02" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 0.84, 6.175)
+position = Vector3(2.85, 1.26, 9.2625)
 
 mesh = SubResource("Mesh_StairRailRight02")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight02"]
 
@@ -3131,19 +3207,23 @@ shape = SubResource("Shape_StairRailRight02")
 
 [node name="EntranceStep03" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.08, 6.625)
+position = Vector3(0, 0.12, 9.9375)
 
 mesh = SubResource("Mesh_EntranceStep03")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft03" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 0.96, 6.625)
+position = Vector3(-2.85, 1.44, 9.9375)
 
 mesh = SubResource("Mesh_StairRailLeft03")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft03"]
 
@@ -3153,11 +3233,13 @@ shape = SubResource("Shape_StairRailLeft03")
 
 [node name="StairRailRight03" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 0.96, 6.625)
+position = Vector3(2.85, 1.44, 9.9375)
 
 mesh = SubResource("Mesh_StairRailRight03")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight03"]
 
@@ -3167,19 +3249,23 @@ shape = SubResource("Shape_StairRailRight03")
 
 [node name="EntranceStep04" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.14, 7.075)
+position = Vector3(0, 0.21, 10.6125)
 
 mesh = SubResource("Mesh_EntranceStep04")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft04" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 1.08, 7.075)
+position = Vector3(-2.85, 1.62, 10.6125)
 
 mesh = SubResource("Mesh_StairRailLeft04")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft04"]
 
@@ -3189,11 +3275,13 @@ shape = SubResource("Shape_StairRailLeft04")
 
 [node name="StairRailRight04" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 1.08, 7.075)
+position = Vector3(2.85, 1.62, 10.6125)
 
 mesh = SubResource("Mesh_StairRailRight04")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight04"]
 
@@ -3203,19 +3291,23 @@ shape = SubResource("Shape_StairRailRight04")
 
 [node name="EntranceStep05" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.2, 7.525)
+position = Vector3(0, 0.3, 11.2875)
 
 mesh = SubResource("Mesh_EntranceStep05")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft05" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 1.2, 7.525)
+position = Vector3(-2.85, 1.8, 11.2875)
 
 mesh = SubResource("Mesh_StairRailLeft05")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft05"]
 
@@ -3225,11 +3317,13 @@ shape = SubResource("Shape_StairRailLeft05")
 
 [node name="StairRailRight05" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 1.2, 7.525)
+position = Vector3(2.85, 1.8, 11.2875)
 
 mesh = SubResource("Mesh_StairRailRight05")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight05"]
 
@@ -3239,19 +3333,23 @@ shape = SubResource("Shape_StairRailRight05")
 
 [node name="EntranceStep06" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.26, 7.975)
+position = Vector3(0, 0.39, 11.9625)
 
 mesh = SubResource("Mesh_EntranceStep06")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft06" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 1.32, 7.975)
+position = Vector3(-2.85, 1.98, 11.9625)
 
 mesh = SubResource("Mesh_StairRailLeft06")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft06"]
 
@@ -3261,11 +3359,13 @@ shape = SubResource("Shape_StairRailLeft06")
 
 [node name="StairRailRight06" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 1.32, 7.975)
+position = Vector3(2.85, 1.98, 11.9625)
 
 mesh = SubResource("Mesh_StairRailRight06")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight06"]
 
@@ -3275,19 +3375,23 @@ shape = SubResource("Shape_StairRailRight06")
 
 [node name="EntranceStep07" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.32, 8.425)
+position = Vector3(0, 0.48, 12.6375)
 
 mesh = SubResource("Mesh_EntranceStep07")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft07" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 1.44, 8.425)
+position = Vector3(-2.85, 2.16, 12.6375)
 
 mesh = SubResource("Mesh_StairRailLeft07")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft07"]
 
@@ -3297,11 +3401,13 @@ shape = SubResource("Shape_StairRailLeft07")
 
 [node name="StairRailRight07" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 1.44, 8.425)
+position = Vector3(2.85, 2.16, 12.6375)
 
 mesh = SubResource("Mesh_StairRailRight07")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight07"]
 
@@ -3311,19 +3417,23 @@ shape = SubResource("Shape_StairRailRight07")
 
 [node name="EntranceStep08" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.38, 8.875)
+position = Vector3(0, 0.57, 13.3125)
 
 mesh = SubResource("Mesh_EntranceStep08")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft08" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 1.56, 8.875)
+position = Vector3(-2.85, 2.34, 13.3125)
 
 mesh = SubResource("Mesh_StairRailLeft08")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft08"]
 
@@ -3333,11 +3443,13 @@ shape = SubResource("Shape_StairRailLeft08")
 
 [node name="StairRailRight08" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 1.56, 8.875)
+position = Vector3(2.85, 2.34, 13.3125)
 
 mesh = SubResource("Mesh_StairRailRight08")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight08"]
 
@@ -3347,19 +3459,23 @@ shape = SubResource("Shape_StairRailRight08")
 
 [node name="EntranceStep09" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.44, 9.325)
+position = Vector3(0, 0.66, 13.9875)
 
 mesh = SubResource("Mesh_EntranceStep09")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft09" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 1.68, 9.325)
+position = Vector3(-2.85, 2.52, 13.9875)
 
 mesh = SubResource("Mesh_StairRailLeft09")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft09"]
 
@@ -3369,11 +3485,13 @@ shape = SubResource("Shape_StairRailLeft09")
 
 [node name="StairRailRight09" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 1.68, 9.325)
+position = Vector3(2.85, 2.52, 13.9875)
 
 mesh = SubResource("Mesh_StairRailRight09")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight09"]
 
@@ -3383,19 +3501,23 @@ shape = SubResource("Shape_StairRailRight09")
 
 [node name="EntranceStep10" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.5, 9.775)
+position = Vector3(0, 0.75, 14.6625)
 
 mesh = SubResource("Mesh_EntranceStep10")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft10" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 1.8, 9.775)
+position = Vector3(-2.85, 2.7, 14.6625)
 
 mesh = SubResource("Mesh_StairRailLeft10")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft10"]
 
@@ -3405,11 +3527,13 @@ shape = SubResource("Shape_StairRailLeft10")
 
 [node name="StairRailRight10" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 1.8, 9.775)
+position = Vector3(2.85, 2.7, 14.6625)
 
 mesh = SubResource("Mesh_StairRailRight10")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight10"]
 
@@ -3419,19 +3543,23 @@ shape = SubResource("Shape_StairRailRight10")
 
 [node name="EntranceStep11" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.56, 10.225)
+position = Vector3(0, 0.84, 15.3375)
 
 mesh = SubResource("Mesh_EntranceStep11")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft11" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 1.92, 10.225)
+position = Vector3(-2.85, 2.88, 15.3375)
 
 mesh = SubResource("Mesh_StairRailLeft11")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft11"]
 
@@ -3441,11 +3569,13 @@ shape = SubResource("Shape_StairRailLeft11")
 
 [node name="StairRailRight11" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 1.92, 10.225)
+position = Vector3(2.85, 2.88, 15.3375)
 
 mesh = SubResource("Mesh_StairRailRight11")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight11"]
 
@@ -3455,19 +3585,23 @@ shape = SubResource("Shape_StairRailRight11")
 
 [node name="EntranceStep12" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0.62, 10.675)
+position = Vector3(0, 0.93, 16.0125)
 
 mesh = SubResource("Mesh_EntranceStep12")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StairRailLeft12" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 2.04, 10.675)
+position = Vector3(-2.85, 3.06, 16.0125)
 
 mesh = SubResource("Mesh_StairRailLeft12")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailLeft12"]
 
@@ -3477,11 +3611,13 @@ shape = SubResource("Shape_StairRailLeft12")
 
 [node name="StairRailRight12" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 2.04, 10.675)
+position = Vector3(2.85, 3.06, 16.0125)
 
 mesh = SubResource("Mesh_StairRailRight12")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StairRailRight12"]
 
@@ -3491,11 +3627,13 @@ shape = SubResource("Shape_StairRailRight12")
 
 [node name="EntranceUpperLanding" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 1.44, 11.65)
+position = Vector3(0, 2.16, 17.475)
 
 mesh = SubResource("Mesh_EntranceUpperLanding")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceUpperLanding"]
 
@@ -3505,11 +3643,13 @@ shape = SubResource("Shape_EntranceUpperLanding")
 
 [node name="LandingRailLeft" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.9, 2.04, 11.65)
+position = Vector3(-2.85, 3.06, 17.475)
 
 mesh = SubResource("Mesh_LandingRailLeft")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LandingRailLeft"]
 
@@ -3519,11 +3659,13 @@ shape = SubResource("Shape_LandingRailLeft")
 
 [node name="LandingRailRight" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.9, 2.04, 11.65)
+position = Vector3(2.85, 3.06, 17.475)
 
 mesh = SubResource("Mesh_LandingRailRight")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LandingRailRight"]
 
@@ -3534,6 +3676,8 @@ shape = SubResource("Shape_LandingRailRight")
 [node name="EntranceStairWalkRamp" type="StaticBody3D" parent="."]
 
 metadata/note = "Smooth ramp collider beneath visual treads; intentional, for existing player without step climbing"
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceStairWalkRamp"]
 
@@ -3541,13 +3685,15 @@ shape = SubResource("EntranceStairRampShape")
 
 [node name="EntranceRubble1" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.28, 0.425, 3.9)
+position = Vector3(-1.92, 0.6375, 5.85)
 
 mesh = SubResource("Mesh_EntranceRubble1")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_rock")
 
 rotation = Vector3(0, 0.3, 0)
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble1"]
 
@@ -3557,13 +3703,15 @@ shape = SubResource("Shape_EntranceRubble1")
 
 [node name="EntranceRubble2" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.23, 0.35, 2.6)
+position = Vector3(1.845, 0.525, 3.9)
 
 mesh = SubResource("Mesh_EntranceRubble2")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_rock")
 
 rotation = Vector3(0, -0.4, 0)
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble2"]
 
@@ -3573,13 +3721,15 @@ shape = SubResource("Shape_EntranceRubble2")
 
 [node name="EntranceRubble3" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.3, 0.3, 0.5)
+position = Vector3(-1.95, 0.45, 0.75)
 
 mesh = SubResource("Mesh_EntranceRubble3")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_rock")
 
 rotation = Vector3(0, 0.5, 0)
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble3"]
 
@@ -3589,13 +3739,15 @@ shape = SubResource("Shape_EntranceRubble3")
 
 [node name="EntranceRubble4" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.24, 0.475, -2.7)
+position = Vector3(1.86, 0.7125, -4.05)
 
 mesh = SubResource("Mesh_EntranceRubble4")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_rock")
 
 rotation = Vector3(0, 0.2, 0)
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble4"]
 
@@ -3605,13 +3757,15 @@ shape = SubResource("Shape_EntranceRubble4")
 
 [node name="EntranceRubble5" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.3, 0.35, -4.5)
+position = Vector3(-1.95, 0.525, -6.75)
 
 mesh = SubResource("Mesh_EntranceRubble5")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_rock")
 
 rotation = Vector3(0, -0.25, 0)
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble5"]
 
@@ -3621,13 +3775,15 @@ shape = SubResource("Shape_EntranceRubble5")
 
 [node name="EntranceRubble6" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.3, 0.3, -6.5)
+position = Vector3(1.95, 0.45, -9.75)
 
 mesh = SubResource("Mesh_EntranceRubble6")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_rock")
 
 rotation = Vector3(0, 0.5, 0)
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble6"]
 
@@ -3637,13 +3793,15 @@ shape = SubResource("Shape_EntranceRubble6")
 
 [node name="BrokenLeftPillar" type="MeshInstance3D" parent="."]
 
-position = Vector3(-1.17, 0.46, 2)
+position = Vector3(-1.755, 0.69, 3)
 
 mesh = SubResource("Mesh_BrokenLeftPillar")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_rock")
 
 rotation = Vector3(0, 0.12, 0.13)
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BrokenLeftPillar"]
 
@@ -3653,13 +3811,15 @@ shape = SubResource("Shape_BrokenLeftPillar")
 
 [node name="BrokenRightPillar" type="MeshInstance3D" parent="."]
 
-position = Vector3(1.15, 0.42, -5)
+position = Vector3(1.725, 0.63, -7.5)
 
 mesh = SubResource("Mesh_BrokenRightPillar")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_rock")
 
 rotation = Vector3(0, -0.15, -0.14)
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BrokenRightPillar"]
 
@@ -3669,41 +3829,46 @@ shape = SubResource("Shape_BrokenRightPillar")
 
 [node name="StairFillLight" type="OmniLight3D" parent="."]
 
-position = Vector3(0,4,9)
+position = Vector3(0, 6, 13.5)
 
-light_color = Color(1,0.83,0.62,1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.4
+light_energy = 0.868
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
 
 [node name="HubSideFill0" type="OmniLight3D" parent="."]
 
-position = Vector3(-5,3.8,-20)
+position = Vector3(-7.5, 5.7, -30)
 
-light_color = Color(1,0.83,0.62,1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1
+light_energy = 0.62
 
-omni_range = 10
+omni_range = 15
+light_specular = 0.3
 
 [node name="HubSideFill1" type="OmniLight3D" parent="."]
 
-position = Vector3(5,3.8,-20)
+position = Vector3(7.5, 5.7, -30)
 
-light_color = Color(1,0.83,0.62,1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1
+light_energy = 0.62
 
-omni_range = 10
+omni_range = 15
+light_specular = 0.3
 
 [node name="To07Landing" type="MeshInstance3D" parent="."]
 
-position = Vector3(9, 0, -20)
+position = Vector3(13.5, 0, -30)
 
 mesh = SubResource("Mesh_To07Landing")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To07Landing"]
 
@@ -3713,11 +3878,13 @@ shape = SubResource("Shape_To07Landing")
 
 [node name="To07Roof" type="MeshInstance3D" parent="."]
 
-position = Vector3(9, 3.2, -20)
+position = Vector3(13.5, 4.8, -30)
 
 mesh = SubResource("Mesh_To07Roof")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To07Roof"]
 
@@ -3727,11 +3894,13 @@ shape = SubResource("Shape_To07Roof")
 
 [node name="To07South" type="MeshInstance3D" parent="."]
 
-position = Vector3(9, 1.6, -18.35)
+position = Vector3(13.5, 2.4, -27.525)
 
 mesh = SubResource("Mesh_To07South")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To07South"]
 
@@ -3741,11 +3910,13 @@ shape = SubResource("Shape_To07South")
 
 [node name="To07North" type="MeshInstance3D" parent="."]
 
-position = Vector3(9, 1.6, -21.65)
+position = Vector3(13.5, 2.4, -32.475)
 
 mesh = SubResource("Mesh_To07North")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To07North"]
 
@@ -3755,11 +3926,13 @@ shape = SubResource("Shape_To07North")
 
 [node name="To10Landing" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 0, -29)
+position = Vector3(0, 0, -43.5)
 
 mesh = SubResource("Mesh_To10Landing")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To10Landing"]
 
@@ -3769,11 +3942,13 @@ shape = SubResource("Shape_To10Landing")
 
 [node name="To10Roof" type="MeshInstance3D" parent="."]
 
-position = Vector3(0, 3.2, -29)
+position = Vector3(0, 4.8, -43.5)
 
 mesh = SubResource("Mesh_To10Roof")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To10Roof"]
 
@@ -3783,11 +3958,13 @@ shape = SubResource("Shape_To10Roof")
 
 [node name="To10Left" type="MeshInstance3D" parent="."]
 
-position = Vector3(-2.15, 1.6, -29)
+position = Vector3(-3.225, 2.4, -43.5)
 
 mesh = SubResource("Mesh_To10Left")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To10Left"]
 
@@ -3797,11 +3974,13 @@ shape = SubResource("Shape_To10Left")
 
 [node name="To10Right" type="MeshInstance3D" parent="."]
 
-position = Vector3(2.15, 1.6, -29)
+position = Vector3(3.225, 2.4, -43.5)
 
 mesh = SubResource("Mesh_To10Right")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="StaticBody3D" type="StaticBody3D" parent="To10Right"]
 
@@ -3812,6 +3991,8 @@ shape = SubResource("Shape_To10Right")
 [node name="WestWing" type="Node3D" parent="."]
 
 metadata/note = "03-06 west architecture blockout, north=-Z, estimated meters; shortcut intentionally ungated"
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="Room03" type="Node3D" parent="WestWing"]
 
@@ -3829,7 +4010,7 @@ position = Vector3(-8.15, 2.6, -22.5)
 
 mesh = SubResource("Mesh_West_HubShortcutMiddlePier")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/HubShortcutMiddlePier"]
 
@@ -3843,7 +4024,7 @@ position = Vector3(-8.15, 4.1, -25)
 
 mesh = SubResource("Mesh_West_HubShortcutLintel")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/HubShortcutLintel"]
 
@@ -3857,7 +4038,7 @@ position = Vector3(-29.0, 0, -60.0)
 
 mesh = SubResource("Mesh_West_Floor000")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/Floor000"]
 
@@ -3871,7 +4052,7 @@ position = Vector3(-29.0, 3.2, -60.0)
 
 mesh = SubResource("Mesh_West_Ceiling000")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/Ceiling000"]
 
@@ -3885,7 +4066,7 @@ position = Vector3(-38.25, 0, -60.0)
 
 mesh = SubResource("Mesh_West_Floor001")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Floor001"]
 
@@ -3899,7 +4080,7 @@ position = Vector3(-38.25, 3.2, -60.0)
 
 mesh = SubResource("Mesh_West_Ceiling001")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Ceiling001"]
 
@@ -3913,7 +4094,7 @@ position = Vector3(-39.0, 0, -54.0)
 
 mesh = SubResource("Mesh_West_Floor002")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Floor002"]
 
@@ -3927,7 +4108,7 @@ position = Vector3(-39.0, 3.2, -54.0)
 
 mesh = SubResource("Mesh_West_Ceiling002")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Ceiling002"]
 
@@ -3941,7 +4122,7 @@ position = Vector3(-26.0, 0, -51.0)
 
 mesh = SubResource("Mesh_West_Floor003")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Floor003"]
 
@@ -3955,7 +4136,7 @@ position = Vector3(-26.0, 3.2, -51.0)
 
 mesh = SubResource("Mesh_West_Ceiling003")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Ceiling003"]
 
@@ -3969,7 +4150,7 @@ position = Vector3(-16.0, 0, -44.5)
 
 mesh = SubResource("Mesh_West_Floor004")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Floor004"]
 
@@ -3983,7 +4164,7 @@ position = Vector3(-16.0, 3.2, -44.5)
 
 mesh = SubResource("Mesh_West_Ceiling004")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Ceiling004"]
 
@@ -3997,7 +4178,7 @@ position = Vector3(-27.5, 0, -41.0)
 
 mesh = SubResource("Mesh_West_Floor005")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Floor005"]
 
@@ -4011,7 +4192,7 @@ position = Vector3(-27.5, 3.2, -41.0)
 
 mesh = SubResource("Mesh_West_Ceiling005")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Ceiling005"]
 
@@ -4025,7 +4206,7 @@ position = Vector3(-36.0, 0, -37.25)
 
 mesh = SubResource("Mesh_West_Floor006")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Floor006"]
 
@@ -4039,7 +4220,7 @@ position = Vector3(-36.0, 3.2, -37.25)
 
 mesh = SubResource("Mesh_West_Ceiling006")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/Ceiling006"]
 
@@ -4053,7 +4234,7 @@ position = Vector3(-22.0, 0, -33.5)
 
 mesh = SubResource("Mesh_West_Floor007")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/Floor007"]
 
@@ -4067,7 +4248,7 @@ position = Vector3(-22.0, 3.2, -33.5)
 
 mesh = SubResource("Mesh_West_Ceiling007")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/Ceiling007"]
 
@@ -4081,7 +4262,7 @@ position = Vector3(-36.0, 0, -30.0)
 
 mesh = SubResource("Mesh_West_Floor008")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/Floor008"]
 
@@ -4095,7 +4276,7 @@ position = Vector3(-36.0, 3.2, -30.0)
 
 mesh = SubResource("Mesh_West_Ceiling008")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/Ceiling008"]
 
@@ -4109,7 +4290,7 @@ position = Vector3(-15.0, 0, -29.0)
 
 mesh = SubResource("Mesh_West_Floor009")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/Floor009"]
 
@@ -4123,7 +4304,7 @@ position = Vector3(-15.0, 3.2, -29.0)
 
 mesh = SubResource("Mesh_West_Ceiling009")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/Ceiling009"]
 
@@ -4137,7 +4318,7 @@ position = Vector3(-11.0, 0, -25.5)
 
 mesh = SubResource("Mesh_West_Floor010")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/Floor010"]
 
@@ -4151,7 +4332,7 @@ position = Vector3(-11.0, 3.2, -25.5)
 
 mesh = SubResource("Mesh_West_Ceiling010")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/Ceiling010"]
 
@@ -4165,7 +4346,7 @@ position = Vector3(-8.75, 0, -25.0)
 
 mesh = SubResource("Mesh_West_Floor011")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/Floor011"]
 
@@ -4179,7 +4360,7 @@ position = Vector3(-8.75, 3.2, -25.0)
 
 mesh = SubResource("Mesh_West_Ceiling011")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/Ceiling011"]
 
@@ -4193,7 +4374,7 @@ position = Vector3(-36.0, 0, -21.75)
 
 mesh = SubResource("Mesh_West_Floor012")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor012"]
 
@@ -4207,7 +4388,7 @@ position = Vector3(-36.0, 3.2, -21.75)
 
 mesh = SubResource("Mesh_West_Ceiling012")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling012"]
 
@@ -4221,7 +4402,7 @@ position = Vector3(-22.25, 0, -20.0)
 
 mesh = SubResource("Mesh_West_Floor013")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor013"]
 
@@ -4235,7 +4416,7 @@ position = Vector3(-22.25, 3.2, -20.0)
 
 mesh = SubResource("Mesh_West_Ceiling013")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling013"]
 
@@ -4249,7 +4430,7 @@ position = Vector3(-28.5, 0, -14.25)
 
 mesh = SubResource("Mesh_West_Floor014")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor014"]
 
@@ -4263,7 +4444,7 @@ position = Vector3(-28.5, 3.2, -14.25)
 
 mesh = SubResource("Mesh_West_Ceiling014")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling014"]
 
@@ -4277,7 +4458,7 @@ position = Vector3(-20.5, 0, -14.25)
 
 mesh = SubResource("Mesh_West_Floor015")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor015"]
 
@@ -4291,7 +4472,7 @@ position = Vector3(-20.5, 3.2, -14.25)
 
 mesh = SubResource("Mesh_West_Ceiling015")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling015"]
 
@@ -4305,7 +4486,7 @@ position = Vector3(-12.5, 0, -12.25)
 
 mesh = SubResource("Mesh_West_Floor016")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor016"]
 
@@ -4319,7 +4500,7 @@ position = Vector3(-12.5, 3.2, -12.25)
 
 mesh = SubResource("Mesh_West_Ceiling016")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling016"]
 
@@ -4333,7 +4514,7 @@ position = Vector3(-30.25, 0, -12.5)
 
 mesh = SubResource("Mesh_West_Floor017")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor017"]
 
@@ -4347,7 +4528,7 @@ position = Vector3(-30.25, 3.2, -12.5)
 
 mesh = SubResource("Mesh_West_Ceiling017")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling017"]
 
@@ -4361,7 +4542,7 @@ position = Vector3(-26.75, 0, -12.5)
 
 mesh = SubResource("Mesh_West_Floor018")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor018"]
 
@@ -4375,7 +4556,7 @@ position = Vector3(-26.75, 3.2, -12.5)
 
 mesh = SubResource("Mesh_West_Ceiling018")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling018"]
 
@@ -4389,7 +4570,7 @@ position = Vector3(-22.25, 0, -12.5)
 
 mesh = SubResource("Mesh_West_Floor019")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor019"]
 
@@ -4403,7 +4584,7 @@ position = Vector3(-22.25, 3.2, -12.5)
 
 mesh = SubResource("Mesh_West_Ceiling019")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling019"]
 
@@ -4417,7 +4598,7 @@ position = Vector3(-18.75, 0, -12.5)
 
 mesh = SubResource("Mesh_West_Floor020")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor020"]
 
@@ -4431,7 +4612,7 @@ position = Vector3(-18.75, 3.2, -12.5)
 
 mesh = SubResource("Mesh_West_Ceiling020")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling020"]
 
@@ -4445,7 +4626,7 @@ position = Vector3(-14.25, 0, -9.0)
 
 mesh = SubResource("Mesh_West_Floor021")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor021"]
 
@@ -4459,7 +4640,7 @@ position = Vector3(-14.25, 3.2, -9.0)
 
 mesh = SubResource("Mesh_West_Ceiling021")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling021"]
 
@@ -4473,7 +4654,7 @@ position = Vector3(-10.75, 0, -9.0)
 
 mesh = SubResource("Mesh_West_Floor022")
 
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Floor022"]
 
@@ -4487,7 +4668,7 @@ position = Vector3(-10.75, 3.2, -9.0)
 
 mesh = SubResource("Mesh_West_Ceiling022")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/Ceiling022"]
 
@@ -4501,7 +4682,7 @@ position = Vector3(-33.5, 1.6, -18.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall000")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall000"]
 
@@ -4515,7 +4696,7 @@ position = Vector3(-24.5, 1.6, -18.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall001")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall001"]
 
@@ -4529,7 +4710,7 @@ position = Vector3(-16.5, 1.6, -18.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall002")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall002"]
 
@@ -4543,7 +4724,7 @@ position = Vector3(-10.75, 1.6, -18.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall003")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall003"]
 
@@ -4557,7 +4738,7 @@ position = Vector3(-22.25, 1.6, -21.625)
 
 mesh = SubResource("Mesh_West_BoundaryWall004")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall004"]
 
@@ -4571,7 +4752,7 @@ position = Vector3(-37.625, 1.6, -21.75)
 
 mesh = SubResource("Mesh_West_BoundaryWall005")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall005"]
 
@@ -4585,7 +4766,7 @@ position = Vector3(-34.375, 1.6, -23.25)
 
 mesh = SubResource("Mesh_West_BoundaryWall006")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall006"]
 
@@ -4599,7 +4780,7 @@ position = Vector3(-29.625, 1.6, -16.75)
 
 mesh = SubResource("Mesh_West_BoundaryWall007")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall007"]
 
@@ -4613,7 +4794,7 @@ position = Vector3(-27.375, 1.6, -16.75)
 
 mesh = SubResource("Mesh_West_BoundaryWall008")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall008"]
 
@@ -4627,7 +4808,7 @@ position = Vector3(-31.125, 1.6, -12.5)
 
 mesh = SubResource("Mesh_West_BoundaryWall009")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall009"]
 
@@ -4641,7 +4822,7 @@ position = Vector3(-30.25, 1.6, -15.125)
 
 mesh = SubResource("Mesh_West_BoundaryWall010")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall010"]
 
@@ -4655,7 +4836,7 @@ position = Vector3(-26.75, 1.6, -15.125)
 
 mesh = SubResource("Mesh_West_BoundaryWall011")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall011"]
 
@@ -4669,7 +4850,7 @@ position = Vector3(-22.25, 1.6, -15.125)
 
 mesh = SubResource("Mesh_West_BoundaryWall012")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall012"]
 
@@ -4683,7 +4864,7 @@ position = Vector3(-18.75, 1.6, -15.125)
 
 mesh = SubResource("Mesh_West_BoundaryWall013")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall013"]
 
@@ -4697,7 +4878,7 @@ position = Vector3(-28.5, 1.6, -9.875)
 
 mesh = SubResource("Mesh_West_BoundaryWall014")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall014"]
 
@@ -4711,7 +4892,7 @@ position = Vector3(-20.5, 1.6, -9.875)
 
 mesh = SubResource("Mesh_West_BoundaryWall015")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall015"]
 
@@ -4725,7 +4906,7 @@ position = Vector3(-25.875, 1.6, -12.5)
 
 mesh = SubResource("Mesh_West_BoundaryWall016")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall016"]
 
@@ -4739,7 +4920,7 @@ position = Vector3(-21.625, 1.6, -16.75)
 
 mesh = SubResource("Mesh_West_BoundaryWall017")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall017"]
 
@@ -4753,7 +4934,7 @@ position = Vector3(-19.375, 1.6, -16.75)
 
 mesh = SubResource("Mesh_West_BoundaryWall018")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall018"]
 
@@ -4767,7 +4948,7 @@ position = Vector3(-23.125, 1.6, -12.5)
 
 mesh = SubResource("Mesh_West_BoundaryWall019")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall019"]
 
@@ -4781,7 +4962,7 @@ position = Vector3(-17.875, 1.6, -12.5)
 
 mesh = SubResource("Mesh_West_BoundaryWall020")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall020"]
 
@@ -4795,7 +4976,7 @@ position = Vector3(-13.625, 1.6, -15.25)
 
 mesh = SubResource("Mesh_West_BoundaryWall021")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall021"]
 
@@ -4809,7 +4990,7 @@ position = Vector3(-11.375, 1.6, -15.25)
 
 mesh = SubResource("Mesh_West_BoundaryWall022")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall022"]
 
@@ -4823,7 +5004,7 @@ position = Vector3(-15.125, 1.6, -9.0)
 
 mesh = SubResource("Mesh_West_BoundaryWall023")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall023"]
 
@@ -4837,7 +5018,7 @@ position = Vector3(-14.25, 1.6, -12.125)
 
 mesh = SubResource("Mesh_West_BoundaryWall024")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall024"]
 
@@ -4851,7 +5032,7 @@ position = Vector3(-10.75, 1.6, -12.125)
 
 mesh = SubResource("Mesh_West_BoundaryWall025")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall025"]
 
@@ -4865,7 +5046,7 @@ position = Vector3(-12.5, 1.6, -5.875)
 
 mesh = SubResource("Mesh_West_BoundaryWall026")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall026"]
 
@@ -4879,7 +5060,7 @@ position = Vector3(-9.875, 1.6, -9.0)
 
 mesh = SubResource("Mesh_West_BoundaryWall027")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room03/BoundaryWall027"]
 
@@ -4893,7 +5074,7 @@ position = Vector3(-40.125, 1.6, -30.0)
 
 mesh = SubResource("Mesh_West_BoundaryWall028")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/BoundaryWall028"]
 
@@ -4907,7 +5088,7 @@ position = Vector3(-38.75, 1.6, -35.125)
 
 mesh = SubResource("Mesh_West_BoundaryWall029")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/BoundaryWall029"]
 
@@ -4921,7 +5102,7 @@ position = Vector3(-33.25, 1.6, -35.125)
 
 mesh = SubResource("Mesh_West_BoundaryWall030")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/BoundaryWall030"]
 
@@ -4935,7 +5116,7 @@ position = Vector3(-38.75, 1.6, -24.875)
 
 mesh = SubResource("Mesh_West_BoundaryWall031")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/BoundaryWall031"]
 
@@ -4949,7 +5130,7 @@ position = Vector3(-33.25, 1.6, -24.875)
 
 mesh = SubResource("Mesh_West_BoundaryWall032")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/BoundaryWall032"]
 
@@ -4963,7 +5144,7 @@ position = Vector3(-31.875, 1.6, -30.0)
 
 mesh = SubResource("Mesh_West_BoundaryWall033")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/BoundaryWall033"]
 
@@ -4977,7 +5158,7 @@ position = Vector3(-37.625, 1.6, -38.75)
 
 mesh = SubResource("Mesh_West_BoundaryWall034")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall034"]
 
@@ -4991,7 +5172,7 @@ position = Vector3(-34.375, 1.6, -37.25)
 
 mesh = SubResource("Mesh_West_BoundaryWall035")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall035"]
 
@@ -5005,7 +5186,7 @@ position = Vector3(-27.5, 1.6, -42.625)
 
 mesh = SubResource("Mesh_West_BoundaryWall036")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall036"]
 
@@ -5019,7 +5200,7 @@ position = Vector3(-29.0, 1.6, -39.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall037")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall037"]
 
@@ -5033,7 +5214,7 @@ position = Vector3(-17.5, 1.6, -39.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall038")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall038"]
 
@@ -5047,7 +5228,7 @@ position = Vector3(-14.375, 1.6, -46.0)
 
 mesh = SubResource("Mesh_West_BoundaryWall039")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall039"]
 
@@ -5061,7 +5242,7 @@ position = Vector3(-17.625, 1.6, -46.0)
 
 mesh = SubResource("Mesh_West_BoundaryWall040")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall040"]
 
@@ -5075,7 +5256,7 @@ position = Vector3(-40.625, 1.6, -55.5)
 
 mesh = SubResource("Mesh_West_BoundaryWall041")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall041"]
 
@@ -5089,7 +5270,7 @@ position = Vector3(-29.0, 1.6, -49.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall042")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall042"]
 
@@ -5103,7 +5284,7 @@ position = Vector3(-26.0, 1.6, -52.625)
 
 mesh = SubResource("Mesh_West_BoundaryWall043")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall043"]
 
@@ -5117,7 +5298,7 @@ position = Vector3(-37.375, 1.6, -55.5)
 
 mesh = SubResource("Mesh_West_BoundaryWall044")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall044"]
 
@@ -5131,7 +5312,7 @@ position = Vector3(-38.25, 1.6, -61.625)
 
 mesh = SubResource("Mesh_West_BoundaryWall045")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall045"]
 
@@ -5145,7 +5326,7 @@ position = Vector3(-36.75, 1.6, -58.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall046")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Corridor05/BoundaryWall046"]
 
@@ -5159,7 +5340,7 @@ position = Vector3(-36.125, 1.6, -63.25)
 
 mesh = SubResource("Mesh_West_BoundaryWall047")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/BoundaryWall047"]
 
@@ -5173,7 +5354,7 @@ position = Vector3(-36.125, 1.6, -56.75)
 
 mesh = SubResource("Mesh_West_BoundaryWall048")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/BoundaryWall048"]
 
@@ -5187,7 +5368,7 @@ position = Vector3(-29.0, 1.6, -65.125)
 
 mesh = SubResource("Mesh_West_BoundaryWall049")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/BoundaryWall049"]
 
@@ -5201,7 +5382,7 @@ position = Vector3(-29.0, 1.6, -54.875)
 
 mesh = SubResource("Mesh_West_BoundaryWall050")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/BoundaryWall050"]
 
@@ -5215,7 +5396,7 @@ position = Vector3(-21.875, 1.6, -60.0)
 
 mesh = SubResource("Mesh_West_BoundaryWall051")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/BoundaryWall051"]
 
@@ -5229,7 +5410,7 @@ position = Vector3(-23.625, 1.6, -33.5)
 
 mesh = SubResource("Mesh_West_BoundaryWall052")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/BoundaryWall052"]
 
@@ -5243,7 +5424,7 @@ position = Vector3(-20.375, 1.6, -35.0)
 
 mesh = SubResource("Mesh_West_BoundaryWall053")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/BoundaryWall053"]
 
@@ -5257,7 +5438,7 @@ position = Vector3(-18.0, 1.6, -27.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall054")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/BoundaryWall054"]
 
@@ -5271,7 +5452,7 @@ position = Vector3(-15.0, 1.6, -30.625)
 
 mesh = SubResource("Mesh_West_BoundaryWall055")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/BoundaryWall055"]
 
@@ -5285,7 +5466,7 @@ position = Vector3(-9.375, 1.6, -28.5)
 
 mesh = SubResource("Mesh_West_BoundaryWall056")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/BoundaryWall056"]
 
@@ -5299,7 +5480,7 @@ position = Vector3(-12.625, 1.6, -25.5)
 
 mesh = SubResource("Mesh_West_BoundaryWall057")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/BoundaryWall057"]
 
@@ -5313,7 +5494,7 @@ position = Vector3(-10.25, 1.6, -23.375)
 
 mesh = SubResource("Mesh_West_BoundaryWall058")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/BoundaryWall058"]
 
@@ -5327,7 +5508,7 @@ position = Vector3(-8.75, 1.6, -26.625)
 
 mesh = SubResource("Mesh_West_BoundaryWall059")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/BoundaryWall059"]
 
@@ -5341,7 +5522,7 @@ position = Vector3(-38.9, 1.6, -33.9)
 
 mesh = SubResource("Mesh_West_Room04Pier0")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/Room04Pier0"]
 
@@ -5355,7 +5536,7 @@ position = Vector3(-33.1, 1.6, -33.9)
 
 mesh = SubResource("Mesh_West_Room04Pier1")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room04/Room04Pier1"]
 
@@ -5369,7 +5550,7 @@ position = Vector3(-34.9, 1.6, -63.9)
 
 mesh = SubResource("Mesh_West_Room06Pier0")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/Room06Pier0"]
 
@@ -5383,7 +5564,7 @@ position = Vector3(-23.1, 1.6, -63.9)
 
 mesh = SubResource("Mesh_West_Room06Pier1")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/Room06Pier1"]
 
@@ -5397,7 +5578,7 @@ position = Vector3(-34.9, 1.6, -56.1)
 
 mesh = SubResource("Mesh_West_Room06Pier2")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/Room06Pier2"]
 
@@ -5411,7 +5592,7 @@ position = Vector3(-23.1, 1.6, -56.1)
 
 mesh = SubResource("Mesh_West_Room06Pier3")
 
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/Room06/Room06Pier3"]
 
@@ -5423,164 +5604,214 @@ shape = SubResource("Shape_West_Room06Pier3")
 
 position = Vector3(-13, 2.7, -20)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight01" type="OmniLight3D" parent="WestWing/Room03"]
 
 position = Vector3(-23, 2.7, -20)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight02" type="OmniLight3D" parent="WestWing/Room03"]
 
 position = Vector3(-33, 2.7, -20)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight03" type="OmniLight3D" parent="WestWing/Room03"]
 
 position = Vector3(-28.5, 2.7, -12.5)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight04" type="OmniLight3D" parent="WestWing/Room03"]
 
 position = Vector3(-20.5, 2.7, -12.5)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight05" type="OmniLight3D" parent="WestWing/Room03"]
 
 position = Vector3(-12.5, 2.7, -9)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight06" type="OmniLight3D" parent="WestWing/Room04"]
 
 position = Vector3(-36, 2.7, -30)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight07" type="OmniLight3D" parent="WestWing/Corridor05"]
 
 position = Vector3(-36, 2.7, -38)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight08" type="OmniLight3D" parent="WestWing/Corridor05"]
 
 position = Vector3(-27, 2.7, -41)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight09" type="OmniLight3D" parent="WestWing/Corridor05"]
 
 position = Vector3(-16, 2.7, -46)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight10" type="OmniLight3D" parent="WestWing/Corridor05"]
 
 position = Vector3(-25, 2.7, -51)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight11" type="OmniLight3D" parent="WestWing/Corridor05"]
 
 position = Vector3(-38, 2.7, -54)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight12" type="OmniLight3D" parent="WestWing/Room06"]
 
 position = Vector3(-29, 2.7, -60)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight13" type="OmniLight3D" parent="WestWing/WestShortcut"]
 
 position = Vector3(-22, 2.7, -34)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight14" type="OmniLight3D" parent="WestWing/WestShortcut"]
 
 position = Vector3(-16, 2.7, -29)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight15" type="OmniLight3D" parent="WestWing/WestShortcut"]
 
 position = Vector3(-10.5, 2.7, -25)
 
-light_color = Color(1, 0.83, 0.62, 1)
+light_color = Color(1, 0.68, 0.37, 1)
 
-light_energy = 1.3
+light_energy = 0.806
 
-omni_range = 9
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="EastWing" type="Node3D" parent="."]
 metadata/note = "07 abyss, 08-09 architecture; no bridge/rope/mechanisms, shortcut currently bidirectional"
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="Chasm07" type="Node3D" parent="EastWing"]
 
@@ -5597,7 +5828,7 @@ metadata/note = "07 abyss, 08-09 architecture; no bridge/rope/mechanisms, shortc
 [node name="HubEastBetweenDoors" type="MeshInstance3D" parent="EastWing"]
 position = Vector3(8.15, 2.6, -17.5)
 mesh = SubResource("Mesh_East_HubEastBetweenDoors")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/HubEastBetweenDoors"]
 
@@ -5607,7 +5838,7 @@ shape = SubResource("Shape_East_HubEastBetweenDoors")
 [node name="HubEastSouthCorner" type="MeshInstance3D" parent="EastWing"]
 position = Vector3(8.15, 2.6, -12.75)
 mesh = SubResource("Mesh_East_HubEastSouthCorner")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/HubEastSouthCorner"]
 
@@ -5617,7 +5848,7 @@ shape = SubResource("Shape_East_HubEastSouthCorner")
 [node name="HubShortcutLintel" type="MeshInstance3D" parent="EastWing"]
 position = Vector3(8.15, 4.1, -15)
 mesh = SubResource("Mesh_East_HubShortcutLintel")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/HubShortcutLintel"]
 
@@ -5627,7 +5858,7 @@ shape = SubResource("Shape_East_HubShortcutLintel")
 [node name="Floor000" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(40.0, 0, -40.0)
 mesh = SubResource("Mesh_East_Floor000")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/Floor000"]
 
@@ -5637,7 +5868,7 @@ shape = SubResource("Shape_East_Floor000")
 [node name="Ceiling000" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(40.0, 3.2, -40.0)
 mesh = SubResource("Mesh_East_Ceiling000")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/Ceiling000"]
 
@@ -5647,7 +5878,7 @@ shape = SubResource("Shape_East_Ceiling000")
 [node name="Floor001" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(40.0, 0, -31.0)
 mesh = SubResource("Mesh_East_Floor001")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/Floor001"]
 
@@ -5657,7 +5888,7 @@ shape = SubResource("Shape_East_Floor001")
 [node name="Ceiling001" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(40.0, 3.2, -31.0)
 mesh = SubResource("Mesh_East_Ceiling001")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/Ceiling001"]
 
@@ -5667,7 +5898,7 @@ shape = SubResource("Shape_East_Ceiling001")
 [node name="Floor002" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(40.0, 0, -20.0)
 mesh = SubResource("Mesh_East_Floor002")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Floor002"]
 
@@ -5677,7 +5908,7 @@ shape = SubResource("Shape_East_Floor002")
 [node name="Ceiling002" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(40.0, 3.2, -20.0)
 mesh = SubResource("Mesh_East_Ceiling002")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Ceiling002"]
 
@@ -5687,7 +5918,7 @@ shape = SubResource("Shape_East_Ceiling002")
 [node name="Floor003" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(35.0, 0, -20.0)
 mesh = SubResource("Mesh_East_Floor003")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Floor003"]
 
@@ -5697,7 +5928,7 @@ shape = SubResource("Shape_East_Floor003")
 [node name="Ceiling003" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(35.0, 3.2, -20.0)
 mesh = SubResource("Mesh_East_Ceiling003")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Ceiling003"]
 
@@ -5707,7 +5938,7 @@ shape = SubResource("Shape_East_Ceiling003")
 [node name="Floor004" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(45.0, 0, -20.0)
 mesh = SubResource("Mesh_East_Floor004")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Floor004"]
 
@@ -5717,7 +5948,7 @@ shape = SubResource("Shape_East_Floor004")
 [node name="Ceiling004" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(45.0, 3.2, -20.0)
 mesh = SubResource("Mesh_East_Ceiling004")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Ceiling004"]
 
@@ -5727,7 +5958,7 @@ shape = SubResource("Shape_East_Ceiling004")
 [node name="Floor005" type="MeshInstance3D" parent="EastWing/WestBankA"]
 position = Vector3(12.0, 0, -20.0)
 mesh = SubResource("Mesh_East_Floor005")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/WestBankA/Floor005"]
 
@@ -5737,7 +5968,7 @@ shape = SubResource("Shape_East_Floor005")
 [node name="Ceiling005" type="MeshInstance3D" parent="EastWing/WestBankA"]
 position = Vector3(12.0, 3.2, -20.0)
 mesh = SubResource("Mesh_East_Ceiling005")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/WestBankA/Ceiling005"]
 
@@ -5747,7 +5978,7 @@ shape = SubResource("Shape_East_Ceiling005")
 [node name="Floor006" type="MeshInstance3D" parent="EastWing/EastBankC"]
 position = Vector3(32.0, 0, -20.0)
 mesh = SubResource("Mesh_East_Floor006")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastBankC/Floor006"]
 
@@ -5757,7 +5988,7 @@ shape = SubResource("Shape_East_Floor006")
 [node name="Ceiling006" type="MeshInstance3D" parent="EastWing/EastBankC"]
 position = Vector3(32.0, 3.2, -20.0)
 mesh = SubResource("Mesh_East_Ceiling006")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastBankC/Ceiling006"]
 
@@ -5767,7 +5998,7 @@ shape = SubResource("Shape_East_Ceiling006")
 [node name="Floor007" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(10.25, 0, -15.0)
 mesh = SubResource("Mesh_East_Floor007")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/Floor007"]
 
@@ -5777,7 +6008,7 @@ shape = SubResource("Shape_East_Floor007")
 [node name="Ceiling007" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(10.25, 3.2, -15.0)
 mesh = SubResource("Mesh_East_Ceiling007")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/Ceiling007"]
 
@@ -5787,7 +6018,7 @@ shape = SubResource("Shape_East_Ceiling007")
 [node name="Floor008" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(11.0, 0, -8.0)
 mesh = SubResource("Mesh_East_Floor008")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/Floor008"]
 
@@ -5797,7 +6028,7 @@ shape = SubResource("Shape_East_Floor008")
 [node name="Ceiling008" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(11.0, 3.2, -8.0)
 mesh = SubResource("Mesh_East_Ceiling008")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/Ceiling008"]
 
@@ -5807,7 +6038,7 @@ shape = SubResource("Shape_East_Ceiling008")
 [node name="Floor009" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(40.0, 0, -7.75)
 mesh = SubResource("Mesh_East_Floor009")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/Floor009"]
 
@@ -5817,7 +6048,7 @@ shape = SubResource("Shape_East_Floor009")
 [node name="Ceiling009" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(40.0, 3.2, -7.75)
 mesh = SubResource("Mesh_East_Ceiling009")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/Ceiling009"]
 
@@ -5827,7 +6058,7 @@ shape = SubResource("Shape_East_Ceiling009")
 [node name="Floor010" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(25.5, 0, -4.0)
 mesh = SubResource("Mesh_East_Floor010")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/Floor010"]
 
@@ -5837,7 +6068,7 @@ shape = SubResource("Shape_East_Floor010")
 [node name="Ceiling010" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(25.5, 3.2, -4.0)
 mesh = SubResource("Mesh_East_Ceiling010")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/Ceiling010"]
 
@@ -5847,7 +6078,7 @@ shape = SubResource("Shape_East_Ceiling010")
 [node name="BoundaryWall000" type="MeshInstance3D" parent="EastWing/WestBankA"]
 position = Vector3(12.0, 1.6, -21.625)
 mesh = SubResource("Mesh_East_BoundaryWall000")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/WestBankA/BoundaryWall000"]
 
@@ -5857,7 +6088,7 @@ shape = SubResource("Shape_East_BoundaryWall000")
 [node name="BoundaryWall001" type="MeshInstance3D" parent="EastWing/WestBankA"]
 position = Vector3(12.0, 1.6, -18.375)
 mesh = SubResource("Mesh_East_BoundaryWall001")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/WestBankA/BoundaryWall001"]
 
@@ -5867,7 +6098,7 @@ shape = SubResource("Shape_East_BoundaryWall001")
 [node name="BoundaryWall002" type="MeshInstance3D" parent="EastWing/EastBankC"]
 position = Vector3(32.0, 1.6, -21.625)
 mesh = SubResource("Mesh_East_BoundaryWall002")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastBankC/BoundaryWall002"]
 
@@ -5877,7 +6108,7 @@ shape = SubResource("Shape_East_BoundaryWall002")
 [node name="BoundaryWall003" type="MeshInstance3D" parent="EastWing/EastBankC"]
 position = Vector3(32.0, 1.6, -18.375)
 mesh = SubResource("Mesh_East_BoundaryWall003")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastBankC/BoundaryWall003"]
 
@@ -5887,7 +6118,7 @@ shape = SubResource("Shape_East_BoundaryWall003")
 [node name="BoundaryWall004" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(33.875, 1.6, -23.25)
 mesh = SubResource("Mesh_East_BoundaryWall004")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall004"]
 
@@ -5897,7 +6128,7 @@ shape = SubResource("Shape_East_BoundaryWall004")
 [node name="BoundaryWall005" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(33.875, 1.6, -16.75)
 mesh = SubResource("Mesh_East_BoundaryWall005")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall005"]
 
@@ -5907,7 +6138,7 @@ shape = SubResource("Shape_East_BoundaryWall005")
 [node name="BoundaryWall006" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(35.0, 1.6, -25.125)
 mesh = SubResource("Mesh_East_BoundaryWall006")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall006"]
 
@@ -5917,7 +6148,7 @@ shape = SubResource("Shape_East_BoundaryWall006")
 [node name="BoundaryWall007" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(45.0, 1.6, -25.125)
 mesh = SubResource("Mesh_East_BoundaryWall007")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall007"]
 
@@ -5927,7 +6158,7 @@ shape = SubResource("Shape_East_BoundaryWall007")
 [node name="BoundaryWall008" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(35.0, 1.6, -14.875)
 mesh = SubResource("Mesh_East_BoundaryWall008")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall008"]
 
@@ -5937,7 +6168,7 @@ shape = SubResource("Shape_East_BoundaryWall008")
 [node name="BoundaryWall009" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(45.0, 1.6, -14.875)
 mesh = SubResource("Mesh_East_BoundaryWall009")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall009"]
 
@@ -5947,7 +6178,7 @@ shape = SubResource("Shape_East_BoundaryWall009")
 [node name="BoundaryWall010" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(46.125, 1.6, -20.0)
 mesh = SubResource("Mesh_East_BoundaryWall010")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall010"]
 
@@ -5957,7 +6188,7 @@ shape = SubResource("Shape_East_BoundaryWall010")
 [node name="BoundaryWall011" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(35.875, 1.6, -26.0)
 mesh = SubResource("Mesh_East_BoundaryWall011")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall011"]
 
@@ -5967,7 +6198,7 @@ shape = SubResource("Shape_East_BoundaryWall011")
 [node name="BoundaryWall012" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(35.875, 1.6, -14.0)
 mesh = SubResource("Mesh_East_BoundaryWall012")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall012"]
 
@@ -5977,7 +6208,7 @@ shape = SubResource("Shape_East_BoundaryWall012")
 [node name="BoundaryWall013" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(37.25, 1.6, -27.125)
 mesh = SubResource("Mesh_East_BoundaryWall013")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall013"]
 
@@ -5987,7 +6218,7 @@ shape = SubResource("Shape_East_BoundaryWall013")
 [node name="BoundaryWall014" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(42.75, 1.6, -27.125)
 mesh = SubResource("Mesh_East_BoundaryWall014")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall014"]
 
@@ -5997,7 +6228,7 @@ shape = SubResource("Shape_East_BoundaryWall014")
 [node name="BoundaryWall015" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(37.25, 1.6, -12.875)
 mesh = SubResource("Mesh_East_BoundaryWall015")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall015"]
 
@@ -6007,7 +6238,7 @@ shape = SubResource("Shape_East_BoundaryWall015")
 [node name="BoundaryWall016" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(42.75, 1.6, -12.875)
 mesh = SubResource("Mesh_East_BoundaryWall016")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall016"]
 
@@ -6017,7 +6248,7 @@ shape = SubResource("Shape_East_BoundaryWall016")
 [node name="BoundaryWall017" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(44.125, 1.6, -26.0)
 mesh = SubResource("Mesh_East_BoundaryWall017")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall017"]
 
@@ -6027,7 +6258,7 @@ shape = SubResource("Shape_East_BoundaryWall017")
 [node name="BoundaryWall018" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(44.125, 1.6, -14.0)
 mesh = SubResource("Mesh_East_BoundaryWall018")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/BoundaryWall018"]
 
@@ -6037,7 +6268,7 @@ shape = SubResource("Shape_East_BoundaryWall018")
 [node name="BoundaryWall019" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(38.375, 1.6, -31.0)
 mesh = SubResource("Mesh_East_BoundaryWall019")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/BoundaryWall019"]
 
@@ -6047,7 +6278,7 @@ shape = SubResource("Shape_East_BoundaryWall019")
 [node name="BoundaryWall020" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(41.625, 1.6, -31.0)
 mesh = SubResource("Mesh_East_BoundaryWall020")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/BoundaryWall020"]
 
@@ -6057,7 +6288,7 @@ shape = SubResource("Shape_East_BoundaryWall020")
 [node name="BoundaryWall021" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(32.875, 1.6, -40.0)
 mesh = SubResource("Mesh_East_BoundaryWall021")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/BoundaryWall021"]
 
@@ -6067,7 +6298,7 @@ shape = SubResource("Shape_East_BoundaryWall021")
 [node name="BoundaryWall022" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(40.0, 1.6, -45.125)
 mesh = SubResource("Mesh_East_BoundaryWall022")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/BoundaryWall022"]
 
@@ -6077,7 +6308,7 @@ shape = SubResource("Shape_East_BoundaryWall022")
 [node name="BoundaryWall023" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(35.75, 1.6, -34.875)
 mesh = SubResource("Mesh_East_BoundaryWall023")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/BoundaryWall023"]
 
@@ -6087,7 +6318,7 @@ shape = SubResource("Shape_East_BoundaryWall023")
 [node name="BoundaryWall024" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(44.25, 1.6, -34.875)
 mesh = SubResource("Mesh_East_BoundaryWall024")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/BoundaryWall024"]
 
@@ -6097,7 +6328,7 @@ shape = SubResource("Shape_East_BoundaryWall024")
 [node name="BoundaryWall025" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(47.125, 1.6, -40.0)
 mesh = SubResource("Mesh_East_BoundaryWall025")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/BoundaryWall025"]
 
@@ -6107,7 +6338,7 @@ shape = SubResource("Shape_East_BoundaryWall025")
 [node name="BoundaryWall026" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(38.375, 1.6, -9.25)
 mesh = SubResource("Mesh_East_BoundaryWall026")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/BoundaryWall026"]
 
@@ -6117,7 +6348,7 @@ shape = SubResource("Shape_East_BoundaryWall026")
 [node name="BoundaryWall027" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(25.5, 1.6, -2.375)
 mesh = SubResource("Mesh_East_BoundaryWall027")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/BoundaryWall027"]
 
@@ -6127,7 +6358,7 @@ shape = SubResource("Shape_East_BoundaryWall027")
 [node name="BoundaryWall028" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(41.625, 1.6, -7.75)
 mesh = SubResource("Mesh_East_BoundaryWall028")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/BoundaryWall028"]
 
@@ -6137,7 +6368,7 @@ shape = SubResource("Shape_East_BoundaryWall028")
 [node name="BoundaryWall029" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(9.375, 1.6, -8.0)
 mesh = SubResource("Mesh_East_BoundaryWall029")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/BoundaryWall029"]
 
@@ -6147,7 +6378,7 @@ shape = SubResource("Shape_East_BoundaryWall029")
 [node name="BoundaryWall030" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(25.5, 1.6, -5.625)
 mesh = SubResource("Mesh_East_BoundaryWall030")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/BoundaryWall030"]
 
@@ -6157,7 +6388,7 @@ shape = SubResource("Shape_East_BoundaryWall030")
 [node name="BoundaryWall031" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(10.25, 1.6, -16.625)
 mesh = SubResource("Mesh_East_BoundaryWall031")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/BoundaryWall031"]
 
@@ -6167,7 +6398,7 @@ shape = SubResource("Shape_East_BoundaryWall031")
 [node name="BoundaryWall032" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(12.625, 1.6, -11.0)
 mesh = SubResource("Mesh_East_BoundaryWall032")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/BoundaryWall032"]
 
@@ -6177,7 +6408,7 @@ shape = SubResource("Shape_East_BoundaryWall032")
 [node name="BoundaryWall033" type="MeshInstance3D" parent="EastWing/EastShortcut"]
 position = Vector3(8.75, 1.6, -13.375)
 mesh = SubResource("Mesh_East_BoundaryWall033")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastShortcut/BoundaryWall033"]
 
@@ -6187,7 +6418,7 @@ shape = SubResource("Shape_East_BoundaryWall033")
 [node name="WestCliffPlatform" type="MeshInstance3D" parent="EastWing/WestBankA"]
 position = Vector3(15, -8.95, -20)
 mesh = SubResource("Mesh_East_WestCliffPlatform")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_rock")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/WestBankA/WestCliffPlatform"]
 
@@ -6197,7 +6428,7 @@ shape = SubResource("Shape_East_WestCliffPlatform")
 [node name="EastCliffPlatform" type="MeshInstance3D" parent="EastWing/EastBankC"]
 position = Vector3(29, -8.95, -20)
 mesh = SubResource("Mesh_East_EastCliffPlatform")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_rock")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/EastBankC/EastCliffPlatform"]
 
@@ -6207,7 +6438,7 @@ shape = SubResource("Shape_East_EastCliffPlatform")
 [node name="ChasmBottom" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(22, -18.2, -20)
 mesh = SubResource("Mesh_East_ChasmBottom")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_rock")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmBottom"]
 
@@ -6217,7 +6448,7 @@ shape = SubResource("Shape_East_ChasmBottom")
 [node name="ChasmCeiling" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(22, 5.2, -20)
 mesh = SubResource("Mesh_East_ChasmCeiling")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmCeiling"]
 
@@ -6227,7 +6458,7 @@ shape = SubResource("Shape_East_ChasmCeiling")
 [node name="ChasmNorthRockWall" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(22, -6.45, -27.25)
 mesh = SubResource("Mesh_East_ChasmNorthRockWall")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_rock")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmNorthRockWall"]
 
@@ -6237,7 +6468,7 @@ shape = SubResource("Shape_East_ChasmNorthRockWall")
 [node name="ChasmSouthRockWallLeft" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(17, -6.45, -12.75)
 mesh = SubResource("Mesh_East_ChasmSouthRockWallLeft")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_rock")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmSouthRockWallLeft"]
 
@@ -6247,7 +6478,7 @@ shape = SubResource("Shape_East_ChasmSouthRockWallLeft")
 [node name="ChasmSouthRockWallRight" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(27, -6.45, -12.75)
 mesh = SubResource("Mesh_East_ChasmSouthRockWallRight")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_rock")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmSouthRockWallRight"]
 
@@ -6257,7 +6488,7 @@ shape = SubResource("Shape_East_ChasmSouthRockWallRight")
 [node name="ChasmWestLowerWall" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(13.75, -8.95, -20)
 mesh = SubResource("Mesh_East_ChasmWestLowerWall")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmWestLowerWall"]
 
@@ -6267,7 +6498,7 @@ shape = SubResource("Shape_East_ChasmWestLowerWall")
 [node name="ChasmWestNorthWall" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(13.75, 2.6, -24.25)
 mesh = SubResource("Mesh_East_ChasmWestNorthWall")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmWestNorthWall"]
 
@@ -6277,7 +6508,7 @@ shape = SubResource("Shape_East_ChasmWestNorthWall")
 [node name="ChasmWestSouthWall" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(13.75, 2.6, -15.75)
 mesh = SubResource("Mesh_East_ChasmWestSouthWall")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmWestSouthWall"]
 
@@ -6287,7 +6518,7 @@ shape = SubResource("Shape_East_ChasmWestSouthWall")
 [node name="ChasmWestLintel" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(13.75, 4.1, -20)
 mesh = SubResource("Mesh_East_ChasmWestLintel")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmWestLintel"]
 
@@ -6297,7 +6528,7 @@ shape = SubResource("Shape_East_ChasmWestLintel")
 [node name="ChasmEastLowerWall" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(30.25, -8.95, -20)
 mesh = SubResource("Mesh_East_ChasmEastLowerWall")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmEastLowerWall"]
 
@@ -6307,7 +6538,7 @@ shape = SubResource("Shape_East_ChasmEastLowerWall")
 [node name="ChasmEastNorthWall" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(30.25, 2.6, -24.25)
 mesh = SubResource("Mesh_East_ChasmEastNorthWall")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmEastNorthWall"]
 
@@ -6317,7 +6548,7 @@ shape = SubResource("Shape_East_ChasmEastNorthWall")
 [node name="ChasmEastSouthWall" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(30.25, 2.6, -15.75)
 mesh = SubResource("Mesh_East_ChasmEastSouthWall")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmEastSouthWall"]
 
@@ -6327,7 +6558,7 @@ shape = SubResource("Shape_East_ChasmEastSouthWall")
 [node name="ChasmEastLintel" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(30.25, 4.1, -20)
 mesh = SubResource("Mesh_East_ChasmEastLintel")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/ChasmEastLintel"]
 
@@ -6337,7 +6568,7 @@ shape = SubResource("Shape_East_ChasmEastLintel")
 [node name="SouthNichePlatform" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(22, -8.95, -11.5)
 mesh = SubResource("Mesh_East_SouthNichePlatform")
-material_override = SubResource("EastRock")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/SouthNichePlatform"]
 
@@ -6347,7 +6578,7 @@ shape = SubResource("Shape_East_SouthNichePlatform")
 [node name="SouthNicheRoof" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(22, 3.2, -11.5)
 mesh = SubResource("Mesh_East_SouthNicheRoof")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/SouthNicheRoof"]
 
@@ -6357,7 +6588,7 @@ shape = SubResource("Shape_East_SouthNicheRoof")
 [node name="SouthNicheEnd" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(22, 1.6, -9.75)
 mesh = SubResource("Mesh_East_SouthNicheEnd")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/SouthNicheEnd"]
 
@@ -6367,7 +6598,7 @@ shape = SubResource("Shape_East_SouthNicheEnd")
 [node name="SouthNicheLeft" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(19.75, 1.6, -11.5)
 mesh = SubResource("Mesh_East_SouthNicheLeft")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/SouthNicheLeft"]
 
@@ -6377,7 +6608,7 @@ shape = SubResource("Shape_East_SouthNicheLeft")
 [node name="SouthNicheRight" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(24.25, 1.6, -11.5)
 mesh = SubResource("Mesh_East_SouthNicheRight")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/SouthNicheRight"]
 
@@ -6387,7 +6618,7 @@ shape = SubResource("Shape_East_SouthNicheRight")
 [node name="BankAFrameNorth" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(15, 0.4, -23.15)
 mesh = SubResource("Mesh_East_BankAFrameNorth")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/BankAFrameNorth"]
 
@@ -6397,7 +6628,7 @@ shape = SubResource("Shape_East_BankAFrameNorth")
 [node name="BankAFrameSouth" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(15, 0.4, -16.85)
 mesh = SubResource("Mesh_East_BankAFrameSouth")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/BankAFrameSouth"]
 
@@ -6407,7 +6638,7 @@ shape = SubResource("Shape_East_BankAFrameSouth")
 [node name="BankCFrameNorth" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(29, 0.4, -23.15)
 mesh = SubResource("Mesh_East_BankCFrameNorth")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/BankCFrameNorth"]
 
@@ -6417,7 +6648,7 @@ shape = SubResource("Shape_East_BankCFrameNorth")
 [node name="BankCFrameSouth" type="MeshInstance3D" parent="EastWing/Chasm07"]
 position = Vector3(29, 0.4, -16.85)
 mesh = SubResource("Mesh_East_BankCFrameSouth")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Chasm07/BankCFrameSouth"]
 
@@ -6427,7 +6658,7 @@ shape = SubResource("Shape_East_BankCFrameSouth")
 [node name="Room08Pier0" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(35.2, 1.6, -24)
 mesh = SubResource("Mesh_East_Room08Pier0")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Room08Pier0"]
 
@@ -6437,7 +6668,7 @@ shape = SubResource("Shape_East_Room08Pier0")
 [node name="Room08Pier1" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(44.8, 1.6, -24)
 mesh = SubResource("Mesh_East_Room08Pier1")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Room08Pier1"]
 
@@ -6447,7 +6678,7 @@ shape = SubResource("Shape_East_Room08Pier1")
 [node name="Room08Pier2" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(35.2, 1.6, -16)
 mesh = SubResource("Mesh_East_Room08Pier2")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Room08Pier2"]
 
@@ -6457,7 +6688,7 @@ shape = SubResource("Shape_East_Room08Pier2")
 [node name="Room08Pier3" type="MeshInstance3D" parent="EastWing/Room08"]
 position = Vector3(44.8, 1.6, -16)
 mesh = SubResource("Mesh_East_Room08Pier3")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room08/Room08Pier3"]
 
@@ -6467,7 +6698,7 @@ shape = SubResource("Shape_East_Room08Pier3")
 [node name="Room09Pier0" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(34.2, 1.6, -43.8)
 mesh = SubResource("Mesh_East_Room09Pier0")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/Room09Pier0"]
 
@@ -6477,7 +6708,7 @@ shape = SubResource("Shape_East_Room09Pier0")
 [node name="Room09Pier1" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(45.8, 1.6, -43.8)
 mesh = SubResource("Mesh_East_Room09Pier1")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/Room09Pier1"]
 
@@ -6487,7 +6718,7 @@ shape = SubResource("Shape_East_Room09Pier1")
 [node name="Room09Pier2" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(34.2, 1.6, -36.2)
 mesh = SubResource("Mesh_East_Room09Pier2")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/Room09Pier2"]
 
@@ -6497,7 +6728,7 @@ shape = SubResource("Shape_East_Room09Pier2")
 [node name="Room09Pier3" type="MeshInstance3D" parent="EastWing/Room09"]
 position = Vector3(45.8, 1.6, -36.2)
 mesh = SubResource("Mesh_East_Room09Pier3")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWing/Room09/Room09Pier3"]
 
@@ -6506,84 +6737,125 @@ shape = SubResource("Shape_East_Room09Pier3")
 
 [node name="FillLight00" type="OmniLight3D" parent="EastWing/WestBankA"]
 position = Vector3(12, 2.7, -20)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 8
+light_color = Color(0.56, 0.65, 0.78, 1)
+light_energy = 0.58
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight01" type="OmniLight3D" parent="EastWing/WestBankA"]
 position = Vector3(15, 3.8, -20)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 8
+light_color = Color(0.56, 0.65, 0.78, 1)
+light_energy = 0.58
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight02" type="OmniLight3D" parent="EastWing/EastBankC"]
 position = Vector3(29, 3.8, -20)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 8
+light_color = Color(0.56, 0.65, 0.78, 1)
+light_energy = 0.58
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight03" type="OmniLight3D" parent="EastWing/Chasm07"]
 position = Vector3(22, -10, -23)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 14
+light_color = Color(0.25, 0.40, 0.64, 1)
+light_energy = 0.58
+omni_range = 21
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight04" type="OmniLight3D" parent="EastWing/Chasm07"]
 position = Vector3(22, 2.7, -11.5)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 6
+light_color = Color(0.25, 0.40, 0.64, 1)
+light_energy = 0.58
+omni_range = 9
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight05" type="OmniLight3D" parent="EastWing/Room08"]
 position = Vector3(40, 2.7, -20)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 10
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.682
+omni_range = 15
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight06" type="OmniLight3D" parent="EastWing/Room09"]
 position = Vector3(40, 2.7, -31)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 8
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.682
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight07" type="OmniLight3D" parent="EastWing/Room09"]
 position = Vector3(40, 2.7, -40)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 11
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.682
+omni_range = 16.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight08" type="OmniLight3D" parent="EastWing/EastShortcut"]
 position = Vector3(40, 2.7, -9)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 8
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.682
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight09" type="OmniLight3D" parent="EastWing/EastShortcut"]
 position = Vector3(32, 2.7, -4)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 8
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.682
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight10" type="OmniLight3D" parent="EastWing/EastShortcut"]
 position = Vector3(22, 2.7, -4)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 8
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.682
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight11" type="OmniLight3D" parent="EastWing/EastShortcut"]
 position = Vector3(11, 2.7, -4)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 8
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.682
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight12" type="OmniLight3D" parent="EastWing/EastShortcut"]
 position = Vector3(11, 2.7, -13)
-light_color = Color(1, 0.83, 0.62, 1)
-light_energy = 1.1
-omni_range = 8
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.682
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FinalWing" type="Node3D" parent="."]
 metadata/note = "10-12 architecture blockout, estimated meters; no locks, guard AI or completion trigger"
+scale = Vector3(1.5, 1.5, 1.5)
+
 
 [node name="Approach10" type="Node3D" parent="FinalWing"]
 
@@ -6598,7 +6870,7 @@ metadata/note = "10-12 architecture blockout, estimated meters; no locks, guard 
 [node name="Floor000" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(10.0, 0, -75.0)
 mesh = SubResource("Mesh_Final_Floor000")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/Floor000"]
 
@@ -6608,7 +6880,7 @@ shape = SubResource("Shape_Final_Floor000")
 [node name="Ceiling000" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(10.0, 4.2, -75.0)
 mesh = SubResource("Mesh_Final_Ceiling000")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/Ceiling000"]
 
@@ -6618,7 +6890,7 @@ shape = SubResource("Shape_Final_Ceiling000")
 [node name="Floor001" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0, -68.5)
 mesh = SubResource("Mesh_Final_Floor001")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/Floor001"]
 
@@ -6628,7 +6900,7 @@ shape = SubResource("Shape_Final_Floor001")
 [node name="Ceiling001" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 3.2, -68.5)
 mesh = SubResource("Mesh_Final_Ceiling001")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/Ceiling001"]
 
@@ -6638,7 +6910,7 @@ shape = SubResource("Shape_Final_Ceiling001")
 [node name="Floor002" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(10.0, 0, -70.5)
 mesh = SubResource("Mesh_Final_Floor002")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/Floor002"]
 
@@ -6648,7 +6920,7 @@ shape = SubResource("Shape_Final_Floor002")
 [node name="Ceiling002" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(10.0, 4.2, -70.5)
 mesh = SubResource("Mesh_Final_Ceiling002")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/Ceiling002"]
 
@@ -6658,7 +6930,7 @@ shape = SubResource("Shape_Final_Ceiling002")
 [node name="Floor003" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(38.0, 0, -61.0)
 mesh = SubResource("Mesh_Final_Floor003")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/Floor003"]
 
@@ -6668,7 +6940,7 @@ shape = SubResource("Shape_Final_Floor003")
 [node name="Ceiling003" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(38.0, 5.2, -61.0)
 mesh = SubResource("Mesh_Final_Ceiling003")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/Ceiling003"]
 
@@ -6678,7 +6950,7 @@ shape = SubResource("Shape_Final_Ceiling003")
 [node name="Floor004" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(10.0, 0, -61.0)
 mesh = SubResource("Mesh_Final_Floor004")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Floor004"]
 
@@ -6688,7 +6960,7 @@ shape = SubResource("Shape_Final_Floor004")
 [node name="Ceiling004" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(10.0, 5.2, -61.0)
 mesh = SubResource("Mesh_Final_Ceiling004")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Ceiling004"]
 
@@ -6698,7 +6970,7 @@ shape = SubResource("Shape_Final_Ceiling004")
 [node name="Floor005" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(49.5, 0, -65.5)
 mesh = SubResource("Mesh_Final_Floor005")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/Floor005"]
 
@@ -6708,7 +6980,7 @@ shape = SubResource("Shape_Final_Floor005")
 [node name="Ceiling005" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(49.5, 3.2, -65.5)
 mesh = SubResource("Mesh_Final_Ceiling005")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/Ceiling005"]
 
@@ -6718,7 +6990,7 @@ shape = SubResource("Shape_Final_Ceiling005")
 [node name="Floor006" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(27.0, 0, -61.0)
 mesh = SubResource("Mesh_Final_Floor006")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/Floor006"]
 
@@ -6728,7 +7000,7 @@ shape = SubResource("Shape_Final_Floor006")
 [node name="Ceiling006" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(27.0, 5.2, -61.0)
 mesh = SubResource("Mesh_Final_Ceiling006")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/Ceiling006"]
 
@@ -6738,7 +7010,7 @@ shape = SubResource("Shape_Final_Ceiling006")
 [node name="Floor007" type="MeshInstance3D" parent="FinalWing/Approach10"]
 position = Vector3(0.0, 0, -41.5)
 mesh = SubResource("Mesh_Final_Floor007")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Approach10/Floor007"]
 
@@ -6748,7 +7020,7 @@ shape = SubResource("Shape_Final_Floor007")
 [node name="Ceiling007" type="MeshInstance3D" parent="FinalWing/Approach10"]
 position = Vector3(0.0, 3.2, -41.5)
 mesh = SubResource("Mesh_Final_Ceiling007")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Approach10/Ceiling007"]
 
@@ -6758,7 +7030,7 @@ shape = SubResource("Shape_Final_Ceiling007")
 [node name="BoundaryWall000" type="MeshInstance3D" parent="FinalWing/Approach10"]
 position = Vector3(-2.125, 1.6, -41.5)
 mesh = SubResource("Mesh_Final_BoundaryWall000")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Approach10/BoundaryWall000"]
 
@@ -6768,7 +7040,7 @@ shape = SubResource("Shape_Final_BoundaryWall000")
 [node name="BoundaryWall001" type="MeshInstance3D" parent="FinalWing/Approach10"]
 position = Vector3(2.125, 1.6, -41.5)
 mesh = SubResource("Mesh_Final_BoundaryWall001")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Approach10/BoundaryWall001"]
 
@@ -6778,7 +7050,7 @@ shape = SubResource("Shape_Final_BoundaryWall001")
 [node name="BoundaryWall002" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(-5.125, 2.6, -61.0)
 mesh = SubResource("Mesh_Final_BoundaryWall002")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/BoundaryWall002"]
 
@@ -6788,7 +7060,7 @@ shape = SubResource("Shape_Final_BoundaryWall002")
 [node name="BoundaryWall003" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(1.75, 2.6, -69.125)
 mesh = SubResource("Mesh_Final_BoundaryWall003")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/BoundaryWall003"]
 
@@ -6798,7 +7070,7 @@ shape = SubResource("Shape_Final_BoundaryWall003")
 [node name="BoundaryWall004" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(18.25, 2.6, -69.125)
 mesh = SubResource("Mesh_Final_BoundaryWall004")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/BoundaryWall004"]
 
@@ -6808,7 +7080,7 @@ shape = SubResource("Shape_Final_BoundaryWall004")
 [node name="BoundaryWall005" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(-3.5, 2.6, -52.875)
 mesh = SubResource("Mesh_Final_BoundaryWall005")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/BoundaryWall005"]
 
@@ -6818,7 +7090,7 @@ shape = SubResource("Shape_Final_BoundaryWall005")
 [node name="BoundaryWall006" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(13.5, 2.6, -52.875)
 mesh = SubResource("Mesh_Final_BoundaryWall006")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/BoundaryWall006"]
 
@@ -6828,7 +7100,7 @@ shape = SubResource("Shape_Final_BoundaryWall006")
 [node name="BoundaryWall007" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(25.125, 2.6, -65.75)
 mesh = SubResource("Mesh_Final_BoundaryWall007")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/BoundaryWall007"]
 
@@ -6838,7 +7110,7 @@ shape = SubResource("Shape_Final_BoundaryWall007")
 [node name="BoundaryWall008" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(25.125, 2.6, -56.25)
 mesh = SubResource("Mesh_Final_BoundaryWall008")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/BoundaryWall008"]
 
@@ -6848,7 +7120,7 @@ shape = SubResource("Shape_Final_BoundaryWall008")
 [node name="BoundaryWall009" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(8.375, 2.1, -70.5)
 mesh = SubResource("Mesh_Final_BoundaryWall009")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/BoundaryWall009"]
 
@@ -6858,7 +7130,7 @@ shape = SubResource("Shape_Final_BoundaryWall009")
 [node name="BoundaryWall010" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(11.625, 2.1, -70.5)
 mesh = SubResource("Mesh_Final_BoundaryWall010")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/BoundaryWall010"]
 
@@ -6868,7 +7140,7 @@ shape = SubResource("Shape_Final_BoundaryWall010")
 [node name="BoundaryWall011" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(5.875, 2.1, -75.0)
 mesh = SubResource("Mesh_Final_BoundaryWall011")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/BoundaryWall011"]
 
@@ -6878,7 +7150,7 @@ shape = SubResource("Shape_Final_BoundaryWall011")
 [node name="BoundaryWall012" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(10.0, 2.1, -78.125)
 mesh = SubResource("Mesh_Final_BoundaryWall012")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/BoundaryWall012"]
 
@@ -6888,7 +7160,7 @@ shape = SubResource("Shape_Final_BoundaryWall012")
 [node name="BoundaryWall013" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(7.25, 2.1, -71.875)
 mesh = SubResource("Mesh_Final_BoundaryWall013")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/BoundaryWall013"]
 
@@ -6898,7 +7170,7 @@ shape = SubResource("Shape_Final_BoundaryWall013")
 [node name="BoundaryWall014" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(12.75, 2.1, -71.875)
 mesh = SubResource("Mesh_Final_BoundaryWall014")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/BoundaryWall014"]
 
@@ -6908,7 +7180,7 @@ shape = SubResource("Shape_Final_BoundaryWall014")
 [node name="BoundaryWall015" type="MeshInstance3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(14.125, 2.1, -75.0)
 mesh = SubResource("Mesh_Final_BoundaryWall015")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/NorthSideRoom10/BoundaryWall015"]
 
@@ -6918,7 +7190,7 @@ shape = SubResource("Shape_Final_BoundaryWall015")
 [node name="BoundaryWall016" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(27.0, 2.6, -62.625)
 mesh = SubResource("Mesh_Final_BoundaryWall016")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/BoundaryWall016"]
 
@@ -6928,7 +7200,7 @@ shape = SubResource("Shape_Final_BoundaryWall016")
 [node name="BoundaryWall017" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(27.0, 2.6, -59.375)
 mesh = SubResource("Mesh_Final_BoundaryWall017")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/BoundaryWall017"]
 
@@ -6938,7 +7210,7 @@ shape = SubResource("Shape_Final_BoundaryWall017")
 [node name="BoundaryWall018" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(28.875, 2.6, -66.25)
 mesh = SubResource("Mesh_Final_BoundaryWall018")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/BoundaryWall018"]
 
@@ -6948,7 +7220,7 @@ shape = SubResource("Shape_Final_BoundaryWall018")
 [node name="BoundaryWall019" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(28.875, 2.6, -55.75)
 mesh = SubResource("Mesh_Final_BoundaryWall019")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/BoundaryWall019"]
 
@@ -6958,7 +7230,7 @@ shape = SubResource("Shape_Final_BoundaryWall019")
 [node name="BoundaryWall020" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(38.0, 2.6, -70.125)
 mesh = SubResource("Mesh_Final_BoundaryWall020")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/BoundaryWall020"]
 
@@ -6968,7 +7240,7 @@ shape = SubResource("Shape_Final_BoundaryWall020")
 [node name="BoundaryWall021" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(38.0, 2.6, -51.875)
 mesh = SubResource("Mesh_Final_BoundaryWall021")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/BoundaryWall021"]
 
@@ -6978,7 +7250,7 @@ shape = SubResource("Shape_Final_BoundaryWall021")
 [node name="BoundaryWall022" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(47.125, 2.6, -68.5)
 mesh = SubResource("Mesh_Final_BoundaryWall022")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/BoundaryWall022"]
 
@@ -6988,7 +7260,7 @@ shape = SubResource("Shape_Final_BoundaryWall022")
 [node name="BoundaryWall023" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(47.125, 2.6, -58.0)
 mesh = SubResource("Mesh_Final_BoundaryWall023")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/BoundaryWall023"]
 
@@ -6998,7 +7270,7 @@ shape = SubResource("Shape_Final_BoundaryWall023")
 [node name="BoundaryWall024" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(49.5, 1.6, -67.125)
 mesh = SubResource("Mesh_Final_BoundaryWall024")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/BoundaryWall024"]
 
@@ -7008,7 +7280,7 @@ shape = SubResource("Shape_Final_BoundaryWall024")
 [node name="BoundaryWall025" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(51.0, 1.6, -63.875)
 mesh = SubResource("Mesh_Final_BoundaryWall025")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/BoundaryWall025"]
 
@@ -7018,7 +7290,7 @@ shape = SubResource("Shape_Final_BoundaryWall025")
 [node name="BoundaryWall026" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(55.125, 1.6, -68.5)
 mesh = SubResource("Mesh_Final_BoundaryWall026")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/BoundaryWall026"]
 
@@ -7028,7 +7300,7 @@ shape = SubResource("Shape_Final_BoundaryWall026")
 [node name="BoundaryWall027" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(51.875, 1.6, -70.0)
 mesh = SubResource("Mesh_Final_BoundaryWall027")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/BoundaryWall027"]
 
@@ -7038,7 +7310,7 @@ shape = SubResource("Shape_Final_BoundaryWall027")
 [node name="Column1_1Base" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(1, 0.25, -65.5)
 mesh = SubResource("Mesh_Final_Column1_1Base")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_1Base"]
 
@@ -7048,7 +7320,7 @@ shape = SubResource("Shape_Final_Column1_1Base")
 [node name="Column1_1Shaft" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(1, 2.6, -65.5)
 mesh = SubResource("Mesh_Final_Column1_1Shaft")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_1Shaft"]
 
@@ -7058,7 +7330,7 @@ shape = SubResource("Shape_Final_Column1_1Shaft")
 [node name="Column1_1Capital" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(1, 4.95, -65.5)
 mesh = SubResource("Mesh_Final_Column1_1Capital")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_1Capital"]
 
@@ -7068,7 +7340,7 @@ shape = SubResource("Shape_Final_Column1_1Capital")
 [node name="Column1_2Base" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(7, 0.25, -65.5)
 mesh = SubResource("Mesh_Final_Column1_2Base")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_2Base"]
 
@@ -7078,7 +7350,7 @@ shape = SubResource("Shape_Final_Column1_2Base")
 [node name="Column1_2Shaft" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(7, 2.6, -65.5)
 mesh = SubResource("Mesh_Final_Column1_2Shaft")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_2Shaft"]
 
@@ -7088,7 +7360,7 @@ shape = SubResource("Shape_Final_Column1_2Shaft")
 [node name="Column1_2Capital" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(7, 4.95, -65.5)
 mesh = SubResource("Mesh_Final_Column1_2Capital")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_2Capital"]
 
@@ -7098,7 +7370,7 @@ shape = SubResource("Shape_Final_Column1_2Capital")
 [node name="Column1_3Base" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(13, 0.25, -65.5)
 mesh = SubResource("Mesh_Final_Column1_3Base")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_3Base"]
 
@@ -7108,7 +7380,7 @@ shape = SubResource("Shape_Final_Column1_3Base")
 [node name="Column1_3Shaft" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(13, 2.6, -65.5)
 mesh = SubResource("Mesh_Final_Column1_3Shaft")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_3Shaft"]
 
@@ -7118,7 +7390,7 @@ shape = SubResource("Shape_Final_Column1_3Shaft")
 [node name="Column1_3Capital" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(13, 4.95, -65.5)
 mesh = SubResource("Mesh_Final_Column1_3Capital")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_3Capital"]
 
@@ -7128,7 +7400,7 @@ shape = SubResource("Shape_Final_Column1_3Capital")
 [node name="Column1_4Base" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(19, 0.25, -65.5)
 mesh = SubResource("Mesh_Final_Column1_4Base")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_4Base"]
 
@@ -7138,7 +7410,7 @@ shape = SubResource("Shape_Final_Column1_4Base")
 [node name="Column1_4Shaft" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(19, 2.6, -65.5)
 mesh = SubResource("Mesh_Final_Column1_4Shaft")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_4Shaft"]
 
@@ -7148,7 +7420,7 @@ shape = SubResource("Shape_Final_Column1_4Shaft")
 [node name="Column1_4Capital" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(19, 4.95, -65.5)
 mesh = SubResource("Mesh_Final_Column1_4Capital")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column1_4Capital"]
 
@@ -7158,7 +7430,7 @@ shape = SubResource("Shape_Final_Column1_4Capital")
 [node name="Column2_1Base" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(1, 0.25, -56.5)
 mesh = SubResource("Mesh_Final_Column2_1Base")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_1Base"]
 
@@ -7168,7 +7440,7 @@ shape = SubResource("Shape_Final_Column2_1Base")
 [node name="Column2_1Shaft" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(1, 2.6, -56.5)
 mesh = SubResource("Mesh_Final_Column2_1Shaft")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_1Shaft"]
 
@@ -7178,7 +7450,7 @@ shape = SubResource("Shape_Final_Column2_1Shaft")
 [node name="Column2_1Capital" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(1, 4.95, -56.5)
 mesh = SubResource("Mesh_Final_Column2_1Capital")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_1Capital"]
 
@@ -7188,7 +7460,7 @@ shape = SubResource("Shape_Final_Column2_1Capital")
 [node name="Column2_2Base" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(7, 0.25, -56.5)
 mesh = SubResource("Mesh_Final_Column2_2Base")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_2Base"]
 
@@ -7198,7 +7470,7 @@ shape = SubResource("Shape_Final_Column2_2Base")
 [node name="Column2_2Shaft" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(7, 2.6, -56.5)
 mesh = SubResource("Mesh_Final_Column2_2Shaft")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_2Shaft"]
 
@@ -7208,7 +7480,7 @@ shape = SubResource("Shape_Final_Column2_2Shaft")
 [node name="Column2_2Capital" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(7, 4.95, -56.5)
 mesh = SubResource("Mesh_Final_Column2_2Capital")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_2Capital"]
 
@@ -7218,7 +7490,7 @@ shape = SubResource("Shape_Final_Column2_2Capital")
 [node name="Column2_3Base" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(13, 0.25, -56.5)
 mesh = SubResource("Mesh_Final_Column2_3Base")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_3Base"]
 
@@ -7228,7 +7500,7 @@ shape = SubResource("Shape_Final_Column2_3Base")
 [node name="Column2_3Shaft" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(13, 2.6, -56.5)
 mesh = SubResource("Mesh_Final_Column2_3Shaft")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_3Shaft"]
 
@@ -7238,7 +7510,7 @@ shape = SubResource("Shape_Final_Column2_3Shaft")
 [node name="Column2_3Capital" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(13, 4.95, -56.5)
 mesh = SubResource("Mesh_Final_Column2_3Capital")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_3Capital"]
 
@@ -7248,7 +7520,7 @@ shape = SubResource("Shape_Final_Column2_3Capital")
 [node name="Column2_4Base" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(19, 0.25, -56.5)
 mesh = SubResource("Mesh_Final_Column2_4Base")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_4Base"]
 
@@ -7258,7 +7530,7 @@ shape = SubResource("Shape_Final_Column2_4Base")
 [node name="Column2_4Shaft" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(19, 2.6, -56.5)
 mesh = SubResource("Mesh_Final_Column2_4Shaft")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_4Shaft"]
 
@@ -7268,7 +7540,7 @@ shape = SubResource("Shape_Final_Column2_4Shaft")
 [node name="Column2_4Capital" type="MeshInstance3D" parent="FinalWing/Hall10"]
 position = Vector3(19, 4.95, -56.5)
 mesh = SubResource("Mesh_Final_Column2_4Capital")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_trim")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Hall10/Column2_4Capital"]
 
@@ -7278,7 +7550,7 @@ shape = SubResource("Shape_Final_Column2_4Capital")
 [node name="CentralCoffinPlinth" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(38, 0.3, -61)
 mesh = SubResource("Mesh_Final_CentralCoffinPlinth")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_coffin")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/CentralCoffinPlinth"]
 
@@ -7288,7 +7560,7 @@ shape = SubResource("Shape_Final_CentralCoffinPlinth")
 [node name="GreyboxCoffin" type="MeshInstance3D" parent="FinalWing/Tomb11"]
 position = Vector3(38, 1.05, -61)
 mesh = SubResource("Mesh_Final_GreyboxCoffin")
-material_override = SubResource("Cap")
+material_override = ExtResource("Art_coffin")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/GreyboxCoffin"]
 
@@ -7298,62 +7570,62 @@ shape = SubResource("Shape_Final_GreyboxCoffin")
 [node name="ExitStep01" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, -0.04, -73.225)
 mesh = SubResource("Mesh_Final_ExitStep01")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep02" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.02, -73.675)
 mesh = SubResource("Mesh_Final_ExitStep02")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep03" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.08, -74.125)
 mesh = SubResource("Mesh_Final_ExitStep03")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep04" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.14, -74.575)
 mesh = SubResource("Mesh_Final_ExitStep04")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep05" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.2, -75.025)
 mesh = SubResource("Mesh_Final_ExitStep05")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep06" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.26, -75.475)
 mesh = SubResource("Mesh_Final_ExitStep06")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep07" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.32, -75.925)
 mesh = SubResource("Mesh_Final_ExitStep07")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep08" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.38, -76.375)
 mesh = SubResource("Mesh_Final_ExitStep08")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep09" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.44, -76.825)
 mesh = SubResource("Mesh_Final_ExitStep09")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep10" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.5, -77.275)
 mesh = SubResource("Mesh_Final_ExitStep10")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep11" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.56, -77.725)
 mesh = SubResource("Mesh_Final_ExitStep11")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStep12" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 0.62, -78.175)
 mesh = SubResource("Mesh_Final_ExitStep12")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="ExitStairWalkRamp" type="StaticBody3D" parent="FinalWing/Exit12"]
 metadata/note = "Intentional continuous slope collision for visible stairs; same treatment as entrance 01"
@@ -7364,7 +7636,7 @@ shape = SubResource("Final_ExitStairRampShape")
 [node name="ExitStairWestWall" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(51.875, 2.4, -75.7)
 mesh = SubResource("Mesh_Final_ExitStairWestWall")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/ExitStairWestWall"]
 
@@ -7374,7 +7646,7 @@ shape = SubResource("Shape_Final_ExitStairWestWall")
 [node name="ExitLandingWestWall" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(51.875, 3.24, -79.4)
 mesh = SubResource("Mesh_Final_ExitLandingWestWall")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/ExitLandingWestWall"]
 
@@ -7384,7 +7656,7 @@ shape = SubResource("Shape_Final_ExitLandingWestWall")
 [node name="ExitStairEastWall" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(55.125, 2.4, -75.7)
 mesh = SubResource("Mesh_Final_ExitStairEastWall")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/ExitStairEastWall"]
 
@@ -7394,7 +7666,7 @@ shape = SubResource("Shape_Final_ExitStairEastWall")
 [node name="ExitLandingEastWall" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(55.125, 3.24, -79.4)
 mesh = SubResource("Mesh_Final_ExitLandingEastWall")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/ExitLandingEastWall"]
 
@@ -7404,7 +7676,7 @@ shape = SubResource("Shape_Final_ExitLandingEastWall")
 [node name="ExitStairRoof" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 5, -75.7)
 mesh = SubResource("Mesh_Final_ExitStairRoof")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/ExitStairRoof"]
 
@@ -7414,7 +7686,7 @@ shape = SubResource("Shape_Final_ExitStairRoof")
 [node name="ExitUpperLanding" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 1.44, -79.4)
 mesh = SubResource("Mesh_Final_ExitUpperLanding")
-material_override = SubResource("Floor")
+material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/ExitUpperLanding"]
 
@@ -7424,7 +7696,7 @@ shape = SubResource("Shape_Final_ExitUpperLanding")
 [node name="ExitLandingRoof" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 5.04, -79.4)
 mesh = SubResource("Mesh_Final_ExitLandingRoof")
-material_override = SubResource("Stone")
+material_override = ExtResource("Art_ceiling")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/ExitLandingRoof"]
 
@@ -7434,7 +7706,7 @@ shape = SubResource("Shape_Final_ExitLandingRoof")
 [node name="ExitVisibleEndWall" type="MeshInstance3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5, 3.24, -80.525)
 mesh = SubResource("Mesh_Final_ExitVisibleEndWall")
-material_override = SubResource("Cap")
+material_override = ExtResource("Art_wall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Exit12/ExitVisibleEndWall"]
 
@@ -7443,66 +7715,104 @@ shape = SubResource("Shape_Final_ExitVisibleEndWall")
 
 [node name="FillLight00" type="OmniLight3D" parent="FinalWing/Approach10"]
 position = Vector3(0,2.7,-36)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 9
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight01" type="OmniLight3D" parent="FinalWing/Approach10"]
 position = Vector3(0,2.7,-46)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 9
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight02" type="OmniLight3D" parent="FinalWing/Hall10"]
 position = Vector3(0,4.3,-61)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 12
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 18
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight03" type="OmniLight3D" parent="FinalWing/Hall10"]
 position = Vector3(10,4.3,-61)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 12
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 18
+shadow_enabled = true
+shadow_bias = 0.04
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight04" type="OmniLight3D" parent="FinalWing/Hall10"]
 position = Vector3(21,4.3,-61)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 12
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 18
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight05" type="OmniLight3D" parent="FinalWing/NorthSideRoom10"]
 position = Vector3(10,3.4,-75)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 8
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight06" type="OmniLight3D" parent="FinalWing/Tomb11"]
 position = Vector3(32,4.3,-61)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 10
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 15
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight07" type="OmniLight3D" parent="FinalWing/Tomb11"]
 position = Vector3(43,4.3,-61)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 11
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 16.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight08" type="OmniLight3D" parent="FinalWing/Exit12"]
 position = Vector3(50,2.7,-65.5)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 8
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight09" type="OmniLight3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5,4.2,-74)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 9
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 13.5
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
 
 [node name="FillLight10" type="OmniLight3D" parent="FinalWing/Exit12"]
 position = Vector3(53.5,4.3,-79.4)
-light_color = Color(1,0.83,0.62,1)
-light_energy = 1.4
-omni_range = 8
+light_color = Color(1, 0.68, 0.37, 1)
+light_energy = 0.868
+omni_range = 12
+light_specular = 0.3
+scale = Vector3(0.666666667, 0.666666667, 0.666666667)
+
+
+[node name="ArtDetails" parent="." instance=ExtResource("Art_details")]
+scale = Vector3(1.5, 1.5, 1.5)

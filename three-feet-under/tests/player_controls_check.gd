@@ -4,6 +4,8 @@ var failures: Array[String] = []
 var checks := 0
 var scene: Node3D
 var player: CharacterBody3D
+var scene_scale := 1.0
+var ground_y := .1
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -51,6 +53,8 @@ func load_test_scene(path: String) -> void:
 	root.add_child(scene)
 	current_scene = scene
 	player = scene.get_node("player")
+	scene_scale = scene.get_meta("environment_scale", 1.0)
+	ground_y = .1*scene_scale
 	await ticks(6)
 
 func run() -> void:
@@ -60,21 +64,21 @@ func run() -> void:
 		await load_test_scene(path)
 		expect(player.get_node("PlayerControlsHUD/ControlsHint").visible, path+": controls visible")
 		expect(player.has_abyss == (path=="res://tomb_corridor.tscn"), path+": abyss detection limited to tomb")
-		await teleport(Vector3(0,.11,0))
+		await teleport(Vector3(0,ground_y+.01,0))
 		var start_z := player.position.z
 		Input.action_press("move_forward")
 		await ticks(40)
 		var walk_distance: float = start_z-player.position.z
 		clear_actions()
 		expect(abs(player.velocity.z+3.0)<.01 and abs(walk_distance-2.0)<.12, path+": walk 3 m/s")
-		await teleport(Vector3(0,.11,0))
+		await teleport(Vector3(0,ground_y+.01,0))
 		start_z = player.position.z
 		Input.action_press("move_forward")
 		Input.action_press("sneak")
 		await ticks(40)
 		var sneak_distance: float = start_z-player.position.z
 		expect(abs(player.velocity.z+1.2)<.01 and sneak_distance<walk_distance*.5, path+": sneak is slower at 1.2 m/s")
-		await teleport(Vector3(0,.11,0))
+		await teleport(Vector3(0,ground_y+.01,0))
 		Input.action_press("crouch")
 		await ticks(1)
 		expect(player.is_crouching and abs(player.capsule.height-1.1)<.001 and abs(player.body_collision.position.y-.55)<.001, path+": actual crouch capsule")
@@ -87,7 +91,7 @@ func run() -> void:
 		clear_actions()
 		await ticks(35)
 		expect(not player.is_crouching and abs(player.capsule.height-1.8)<.001 and abs(player.camera.position.y-1.6)<.01, path+": release restores stance")
-		await teleport(Vector3(0,.11,0))
+		await teleport(Vector3(0,ground_y+.01,0))
 		Input.action_press("crouch")
 		await ticks(3)
 		var ceiling := StaticBody3D.new()
@@ -97,7 +101,7 @@ func run() -> void:
 		shape.shape = box
 		ceiling.add_child(shape)
 		scene.add_child(ceiling)
-		ceiling.position = Vector3(0,1.5,0)
+		ceiling.position = Vector3(0,ground_y+1.4,0)
 		await ticks(3)
 		Input.action_release("crouch")
 		await ticks(10)
@@ -109,7 +113,7 @@ func run() -> void:
 		expect(not player.is_crouching and abs(player.capsule.height-1.8)<.001, path+": stands after leaving low ceiling")
 		ceiling.queue_free()
 		await ticks(2)
-		await teleport(Vector3(0,.11,0))
+		await teleport(Vector3(0,ground_y+.01,0))
 		Input.action_press("jump")
 		await ticks(1)
 		expect(player.velocity.y>3.0 and not player.is_on_floor(), path+": ground jump")
@@ -124,15 +128,15 @@ func run() -> void:
 		for frame in range(65):
 			await ticks(1)
 			peak = maxf(peak,player.position.y)
-		expect(player.is_on_floor() and abs(player.position.y-.1)<.03 and peak<.9 and peak>.6, path+": jump height and landing")
+		expect(player.is_on_floor() and abs(player.position.y-ground_y)<.03 and peak-ground_y<.8 and peak-ground_y>.5, path+": jump height and landing")
 		Input.action_press("crouch")
 		await ticks(2)
 		Input.action_press("jump")
 		await ticks(2)
 		expect(player.is_on_floor(), path+": no crouched jump")
 		clear_actions()
-		await teleport(Vector3(0,.11,-1.5))
 		var tablet = scene.get_node("ClueTablet")
+		await teleport(Vector3(tablet.position.x+1.45,ground_y+.01,tablet.position.z))
 		await ticks(3)
 		expect(tablet.can_read and tablet.prompt.visible, path+": tablet proximity")
 		await key_tap(KEY_E)
@@ -155,24 +159,24 @@ func run() -> void:
 		expect(player.mouse_captured, path+": click captures mouse")
 		print("Checked shared controls: ",path)
 	# Crouching on the entrance ramp must not leave the player stuck crouched.
-	await teleport(Vector3(0,.8,8))
+	await teleport(Vector3(0,.8,8)*scene_scale)
 	Input.action_press("crouch")
 	await ticks(5)
 	Input.action_release("crouch")
 	await ticks(35)
 	expect(not player.is_crouching and player.is_on_floor(), "stand up on staircase ramp")
 	# Tomb-specific actual staircase movement using the live control script.
-	await teleport(Vector3(0,1.64,11.7))
+	await teleport(Vector3(0,1.54*scene_scale+.1,11.7*scene_scale))
 	Input.action_press("move_forward")
-	await ticks(320)
+	await ticks(int(320*scene_scale))
 	clear_actions()
-	expect(player.position.z < -3.5 and player.position.y>0.0 and not player.is_dead, "stairs down and corridor")
+	expect(player.position.z < -3.5*scene_scale and player.position.y>0.0 and not player.is_dead, "stairs down and corridor")
 	Input.action_press("move_back")
-	await ticks(320)
+	await ticks(int(320*scene_scale))
 	clear_actions()
-	expect(player.position.z>11 and abs(player.position.y-1.54)<.05, "stairs back up")
+	expect(player.position.z>11*scene_scale and abs(player.position.y-1.54*scene_scale)<.05, "stairs back up")
 	# Try an ordinary running jump from A: it must fall, never reach C.
-	await teleport(Vector3(15,.11,-20))
+	await teleport(Vector3(15*scene_scale,ground_y+.01,-20*scene_scale))
 	Input.action_press("move_right")
 	Input.action_press("jump")
 	await ticks(1)
@@ -182,13 +186,13 @@ func run() -> void:
 	while not player.is_dead and death_frames<200:
 		await ticks(1)
 		death_frames += 1
-		if not player.is_dead and player.position.y < -2 and not forced_reading:
+		if not player.is_dead and player.position.y < -2*scene_scale and not forced_reading:
 			# A fall can continue under gravity while a reading overlay is open.
 			forced_reading = true
 			scene.get_node("ClueTablet").reading = true
 			player.set_reading(true)
 	clear_actions()
-	expect(player.is_dead and player.position.x<28 and player.position.y>-18, "12m gap cannot be jumped; death before bottom")
+	expect(player.is_dead and player.position.x<28*scene_scale and player.position.y>-18*scene_scale, "scaled gap cannot be jumped; death before bottom")
 	expect(player.death_overlay.visible and "深渊" in player.death_message.text and player.velocity==Vector3.ZERO, "visible death overlay and frozen velocity")
 	expect(not player.can_interact(), "death blocks interaction")
 	expect(forced_reading and not player.is_reading and not scene.get_node("ClueTablet").reading and not scene.get_node("HUD/InteractPrompt").visible, "death closes reading and tablet HUD")
@@ -210,7 +214,7 @@ func run() -> void:
 	player = scene.get_node("player")
 	await ticks(8)
 	expect(player.get_instance_id()!=old_player_id and not player.is_dead, "scene actually reloaded once")
-	expect(abs(player.position.x)<.01 and abs(player.position.z-11.7)<.03 and abs(player.position.y-1.54)<.08, "restart from tomb entrance")
+	expect(abs(player.position.x)<.01 and abs(player.position.z-11.7*scene_scale)<.03 and abs(player.position.y-1.54*scene_scale)<.08, "restart from tomb entrance")
 	expect(not player.death_overlay.visible and player.mouse_captured, "restart clears death HUD and captures mouse")
 	# Missing current scene exercises the guarded reload-error fallback without a login or scene change.
 	player.is_dead = true

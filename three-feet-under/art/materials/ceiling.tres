@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://art/shaders/world_stone.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/stone_color = Color(0.28,0.27,0.25,1)
+shader_parameter/block_size = Vector2(1.3,0.72)
+shader_parameter/joint_width = 0.022
+shader_parameter/relief = 0.014
+shader_parameter/rock_mode = 0
+shader_parameter/wear = 0.6
