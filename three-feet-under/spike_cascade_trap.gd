@@ -68,17 +68,37 @@ var _seam_mat: Material
 
 
 func _ready() -> void:
+	# Geometry must not add_child while this node (or its parent scene) is still
+	# busy entering the tree — defer so editor+runtime panels actually appear.
 	_rng.randomize()
+	call_deferred("_deferred_ready_build")
+
+
+func _deferred_ready_build() -> void:
+	if not is_inside_tree():
+		return
 	_rebuild_geometry()
 	if Engine.is_editor_hint():
 		print("SpikeCascadeTrap: editor preview at ", global_position, " size ", corridor_length, "x", corridor_width)
 		return
 	_prompt = _resolve_prompt()
+	print("SpikeCascadeTrap: ready at ", global_position, " size ", corridor_length, "x", corridor_width)
+
+
+func _connect_runtime_signals() -> void:
+	if Engine.is_editor_hint():
+		return
 	if _trigger:
 		if not _trigger.body_entered.is_connected(_on_mid_trigger):
 			_trigger.body_entered.connect(_on_mid_trigger)
 		_trigger.set_deferred("monitoring", true)
-	print("SpikeCascadeTrap: ready at ", global_position, " size ", corridor_length, "x", corridor_width)
+	for seg in _segments:
+		var pit: Node = seg["root"].get_node_or_null("Pit")
+		if pit == null:
+			continue
+		var spike_area := pit.get_node_or_null("SpikeArea")
+		if spike_area is Area3D and not spike_area.body_entered.is_connected(_on_spike_entered):
+			spike_area.body_entered.connect(_on_spike_entered)
 
 
 func _notification(what: int) -> void:
@@ -135,7 +155,7 @@ func _make_materials() -> void:
 	_seam_mat = seam
 
 	_spike_mat = StandardMaterial3D.new()
-	# Rusty iron — orange-brown oxide, rough, little chrome.
+	# Rusty iron: orange-brown oxide, rough, little chrome.
 	_spike_mat.albedo_color = Color(0.52, 0.26, 0.12)
 	_spike_mat.metallic = 0.22
 	_spike_mat.roughness = 0.82
@@ -147,24 +167,31 @@ func _make_materials() -> void:
 
 func _clear_generated() -> void:
 	# Free previous runtime/editor-built children so rebuild is idempotent.
+	# Rename + queue_free avoids name clashes if free is deferred a frame.
 	var to_free: Array[Node] = []
 	for c in get_children():
 		var n := String(c.name)
 		if n == "TriggerArea" or n == "CenterSeam" or n == "DebugTag" or n.begins_with("PitSegment_"):
 			to_free.append(c)
 	for c in to_free:
+		c.name = String(c.name) + "_old"
 		remove_child(c)
-		c.free()
+		c.queue_free()
 	_segments.clear()
 	_trigger = null
 	_built = false
 
 
 func _rebuild_geometry() -> void:
+	if not is_inside_tree():
+		return
 	_clear_generated()
 	_make_materials()
 	_build_geometry()
 	_built = true
+	# Runtime signal hooks after a rebuild that was not from _ready (e.g. export tweak in play).
+	if not Engine.is_editor_hint():
+		_connect_runtime_signals()
 
 
 func _configure_area(area: Area3D) -> void:
@@ -172,6 +199,14 @@ func _configure_area(area: Area3D) -> void:
 	area.collision_mask = 1
 	area.monitoring = true
 	area.monitorable = false
+
+
+func _safe_add_child(node: Node) -> void:
+	# Prefer deferred add when this trap is still entering the tree / busy.
+	if not is_node_ready():
+		add_child.call_deferred(node)
+	else:
+		add_child(node)
 
 
 func _build_geometry() -> void:
@@ -196,7 +231,7 @@ func _build_geometry() -> void:
 	trigger_cs.shape = trigger_shape
 	trigger_cs.position = Vector3(0.0, 1.1, 0.0)
 	_trigger.add_child(trigger_cs)
-	add_child(_trigger)
+	_safe_add_child(_trigger)
 	if Engine.is_editor_hint():
 		_trigger.monitoring = false
 	else:
@@ -212,7 +247,7 @@ func _build_geometry() -> void:
 	seam.material_override = _seam_mat
 	seam.position = Vector3(0.0, panel_y + floor_thickness * 0.5 + 0.006, 0.0)
 	seam.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	add_child(seam)
+	_safe_add_child(seam)
 
 	if show_debug_label:
 		var tag := Label3D.new()
@@ -224,7 +259,7 @@ func _build_geometry() -> void:
 		tag.outline_size = 12
 		tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		tag.position = Vector3(0.0, 2.0, 0.0)
-		add_child(tag)
+		_safe_add_child(tag)
 
 	# Sharper, thinner cone template; per-spike scale/jitter applied below.
 	var spike_mesh := CylinderMesh.new()
@@ -244,7 +279,7 @@ func _build_geometry() -> void:
 		var seg := Node3D.new()
 		seg.name = "PitSegment_%02d" % i
 		seg.position = Vector3(x, panel_y, 0.0)
-		add_child(seg)
+		_safe_add_child(seg)
 
 		var south := Node3D.new()
 		south.name = "SouthPanel"
@@ -286,8 +321,7 @@ func _build_geometry() -> void:
 		spike_cs.position = Vector3(0.0, 0.45, 0.0)
 		spike_area.add_child(spike_cs)
 		pit.add_child(spike_area)
-		if not Engine.is_editor_hint():
-			spike_area.body_entered.connect(_on_spike_entered)
+		# body_entered connected in _connect_runtime_signals after deferred add
 
 		# 5 rows across width (was 3, +2) x denser along segment; jittered irregular layout.
 		var rows_x := 4
