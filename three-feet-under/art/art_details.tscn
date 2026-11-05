@@ -1,0 +1,146 @@
+[gd_scene format=3]
+
+[ext_resource type="Environment" path="res://art/tomb_environment.tres" id="1_1om78"]
+[ext_resource type="Material" path="res://art/materials/trim.tres" id="2_vyfat"]
+[ext_resource type="MultiMesh" path="res://art/batches/WallFoot_EntryHub.tres" id="3_01w68"]
+[ext_resource type="Material" path="res://art/materials/rock.tres" id="3_ia5u7"]
+[ext_resource type="MultiMesh" path="res://art/batches/WallCornice_EntryHub.tres" id="4_053c4"]
+[ext_resource type="Material" path="res://art/materials/bronze.tres" id="4_mk2jr"]
+[ext_resource type="Material" path="res://art/materials/lamp_glow.tres" id="5_q7igt"]
+[ext_resource type="MultiMesh" path="res://art/batches/WallFoot_West.tres" id="5_qmmcx"]
+[ext_resource type="MultiMesh" path="res://art/batches/WallCornice_West.tres" id="6_gwvth"]
+[ext_resource type="MultiMesh" path="res://art/batches/WallFoot_East.tres" id="7_wt7mi"]
+[ext_resource type="MultiMesh" path="res://art/batches/WallCornice_East.tres" id="8_tsn7u"]
+[ext_resource type="MultiMesh" path="res://art/batches/WallFoot_Final.tres" id="9_4wde3"]
+[ext_resource type="MultiMesh" path="res://art/batches/WallCornice_Final.tres" id="10_m138l"]
+[ext_resource type="MultiMesh" path="res://art/batches/DoorStone.tres" id="11_le3ka"]
+[ext_resource type="MultiMesh" path="res://art/batches/EntranceRockFacing.tres" id="13_83v36"]
+[ext_resource type="MultiMesh" path="res://art/batches/EntranceRockFacingFacets.tres" id="14_c1v0j"]
+[ext_resource type="MultiMesh" path="res://art/batches/FloorInlay.tres" id="15_gqqa3"]
+[ext_resource type="Material" path="res://art/materials/wall.tres" id="15_qmmcx"]
+[ext_resource type="MultiMesh" path="res://art/batches/EntryChips.tres" id="16_g10i0"]
+[ext_resource type="MultiMesh" path="res://art/batches/HighDoorFrieze.tres" id="16_gwvth"]
+[ext_resource type="MultiMesh" path="res://art/batches/EntryArch.tres" id="17_b0qv5"]
+[ext_resource type="MultiMesh" path="res://art/batches/ColumnCollars.tres" id="18_t36wm"]
+[ext_resource type="MultiMesh" path="res://art/batches/TombRelief.tres" id="19_eau35"]
+[ext_resource type="MultiMesh" path="res://art/batches/CliffFragments.tres" id="20_wt8a5"]
+[ext_resource type="MultiMesh" path="res://art/batches/BottomFragments.tres" id="21_7qwaj"]
+[ext_resource type="MultiMesh" path="res://art/batches/CornerChips.tres" id="22_qcsjp"]
+[ext_resource type="MultiMesh" path="res://art/batches/LampBronze.tres" id="24_6jdg7"]
+[ext_resource type="MultiMesh" path="res://art/batches/LampGlow.tres" id="26_7xpsk"]
+
+[node name="ArtDetails" type="Node3D" unique_id=932618076]
+metadata/note = "Static collision-free, project-authored stone trims/chips/sconces; no gameplay rebuild"
+
+[node name="TombEnvironment" type="WorldEnvironment" parent="." unique_id=949566151]
+environment = ExtResource("1_1om78")
+
+[node name="WallFoot_EntryHub" type="MultiMeshInstance3D" parent="." unique_id=2100530798]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("3_01w68")
+
+[node name="WallCornice_EntryHub" type="MultiMeshInstance3D" parent="." unique_id=920123786]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("4_053c4")
+
+[node name="WallFoot_West" type="MultiMeshInstance3D" parent="." unique_id=1297063734]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("5_qmmcx")
+
+[node name="WallCornice_West" type="MultiMeshInstance3D" parent="." unique_id=440081119]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("6_gwvth")
+
+[node name="WallFoot_East" type="MultiMeshInstance3D" parent="." unique_id=973525467]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("7_wt7mi")
+
+[node name="WallCornice_East" type="MultiMeshInstance3D" parent="." unique_id=2083573697]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("8_tsn7u")
+
+[node name="WallFoot_Final" type="MultiMeshInstance3D" parent="." unique_id=2097796422]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("9_4wde3")
+
+[node name="WallCornice_Final" type="MultiMeshInstance3D" parent="." unique_id=1824094277]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("10_m138l")
+
+[node name="DoorStone" type="MultiMeshInstance3D" parent="." unique_id=1293454387]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("11_le3ka")
+
+[node name="EntranceRockFacing" type="MultiMeshInstance3D" parent="." unique_id=1864599452]
+material_override = ExtResource("3_ia5u7")
+cast_shadow = 0
+multimesh = ExtResource("13_83v36")
+
+[node name="EntranceRockFacingFacets" type="MultiMeshInstance3D" parent="." unique_id=976944038]
+material_override = ExtResource("3_ia5u7")
+cast_shadow = 0
+multimesh = ExtResource("14_c1v0j")
+
+[node name="HighDoorFrieze" type="MultiMeshInstance3D" parent="." unique_id=1215215912]
+material_override = ExtResource("15_qmmcx")
+cast_shadow = 0
+multimesh = ExtResource("16_gwvth")
+
+[node name="FloorInlay" type="MultiMeshInstance3D" parent="." unique_id=610118947]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("15_gqqa3")
+
+[node name="EntryChips" type="MultiMeshInstance3D" parent="." unique_id=1758537472]
+material_override = ExtResource("3_ia5u7")
+cast_shadow = 0
+multimesh = ExtResource("16_g10i0")
+
+[node name="EntryArch" type="MultiMeshInstance3D" parent="." unique_id=10513882]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("17_b0qv5")
+
+[node name="ColumnCollars" type="MultiMeshInstance3D" parent="." unique_id=1033078098]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("18_t36wm")
+
+[node name="TombRelief" type="MultiMeshInstance3D" parent="." unique_id=1546413286]
+material_override = ExtResource("2_vyfat")
+cast_shadow = 0
+multimesh = ExtResource("19_eau35")
+
+[node name="CliffFragments" type="MultiMeshInstance3D" parent="." unique_id=879892188]
+material_override = ExtResource("3_ia5u7")
+cast_shadow = 0
+multimesh = ExtResource("20_wt8a5")
+
+[node name="BottomFragments" type="MultiMeshInstance3D" parent="." unique_id=1806002415]
+material_override = ExtResource("3_ia5u7")
+cast_shadow = 0
+multimesh = ExtResource("21_7qwaj")
+
+[node name="CornerChips" type="MultiMeshInstance3D" parent="." unique_id=114664213]
+material_override = ExtResource("3_ia5u7")
+cast_shadow = 0
+multimesh = ExtResource("22_qcsjp")
+
+[node name="LampBronze" type="MultiMeshInstance3D" parent="." unique_id=472766844]
+material_override = ExtResource("4_mk2jr")
+cast_shadow = 0
+multimesh = ExtResource("24_6jdg7")
+
+[node name="LampGlow" type="MultiMeshInstance3D" parent="." unique_id=1213848448]
+material_override = ExtResource("5_q7igt")
+cast_shadow = 0
+multimesh = ExtResource("26_7xpsk")

@@ -1,0 +1,9 @@
+[gd_resource type="MultiMesh" format=3]
+
+[ext_resource type="BoxMesh" path="res://art/detail_cube.tres" id="1_fqspe"]
+
+[resource]
+transform_format = 1
+instance_count = 4
+mesh = ExtResource("1_fqspe")
+buffer = PackedFloat32Array(0.12, 0, 0, -7.55, 0, 0.008, 0, 0.106, 0, 0, 14.8, -20, 0.12, 0, 0, 7.55, 0, 0.008, 0, 0.106, 0, 0, 14.8, -20, 14.8, 0, 0, 0, 0, 0.008, 0, 0.106, 0, 0, 0.12, -27.45, 14.8, 0, 0, 0, 0, 0.008, 0, 0.106, 0, 0, 0.12, -12.55)

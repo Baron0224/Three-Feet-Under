@@ -1,0 +1,9 @@
+[gd_resource type="MultiMesh" format=3]
+
+[ext_resource type="BoxMesh" path="res://art/detail_cube.tres" id="1_j83br"]
+
+[resource]
+transform_format = 1
+instance_count = 1
+mesh = ExtResource("1_j83br")
+buffer = PackedFloat32Array(0.3, 0, 0, 47.02, 0, 1.78, 0, 4.21, 0, 0, 3, -65.5)

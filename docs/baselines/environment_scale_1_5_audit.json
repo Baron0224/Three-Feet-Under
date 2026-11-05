@@ -1,0 +1,480 @@
+{
+  "baseline_scene_sha256": "f3c522ad575d3dff09ea4564046252a30e0b0928b3ac1f3d3b3af9997aca5689",
+  "factor": 1.5,
+  "origin": [
+    0,
+    0,
+    0
+  ],
+  "method": "scale only root architecture subtrees; move root translations once; player and tablet excluded",
+  "protected": {
+    "clue_tablet.gd": "ab9125e515b72f4a94a8e3b9b3ed4c835ee9ae25807b41974bed5ed46c956217",
+    "project.godot": "93a22cc47f6caaad420bc35754bf04a84c0acc916865e063d011710463926a68",
+    "main.tscn": "b96fd93e55beb7862deca6fea930a3311239e2b470a733caa3c5b917ca01da26"
+  },
+  "materials": {
+    "art/materials/bronze.tres": "cc9ab6ad69a793430885825910ea4a3e26f4e656ee9e45052ca321a71e36d9bc",
+    "art/materials/ceiling.tres": "1e225235bbe6f42f4d3a8a27104dca7ac0abd98279a0ea49539ffd95ca9518c1",
+    "art/materials/coffin.tres": "c25dcbb2f662042c283533657900cae8037fba12caafe1449d6d19def18e2215",
+    "art/materials/floor.tres": "774aa63cb74ba8c1a918b26666c4e9580c986af7583738dbee8a3f9ef2e755a1",
+    "art/materials/lamp_glow.tres": "d35f88c55cbd92049e1435af1bcab686b84a844c30e488a359b7c5d9ab8ee29b",
+    "art/materials/rock.tres": "4590bb8d89e20cddf65285d7882c10e0b9929ab3d9d31ff2f361254a213dbc52",
+    "art/materials/trim.tres": "3af99db2cf417d339c228455aa7ea111d37944640609517e13278e228a18602c",
+    "art/materials/wall.tres": "1f152e381fc5c6a8531aa4d056c167fc975274d473bde415e0b50ede1b691ed2",
+    "art/shaders/world_stone.gdshader": "ea8f1db002a2970e83fb46627a0c84b1ffd2699ad5a523e64588b6ccc8e2e29f",
+    "art/shaders/world_stone.gdshader.uid": "0c69e3a4b66d2b7e6360691dda8b798401441982edb2afcc1e42a424526c2df9"
+  },
+  "architecture_root_nodes": [
+    {
+      "name": "Floor01",
+      "before": "[node name=\"Floor01\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0, 1.5)\n\nmesh = SubResource(\"Mesh_Floor01\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"Floor01\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0, 2.25)\n\nmesh = SubResource(\"Mesh_Floor01\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Floor02",
+      "before": "[node name=\"Floor02\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0, -7.25)\n\nmesh = SubResource(\"Mesh_Floor02\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"Floor02\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0, -10.875)\n\nmesh = SubResource(\"Mesh_Floor02\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "LeftWall",
+      "before": "[node name=\"LeftWall\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.65, 1.6, -3.25)\n\nmesh = SubResource(\"Mesh_LeftWall\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"LeftWall\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.475, 2.4, -4.875)\n\nmesh = SubResource(\"Mesh_LeftWall\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "RightWall",
+      "before": "[node name=\"RightWall\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.65, 1.6, -3.25)\n\nmesh = SubResource(\"Mesh_RightWall\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"RightWall\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.475, 2.4, -4.875)\n\nmesh = SubResource(\"Mesh_RightWall\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Ceiling",
+      "before": "[node name=\"Ceiling\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 3.2, 1.5)\n\nmesh = SubResource(\"Mesh_Ceiling\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\n",
+      "after": "[node name=\"Ceiling\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 4.8, 2.25)\n\nmesh = SubResource(\"Mesh_Ceiling\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Ceiling2",
+      "before": "[node name=\"Ceiling2\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 3.2, -7.25)\n\nmesh = SubResource(\"Mesh_Ceiling2\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\n",
+      "after": "[node name=\"Ceiling2\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 4.8, -10.875)\n\nmesh = SubResource(\"Mesh_Ceiling2\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceSouthEnd",
+      "before": "[node name=\"EntranceSouthEnd\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 3.04, 12.55)\n\nmesh = SubResource(\"Mesh_EntranceSouthEnd\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"EntranceSouthEnd\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 4.56, 18.825)\n\nmesh = SubResource(\"Mesh_EntranceSouthEnd\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02Floor",
+      "before": "[node name=\"Hub02Floor\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0, -20)\n\nmesh = SubResource(\"Mesh_Hub02Floor\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"Hub02Floor\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0, -30)\n\nmesh = SubResource(\"Mesh_Hub02Floor\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02Ceiling",
+      "before": "[node name=\"Hub02Ceiling\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 5.2, -20)\n\nmesh = SubResource(\"Mesh_Hub02Ceiling\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\n",
+      "after": "[node name=\"Hub02Ceiling\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 7.8, -30)\n\nmesh = SubResource(\"Mesh_Hub02Ceiling\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02WestSouth",
+      "before": "[node name=\"Hub02WestSouth\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-8.15, 2.6, -15.25)\n\nmesh = SubResource(\"Mesh_Hub02WestSouth\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"Hub02WestSouth\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-12.225, 3.9, -22.875)\n\nmesh = SubResource(\"Mesh_Hub02WestSouth\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02WestNorth",
+      "before": "[node name=\"Hub02WestNorth\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-8.15, 2.6, -27.25)\n\nmesh = SubResource(\"Mesh_Hub02WestNorth\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"Hub02WestNorth\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-12.225, 3.9, -40.875)\n\nmesh = SubResource(\"Mesh_Hub02WestNorth\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02WestLintel",
+      "before": "[node name=\"Hub02WestLintel\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-8.15, 4.1, -20)\n\nmesh = SubResource(\"Mesh_Hub02WestLintel\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"Hub02WestLintel\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-12.225, 6.15, -30)\n\nmesh = SubResource(\"Mesh_Hub02WestLintel\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02EastNorth",
+      "before": "[node name=\"Hub02EastNorth\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(8.15, 2.6, -24.75)\n\nmesh = SubResource(\"Mesh_Hub02EastNorth\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"Hub02EastNorth\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(12.225, 3.9, -37.125)\n\nmesh = SubResource(\"Mesh_Hub02EastNorth\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02EastLintel",
+      "before": "[node name=\"Hub02EastLintel\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(8.15, 4.1, -20)\n\nmesh = SubResource(\"Mesh_Hub02EastLintel\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"Hub02EastLintel\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(12.225, 6.15, -30)\n\nmesh = SubResource(\"Mesh_Hub02EastLintel\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02SouthLeft",
+      "before": "[node name=\"Hub02SouthLeft\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-4.75, 2.6, -11.85)\n\nmesh = SubResource(\"Mesh_Hub02SouthLeft\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"Hub02SouthLeft\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-7.125, 3.9, -17.775)\n\nmesh = SubResource(\"Mesh_Hub02SouthLeft\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02SouthRight",
+      "before": "[node name=\"Hub02SouthRight\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(4.75, 2.6, -11.85)\n\nmesh = SubResource(\"Mesh_Hub02SouthRight\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"Hub02SouthRight\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(7.125, 3.9, -17.775)\n\nmesh = SubResource(\"Mesh_Hub02SouthRight\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02SouthLintel",
+      "before": "[node name=\"Hub02SouthLintel\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 4.1, -11.85)\n\nmesh = SubResource(\"Mesh_Hub02SouthLintel\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"Hub02SouthLintel\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 6.15, -17.775)\n\nmesh = SubResource(\"Mesh_Hub02SouthLintel\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02NorthLeft",
+      "before": "[node name=\"Hub02NorthLeft\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-5, 2.6, -28.15)\n\nmesh = SubResource(\"Mesh_Hub02NorthLeft\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"Hub02NorthLeft\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-7.5, 3.9, -42.225)\n\nmesh = SubResource(\"Mesh_Hub02NorthLeft\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02NorthRight",
+      "before": "[node name=\"Hub02NorthRight\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(5, 2.6, -28.15)\n\nmesh = SubResource(\"Mesh_Hub02NorthRight\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"Hub02NorthRight\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(7.5, 3.9, -42.225)\n\nmesh = SubResource(\"Mesh_Hub02NorthRight\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "Hub02NorthLintel",
+      "before": "[node name=\"Hub02NorthLintel\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 4.1, -28.15)\n\nmesh = SubResource(\"Mesh_Hub02NorthLintel\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"Hub02NorthLintel\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 6.15, -42.225)\n\nmesh = SubResource(\"Mesh_Hub02NorthLintel\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To03Landing",
+      "before": "[node name=\"To03Landing\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-9.0, 0.0, -20.0)\n\nmesh = SubResource(\"Mesh_To03Landing\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"To03Landing\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-13.5, 0, -30)\n\nmesh = SubResource(\"Mesh_To03Landing\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To03Roof",
+      "before": "[node name=\"To03Roof\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-9.0, 3.2, -20.0)\n\nmesh = SubResource(\"Mesh_To03Roof\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\n",
+      "after": "[node name=\"To03Roof\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-13.5, 4.8, -30)\n\nmesh = SubResource(\"Mesh_To03Roof\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To03South",
+      "before": "[node name=\"To03South\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-9.0, 1.6, -18.35)\n\nmesh = SubResource(\"Mesh_To03South\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"To03South\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-13.5, 2.4, -27.525)\n\nmesh = SubResource(\"Mesh_To03South\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To03North",
+      "before": "[node name=\"To03North\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-9.0, 1.6, -21.65)\n\nmesh = SubResource(\"Mesh_To03North\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"To03North\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-13.5, 2.4, -32.475)\n\nmesh = SubResource(\"Mesh_To03North\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntryFillLight",
+      "before": "[node name=\"EntryFillLight\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(0, 2.7, 1)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.744\n\nomni_range = 7\nlight_specular = 0.3\n",
+      "after": "[node name=\"EntryFillLight\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(0, 4.05, 1.5)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.744\n\nomni_range = 10.5\nlight_specular = 0.3\n"
+    },
+    {
+      "name": "CorridorFillLight",
+      "before": "[node name=\"CorridorFillLight\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(0, 2.7, -7)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.744\n\nomni_range = 7\nlight_specular = 0.3\n",
+      "after": "[node name=\"CorridorFillLight\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(0, 4.05, -10.5)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.744\n\nomni_range = 10.5\nlight_specular = 0.3\n"
+    },
+    {
+      "name": "HubFillLight",
+      "before": "[node name=\"HubFillLight\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(0, 4.3, -20)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 1.24\n\nomni_range = 15\nshadow_enabled = true\nshadow_bias = 0.04\nlight_specular = 0.3\n",
+      "after": "[node name=\"HubFillLight\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(0, 6.45, -30)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 1.24\n\nomni_range = 22.5\nshadow_enabled = true\nshadow_bias = 0.04\nlight_specular = 0.3\n"
+    },
+    {
+      "name": "EntranceStep01",
+      "before": "[node name=\"EntranceStep01\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, -0.04, 5.725)\n\nmesh = SubResource(\"Mesh_EntranceStep01\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep01\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, -0.06, 8.5875)\n\nmesh = SubResource(\"Mesh_EntranceStep01\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft01",
+      "before": "[node name=\"StairRailLeft01\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 0.72, 5.725)\n\nmesh = SubResource(\"Mesh_StairRailLeft01\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft01\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 1.08, 8.5875)\n\nmesh = SubResource(\"Mesh_StairRailLeft01\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight01",
+      "before": "[node name=\"StairRailRight01\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 0.72, 5.725)\n\nmesh = SubResource(\"Mesh_StairRailRight01\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight01\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 1.08, 8.5875)\n\nmesh = SubResource(\"Mesh_StairRailRight01\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep02",
+      "before": "[node name=\"EntranceStep02\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.02, 6.175)\n\nmesh = SubResource(\"Mesh_EntranceStep02\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep02\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.03, 9.2625)\n\nmesh = SubResource(\"Mesh_EntranceStep02\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft02",
+      "before": "[node name=\"StairRailLeft02\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 0.84, 6.175)\n\nmesh = SubResource(\"Mesh_StairRailLeft02\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft02\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 1.26, 9.2625)\n\nmesh = SubResource(\"Mesh_StairRailLeft02\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight02",
+      "before": "[node name=\"StairRailRight02\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 0.84, 6.175)\n\nmesh = SubResource(\"Mesh_StairRailRight02\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight02\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 1.26, 9.2625)\n\nmesh = SubResource(\"Mesh_StairRailRight02\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep03",
+      "before": "[node name=\"EntranceStep03\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.08, 6.625)\n\nmesh = SubResource(\"Mesh_EntranceStep03\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep03\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.12, 9.9375)\n\nmesh = SubResource(\"Mesh_EntranceStep03\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft03",
+      "before": "[node name=\"StairRailLeft03\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 0.96, 6.625)\n\nmesh = SubResource(\"Mesh_StairRailLeft03\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft03\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 1.44, 9.9375)\n\nmesh = SubResource(\"Mesh_StairRailLeft03\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight03",
+      "before": "[node name=\"StairRailRight03\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 0.96, 6.625)\n\nmesh = SubResource(\"Mesh_StairRailRight03\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight03\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 1.44, 9.9375)\n\nmesh = SubResource(\"Mesh_StairRailRight03\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep04",
+      "before": "[node name=\"EntranceStep04\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.14, 7.075)\n\nmesh = SubResource(\"Mesh_EntranceStep04\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep04\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.21, 10.6125)\n\nmesh = SubResource(\"Mesh_EntranceStep04\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft04",
+      "before": "[node name=\"StairRailLeft04\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 1.08, 7.075)\n\nmesh = SubResource(\"Mesh_StairRailLeft04\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft04\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 1.62, 10.6125)\n\nmesh = SubResource(\"Mesh_StairRailLeft04\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight04",
+      "before": "[node name=\"StairRailRight04\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 1.08, 7.075)\n\nmesh = SubResource(\"Mesh_StairRailRight04\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight04\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 1.62, 10.6125)\n\nmesh = SubResource(\"Mesh_StairRailRight04\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep05",
+      "before": "[node name=\"EntranceStep05\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.2, 7.525)\n\nmesh = SubResource(\"Mesh_EntranceStep05\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep05\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.3, 11.2875)\n\nmesh = SubResource(\"Mesh_EntranceStep05\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft05",
+      "before": "[node name=\"StairRailLeft05\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 1.2, 7.525)\n\nmesh = SubResource(\"Mesh_StairRailLeft05\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft05\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 1.8, 11.2875)\n\nmesh = SubResource(\"Mesh_StairRailLeft05\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight05",
+      "before": "[node name=\"StairRailRight05\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 1.2, 7.525)\n\nmesh = SubResource(\"Mesh_StairRailRight05\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight05\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 1.8, 11.2875)\n\nmesh = SubResource(\"Mesh_StairRailRight05\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep06",
+      "before": "[node name=\"EntranceStep06\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.26, 7.975)\n\nmesh = SubResource(\"Mesh_EntranceStep06\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep06\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.39, 11.9625)\n\nmesh = SubResource(\"Mesh_EntranceStep06\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft06",
+      "before": "[node name=\"StairRailLeft06\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 1.32, 7.975)\n\nmesh = SubResource(\"Mesh_StairRailLeft06\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft06\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 1.98, 11.9625)\n\nmesh = SubResource(\"Mesh_StairRailLeft06\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight06",
+      "before": "[node name=\"StairRailRight06\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 1.32, 7.975)\n\nmesh = SubResource(\"Mesh_StairRailRight06\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight06\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 1.98, 11.9625)\n\nmesh = SubResource(\"Mesh_StairRailRight06\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep07",
+      "before": "[node name=\"EntranceStep07\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.32, 8.425)\n\nmesh = SubResource(\"Mesh_EntranceStep07\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep07\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.48, 12.6375)\n\nmesh = SubResource(\"Mesh_EntranceStep07\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft07",
+      "before": "[node name=\"StairRailLeft07\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 1.44, 8.425)\n\nmesh = SubResource(\"Mesh_StairRailLeft07\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft07\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 2.16, 12.6375)\n\nmesh = SubResource(\"Mesh_StairRailLeft07\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight07",
+      "before": "[node name=\"StairRailRight07\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 1.44, 8.425)\n\nmesh = SubResource(\"Mesh_StairRailRight07\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight07\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 2.16, 12.6375)\n\nmesh = SubResource(\"Mesh_StairRailRight07\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep08",
+      "before": "[node name=\"EntranceStep08\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.38, 8.875)\n\nmesh = SubResource(\"Mesh_EntranceStep08\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep08\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.57, 13.3125)\n\nmesh = SubResource(\"Mesh_EntranceStep08\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft08",
+      "before": "[node name=\"StairRailLeft08\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 1.56, 8.875)\n\nmesh = SubResource(\"Mesh_StairRailLeft08\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft08\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 2.34, 13.3125)\n\nmesh = SubResource(\"Mesh_StairRailLeft08\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight08",
+      "before": "[node name=\"StairRailRight08\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 1.56, 8.875)\n\nmesh = SubResource(\"Mesh_StairRailRight08\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight08\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 2.34, 13.3125)\n\nmesh = SubResource(\"Mesh_StairRailRight08\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep09",
+      "before": "[node name=\"EntranceStep09\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.44, 9.325)\n\nmesh = SubResource(\"Mesh_EntranceStep09\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep09\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.66, 13.9875)\n\nmesh = SubResource(\"Mesh_EntranceStep09\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft09",
+      "before": "[node name=\"StairRailLeft09\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 1.68, 9.325)\n\nmesh = SubResource(\"Mesh_StairRailLeft09\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft09\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 2.52, 13.9875)\n\nmesh = SubResource(\"Mesh_StairRailLeft09\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight09",
+      "before": "[node name=\"StairRailRight09\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 1.68, 9.325)\n\nmesh = SubResource(\"Mesh_StairRailRight09\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight09\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 2.52, 13.9875)\n\nmesh = SubResource(\"Mesh_StairRailRight09\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep10",
+      "before": "[node name=\"EntranceStep10\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.5, 9.775)\n\nmesh = SubResource(\"Mesh_EntranceStep10\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep10\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.75, 14.6625)\n\nmesh = SubResource(\"Mesh_EntranceStep10\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft10",
+      "before": "[node name=\"StairRailLeft10\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 1.8, 9.775)\n\nmesh = SubResource(\"Mesh_StairRailLeft10\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft10\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 2.7, 14.6625)\n\nmesh = SubResource(\"Mesh_StairRailLeft10\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight10",
+      "before": "[node name=\"StairRailRight10\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 1.8, 9.775)\n\nmesh = SubResource(\"Mesh_StairRailRight10\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight10\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 2.7, 14.6625)\n\nmesh = SubResource(\"Mesh_StairRailRight10\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep11",
+      "before": "[node name=\"EntranceStep11\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.56, 10.225)\n\nmesh = SubResource(\"Mesh_EntranceStep11\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep11\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.84, 15.3375)\n\nmesh = SubResource(\"Mesh_EntranceStep11\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft11",
+      "before": "[node name=\"StairRailLeft11\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 1.92, 10.225)\n\nmesh = SubResource(\"Mesh_StairRailLeft11\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft11\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 2.88, 15.3375)\n\nmesh = SubResource(\"Mesh_StairRailLeft11\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight11",
+      "before": "[node name=\"StairRailRight11\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 1.92, 10.225)\n\nmesh = SubResource(\"Mesh_StairRailRight11\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight11\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 2.88, 15.3375)\n\nmesh = SubResource(\"Mesh_StairRailRight11\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStep12",
+      "before": "[node name=\"EntranceStep12\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.62, 10.675)\n\nmesh = SubResource(\"Mesh_EntranceStep12\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceStep12\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0.93, 16.0125)\n\nmesh = SubResource(\"Mesh_EntranceStep12\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailLeft12",
+      "before": "[node name=\"StairRailLeft12\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 2.04, 10.675)\n\nmesh = SubResource(\"Mesh_StairRailLeft12\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailLeft12\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 3.06, 16.0125)\n\nmesh = SubResource(\"Mesh_StairRailLeft12\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairRailRight12",
+      "before": "[node name=\"StairRailRight12\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 2.04, 10.675)\n\nmesh = SubResource(\"Mesh_StairRailRight12\")\n\nmaterial_override = ExtResource(\"Art_trim\")\n",
+      "after": "[node name=\"StairRailRight12\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 3.06, 16.0125)\n\nmesh = SubResource(\"Mesh_StairRailRight12\")\n\nmaterial_override = ExtResource(\"Art_trim\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceUpperLanding",
+      "before": "[node name=\"EntranceUpperLanding\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 1.44, 11.65)\n\nmesh = SubResource(\"Mesh_EntranceUpperLanding\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"EntranceUpperLanding\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 2.16, 17.475)\n\nmesh = SubResource(\"Mesh_EntranceUpperLanding\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "LandingRailLeft",
+      "before": "[node name=\"LandingRailLeft\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.9, 2.04, 11.65)\n\nmesh = SubResource(\"Mesh_LandingRailLeft\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"LandingRailLeft\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.85, 3.06, 17.475)\n\nmesh = SubResource(\"Mesh_LandingRailLeft\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "LandingRailRight",
+      "before": "[node name=\"LandingRailRight\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.9, 2.04, 11.65)\n\nmesh = SubResource(\"Mesh_LandingRailRight\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"LandingRailRight\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.85, 3.06, 17.475)\n\nmesh = SubResource(\"Mesh_LandingRailRight\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceStairWalkRamp",
+      "before": "[node name=\"EntranceStairWalkRamp\" type=\"StaticBody3D\" parent=\".\"]\n\nmetadata/note = \"Smooth ramp collider beneath visual treads; intentional, for existing player without step climbing\"\n",
+      "after": "[node name=\"EntranceStairWalkRamp\" type=\"StaticBody3D\" parent=\".\"]\n\nmetadata/note = \"Smooth ramp collider beneath visual treads; intentional, for existing player without step climbing\"\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceRubble1",
+      "before": "[node name=\"EntranceRubble1\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.28, 0.425, 3.9)\n\nmesh = SubResource(\"Mesh_EntranceRubble1\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.3, 0)\n",
+      "after": "[node name=\"EntranceRubble1\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.92, 0.6375, 5.85)\n\nmesh = SubResource(\"Mesh_EntranceRubble1\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.3, 0)\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceRubble2",
+      "before": "[node name=\"EntranceRubble2\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.23, 0.35, 2.6)\n\nmesh = SubResource(\"Mesh_EntranceRubble2\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, -0.4, 0)\n",
+      "after": "[node name=\"EntranceRubble2\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.845, 0.525, 3.9)\n\nmesh = SubResource(\"Mesh_EntranceRubble2\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, -0.4, 0)\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceRubble3",
+      "before": "[node name=\"EntranceRubble3\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.3, 0.3, 0.5)\n\nmesh = SubResource(\"Mesh_EntranceRubble3\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.5, 0)\n",
+      "after": "[node name=\"EntranceRubble3\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.95, 0.45, 0.75)\n\nmesh = SubResource(\"Mesh_EntranceRubble3\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.5, 0)\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceRubble4",
+      "before": "[node name=\"EntranceRubble4\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.24, 0.475, -2.7)\n\nmesh = SubResource(\"Mesh_EntranceRubble4\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.2, 0)\n",
+      "after": "[node name=\"EntranceRubble4\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.86, 0.7125, -4.05)\n\nmesh = SubResource(\"Mesh_EntranceRubble4\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.2, 0)\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceRubble5",
+      "before": "[node name=\"EntranceRubble5\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.3, 0.35, -4.5)\n\nmesh = SubResource(\"Mesh_EntranceRubble5\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, -0.25, 0)\n",
+      "after": "[node name=\"EntranceRubble5\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.95, 0.525, -6.75)\n\nmesh = SubResource(\"Mesh_EntranceRubble5\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, -0.25, 0)\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EntranceRubble6",
+      "before": "[node name=\"EntranceRubble6\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.3, 0.3, -6.5)\n\nmesh = SubResource(\"Mesh_EntranceRubble6\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.5, 0)\n",
+      "after": "[node name=\"EntranceRubble6\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.95, 0.45, -9.75)\n\nmesh = SubResource(\"Mesh_EntranceRubble6\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.5, 0)\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "BrokenLeftPillar",
+      "before": "[node name=\"BrokenLeftPillar\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.17, 0.46, 2)\n\nmesh = SubResource(\"Mesh_BrokenLeftPillar\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.12, 0.13)\n",
+      "after": "[node name=\"BrokenLeftPillar\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-1.755, 0.69, 3)\n\nmesh = SubResource(\"Mesh_BrokenLeftPillar\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, 0.12, 0.13)\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "BrokenRightPillar",
+      "before": "[node name=\"BrokenRightPillar\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.15, 0.42, -5)\n\nmesh = SubResource(\"Mesh_BrokenRightPillar\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, -0.15, -0.14)\n",
+      "after": "[node name=\"BrokenRightPillar\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(1.725, 0.63, -7.5)\n\nmesh = SubResource(\"Mesh_BrokenRightPillar\")\n\nmaterial_override = ExtResource(\"Art_rock\")\n\nrotation = Vector3(0, -0.15, -0.14)\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "StairFillLight",
+      "before": "[node name=\"StairFillLight\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(0,4,9)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.868\n\nomni_range = 9\nlight_specular = 0.3\n",
+      "after": "[node name=\"StairFillLight\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(0, 6, 13.5)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.868\n\nomni_range = 13.5\nlight_specular = 0.3\n"
+    },
+    {
+      "name": "HubSideFill0",
+      "before": "[node name=\"HubSideFill0\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(-5,3.8,-20)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.62\n\nomni_range = 10\nlight_specular = 0.3\n",
+      "after": "[node name=\"HubSideFill0\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(-7.5, 5.7, -30)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.62\n\nomni_range = 15\nlight_specular = 0.3\n"
+    },
+    {
+      "name": "HubSideFill1",
+      "before": "[node name=\"HubSideFill1\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(5,3.8,-20)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.62\n\nomni_range = 10\nlight_specular = 0.3\n",
+      "after": "[node name=\"HubSideFill1\" type=\"OmniLight3D\" parent=\".\"]\n\nposition = Vector3(7.5, 5.7, -30)\n\nlight_color = Color(1, 0.68, 0.37, 1)\n\nlight_energy = 0.62\n\nomni_range = 15\nlight_specular = 0.3\n"
+    },
+    {
+      "name": "To07Landing",
+      "before": "[node name=\"To07Landing\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(9, 0, -20)\n\nmesh = SubResource(\"Mesh_To07Landing\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"To07Landing\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(13.5, 0, -30)\n\nmesh = SubResource(\"Mesh_To07Landing\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To07Roof",
+      "before": "[node name=\"To07Roof\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(9, 3.2, -20)\n\nmesh = SubResource(\"Mesh_To07Roof\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\n",
+      "after": "[node name=\"To07Roof\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(13.5, 4.8, -30)\n\nmesh = SubResource(\"Mesh_To07Roof\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To07South",
+      "before": "[node name=\"To07South\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(9, 1.6, -18.35)\n\nmesh = SubResource(\"Mesh_To07South\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"To07South\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(13.5, 2.4, -27.525)\n\nmesh = SubResource(\"Mesh_To07South\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To07North",
+      "before": "[node name=\"To07North\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(9, 1.6, -21.65)\n\nmesh = SubResource(\"Mesh_To07North\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"To07North\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(13.5, 2.4, -32.475)\n\nmesh = SubResource(\"Mesh_To07North\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To10Landing",
+      "before": "[node name=\"To10Landing\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0, -29)\n\nmesh = SubResource(\"Mesh_To10Landing\")\n\nmaterial_override = ExtResource(\"Art_floor\")\n",
+      "after": "[node name=\"To10Landing\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 0, -43.5)\n\nmesh = SubResource(\"Mesh_To10Landing\")\n\nmaterial_override = ExtResource(\"Art_floor\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To10Roof",
+      "before": "[node name=\"To10Roof\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 3.2, -29)\n\nmesh = SubResource(\"Mesh_To10Roof\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\n",
+      "after": "[node name=\"To10Roof\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(0, 4.8, -43.5)\n\nmesh = SubResource(\"Mesh_To10Roof\")\n\nmaterial_override = ExtResource(\"Art_ceiling\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To10Left",
+      "before": "[node name=\"To10Left\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-2.15, 1.6, -29)\n\nmesh = SubResource(\"Mesh_To10Left\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"To10Left\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(-3.225, 2.4, -43.5)\n\nmesh = SubResource(\"Mesh_To10Left\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "To10Right",
+      "before": "[node name=\"To10Right\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(2.15, 1.6, -29)\n\nmesh = SubResource(\"Mesh_To10Right\")\n\nmaterial_override = ExtResource(\"Art_wall\")\n",
+      "after": "[node name=\"To10Right\" type=\"MeshInstance3D\" parent=\".\"]\n\nposition = Vector3(3.225, 2.4, -43.5)\n\nmesh = SubResource(\"Mesh_To10Right\")\n\nmaterial_override = ExtResource(\"Art_wall\")\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "WestWing",
+      "before": "[node name=\"WestWing\" type=\"Node3D\" parent=\".\"]\n\nmetadata/note = \"03-06 west architecture blockout, north=-Z, estimated meters; shortcut intentionally ungated\"\n",
+      "after": "[node name=\"WestWing\" type=\"Node3D\" parent=\".\"]\n\nmetadata/note = \"03-06 west architecture blockout, north=-Z, estimated meters; shortcut intentionally ungated\"\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "EastWing",
+      "before": "[node name=\"EastWing\" type=\"Node3D\" parent=\".\"]\nmetadata/note = \"07 abyss, 08-09 architecture; no bridge/rope/mechanisms, shortcut currently bidirectional\"\n",
+      "after": "[node name=\"EastWing\" type=\"Node3D\" parent=\".\"]\nmetadata/note = \"07 abyss, 08-09 architecture; no bridge/rope/mechanisms, shortcut currently bidirectional\"\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "FinalWing",
+      "before": "[node name=\"FinalWing\" type=\"Node3D\" parent=\".\"]\nmetadata/note = \"10-12 architecture blockout, estimated meters; no locks, guard AI or completion trigger\"\n",
+      "after": "[node name=\"FinalWing\" type=\"Node3D\" parent=\".\"]\nmetadata/note = \"10-12 architecture blockout, estimated meters; no locks, guard AI or completion trigger\"\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    },
+    {
+      "name": "ArtDetails",
+      "before": "[node name=\"ArtDetails\" parent=\".\" instance=ExtResource(\"Art_details\")]\n",
+      "after": "[node name=\"ArtDetails\" parent=\".\" instance=ExtResource(\"Art_details\")]\nscale = Vector3(1.5, 1.5, 1.5)\n\n"
+    }
+  ],
+  "scaled_scene_sha256": "fc9f9139b49c13802634b336792cc7cbb2b1cc4f0c7d4905124becf36d384727"
+}

@@ -143,11 +143,14 @@ func _can_stand() -> bool:
 
 
 func _in_abyss_death_zone() -> bool:
-	# Bound this rule to 07, so the shared main.tscn controller has no false death zone.
-	if not has_abyss or global_position.y >= ABYSS_DEATH_Y:
+	# Scene-authored root-local death bounds follow the environment, not player scale.
+	# The fallback keeps the original 1.0x baseline compatible; main has no abyss.
+	if not has_abyss:
 		return false
+	var bounds: AABB = get_parent().get_meta("abyss_death_bounds",
+		AABB(Vector3(13, -1000, -28), Vector3(18, 1000 + ABYSS_DEATH_Y, 19)))
 	var p: Vector3 = get_parent().to_local(global_position)
-	return p.x >= 13.0 and p.x <= 31.0 and p.z >= -28.0 and p.z <= -9.0
+	return bounds.has_point(p)
 
 
 func _die() -> void:
