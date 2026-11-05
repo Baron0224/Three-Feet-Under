@@ -127,9 +127,9 @@ func _make_materials() -> void:
 		sm.roughness = 0.95
 		_panel_mat = sm
 
-	# Subtle mortar-like seam only (no emissive debug glow).
+	# Nearly floor-colored hairline so panels still read as split without drawing the eye.
 	var seam := StandardMaterial3D.new()
-	seam.albedo_color = Color(0.22, 0.20, 0.18)
+	seam.albedo_color = Color(0.34, 0.32, 0.28)
 	seam.roughness = 0.95
 	_seam_mat = seam
 
@@ -202,10 +202,10 @@ func _build_geometry() -> void:
 	var seam := MeshInstance3D.new()
 	seam.name = "CenterSeam"
 	var seam_mesh := BoxMesh.new()
-	seam_mesh.size = Vector3(corridor_length * 0.98, 0.06, 0.14)
+	seam_mesh.size = Vector3(corridor_length * 0.98, 0.01, 0.02)
 	seam.mesh = seam_mesh
 	seam.material_override = _seam_mat
-	seam.position = Vector3(0.0, panel_y + floor_thickness * 0.5 + 0.04, 0.0)
+	seam.position = Vector3(0.0, panel_y + floor_thickness * 0.5 + 0.006, 0.0)
 	add_child(seam)
 
 	if show_debug_label:
