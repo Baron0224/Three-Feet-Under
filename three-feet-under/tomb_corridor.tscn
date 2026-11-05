@@ -11,6 +11,7 @@
 [ext_resource type="Material" path="res://art/materials/rock.tres" id="Art_rock"]
 [ext_resource type="Material" path="res://art/materials/coffin.tres" id="Art_coffin"]
 [ext_resource type="PackedScene" path="res://art/art_details.tscn" id="Art_details"]
+[ext_resource type="PackedScene" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
 
 [sub_resource type="StandardMaterial3D" id="Stone"]
 
@@ -4286,6 +4287,8 @@ shape = SubResource("Shape_West_Ceiling008")
 
 [node name="Floor009" type="MeshInstance3D" parent="WestWing/WestShortcut"]
 
+visible = false
+
 position = Vector3(-15.0, 0, -29.0)
 
 mesh = SubResource("Mesh_West_Floor009")
@@ -4293,6 +4296,9 @@ mesh = SubResource("Mesh_West_Floor009")
 material_override = ExtResource("Art_floor")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWing/WestShortcut/Floor009"]
+
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WestWing/WestShortcut/Floor009/StaticBody3D"]
 
@@ -5807,6 +5813,16 @@ omni_range = 13.5
 light_specular = 0.3
 scale = Vector3(0.666666667, 0.666666667, 0.666666667)
 
+
+[node name="SpikeCascadeTrap" parent="WestWing/WestShortcut" instance=ExtResource("SpikeCascade")]
+
+position = Vector3(-15.0, 0, -29.0)
+
+respawn_path = NodePath("../SpikeTrapRespawn")
+
+[node name="SpikeTrapRespawn" type="Marker3D" parent="WestWing/WestShortcut"]
+
+position = Vector3(-11.0, 0.2, -25.5)
 
 [node name="EastWing" type="Node3D" parent="."]
 metadata/note = "07 abyss, 08-09 architecture; no bridge/rope/mechanisms, shortcut currently bidirectional"
