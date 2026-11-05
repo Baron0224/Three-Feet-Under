@@ -15,6 +15,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if not player.can_interact():
+		close_reading()
+		return
 	# 按地面上的距离判断靠近，不受玩家转头和眼睛高度影响。
 	var offset := player.global_position - global_position
 	offset.y = 0.0
@@ -38,10 +41,18 @@ func _process(_delta: float) -> void:
 		prompt.text = "按 E 阅读石板"
 
 
+func close_reading() -> void:
+	reading = false
+	can_read = false
+	player.set_reading(false)
+	prompt.visible = false
+
+
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.pressed and not event.echo:
-			if event.physical_keycode == KEY_E:
-				if reading or can_read:
-					reading = not reading
-					get_viewport().set_input_as_handled()
+	if not player.can_interact():
+		return
+	if event.is_action_pressed("interact") and not event.is_echo():
+		if reading or can_read:
+			reading = not reading
+			player.set_reading(reading)
+			get_viewport().set_input_as_handled()
