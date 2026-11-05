@@ -2471,7 +2471,7 @@ omni_range = 22.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 19.0, 1.2, -6)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 56.0, 1.2, -6)
 script = ExtResource("1_et3i4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2089584757]
