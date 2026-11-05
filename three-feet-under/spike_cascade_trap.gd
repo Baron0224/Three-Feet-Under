@@ -1,50 +1,59 @@
 extends Node3D
 
-## Cascading rising-spike trap for an east-west corridor span.
-## Mid trigger -> floor shake -> rows rise from +X (right) to -X (left), slow then fast.
-## Place under an unscaled parent (scene root). Scaled ancestors break Area3D overlap.
+## Cascading trap_floor-style pit traps along an east-west corridor.
+## Mid trigger -> shake closed panels -> segments open +X to -X (slow then fast).
+## Each segment: north/south panels swing open, pit + spikes underneath.
+## Must live under an unscaled parent (Jolt Area3D breaks under scaled ancestors).
 
-@export var corridor_length := 11.0
-@export var corridor_width := 3.0
-@export var floor_thickness := 0.2
-@export var row_count := 12
-@export var spikes_per_row := 3
+@export var corridor_length := 16.5
+@export var corridor_width := 4.5
+@export var floor_thickness := 0.12
+@export var segment_count := 7
 
 @export var shake_seconds := 0.85
-@export var shake_amplitude := 0.045
+@export var shake_amplitude := 0.05
 
-@export var first_row_delay := 0.28
-@export var last_row_delay := 0.05
-@export var spike_rise_time := 0.18
-@export var spike_height := 0.9
-@export var spike_bottom_radius := 0.15
+@export var first_segment_delay := 0.28
+@export var last_segment_delay := 0.05
 
-@export var respawn_path: NodePath
+@export var open_degrees := 110.0
+@export var open_speed := 120.0
+@export var fall_respawn_delay := 1.4
+@export var pit_y := -1.5
+@export var pit_depth := -1.25
+
+@export var respawn_path: NodePath = NodePath("../SpikeTrapRespawn")
 @export var prompt_path: NodePath
 @export var cascade_from_positive_x := true
-@export var respawn_cooldown := 0.85
+@export var respawn_cooldown := 0.9
+@export var show_debug_label := true
 
 var _triggered := false
 var _shaking := false
 var _shake_left := 0.0
 var _cascading := false
 var _respawn_busy := false
+var _player: Node3D
 
-var _floor_root: Node3D
-var _floor_base_pos := Vector3.ZERO
 var _trigger: Area3D
-var _rows: Array[Dictionary] = []
+var _segments: Array[Dictionary] = []
 var _prompt: Label
 var _rng := RandomNumberGenerator.new()
+var _panel_mat: StandardMaterial3D
+var _spike_mat: StandardMaterial3D
+var _pit_mat: StandardMaterial3D
+var _seam_mat: StandardMaterial3D
 
 
 func _ready() -> void:
 	_rng.randomize()
 	_prompt = _resolve_prompt()
+	_make_materials()
 	_build_geometry()
 	if _trigger:
-		_trigger.body_entered.connect(_on_trigger_entered)
+		_trigger.body_entered.connect(_on_mid_trigger)
 		_trigger.set_deferred("monitoring", true)
+	print("SpikeCascadeTrap: ready at ", global_position, " size ", corridor_length, "x", corridor_width)
 
 
 func _resolve_prompt() -> Label:
@@ -60,6 +69,30 @@ func _resolve_prompt() -> Label:
 	return null
 
 
+func _make_materials() -> void:
+	# Distinct warmer panels so the replaced Floor009 is obvious before firing.
+	_panel_mat = StandardMaterial3D.new()
+	_panel_mat.albedo_color = Color(0.55, 0.38, 0.22)
+	_panel_mat.roughness = 0.85
+	_panel_mat.metallic = 0.05
+
+	_seam_mat = StandardMaterial3D.new()
+	_seam_mat.albedo_color = Color(0.95, 0.55, 0.12)
+	_seam_mat.emission_enabled = true
+	_seam_mat.emission = Color(0.9, 0.45, 0.05)
+	_seam_mat.emission_energy_multiplier = 1.8
+	_seam_mat.roughness = 0.4
+
+	_spike_mat = StandardMaterial3D.new()
+	_spike_mat.albedo_color = Color(0.65, 0.65, 0.7)
+	_spike_mat.metallic = 0.4
+	_spike_mat.roughness = 0.45
+
+	_pit_mat = StandardMaterial3D.new()
+	_pit_mat.albedo_color = Color(0.12, 0.10, 0.09)
+	_pit_mat.roughness = 1.0
+
+
 func _configure_area(area: Area3D) -> void:
 	area.collision_layer = 1
 	area.collision_mask = 1
@@ -68,130 +101,154 @@ func _configure_area(area: Area3D) -> void:
 
 
 func _build_geometry() -> void:
-	var floor_mat: Material = load("res://art/materials/floor.tres")
-	if floor_mat == null:
-		var sm := StandardMaterial3D.new()
-		sm.albedo_color = Color(0.37, 0.35, 0.30)
-		sm.roughness = 0.95
-		floor_mat = sm
+	var half_len := corridor_length * 0.5
+	var seg_len := corridor_length / float(segment_count)
+	var half_w := corridor_width * 0.5
+	var half_panel_z := half_w
 
-	var spike_mat := StandardMaterial3D.new()
-	spike_mat.albedo_color = Color(0.62, 0.62, 0.68)
-	spike_mat.metallic = 0.35
-	spike_mat.roughness = 0.45
-
-	_floor_root = Node3D.new()
-	_floor_root.name = "FloorRoot"
-	add_child(_floor_root)
-	_floor_base_pos = Vector3.ZERO
-	_floor_root.position = _floor_base_pos
-
-	var floor_mesh := MeshInstance3D.new()
-	floor_mesh.name = "FloorMesh"
-	var box := BoxMesh.new()
-	box.size = Vector3(corridor_length, floor_thickness, corridor_width)
-	floor_mesh.mesh = box
-	floor_mesh.material_override = floor_mat
-	_floor_root.add_child(floor_mesh)
-
-	var floor_body := StaticBody3D.new()
-	floor_body.name = "FloorBody"
-	floor_body.collision_layer = 1
-	floor_body.collision_mask = 1
-	var floor_cs := CollisionShape3D.new()
-	var floor_shape := BoxShape3D.new()
-	floor_shape.size = Vector3(corridor_length, floor_thickness, corridor_width)
-	floor_cs.shape = floor_shape
-	floor_body.add_child(floor_cs)
-	_floor_root.add_child(floor_body)
-
-	# Mid-span trigger: ~45% of length, full width, tall — reliable under physics poll.
+	# Mid-span trigger.
 	_trigger = Area3D.new()
 	_trigger.name = "TriggerArea"
 	_configure_area(_trigger)
 	var trigger_cs := CollisionShape3D.new()
 	var trigger_shape := BoxShape3D.new()
 	trigger_shape.size = Vector3(
-		maxf(2.5, corridor_length * 0.45),
-		2.0,
-		maxf(1.5, corridor_width * 0.95)
+		maxf(3.0, corridor_length * 0.5),
+		2.2,
+		maxf(2.0, corridor_width * 0.95)
 	)
 	trigger_cs.shape = trigger_shape
-	trigger_cs.position = Vector3(0.0, 1.0, 0.0)
+	trigger_cs.position = Vector3(0.0, 1.1, 0.0)
 	_trigger.add_child(trigger_cs)
 	add_child(_trigger)
 	_trigger.set_deferred("monitoring", true)
 
+	# Bright center seam along the corridor so the trap span is visible.
+	var seam := MeshInstance3D.new()
+	seam.name = "CenterSeam"
+	var seam_mesh := BoxMesh.new()
+	seam_mesh.size = Vector3(corridor_length * 0.98, 0.04, 0.08)
+	seam.mesh = seam_mesh
+	seam.material_override = _seam_mat
+	seam.position = Vector3(0.0, floor_thickness * 0.5 + 0.02, 0.0)
+	add_child(seam)
+
+	if show_debug_label:
+		var tag := Label3D.new()
+		tag.name = "DebugTag"
+		tag.text = "PIT TRAP"
+		tag.font_size = 64
+		tag.modulate = Color(1.0, 0.75, 0.2)
+		tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		tag.position = Vector3(0.0, 1.6, 0.0)
+		tag.outline_size = 8
+		add_child(tag)
+
 	var spike_mesh := CylinderMesh.new()
 	spike_mesh.top_radius = 0.0
-	spike_mesh.bottom_radius = spike_bottom_radius
-	spike_mesh.height = spike_height
+	spike_mesh.bottom_radius = 0.16
+	spike_mesh.height = 0.7
 	spike_mesh.radial_segments = 8
-	spike_mesh.material = spike_mat
+	spike_mesh.material = _spike_mat
 
-	var half_len := corridor_length * 0.5
-	var margin := 0.55
-	var usable := corridor_length - margin * 2.0
-	var row_span := usable / float(maxi(row_count - 1, 1))
-
-	for i in range(row_count):
+	for i in range(segment_count):
 		var x: float
 		if cascade_from_positive_x:
-			x = half_len - margin - row_span * float(i)
+			# index 0 at +X (hub / right), last at -X (west / left)
+			x = half_len - seg_len * (float(i) + 0.5)
 		else:
-			x = -half_len + margin + row_span * float(i)
+			x = -half_len + seg_len * (float(i) + 0.5)
 
-		var row := Node3D.new()
-		row.name = "SpikeRow_%02d" % i
-		row.position = Vector3(x, 0.0, 0.0)
-		add_child(row)
+		var seg := Node3D.new()
+		seg.name = "PitSegment_%02d" % i
+		seg.position = Vector3(x, 0.0, 0.0)
+		add_child(seg)
 
-		var down_y := -spike_height * 0.52
-		var up_y := floor_thickness * 0.5 + spike_height * 0.42
+		# South panel hinge at -Z outer edge; mesh fills toward center (+Z).
+		var south := Node3D.new()
+		south.name = "SouthPanel"
+		south.position = Vector3(0.0, 0.0, -half_w)
+		seg.add_child(south)
+		_add_panel_half(south, Vector3(0.0, 0.0, half_panel_z * 0.5), Vector3(seg_len * 0.98, floor_thickness, half_panel_z))
 
-		var z_positions: Array[float] = []
-		if spikes_per_row <= 1:
-			z_positions.append(0.0)
-		else:
-			var half_w := corridor_width * 0.5 - 0.35
-			for s in range(spikes_per_row):
-				var u := float(s) / float(spikes_per_row - 1)
-				z_positions.append(lerpf(-half_w, half_w, u))
+		# North panel hinge at +Z outer edge; mesh fills toward center (-Z).
+		var north := Node3D.new()
+		north.name = "NorthPanel"
+		north.position = Vector3(0.0, 0.0, half_w)
+		seg.add_child(north)
+		_add_panel_half(north, Vector3(0.0, 0.0, -half_panel_z * 0.5), Vector3(seg_len * 0.98, floor_thickness, half_panel_z))
 
-		var spike_nodes: Array[Node3D] = []
-		for zi in range(z_positions.size()):
-			var holder := Node3D.new()
-			holder.name = "Spike_%d" % zi
-			holder.position = Vector3(0.0, down_y, z_positions[zi])
-			var mi := MeshInstance3D.new()
-			mi.mesh = spike_mesh
-			holder.add_child(mi)
-			row.add_child(holder)
-			spike_nodes.append(holder)
+		var south_body: StaticBody3D = south.get_node("StaticBody3D")
+		var north_body: StaticBody3D = north.get_node("StaticBody3D")
 
-		var hit := Area3D.new()
-		hit.name = "HitArea"
-		_configure_area(hit)
-		hit.monitoring = false
-		var hit_cs := CollisionShape3D.new()
-		var hit_shape := BoxShape3D.new()
-		hit_shape.size = Vector3(row_span * 0.95 + 0.2, spike_height * 0.9, corridor_width * 0.95)
-		hit_cs.shape = hit_shape
-		hit_cs.position = Vector3(0.0, floor_thickness * 0.5 + spike_height * 0.4, 0.0)
-		hit.add_child(hit_cs)
-		row.add_child(hit)
-		hit.body_entered.connect(_on_spike_hit)
+		# Pit + spikes under the segment.
+		var pit := Node3D.new()
+		pit.name = "Pit"
+		pit.position = Vector3(0.0, pit_depth, 0.0)
+		seg.add_child(pit)
 
-		_rows.append({
-			"row": row,
-			"spikes": spike_nodes,
-			"hit": hit,
-			"down_y": down_y,
-			"up_y": up_y,
-			"rise_t": 0.0,
-			"rising": false,
-			"raised": false,
+		var pit_floor := MeshInstance3D.new()
+		pit_floor.name = "PitFloor"
+		var pit_box := BoxMesh.new()
+		pit_box.size = Vector3(seg_len * 0.98, 0.05, corridor_width * 0.98)
+		pit_floor.mesh = pit_box
+		pit_floor.material_override = _pit_mat
+		pit.add_child(pit_floor)
+
+		var spike_area := Area3D.new()
+		spike_area.name = "SpikeArea"
+		_configure_area(spike_area)
+		var spike_cs := CollisionShape3D.new()
+		var spike_shape := BoxShape3D.new()
+		spike_shape.size = Vector3(seg_len * 0.95, 0.9, corridor_width * 0.95)
+		spike_cs.shape = spike_shape
+		spike_cs.position = Vector3(0.0, 0.45, 0.0)
+		spike_area.add_child(spike_cs)
+		pit.add_child(spike_area)
+		spike_area.body_entered.connect(_on_spike_entered)
+
+		var coords := [-0.28, 0.0, 0.28]
+		for sx in coords:
+			for sz in coords:
+				var spike := MeshInstance3D.new()
+				spike.mesh = spike_mesh
+				spike.position = Vector3(sx * seg_len, 0.35, sz * corridor_width)
+				pit.add_child(spike)
+
+		_segments.append({
+			"root": seg,
+			"south": south,
+			"north": north,
+			"south_body": south_body,
+			"north_body": north_body,
+			"base_pos": seg.position,
+			"opening": false,
+			"opened": false,
+			"open_t": 0.0,
 		})
+
+
+func _add_panel_half(hinge: Node3D, mesh_pos: Vector3, size: Vector3) -> void:
+	var mi := MeshInstance3D.new()
+	mi.name = "MeshInstance3D"
+	var box := BoxMesh.new()
+	box.size = size
+	mi.mesh = box
+	mi.material_override = _panel_mat
+	mi.position = mesh_pos
+	hinge.add_child(mi)
+
+	var body := StaticBody3D.new()
+	body.name = "StaticBody3D"
+	body.collision_layer = 1
+	body.collision_mask = 1
+	var cs := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = size
+	cs.shape = shape
+	cs.position = mesh_pos
+	body.add_child(cs)
+	hinge.add_child(body)
 
 
 func _physics_process(_delta: float) -> void:
@@ -201,121 +258,159 @@ func _physics_process(_delta: float) -> void:
 		return
 	for body in _trigger.get_overlapping_bodies():
 		if body.is_in_group("player"):
-			_on_trigger_entered(body)
+			_on_mid_trigger(body)
 			return
 
 
-func _on_trigger_entered(body: Node) -> void:
+func _on_mid_trigger(body: Node) -> void:
 	if _triggered:
 		return
 	if not body.is_in_group("player"):
 		return
 	_triggered = true
-	print("SpikeCascadeTrap: triggered by ", body.name)
-	push_warning("SpikeCascadeTrap: triggered")
+	_player = body as Node3D
+	print("SpikeCascadeTrap: triggered by ", body.name, " at ", (body as Node3D).global_position)
+	push_warning("SpikeCascadeTrap: triggered (pit cascade)")
+	if _prompt:
+		_prompt.visible = true
+		_prompt.text = "The floor trembles..."
 	_start_shake_then_cascade()
 
 
 func _start_shake_then_cascade() -> void:
 	_shaking = true
 	_shake_left = shake_seconds
-	if _prompt:
-		_prompt.visible = true
-		_prompt.text = "The floor trembles..."
 	await get_tree().create_timer(shake_seconds).timeout
 	_shaking = false
-	if is_instance_valid(_floor_root):
-		_floor_root.position = _floor_base_pos
+	for info in _segments:
+		var root: Node3D = info["root"]
+		if is_instance_valid(root):
+			root.position = info["base_pos"]
 	if _prompt:
-		_prompt.text = "Spikes!"
+		_prompt.text = "Floor opens!"
 	_cascading = true
 	await _run_cascade()
 
 
 func _run_cascade() -> void:
-	for i in range(_rows.size()):
-		var t := float(i) / float(maxi(_rows.size() - 1, 1))
-		var delay := lerpf(first_row_delay, last_row_delay, t)
+	for i in range(_segments.size()):
+		var t := float(i) / float(maxi(_segments.size() - 1, 1))
+		var delay := lerpf(first_segment_delay, last_segment_delay, t)
 		if delay > 0.0:
 			await get_tree().create_timer(delay).timeout
-		_begin_row_rise(i)
-	await get_tree().create_timer(spike_rise_time + 0.35).timeout
+		_begin_segment_open(i)
+		print("SpikeCascadeTrap: opening segment ", i)
+	# Wait for last panels to finish opening roughly.
+	var open_time := open_degrees / maxf(open_speed, 1.0)
+	await get_tree().create_timer(open_time + 0.2).timeout
 	_cascading = false
-	if _prompt:
+	if _prompt and not _respawn_busy:
 		_prompt.visible = false
 
 
-func _begin_row_rise(index: int) -> void:
-	if index < 0 or index >= _rows.size():
+func _begin_segment_open(index: int) -> void:
+	if index < 0 or index >= _segments.size():
 		return
-	var info: Dictionary = _rows[index]
-	if info["raised"] or info["rising"]:
+	var info: Dictionary = _segments[index]
+	if info["opened"] or info["opening"]:
 		return
-	info["rising"] = true
-	info["rise_t"] = 0.0
-	_rows[index] = info
+	info["opening"] = true
+	info["open_t"] = 0.0
+	_segments[index] = info
 
 
 func _process(delta: float) -> void:
-	if _shaking and is_instance_valid(_floor_root):
+	if _shaking:
 		_shake_left = maxf(0.0, _shake_left - delta)
 		var damp := clampf(_shake_left / maxf(shake_seconds, 0.001), 0.0, 1.0)
-		var amp := shake_amplitude * (0.35 + 0.65 * damp)
-		_floor_root.position = _floor_base_pos + Vector3(
-			_rng.randf_range(-amp, amp),
-			_rng.randf_range(-amp * 0.35, amp * 0.55),
-			_rng.randf_range(-amp, amp)
-		)
+		var amp := shake_amplitude * (0.4 + 0.6 * damp)
+		for info in _segments:
+			if info["opened"] or info["opening"]:
+				continue
+			var root: Node3D = info["root"]
+			if is_instance_valid(root):
+				var base: Vector3 = info["base_pos"]
+				root.position = base + Vector3(
+					_rng.randf_range(-amp, amp),
+					_rng.randf_range(0.0, amp * 0.6),
+					_rng.randf_range(-amp, amp)
+				)
 
-	for i in range(_rows.size()):
-		var info: Dictionary = _rows[i]
-		if not info["rising"] or info["raised"]:
+	for i in range(_segments.size()):
+		var info: Dictionary = _segments[i]
+		if not info["opening"] or info["opened"]:
 			continue
-		info["rise_t"] = minf(1.0, float(info["rise_t"]) + delta / maxf(spike_rise_time, 0.001))
-		var ease_t := _ease_out_cubic(float(info["rise_t"]))
-		var y := lerpf(float(info["down_y"]), float(info["up_y"]), ease_t)
-		for spike in info["spikes"]:
-			if is_instance_valid(spike):
-				spike.position.y = y
-		var hit: Area3D = info["hit"]
-		if float(info["rise_t"]) >= 0.45 and hit and not hit.monitoring:
-			hit.monitoring = true
-			hit.set_deferred("monitoring", true)
-		if float(info["rise_t"]) >= 1.0:
-			info["rising"] = false
-			info["raised"] = true
-		_rows[i] = info
+		info["open_t"] = move_toward(float(info["open_t"]), 1.0, (open_speed / maxf(open_degrees, 1.0)) * delta)
+		var ang := deg_to_rad(open_degrees * float(info["open_t"]))
+		# Open to the sides (±Z): rotate about local X at the outer hinges.
+		var south: Node3D = info["south"]
+		var north: Node3D = info["north"]
+		if is_instance_valid(south):
+			south.rotation.x = ang
+		if is_instance_valid(north):
+			north.rotation.x = -ang
+		if float(info["open_t"]) >= 1.0:
+			info["opening"] = false
+			info["opened"] = true
+			var sb: StaticBody3D = info["south_body"]
+			var nb: StaticBody3D = info["north_body"]
+			if sb:
+				sb.collision_layer = 0
+				sb.collision_mask = 0
+			if nb:
+				nb.collision_layer = 0
+				nb.collision_mask = 0
+			# Only schedule fall-respawn if the player is standing on this segment.
+			if _player and is_instance_valid(_player):
+				var root: Node3D = info["root"]
+				var local_pos := to_local(_player.global_position)
+				var seg_len := corridor_length / float(maxi(segment_count, 1))
+				if absf(local_pos.x - root.position.x) <= seg_len * 0.55:
+					_fall_and_respawn(_player)
+		_segments[i] = info
+
+	if _player and is_instance_valid(_player) and _triggered:
+		if _player.global_position.y < global_position.y + pit_y:
+			_respawn(_player)
 
 
-func _ease_out_cubic(t: float) -> float:
-	var u := 1.0 - t
-	return 1.0 - u * u * u
+func _on_spike_entered(body: Node) -> void:
+	if body.is_in_group("player"):
+		_respawn(body)
 
 
-func _on_spike_hit(body: Node) -> void:
-	if _respawn_busy:
-		return
-	if not body.is_in_group("player"):
-		return
-	_respawn_busy = true
-	_respawn(body)
-	await get_tree().create_timer(respawn_cooldown).timeout
-	_respawn_busy = false
+func _fall_and_respawn(body: Node) -> void:
+	await get_tree().create_timer(fall_respawn_delay).timeout
+	if is_instance_valid(body):
+		_respawn(body)
 
 
 func _respawn(body: Node) -> void:
+	if _respawn_busy:
+		return
+	if not is_instance_valid(body):
+		return
 	var marker := get_node_or_null(respawn_path)
 	if marker == null:
-		push_warning("SpikeCascadeTrap: respawn_path not set or invalid: %s" % str(respawn_path))
+		# Fallback: try sibling by name from scene root.
+		var scene := get_tree().current_scene
+		if scene:
+			marker = scene.get_node_or_null("SpikeTrapRespawn")
+	if marker == null:
+		push_warning("SpikeCascadeTrap: respawn marker missing (%s)" % str(respawn_path))
 		return
+	_respawn_busy = true
 	if body is Node3D:
 		body.global_position = marker.global_position
 		if body is CharacterBody3D:
 			body.velocity = Vector3.ZERO
-	print("SpikeCascadeTrap: respawned player to ", marker.name)
+	print("SpikeCascadeTrap: respawned to ", marker.global_position)
 	if _prompt:
 		_prompt.visible = true
 		_prompt.text = "Spikes! Sent back."
-		await get_tree().create_timer(1.1).timeout
-		if _prompt and not _cascading and not _shaking:
+	await get_tree().create_timer(respawn_cooldown).timeout
+	_respawn_busy = false
+	if _prompt and not _cascading and not _shaking:
+		await get_tree().create_timer(0.4).timeout
+		if _prompt and not _cascading:
 			_prompt.visible = false

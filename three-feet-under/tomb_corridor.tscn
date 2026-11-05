@@ -5822,6 +5822,10 @@ corridor_length = 16.5
 
 corridor_width = 4.5
 
+segment_count = 7
+
+show_debug_label = true
+
 respawn_path = NodePath("../SpikeTrapRespawn")
 
 [node name="SpikeTrapRespawn" type="Marker3D" parent="."]
