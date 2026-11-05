@@ -6,26 +6,31 @@ extends Node3D
 ## Each segment: north/south panels swing open, pit + spikes underneath.
 ## @tool builds meshes in the editor so the trap is visible without Play.
 ## Must live under an unscaled parent (Jolt Area3D breaks under scaled ancestors).
+##
+## Geometry build rules (Godot 4.x busy-parent):
+## - Never add_child onto an in-tree node while it/ancestors are still setting up.
+## - Fully construct each subtree OFF the tree, then attach once via call_deferred.
+## - Wait two process frames after load before the first rebuild.
 
 @export var corridor_length := 39.0:
 	set(v):
 		corridor_length = v
-		_editor_rebuild()
+		_request_rebuild()
 
 @export var corridor_width := 4.5:
 	set(v):
 		corridor_width = v
-		_editor_rebuild()
+		_request_rebuild()
 
 @export var floor_thickness := 0.14:
 	set(v):
 		floor_thickness = v
-		_editor_rebuild()
+		_request_rebuild()
 
 @export var segment_count := 12:
 	set(v):
 		segment_count = maxi(1, v)
-		_editor_rebuild()
+		_request_rebuild()
 
 @export var shake_seconds := 0.85
 @export var shake_amplitude := 0.05
@@ -46,7 +51,7 @@ extends Node3D
 @export var show_debug_label := false:
 	set(v):
 		show_debug_label = v
-		_editor_rebuild()
+		_request_rebuild()
 
 var _triggered := false
 var _shaking := false
@@ -56,6 +61,8 @@ var _respawn_busy := false
 var _player: Node3D
 var _built := false
 var _rebuild_queued := false
+var _boot_done := false
+var _build_gen := 0
 
 var _trigger: Area3D
 var _segments: Array[Dictionary] = []
@@ -68,59 +75,54 @@ var _seam_mat: Material
 
 
 func _ready() -> void:
-	# Geometry must not add_child while this node (or its parent scene) is still
-	# busy entering the tree — defer so editor+runtime panels actually appear.
 	_rng.randomize()
-	call_deferred("_deferred_ready_build")
+	# Do not build here — parent tomb_corridor may still be busy setting up children.
+	_request_rebuild(true)
 
 
-func _deferred_ready_build() -> void:
+func _notification(what: int) -> void:
+	# Generated meshes are not saved into the packed scene; never rebuild on save.
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		return
+	if what == NOTIFICATION_ENTER_TREE and Engine.is_editor_hint():
+		_request_rebuild(true)
+
+
+func _request_rebuild(from_boot: bool = false) -> void:
+	if not is_inside_tree():
+		return
+	# During packed-scene property apply, export setters fire early — coalesce only.
+	if _rebuild_queued:
+		return
+	_rebuild_queued = true
+	if from_boot or not _boot_done:
+		call_deferred("_boot_rebuild_async")
+	else:
+		call_deferred("_rebuild_async_idle")
+
+
+func _boot_rebuild_async() -> void:
+	# Two idle frames: let tomb_corridor finish add_child of siblings/instances.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_rebuild_queued = false
+	_boot_done = true
 	if not is_inside_tree():
 		return
 	_rebuild_geometry()
 	if Engine.is_editor_hint():
 		print("SpikeCascadeTrap: editor preview at ", global_position, " size ", corridor_length, "x", corridor_width)
-		return
-	_prompt = _resolve_prompt()
-	print("SpikeCascadeTrap: ready at ", global_position, " size ", corridor_length, "x", corridor_width)
+	else:
+		_prompt = _resolve_prompt()
+		print("SpikeCascadeTrap: ready at ", global_position, " size ", corridor_length, "x", corridor_width)
 
 
-func _connect_runtime_signals() -> void:
-	if Engine.is_editor_hint():
-		return
-	if _trigger:
-		if not _trigger.body_entered.is_connected(_on_mid_trigger):
-			_trigger.body_entered.connect(_on_mid_trigger)
-		_trigger.set_deferred("monitoring", true)
-	for seg in _segments:
-		var pit: Node = seg["root"].get_node_or_null("Pit")
-		if pit == null:
-			continue
-		var spike_area := pit.get_node_or_null("SpikeArea")
-		if spike_area is Area3D and not spike_area.body_entered.is_connected(_on_spike_entered):
-			spike_area.body_entered.connect(_on_spike_entered)
-
-
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_EDITOR_PRE_SAVE:
-		_rebuild_geometry()
-
-
-func _editor_rebuild() -> void:
+func _rebuild_async_idle() -> void:
+	await get_tree().process_frame
+	_rebuild_queued = false
 	if not is_inside_tree():
 		return
-	if not Engine.is_editor_hint():
-		return
-	if _rebuild_queued:
-		return
-	_rebuild_queued = true
-	call_deferred("_deferred_editor_rebuild")
-
-
-func _deferred_editor_rebuild() -> void:
-	_rebuild_queued = false
-	if is_inside_tree() and Engine.is_editor_hint():
-		_rebuild_geometry()
+	_rebuild_geometry()
 
 
 func _resolve_prompt() -> Label:
@@ -137,7 +139,6 @@ func _resolve_prompt() -> Label:
 
 
 func _make_materials() -> void:
-	# Match neighboring corridor floors (Art_floor / world_stone gray brick).
 	var floor_mat := load("res://art/materials/floor.tres")
 	if floor_mat is Material:
 		_panel_mat = floor_mat
@@ -147,7 +148,6 @@ func _make_materials() -> void:
 		sm.roughness = 0.95
 		_panel_mat = sm
 
-	# Seam kept invisible (fully transparent); panels alone define the split.
 	var seam := StandardMaterial3D.new()
 	seam.albedo_color = Color(0.37, 0.35, 0.30, 0.0)
 	seam.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -166,12 +166,12 @@ func _make_materials() -> void:
 
 
 func _clear_generated() -> void:
-	# Free previous runtime/editor-built children so rebuild is idempotent.
-	# Rename + queue_free avoids name clashes if free is deferred a frame.
 	var to_free: Array[Node] = []
 	for c in get_children():
 		var n := String(c.name)
 		if n == "TriggerArea" or n == "CenterSeam" or n == "DebugTag" or n.begins_with("PitSegment_"):
+			to_free.append(c)
+		elif n.ends_with("_old"):
 			to_free.append(c)
 	for c in to_free:
 		c.name = String(c.name) + "_old"
@@ -185,13 +185,30 @@ func _clear_generated() -> void:
 func _rebuild_geometry() -> void:
 	if not is_inside_tree():
 		return
+	_build_gen += 1
+	var gen := _build_gen
 	_clear_generated()
 	_make_materials()
-	_build_geometry()
+	_build_geometry(gen)
 	_built = true
-	# Runtime signal hooks after a rebuild that was not from _ready (e.g. export tweak in play).
 	if not Engine.is_editor_hint():
 		_connect_runtime_signals()
+
+
+func _connect_runtime_signals() -> void:
+	if Engine.is_editor_hint():
+		return
+	if _trigger:
+		if not _trigger.body_entered.is_connected(_on_mid_trigger):
+			_trigger.body_entered.connect(_on_mid_trigger)
+		_trigger.set_deferred("monitoring", true)
+	for seg in _segments:
+		var pit: Node = seg["root"].get_node_or_null("Pit")
+		if pit == null:
+			continue
+		var spike_area := pit.get_node_or_null("SpikeArea")
+		if spike_area is Area3D and not spike_area.body_entered.is_connected(_on_spike_entered):
+			spike_area.body_entered.connect(_on_spike_entered)
 
 
 func _configure_area(area: Area3D) -> void:
@@ -201,28 +218,38 @@ func _configure_area(area: Area3D) -> void:
 	area.monitorable = false
 
 
-func _safe_add_child(node: Node) -> void:
-	# Prefer deferred add when this trap is still entering the tree / busy.
-	if not is_node_ready():
-		add_child.call_deferred(node)
-	else:
-		add_child(node)
+func _attach_root_child(node: Node, gen: int) -> void:
+	# Always defer attaching onto this in-tree trap root.
+	call_deferred("_attach_root_child_now", node, gen)
 
 
-func _build_geometry() -> void:
+func _attach_root_child_now(node: Node, gen: int) -> void:
+	if gen != _build_gen:
+		if is_instance_valid(node):
+			node.free()
+		return
+	if not is_inside_tree() or not is_instance_valid(node):
+		return
+	if node.get_parent() == self:
+		return
+	if node.get_parent() != null:
+		node.get_parent().remove_child(node)
+	add_child(node)
+
+
+func _build_geometry(gen: int) -> void:
 	var half_len := corridor_length * 0.5
 	var seg_len := corridor_length / float(maxi(segment_count, 1))
 	var half_w := corridor_width * 0.5
 	var half_panel_z := half_w
-	# Panels sit slightly above coplanar art floor.
 	var panel_y := 0.06
 
+	# Build TriggerArea fully offline, then deferred-attach.
 	_trigger = Area3D.new()
 	_trigger.name = "TriggerArea"
 	_configure_area(_trigger)
 	var trigger_cs := CollisionShape3D.new()
 	var trigger_shape := BoxShape3D.new()
-	# Width (Z) matches corridor floor exactly (Floor010 world width = corridor_width).
 	trigger_shape.size = Vector3(
 		maxf(3.0, corridor_length * 0.5),
 		2.2,
@@ -231,13 +258,12 @@ func _build_geometry() -> void:
 	trigger_cs.shape = trigger_shape
 	trigger_cs.position = Vector3(0.0, 1.1, 0.0)
 	_trigger.add_child(trigger_cs)
-	_safe_add_child(_trigger)
 	if Engine.is_editor_hint():
 		_trigger.monitoring = false
 	else:
-		_trigger.set_deferred("monitoring", true)
+		_trigger.monitoring = false  # enabled deferred in _connect_runtime_signals
+	_attach_root_child(_trigger, gen)
 
-	# Invisible placeholder so rebuild clearing still finds a CenterSeam name if needed.
 	var seam := MeshInstance3D.new()
 	seam.name = "CenterSeam"
 	seam.visible = false
@@ -247,7 +273,7 @@ func _build_geometry() -> void:
 	seam.material_override = _seam_mat
 	seam.position = Vector3(0.0, panel_y + floor_thickness * 0.5 + 0.006, 0.0)
 	seam.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	_safe_add_child(seam)
+	_attach_root_child(seam, gen)
 
 	if show_debug_label:
 		var tag := Label3D.new()
@@ -259,9 +285,8 @@ func _build_geometry() -> void:
 		tag.outline_size = 12
 		tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		tag.position = Vector3(0.0, 2.0, 0.0)
-		_safe_add_child(tag)
+		_attach_root_child(tag, gen)
 
-	# Sharper, thinner cone template; per-spike scale/jitter applied below.
 	var spike_mesh := CylinderMesh.new()
 	spike_mesh.top_radius = 0.0
 	spike_mesh.bottom_radius = 0.07
@@ -276,10 +301,10 @@ func _build_geometry() -> void:
 		else:
 			x = -half_len + seg_len * (float(i) + 0.5)
 
+		# CRITICAL: finish the entire segment subtree OFF the tree, then attach once.
 		var seg := Node3D.new()
 		seg.name = "PitSegment_%02d" % i
 		seg.position = Vector3(x, panel_y, 0.0)
-		_safe_add_child(seg)
 
 		var south := Node3D.new()
 		south.name = "SouthPanel"
@@ -321,9 +346,7 @@ func _build_geometry() -> void:
 		spike_cs.position = Vector3(0.0, 0.45, 0.0)
 		spike_area.add_child(spike_cs)
 		pit.add_child(spike_area)
-		# body_entered connected in _connect_runtime_signals after deferred add
 
-		# 5 rows across width (was 3, +2) x denser along segment; jittered irregular layout.
 		var rows_x := 4
 		var rows_z := 5
 		var spike_i := 0
@@ -361,9 +384,12 @@ func _build_geometry() -> void:
 			"opened": false,
 			"open_t": 0.0,
 		})
+		# Attach only after the full segment tree exists offline.
+		_attach_root_child(seg, gen)
 
 
 func _add_panel_half(hinge: Node3D, mesh_pos: Vector3, size: Vector3) -> void:
+	# hinge is guaranteed off-tree here; direct add_child is safe.
 	var mi := MeshInstance3D.new()
 	mi.name = "MeshInstance3D"
 	var box := BoxMesh.new()
