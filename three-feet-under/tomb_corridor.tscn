@@ -3059,9 +3059,13 @@ shadow_enabled = true
 shadow_bias = 0.04
 light_specular = 0.3
 
+[node name="OriginalSpawn" type="Marker3D" parent="."]
+
+position = Vector3(0, 2.41, 17.55)
+
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
 
-transform = Transform3D(1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  2.41,  17.55)
+transform = Transform3D(1,  0,  0,  0,  1,  0,  0,  0,  1,  38.25,  1.2,  -6.0)
 
 script = ExtResource("1_et3i4")
 
@@ -5811,7 +5815,7 @@ scale = Vector3(0.666666667, 0.666666667, 0.666666667)
 
 [node name="SpikeCascadeTrap" parent="." instance=ExtResource("SpikeCascade")]
 
-position = Vector3(38.25, 0, -6.0)
+position = Vector3(38.25, 0.08, -6.0)
 
 corridor_length = 39.0
 
