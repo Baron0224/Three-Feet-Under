@@ -419,7 +419,9 @@ func _build_knocker(leaf: Node3D, pos: Vector3) -> void:
 
 func _build_leaf(is_left: bool, gen: int) -> void:
 	var half_w := door_width * 0.5
-	var leaf_w := half_w - 0.04
+	# Slight overlap at center so closed leaves look flush (no dark mid seam).
+	var overlap := 0.02
+	var leaf_w := half_w + overlap
 	var hinge_x := -half_w if is_left else half_w
 	var panel_center_x := (leaf_w * 0.5) if is_left else (-leaf_w * 0.5)
 
@@ -433,6 +435,15 @@ func _build_leaf(is_left: bool, gen: int) -> void:
 	_mesh_box(leaf, "Border", Vector3(leaf_w * 0.92, door_height * 0.92, door_thickness * 0.35), Vector3(panel_center_x, 0, door_thickness * 0.25), _bronze_dark)
 	# Vertical fillet
 	_mesh_box(leaf, "Filigree", Vector3(leaf_w * 0.78, door_height * 0.78, door_thickness * 0.12), Vector3(panel_center_x, 0, door_thickness * 0.30), _patina)
+	# Meeting stile at the center edge — covers residual seam when closed.
+	var stile_x := leaf_w if is_left else -leaf_w
+	_mesh_box(
+		leaf,
+		"MeetingStile",
+		Vector3(0.06, door_height * 0.98, door_thickness * 1.15),
+		Vector3(stile_x, 0.0, door_thickness * 0.08),
+		_bronze
+	)
 
 	var cx := panel_center_x
 	_build_dragon(leaf, Vector3(cx, door_height * 0.28, 0))
