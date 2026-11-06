@@ -43,9 +43,9 @@ var _player_on_mid := false
 var _shake_t := 0.0
 var _deck_base_y := 0.0
 
-var _stone: StandardMaterial3D
-var _stone_dark: StandardMaterial3D
-var _moss: StandardMaterial3D
+var _stone: Material
+var _stone_dark: Material
+var _moss: Material
 
 
 func _ready() -> void:
@@ -117,71 +117,30 @@ func _process(delta: float) -> void:
 
 
 func _make_materials() -> void:
-	_stone = StandardMaterial3D.new()
-	_stone.albedo_color = Color(0.34, 0.33, 0.31)
-	_stone.roughness = 0.92
-	_stone.metallic = 0.02
-
-	_stone_dark = StandardMaterial3D.new()
-	_stone_dark.albedo_color = Color(0.18, 0.17, 0.16)
-	_stone_dark.roughness = 0.96
-
-	_moss = StandardMaterial3D.new()
-	_moss.albedo_color = Color(0.22, 0.32, 0.18)
-	_moss.roughness = 1.0
-
-
-func _clear_generated() -> void:
-	for c in get_children():
-		var n := String(c.name)
-		if n.begins_with("Gen_") or n.ends_with("_old"):
-			c.name = n + "_old"
-			remove_child(c)
-			c.queue_free()
-	_deck_root = null
-	_mid_area = null
-	_player_on_mid = false
-
-
-func _rebuild_geometry() -> void:
-	if not is_inside_tree():
-		return
-	_build_gen += 1
-	var gen: int = _build_gen
-	_clear_generated()
-	_make_materials()
-	_build_geometry(gen)
-
-
-func _attach(node: Node, gen: int) -> void:
-	call_deferred("_attach_now", node, gen)
-
-
-func _attach_now(node: Node, gen: int) -> void:
-	if gen != _build_gen:
-		if is_instance_valid(node):
-			node.free()
-		return
-	if not is_inside_tree() or not is_instance_valid(node):
-		return
-	if node.get_parent() == self:
-		return
-	if node.get_parent() != null:
-		node.get_parent().remove_child(node)
-	add_child.call_deferred(node)
-
-
-func _mesh_box(parent: Node, name: String, size: Vector3, pos: Vector3, mat: Material, rot_deg: Vector3 = Vector3.ZERO) -> MeshInstance3D:
-	var mi := MeshInstance3D.new()
-	mi.name = name
-	var box := BoxMesh.new()
-	box.size = size
-	mi.mesh = box
-	mi.material_override = mat
-	mi.position = pos
-	mi.rotation_degrees = rot_deg
-	parent.add_child(mi)
-	return mi
+	var floor_mat := load("res://art/materials/floor.tres")
+	var wall_mat := load("res://art/materials/wall.tres")
+	var rock_mat := load("res://art/materials/rock.tres")
+	if floor_mat is Material:
+		_stone = floor_mat
+	else:
+		var sm := StandardMaterial3D.new()
+		sm.albedo_color = Color(0.30, 0.29, 0.27)
+		sm.roughness = 0.94
+		_stone = sm
+	if wall_mat is Material:
+		_stone_dark = wall_mat
+	else:
+		var sd := StandardMaterial3D.new()
+		sd.albedo_color = Color(0.22, 0.21, 0.20)
+		sd.roughness = 0.96
+		_stone_dark = sd
+	if rock_mat is Material:
+		_moss = rock_mat
+	else:
+		var ms := StandardMaterial3D.new()
+		ms.albedo_color = Color(0.20, 0.26, 0.18)
+		ms.roughness = 1.0
+		_moss = ms
 
 
 func _arch_y(x: float) -> float:
@@ -198,116 +157,113 @@ func _build_geometry(gen: int) -> void:
 
 	var half_l: float = bridge_length * 0.5
 	var half_w: float = bridge_width * 0.5
-	var col_w: float = bridge_length / float(slab_cols)
-	var row_d: float = bridge_width / float(slab_rows)
+	var segments: int = maxi(slab_cols, 8)
+	var seg_len: float = bridge_length / float(segments)
 
-	# Central support pillar into the mist
-	var pillar := Node3D.new()
-	pillar.name = "CenterPillar"
-	pillar.position = Vector3(0.0, -6.0, 0.0)
-	root.add_child(pillar)
-	_mesh_box(pillar, "Shaft", Vector3(1.4, 12.0, 1.4), Vector3(0, 0, 0), _stone_dark)
-	_mesh_box(pillar, "Cap", Vector3(2.0, 0.5, 2.0), Vector3(0, 6.2, 0), _stone)
+	# --- Continuous dark deck (uniform width) ---
+	# One structural plate per segment so the arch reads, but same width end-to-end.
+	for i in range(segments):
+		var x0: float = -half_l + (float(i) + 0.5) * seg_len
+		var y_arch: float = _arch_y(x0)
+		# Tiny wear dip only — keeps surface coherent, not scattered boxes.
+		var wear: float = 0.0
+		if i > 1 and i < segments - 2:
+			wear = sin(float(i) * 1.7) * 0.025
+		_mesh_box(
+			root,
+			"Deck_%d" % i,
+			Vector3(seg_len * 1.02, deck_thickness, bridge_width),
+			Vector3(x0, y_arch + deck_thickness * 0.5 + wear, 0.0),
+			_stone
+		)
 
-	# Deck slabs — complete span, uneven / cracked
-	for c in range(slab_cols):
-		var x0 := -half_l + (float(c) + 0.5) * col_w
-		var y_arch := _arch_y(x0)
-		for r in range(slab_rows):
-			var z0 := -half_w + (float(r) + 0.5) * row_d
-			var jitter_y := _rng.randf_range(-0.06, 0.05)
-			var tilt := Vector3(
-				_rng.randf_range(-3.5, 3.5),
-				_rng.randf_range(-2.0, 2.0),
-				_rng.randf_range(-4.0, 4.0)
-			)
-			var sx := col_w * _rng.randf_range(0.88, 0.98)
-			var sz := row_d * _rng.randf_range(0.86, 0.98)
-			var mat := _stone if _rng.randf() > 0.22 else _stone_dark
-			if _rng.randf() < 0.12:
-				mat = _moss
-			_mesh_box(
-				root,
-				"Slab_%d_%d" % [c, r],
-				Vector3(sx, deck_thickness, sz),
-				Vector3(x0 + _rng.randf_range(-0.04, 0.04), y_arch + jitter_y + deck_thickness * 0.5, z0 + _rng.randf_range(-0.03, 0.03)),
-				mat,
-				tilt
-			)
-			# Occasional crack scrap
-			if _rng.randf() < 0.18:
-				_mesh_box(
-					root,
-					"Crack_%d_%d" % [c, r],
-					Vector3(sx * 0.7, 0.03, 0.04),
-					Vector3(x0, y_arch + deck_thickness + 0.01, z0 + _rng.randf_range(-sz * 0.3, sz * 0.3)),
-					_stone_dark
-				)
+	# Deep crack lines carved into the deck (dark recessed strips)
+	var crack_xs: Array[float] = [-half_l * 0.55, -half_l * 0.18, half_l * 0.12, half_l * 0.48]
+	for ci in range(crack_xs.size()):
+		var cx: float = crack_xs[ci]
+		var cy: float = _arch_y(cx) + deck_thickness + 0.01
+		_mesh_box(root, "CrackV_%d" % ci, Vector3(0.045, 0.04, bridge_width * 0.82), Vector3(cx, cy, 0.0), _stone_dark)
+	# Longitudinal spider cracks
+	_mesh_box(root, "CrackH_main", Vector3(bridge_length * 0.72, 0.035, 0.05), Vector3(0.0, _arch_y(0.0) + deck_thickness + 0.015, 0.15), _stone_dark)
+	_mesh_box(root, "CrackH_2", Vector3(bridge_length * 0.4, 0.03, 0.04), Vector3(-half_l * 0.2, _arch_y(-half_l * 0.2) + deck_thickness + 0.015, -0.35), _stone_dark)
+	_mesh_box(root, "CrackDiag", Vector3(bridge_length * 0.28, 0.03, 0.04), Vector3(half_l * 0.25, _arch_y(half_l * 0.25) + deck_thickness + 0.015, 0.45), _stone_dark, Vector3(0, 28, 0))
 
-	# Walkable collision — continuous slightly arched convex approx as stepped boxes
+	# Walkable collision — same uniform width, stepped to follow arch
 	var body := StaticBody3D.new()
 	body.name = "DeckBody"
 	body.collision_layer = 1
 	body.collision_mask = 1
 	root.add_child(body)
-	for c in range(slab_cols):
-		var x0: float = -half_l + (float(c) + 0.5) * col_w
+	for i in range(segments):
+		var x0: float = -half_l + (float(i) + 0.5) * seg_len
 		var y_arch: float = _arch_y(x0)
 		var cs := CollisionShape3D.new()
 		var shape := BoxShape3D.new()
-		shape.size = Vector3(col_w * 1.02, deck_thickness + 0.08, bridge_width * 0.95)
+		shape.size = Vector3(seg_len * 1.02, deck_thickness + 0.1, bridge_width)
 		cs.shape = shape
 		cs.position = Vector3(x0, y_arch + deck_thickness * 0.5, 0.0)
 		body.add_child(cs)
 
-	# Side rails — incomplete / crumbled
+	# --- Low thick parapets: solid curb with intentional missing teeth ---
+	# Pattern of present/missing per side so both rails share same outer width.
+	var rail_h: float = 0.62
+	var rail_t: float = 0.38
+	var present_L: Array[bool] = [true, true, false, true, true, true, false, true, false, true, true, true, false, true]
+	var present_R: Array[bool] = [true, false, true, true, false, true, true, true, true, false, true, false, true, true]
+	while present_L.size() < segments:
+		present_L.append(true)
+		present_R.append(true)
+
 	for side_i in range(2):
 		var side: float = -1.0 if side_i == 0 else 1.0
-		var z_rail: float = side * (half_w + 0.12)
-		for c in range(slab_cols):
-			# Skip some segments for broken look
-			var broken: bool = _rng.randf() < 0.28
-			var x0: float = -half_l + (float(c) + 0.5) * col_w
+		var z_rail: float = side * (half_w - rail_t * 0.5)  # flush with deck edge — uniform width
+		for i in range(segments):
+			var present: bool = present_L[i] if side_i == 0 else present_R[i]
+			var x0: float = -half_l + (float(i) + 0.5) * seg_len
 			var y_arch: float = _arch_y(x0)
-			if broken:
-				# rubble stump
-				if _rng.randf() < 0.7:
+			if not present:
+				# Broken tooth: leave a low jagged stump only
+				if i % 3 != 1:
 					_mesh_box(
 						root,
-						"RailStub_%s_%d" % [side, c],
-						Vector3(col_w * 0.45, _rng.randf_range(0.15, 0.4), 0.28),
-						Vector3(x0, y_arch + 0.25, z_rail + _rng.randf_range(-0.05, 0.05)),
-						_stone_dark,
-						Vector3(0, 0, _rng.randf_range(-12, 12))
+						"RailStub_%d_%d" % [side_i, i],
+						Vector3(seg_len * 0.55, rail_h * 0.28, rail_t * 0.9),
+						Vector3(x0, y_arch + deck_thickness + rail_h * 0.14, z_rail),
+						_stone_dark
 					)
 				continue
-			var h: float = _rng.randf_range(0.55, 0.85)
-			var rail_mat: Material = _stone if _rng.randf() > 0.3 else _moss
 			_mesh_box(
 				root,
-				"Rail_%s_%d" % [side, c],
-				Vector3(col_w * 0.9, h, 0.32),
-				Vector3(x0, y_arch + h * 0.5 + 0.05, z_rail),
-				rail_mat
+				"Rail_%d_%d" % [side_i, i],
+				Vector3(seg_len * 0.98, rail_h, rail_t),
+				Vector3(x0, y_arch + deck_thickness + rail_h * 0.5, z_rail),
+				_stone_dark if (i % 4 == 0) else _stone
 			)
-			# top coping sometimes missing
-			if _rng.randf() > 0.35:
-				_mesh_box(
-					root,
-					"Coping_%s_%d" % [side, c],
-					Vector3(col_w * 0.85, 0.12, 0.4),
-					Vector3(x0, y_arch + h + 0.1, z_rail),
-					_stone_dark
-				)
+			# Coping on intact sections
+			_mesh_box(
+				root,
+				"Coping_%d_%d" % [side_i, i],
+				Vector3(seg_len * 0.92, 0.1, rail_t * 1.15),
+				Vector3(x0, y_arch + deck_thickness + rail_h + 0.05, z_rail),
+				_moss if (i % 5 == 2) else _stone_dark
+			)
 
-	# End abutments / steps into portals
+	# Center support pillar into the mist
+	var pillar := Node3D.new()
+	pillar.name = "CenterPillar"
+	pillar.position = Vector3(0.0, -6.0, 0.0)
+	root.add_child(pillar)
+	_mesh_box(pillar, "Shaft", Vector3(1.5, 12.0, 1.5), Vector3(0, 0, 0), _stone_dark)
+	_mesh_box(pillar, "Cap", Vector3(2.2, 0.45, 2.2), Vector3(0, 6.15, 0), _stone)
+
+	# End abutments — same width as deck
 	for end_i in range(2):
 		var end_sign: float = -1.0 if end_i == 0 else 1.0
 		var x_end: float = end_sign * half_l
-		_mesh_box(root, "Abutment_%s" % end_sign, Vector3(1.2, 1.1, bridge_width + 0.8), Vector3(x_end, 0.35, 0), _stone_dark)
-		_mesh_box(root, "Step_%s" % end_sign, Vector3(0.7, 0.22, bridge_width * 0.9), Vector3(x_end - end_sign * 0.55, 0.12, 0), _stone)
+		_mesh_box(root, "Abutment_%d" % end_i, Vector3(1.15, 1.0, bridge_width + 0.15), Vector3(x_end, 0.35, 0), _stone_dark)
+		_mesh_box(root, "Step_%d" % end_i, Vector3(0.65, 0.2, bridge_width * 0.95), Vector3(x_end - end_sign * 0.5, 0.1, 0), _stone)
 
-	# Mid-span detector for shake / future collapse trigger zone
+	# Mid-span detector
 	var area := Area3D.new()
 	area.name = "MidspanArea"
 	area.collision_layer = 0
@@ -316,15 +272,17 @@ func _build_geometry(gen: int) -> void:
 	area.monitorable = false
 	var acs := CollisionShape3D.new()
 	var box := BoxShape3D.new()
-	box.size = Vector3(bridge_length * 0.35, 2.5, bridge_width * 0.9)
+	box.size = Vector3(bridge_length * 0.35, 2.5, bridge_width * 0.95)
 	acs.shape = box
 	acs.position = Vector3(0.0, 1.2 + arch_height * 0.5, 0.0)
 	area.add_child(acs)
 	root.add_child(area)
 	_mid_area = area
 	if not Engine.is_editor_hint():
-		area.body_entered.connect(_on_mid_entered)
-		area.body_exited.connect(_on_mid_exited)
+		if not area.body_entered.is_connected(_on_mid_entered):
+			area.body_entered.connect(_on_mid_entered)
+		if not area.body_exited.is_connected(_on_mid_exited):
+			area.body_exited.connect(_on_mid_exited)
 
 	_attach(root, gen)
 
