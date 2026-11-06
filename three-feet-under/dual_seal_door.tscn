@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bqdualsealdoor01"]
+
+[ext_resource type="Script" path="res://dual_seal_door.gd" id="1_dual"]
+
+[node name="DualSealDoor" type="Node3D"]
+script = ExtResource("1_dual")
+door_width = 5.6
+door_height = 4.2
+door_thickness = 0.22
+allow_debug_interact = true
