@@ -76,7 +76,7 @@ var _seam_mat: Material
 
 func _ready() -> void:
 	_rng.randomize()
-	# Do not build here — parent tomb_corridor may still be busy setting up children.
+	# Do not build here - parent tomb_corridor may still be busy setting up children.
 	_request_rebuild(true)
 
 
@@ -91,7 +91,7 @@ func _notification(what: int) -> void:
 func _request_rebuild(from_boot: bool = false) -> void:
 	if not is_inside_tree():
 		return
-	# During packed-scene property apply, export setters fire early — coalesce only.
+	# During packed-scene property apply, export setters fire early - coalesce only.
 	if _rebuild_queued:
 		return
 	_rebuild_queued = true
@@ -234,7 +234,8 @@ func _attach_root_child_now(node: Node, gen: int) -> void:
 		return
 	if node.get_parent() != null:
 		node.get_parent().remove_child(node)
-	add_child(node)
+	# Parent scene can still be busy after boot frames on large tomb_corridor.
+	add_child.call_deferred(node)
 
 
 func _build_geometry(gen: int) -> void:
