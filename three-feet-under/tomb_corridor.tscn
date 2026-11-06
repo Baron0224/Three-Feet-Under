@@ -11,7 +11,7 @@
 [ext_resource type="Material" path="res://art/materials/trim.tres" id="Art_trim"]
 [ext_resource type="Material" path="res://art/materials/wall.tres" id="Art_wall"]
 [ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
-[ext_resource type="PackedScene" uid="uid://bqdualsealdoor01" path="res://dual_seal_door.tscn" id="DualSealDoor"]
+[ext_resource type="PackedScene" uid="uid://ca2l7dub1clt5" path="res://dual_seal_door.tscn" id="DualSealDoor"]
 
 [sub_resource type="BoxMesh" id="Mesh_Floor01"]
 size = Vector3(3, 0.2, 8)
