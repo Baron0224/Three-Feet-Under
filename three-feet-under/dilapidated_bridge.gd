@@ -108,7 +108,7 @@ func _process(delta: float) -> void:
 		return
 	if _player_on_mid:
 		_shake_t += delta * 9.0
-		var amp := shake_amplitude
+		var amp: float = shake_amplitude
 		_deck_root.position.y = _deck_base_y + sin(_shake_t) * amp
 		_deck_root.position.z = sin(_shake_t * 1.3) * amp * 0.35
 	else:
@@ -147,7 +147,7 @@ func _rebuild_geometry() -> void:
 	if not is_inside_tree():
 		return
 	_build_gen += 1
-	var gen := _build_gen
+	var gen: int = _build_gen
 	_clear_generated()
 	_make_materials()
 	_build_geometry(gen)
@@ -186,7 +186,7 @@ func _mesh_box(parent: Node, name: String, size: Vector3, pos: Vector3, mat: Mat
 
 func _arch_y(x: float) -> float:
 	# Slight humpback: 0 at ends, arch_height at center.
-	var t := clampf((x / maxf(bridge_length * 0.5, 0.001) + 1.0) * 0.5, 0.0, 1.0)
+	var t: float = clampf((x / maxf(bridge_length * 0.5, 0.001) + 1.0) * 0.5, 0.0, 1.0)
 	return sin(t * PI) * arch_height
 
 
@@ -196,10 +196,10 @@ func _build_geometry(gen: int) -> void:
 	_deck_root = root
 	_deck_base_y = 0.0
 
-	var half_l := bridge_length * 0.5
-	var half_w := bridge_width * 0.5
-	var col_w := bridge_length / float(slab_cols)
-	var row_d := bridge_width / float(slab_rows)
+	var half_l: float = bridge_length * 0.5
+	var half_w: float = bridge_width * 0.5
+	var col_w: float = bridge_length / float(slab_cols)
+	var row_d: float = bridge_width / float(slab_rows)
 
 	# Central support pillar into the mist
 	var pillar := Node3D.new()
@@ -251,8 +251,8 @@ func _build_geometry(gen: int) -> void:
 	body.collision_mask = 1
 	root.add_child(body)
 	for c in range(slab_cols):
-		var x0 := -half_l + (float(c) + 0.5) * col_w
-		var y_arch := _arch_y(x0)
+		var x0: float = -half_l + (float(c) + 0.5) * col_w
+		var y_arch: float = _arch_y(x0)
 		var cs := CollisionShape3D.new()
 		var shape := BoxShape3D.new()
 		shape.size = Vector3(col_w * 1.02, deck_thickness + 0.08, bridge_width * 0.95)
@@ -261,13 +261,14 @@ func _build_geometry(gen: int) -> void:
 		body.add_child(cs)
 
 	# Side rails — incomplete / crumbled
-	for side in [-1.0, 1.0]:
-		var z_rail := side * (half_w + 0.12)
+	for side_i in range(2):
+		var side: float = -1.0 if side_i == 0 else 1.0
+		var z_rail: float = side * (half_w + 0.12)
 		for c in range(slab_cols):
 			# Skip some segments for broken look
-			var broken := _rng.randf() < 0.28
-			var x0 := -half_l + (float(c) + 0.5) * col_w
-			var y_arch := _arch_y(x0)
+			var broken: bool = _rng.randf() < 0.28
+			var x0: float = -half_l + (float(c) + 0.5) * col_w
+			var y_arch: float = _arch_y(x0)
 			if broken:
 				# rubble stump
 				if _rng.randf() < 0.7:
@@ -280,13 +281,14 @@ func _build_geometry(gen: int) -> void:
 						Vector3(0, 0, _rng.randf_range(-12, 12))
 					)
 				continue
-			var h := _rng.randf_range(0.55, 0.85)
+			var h: float = _rng.randf_range(0.55, 0.85)
+			var rail_mat: Material = _stone if _rng.randf() > 0.3 else _moss
 			_mesh_box(
 				root,
 				"Rail_%s_%d" % [side, c],
 				Vector3(col_w * 0.9, h, 0.32),
 				Vector3(x0, y_arch + h * 0.5 + 0.05, z_rail),
-				_stone if _rng.randf() > 0.3 else _moss
+				rail_mat
 			)
 			# top coping sometimes missing
 			if _rng.randf() > 0.35:
@@ -299,8 +301,9 @@ func _build_geometry(gen: int) -> void:
 				)
 
 	# End abutments / steps into portals
-	for end_sign in [-1.0, 1.0]:
-		var x_end := end_sign * half_l
+	for end_i in range(2):
+		var end_sign: float = -1.0 if end_i == 0 else 1.0
+		var x_end: float = end_sign * half_l
 		_mesh_box(root, "Abutment_%s" % end_sign, Vector3(1.2, 1.1, bridge_width + 0.8), Vector3(x_end, 0.35, 0), _stone_dark)
 		_mesh_box(root, "Step_%s" % end_sign, Vector3(0.7, 0.22, bridge_width * 0.9), Vector3(x_end - end_sign * 0.55, 0.12, 0), _stone)
 
