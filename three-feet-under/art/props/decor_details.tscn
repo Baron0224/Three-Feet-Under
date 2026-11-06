@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3]
+[gd_scene load_steps=76 format=3]
 
 [ext_resource type="Material" path="res://art/materials/wall.tres" id="m_wall"]
 [ext_resource type="Material" path="res://art/materials/trim.tres" id="m_trim"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" path="res://art/materials/rock.tres" id="m_rock"]
 [ext_resource type="Material" path="res://art/materials/seal_gold.tres" id="m_gold"]
 [ext_resource type="Material" path="res://art/materials/seal_blue.tres" id="m_blue"]
+[ext_resource type="Material" path="res://art/materials/clay.tres" id="m_clay"]
 
 [sub_resource type="BoxMesh" id="Mesh_0"]
 size = Vector3(1.02, 0.22, 0.86)
@@ -169,6 +170,96 @@ top_radius = 0.3
 bottom_radius = 0.12
 height = 0.18
 radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="Mesh_46"]
+top_radius = 0.15
+bottom_radius = 0.095
+height = 0.36
+radial_segments = 14
+
+[sub_resource type="CylinderMesh" id="Mesh_47"]
+top_radius = 0.075
+bottom_radius = 0.075
+height = 0.12
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="Mesh_48"]
+top_radius = 0.085
+bottom_radius = 0.085
+height = 0.05
+radial_segments = 14
+
+[sub_resource type="CylinderMesh" id="Mesh_49"]
+top_radius = 0.055
+bottom_radius = 0.085
+height = 0.07
+radial_segments = 12
+
+[sub_resource type="CylinderMesh" id="Mesh_50"]
+top_radius = 0.27
+bottom_radius = 0.16
+height = 0.2
+radial_segments = 14
+
+[sub_resource type="CylinderMesh" id="Mesh_51"]
+top_radius = 0.29
+bottom_radius = 0.28
+height = 0.06
+radial_segments = 14
+
+[sub_resource type="BoxMesh" id="Mesh_52"]
+size = Vector3(0.07, 0.16, 0.07)
+
+[sub_resource type="BoxMesh" id="Mesh_53"]
+size = Vector3(0.24, 0.05, 0.06)
+
+[sub_resource type="BoxMesh" id="Mesh_54"]
+size = Vector3(1.02, 0.09, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_55"]
+size = Vector3(0.09, 0.86, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_56"]
+size = Vector3(1.02, 0.86, 0.06)
+
+[sub_resource type="BoxMesh" id="Mesh_57"]
+size = Vector3(0.1, 0.22, 0.1)
+
+[sub_resource type="CylinderMesh" id="Mesh_58"]
+top_radius = 0.11
+bottom_radius = 0.06
+height = 0.1
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="Mesh_59"]
+size = Vector3(2.4, 0.12, 0.9)
+
+[sub_resource type="BoxMesh" id="Mesh_60"]
+size = Vector3(0.2, 0.6, 0.7)
+
+[sub_resource type="CylinderMesh" id="Mesh_61"]
+top_radius = 0.14
+bottom_radius = 0.08
+height = 0.12
+radial_segments = 12
+
+[sub_resource type="BoxMesh" id="Mesh_62"]
+size = Vector3(0.7, 0.1, 0.26)
+
+[sub_resource type="BoxMesh" id="Mesh_63"]
+size = Vector3(0.08, 0.8, 0.08)
+
+[sub_resource type="BoxMesh" id="Mesh_64"]
+size = Vector3(0.64, 0.07, 0.07)
+
+[sub_resource type="CylinderMesh" id="Mesh_65"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 1.35
+radial_segments = 8
+
+[sub_resource type="BoxMesh" id="Mesh_66"]
+size = Vector3(0.05, 0.18, 0.05)
 
 
 [node name="DecorDetails" type="Node3D"]
@@ -1445,4 +1536,964 @@ material_override = ExtResource("m_trim")
 [node name="Bowl" type="MeshInstance3D" parent="TombLampStands/Lamp11D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31, 0)
 mesh = SubResource("Mesh_45")
+material_override = ExtResource("m_bronze")
+
+[node name="BurialVessels" type="Node3D" parent="."]
+
+[node name="VaseHallN1" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 8, 0.15, -102)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseHallN2" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 17.5, 0.15, -102)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseHallN3" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 26.5, 0.15, -102)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseHallN4" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 34.5, 0.15, -102)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseHallS1" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 3.2, 0.15, -80.9)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseHallS2" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 8, 0.15, -80.9)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseHallS3" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 17.5, 0.15, -80.9)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseHallS4" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 26.5, 0.15, -80.9)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseHallS5" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 34.5, 0.15, -80.9)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseHallS5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseHallS5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseHallS5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseHallS5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseTmbNW" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 46, 0.15, -103.2)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseTmbNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseTmbNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseTmbNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseTmbNW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseTmbNE" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 68, 0.15, -103.2)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseTmbNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseTmbNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseTmbNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseTmbNE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseTmbSW" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 46, 0.15, -79.8)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseTmbSW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseTmbSW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseTmbSW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseTmbSW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="VaseTmbSE" type="Node3D" parent="BurialVessels"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 68, 0.15, -79.8)
+
+[node name="Body" type="MeshInstance3D" parent="BurialVessels/VaseTmbSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("Mesh_46")
+material_override = ExtResource("m_clay")
+
+[node name="Neck" type="MeshInstance3D" parent="BurialVessels/VaseTmbSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+mesh = SubResource("Mesh_47")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="BurialVessels/VaseTmbSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.545, 0)
+mesh = SubResource("Mesh_48")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="BurialVessels/VaseTmbSE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+mesh = SubResource("Mesh_49")
+material_override = ExtResource("m_bronze")
+
+[node name="BronzeDings" type="Node3D" parent="."]
+
+[node name="DingHall1" type="Node3D" parent="BronzeDings"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 3.5, 0.15, -96.8)
+
+[node name="Bowl" type="MeshInstance3D" parent="BronzeDings/DingHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+mesh = SubResource("Mesh_50")
+material_override = ExtResource("m_bronze")
+
+[node name="RimBand" type="MeshInstance3D" parent="BronzeDings/DingHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0)
+mesh = SubResource("Mesh_51")
+material_override = ExtResource("m_bronze")
+
+[node name="LegA" type="MeshInstance3D" parent="BronzeDings/DingHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0.08, 0.12)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="LegB" type="MeshInstance3D" parent="BronzeDings/DingHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0.08, 0.12)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="LegC" type="MeshInstance3D" parent="BronzeDings/DingHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.16)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="HandleL" type="MeshInstance3D" parent="BronzeDings/DingHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31, 0.24, 0)
+mesh = SubResource("Mesh_53")
+material_override = ExtResource("m_bronze")
+
+[node name="HandleR" type="MeshInstance3D" parent="BronzeDings/DingHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31, 0.24, 0)
+mesh = SubResource("Mesh_53")
+material_override = ExtResource("m_bronze")
+
+[node name="DingHall2" type="Node3D" parent="BronzeDings"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 26.5, 0.15, -96.8)
+
+[node name="Bowl" type="MeshInstance3D" parent="BronzeDings/DingHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+mesh = SubResource("Mesh_50")
+material_override = ExtResource("m_bronze")
+
+[node name="RimBand" type="MeshInstance3D" parent="BronzeDings/DingHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0)
+mesh = SubResource("Mesh_51")
+material_override = ExtResource("m_bronze")
+
+[node name="LegA" type="MeshInstance3D" parent="BronzeDings/DingHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0.08, 0.12)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="LegB" type="MeshInstance3D" parent="BronzeDings/DingHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0.08, 0.12)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="LegC" type="MeshInstance3D" parent="BronzeDings/DingHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.16)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="HandleL" type="MeshInstance3D" parent="BronzeDings/DingHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31, 0.24, 0)
+mesh = SubResource("Mesh_53")
+material_override = ExtResource("m_bronze")
+
+[node name="HandleR" type="MeshInstance3D" parent="BronzeDings/DingHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31, 0.24, 0)
+mesh = SubResource("Mesh_53")
+material_override = ExtResource("m_bronze")
+
+[node name="DingTmb1" type="Node3D" parent="BronzeDings"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 66.5, 0.15, -84)
+
+[node name="Bowl" type="MeshInstance3D" parent="BronzeDings/DingTmb1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+mesh = SubResource("Mesh_50")
+material_override = ExtResource("m_bronze")
+
+[node name="RimBand" type="MeshInstance3D" parent="BronzeDings/DingTmb1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0)
+mesh = SubResource("Mesh_51")
+material_override = ExtResource("m_bronze")
+
+[node name="LegA" type="MeshInstance3D" parent="BronzeDings/DingTmb1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0.08, 0.12)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="LegB" type="MeshInstance3D" parent="BronzeDings/DingTmb1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0.08, 0.12)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="LegC" type="MeshInstance3D" parent="BronzeDings/DingTmb1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.16)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="HandleL" type="MeshInstance3D" parent="BronzeDings/DingTmb1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31, 0.24, 0)
+mesh = SubResource("Mesh_53")
+material_override = ExtResource("m_bronze")
+
+[node name="HandleR" type="MeshInstance3D" parent="BronzeDings/DingTmb1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31, 0.24, 0)
+mesh = SubResource("Mesh_53")
+material_override = ExtResource("m_bronze")
+
+[node name="DingTmb2" type="Node3D" parent="BronzeDings"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 47.5, 0.15, -98)
+
+[node name="Bowl" type="MeshInstance3D" parent="BronzeDings/DingTmb2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+mesh = SubResource("Mesh_50")
+material_override = ExtResource("m_bronze")
+
+[node name="RimBand" type="MeshInstance3D" parent="BronzeDings/DingTmb2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0)
+mesh = SubResource("Mesh_51")
+material_override = ExtResource("m_bronze")
+
+[node name="LegA" type="MeshInstance3D" parent="BronzeDings/DingTmb2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14, 0.08, 0.12)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="LegB" type="MeshInstance3D" parent="BronzeDings/DingTmb2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, 0.08, 0.12)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="LegC" type="MeshInstance3D" parent="BronzeDings/DingTmb2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.16)
+mesh = SubResource("Mesh_52")
+material_override = ExtResource("m_bronze")
+
+[node name="HandleL" type="MeshInstance3D" parent="BronzeDings/DingTmb2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31, 0.24, 0)
+mesh = SubResource("Mesh_53")
+material_override = ExtResource("m_bronze")
+
+[node name="HandleR" type="MeshInstance3D" parent="BronzeDings/DingTmb2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31, 0.24, 0)
+mesh = SubResource("Mesh_53")
+material_override = ExtResource("m_bronze")
+
+[node name="WallNiches" type="Node3D" parent="."]
+
+[node name="NicheHallN1" type="Node3D" parent="WallNiches"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 7.5, 0.15, -103.12)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheHallN1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="NicheHallN2" type="Node3D" parent="WallNiches"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 16.5, 0.15, -103.12)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheHallN2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="NicheHallN3" type="Node3D" parent="WallNiches"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 25.5, 0.15, -103.12)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheHallN3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="NicheHallN4" type="Node3D" parent="WallNiches"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 34.5, 0.15, -103.12)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheHallN4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="NicheHallS1" type="Node3D" parent="WallNiches"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 6.5, 0.15, -79.66)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheHallS1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="NicheHallS2" type="Node3D" parent="WallNiches"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 15.5, 0.15, -79.66)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheHallS2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="NicheHallS3" type="Node3D" parent="WallNiches"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 24.5, 0.15, -79.66)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheHallS3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="NicheHallS4" type="Node3D" parent="WallNiches"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 33.5, 0.15, -79.66)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheHallS4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="NicheTmbE" type="Node3D" parent="WallNiches"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 70.2, 0.15, -96.5)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheTmbE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheTmbE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheTmbE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheTmbE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheTmbE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheTmbE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheTmbE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="NicheTmbW" type="Node3D" parent="WallNiches"]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 43.36, 0.15, -86.5)
+
+[node name="Top" type="MeshInstance3D" parent="WallNiches/NicheTmbW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="Bottom" type="MeshInstance3D" parent="WallNiches/NicheTmbW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045, 0)
+mesh = SubResource("Mesh_54")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="WallNiches/NicheTmbW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="PostR" type="MeshInstance3D" parent="WallNiches/NicheTmbW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.465, 0.5, 0)
+mesh = SubResource("Mesh_55")
+material_override = ExtResource("m_trim")
+
+[node name="Back" type="MeshInstance3D" parent="WallNiches/NicheTmbW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.05)
+mesh = SubResource("Mesh_56")
+material_override = ExtResource("m_rock")
+
+[node name="Figurine" type="MeshInstance3D" parent="WallNiches/NicheTmbW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.04)
+mesh = SubResource("Mesh_57")
+material_override = ExtResource("m_rock")
+
+[node name="Bowl" type="MeshInstance3D" parent="WallNiches/NicheTmbW"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16, 0.05)
+mesh = SubResource("Mesh_58")
+material_override = ExtResource("m_bronze")
+
+[node name="OfferingAltar" type="Node3D" parent="."]
+
+[node name="Altar11" type="Node3D" parent="OfferingAltar"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 52.8, 0.15, -91.5)
+
+[node name="Top" type="MeshInstance3D" parent="OfferingAltar/Altar11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66, 0)
+mesh = SubResource("Mesh_59")
+material_override = ExtResource("m_trim")
+
+[node name="LeftLeg" type="MeshInstance3D" parent="OfferingAltar/Altar11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.3, 0)
+mesh = SubResource("Mesh_60")
+material_override = ExtResource("m_wall")
+
+[node name="RightLeg" type="MeshInstance3D" parent="OfferingAltar/Altar11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.3, 0)
+mesh = SubResource("Mesh_60")
+material_override = ExtResource("m_wall")
+
+[node name="BowlL" type="MeshInstance3D" parent="OfferingAltar/Altar11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.78, 0)
+mesh = SubResource("Mesh_61")
+material_override = ExtResource("m_bronze")
+
+[node name="BowlC" type="MeshInstance3D" parent="OfferingAltar/Altar11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
+mesh = SubResource("Mesh_61")
+material_override = ExtResource("m_bronze")
+
+[node name="BowlR" type="MeshInstance3D" parent="OfferingAltar/Altar11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.78, 0)
+mesh = SubResource("Mesh_61")
+material_override = ExtResource("m_bronze")
+
+[node name="SpearRacks" type="Node3D" parent="."]
+
+[node name="RackHall1" type="Node3D" parent="SpearRacks"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 9.5, 0.15, -80.6)
+
+[node name="Base" type="MeshInstance3D" parent="SpearRacks/RackHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("Mesh_62")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="SpearRacks/RackHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 0.45, 0)
+mesh = SubResource("Mesh_63")
+material_override = ExtResource("m_wall")
+
+[node name="PostR" type="MeshInstance3D" parent="SpearRacks/RackHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28, 0.45, 0)
+mesh = SubResource("Mesh_63")
+material_override = ExtResource("m_wall")
+
+[node name="Cross" type="MeshInstance3D" parent="SpearRacks/RackHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("Mesh_64")
+material_override = ExtResource("m_trim")
+
+[node name="Spear1" type="MeshInstance3D" parent="SpearRacks/RackHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.73, 0)
+mesh = SubResource("Mesh_65")
+material_override = ExtResource("m_wall")
+
+[node name="Blade1" type="MeshInstance3D" parent="SpearRacks/RackHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 1.5, 0)
+mesh = SubResource("Mesh_66")
+material_override = ExtResource("m_bronze")
+
+[node name="Spear2" type="MeshInstance3D" parent="SpearRacks/RackHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, 0.73, 0)
+mesh = SubResource("Mesh_65")
+material_override = ExtResource("m_wall")
+
+[node name="Blade2" type="MeshInstance3D" parent="SpearRacks/RackHall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, 1.5, 0)
+mesh = SubResource("Mesh_66")
+material_override = ExtResource("m_bronze")
+
+[node name="RackHall2" type="Node3D" parent="SpearRacks"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 18.5, 0.15, -80.6)
+
+[node name="Base" type="MeshInstance3D" parent="SpearRacks/RackHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("Mesh_62")
+material_override = ExtResource("m_trim")
+
+[node name="PostL" type="MeshInstance3D" parent="SpearRacks/RackHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28, 0.45, 0)
+mesh = SubResource("Mesh_63")
+material_override = ExtResource("m_wall")
+
+[node name="PostR" type="MeshInstance3D" parent="SpearRacks/RackHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28, 0.45, 0)
+mesh = SubResource("Mesh_63")
+material_override = ExtResource("m_wall")
+
+[node name="Cross" type="MeshInstance3D" parent="SpearRacks/RackHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("Mesh_64")
+material_override = ExtResource("m_trim")
+
+[node name="Spear1" type="MeshInstance3D" parent="SpearRacks/RackHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.73, 0)
+mesh = SubResource("Mesh_65")
+material_override = ExtResource("m_wall")
+
+[node name="Blade1" type="MeshInstance3D" parent="SpearRacks/RackHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 1.5, 0)
+mesh = SubResource("Mesh_66")
+material_override = ExtResource("m_bronze")
+
+[node name="Spear2" type="MeshInstance3D" parent="SpearRacks/RackHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, 0.73, 0)
+mesh = SubResource("Mesh_65")
+material_override = ExtResource("m_wall")
+
+[node name="Blade2" type="MeshInstance3D" parent="SpearRacks/RackHall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11, 1.5, 0)
+mesh = SubResource("Mesh_66")
 material_override = ExtResource("m_bronze")

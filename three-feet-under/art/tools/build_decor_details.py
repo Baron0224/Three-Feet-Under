@@ -21,6 +21,7 @@ MAT = {
     "rock": "res://art/materials/rock.tres",
     "gold": "res://art/materials/seal_gold.tres",
     "blue": "res://art/materials/seal_blue.tres",
+    "clay": "res://art/materials/clay.tres",
 }
 
 NEW_MATERIALS = {
@@ -39,6 +40,13 @@ albedo_color = Color(0.18, 0.46, 0.86, 1)
 metallic = 0.55
 metallic_specular = 0.65
 roughness = 0.24
+""",
+    "res://art/materials/clay.tres": """[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.62, 0.42, 0.28, 1)
+metallic = 0.02
+roughness = 0.88
 """,
 }
 
@@ -102,6 +110,58 @@ LAMPSTAND = [
     ("Bowl", ("cyl", (0.18, 0.30, 0.12, 12), (0, 1.31, 0), "bronze")),
 ]
 
+# burial pottery jar, ~0.65 m tall
+VESSEL = [
+    ("Body", ("cyl", (0.36, 0.15, 0.095, 14), (0, 0.22, 0), "clay")),
+    ("Neck", ("cyl", (0.12, 0.075, 0.075, 12), (0, 0.46, 0), "clay")),
+    ("Rim", ("cyl", (0.05, 0.085, 0.085, 14), (0, 0.545, 0), "clay")),
+    ("Lid", ("cyl", (0.07, 0.055, 0.085, 12), (0, 0.61, 0), "bronze")),
+]
+
+# bronze tripod ding (cauldron), ~0.42 m tall including handle span
+DING = [
+    ("Bowl", ("cyl", (0.20, 0.27, 0.16, 14), (0, 0.13, 0), "bronze")),
+    ("RimBand", ("cyl", (0.06, 0.29, 0.28, 14), (0, 0.26, 0), "bronze")),
+    ("LegA", ("box", (0.07, 0.16, 0.07), (-0.14, 0.08, 0.12), "bronze")),
+    ("LegB", ("box", (0.07, 0.16, 0.07), (0.14, 0.08, 0.12), "bronze")),
+    ("LegC", ("box", (0.07, 0.16, 0.07), (0, 0.08, -0.16), "bronze")),
+    ("HandleL", ("box", (0.24, 0.05, 0.06), (-0.31, 0.24, 0), "bronze")),
+    ("HandleR", ("box", (0.24, 0.05, 0.06), (0.31, 0.24, 0), "bronze")),
+]
+
+# wall niche: trim frame + dark recess + little figurine and offering bowl
+NICHE = [
+    ("Top", ("box", (1.02, 0.09, 0.16), (0, 0.95, 0), "trim")),
+    ("Bottom", ("box", (1.02, 0.09, 0.16), (0, 0.045, 0), "trim")),
+    ("PostL", ("box", (0.09, 0.86, 0.16), (-0.465, 0.5, 0), "trim")),
+    ("PostR", ("box", (0.09, 0.86, 0.16), (0.465, 0.5, 0), "trim")),
+    ("Back", ("box", (1.02, 0.86, 0.06), (0, 0.5, -0.05), "rock")),
+    ("Figurine", ("box", (0.10, 0.22, 0.10), (0, 0.30, 0.04), "rock")),
+    ("Bowl", ("cyl", (0.10, 0.11, 0.06, 12), (0, 0.16, 0.05), "bronze")),
+]
+
+# stone offering table in front of the sarcophagus
+ALTAR = [
+    ("Top", ("box", (2.4, 0.12, 0.9), (0, 0.66, 0), "trim")),
+    ("LeftLeg", ("box", (0.2, 0.60, 0.7), (-1.0, 0.30, 0), "wall")),
+    ("RightLeg", ("box", (0.2, 0.60, 0.7), (1.0, 0.30, 0), "wall")),
+    ("BowlL", ("cyl", (0.12, 0.14, 0.08, 12), (-0.7, 0.78, 0), "bronze")),
+    ("BowlC", ("cyl", (0.12, 0.14, 0.08, 12), (0, 0.78, 0), "bronze")),
+    ("BowlR", ("cyl", (0.12, 0.14, 0.08, 12), (0.7, 0.78, 0), "bronze")),
+]
+
+# vertical spear stand with two spears
+SPEARRACK = [
+    ("Base", ("box", (0.7, 0.10, 0.26), (0, 0.05, 0), "trim")),
+    ("PostL", ("box", (0.08, 0.8, 0.08), (-0.28, 0.45, 0), "wall")),
+    ("PostR", ("box", (0.08, 0.8, 0.08), (0.28, 0.45, 0), "wall")),
+    ("Cross", ("box", (0.64, 0.07, 0.07), (0, 0.75, 0), "trim")),
+    ("Spear1", ("cyl", (1.35, 0.025, 0.025, 8), (-0.12, 0.73, 0), "wall")),
+    ("Blade1", ("box", (0.05, 0.18, 0.05), (-0.12, 1.5, 0), "bronze")),
+    ("Spear2", ("cyl", (1.35, 0.025, 0.025, 8), (0.11, 0.73, 0), "wall")),
+    ("Blade2", ("box", (0.05, 0.18, 0.05), (0.11, 1.5, 0), "bronze")),
+]
+
 GUARD = [
     ("Base", ("box", (0.94, 0.22, 0.74), (0, 0.11, 0), "trim")),
     ("BootL", ("box", (0.22, 0.16, 0.32), (-0.17, 0.30, 0.06), "wall")),
@@ -128,6 +188,11 @@ GROUPS = {
     "sarcophagus": ("Sarcophagus", SARCOPHAGUS),
     "guard": ("HallGuards", GUARD),
     "lampstand": ("TombLampStands", LAMPSTAND),
+    "vessel": ("BurialVessels", VESSEL),
+    "ding": ("BronzeDings", DING),
+    "niche": ("WallNiches", NICHE),
+    "altar": ("OfferingAltar", ALTAR),
+    "spearrack": ("SpearRacks", SPEARRACK),
 }
 
 # name, kind, world position (x, y, z), yaw degrees
@@ -151,6 +216,36 @@ PLACEMENTS = [
     ("GuardS2", "guard", (14.0, 0.15, -80.6), 180),
     ("GuardS3", "guard", (23.0, 0.15, -80.6), 180),
     ("GuardS4", "guard", (32.0, 0.15, -80.6), 180),
+    ("VaseHallN1", "vessel", (8.0, 0.15, -102.0), 0),
+    ("VaseHallN2", "vessel", (17.5, 0.15, -102.0), 0),
+    ("VaseHallN3", "vessel", (26.5, 0.15, -102.0), 0),
+    ("VaseHallN4", "vessel", (34.5, 0.15, -102.0), 0),
+    ("VaseHallS1", "vessel", (3.2, 0.15, -80.9), 180),
+    ("VaseHallS2", "vessel", (8.0, 0.15, -80.9), 180),
+    ("VaseHallS3", "vessel", (17.5, 0.15, -80.9), 180),
+    ("VaseHallS4", "vessel", (26.5, 0.15, -80.9), 180),
+    ("VaseHallS5", "vessel", (34.5, 0.15, -80.9), 180),
+    ("VaseTmbNW", "vessel", (46.0, 0.15, -103.2), 0),
+    ("VaseTmbNE", "vessel", (68.0, 0.15, -103.2), 0),
+    ("VaseTmbSW", "vessel", (46.0, 0.15, -79.8), 0),
+    ("VaseTmbSE", "vessel", (68.0, 0.15, -79.8), 0),
+    ("DingHall1", "ding", (3.5, 0.15, -96.8), 180),
+    ("DingHall2", "ding", (26.5, 0.15, -96.8), 0),
+    ("DingTmb1", "ding", (66.5, 0.15, -84.0), 0),
+    ("DingTmb2", "ding", (47.5, 0.15, -98.0), 90),
+    ("NicheHallN1", "niche", (7.5, 0.15, -103.12), 0),
+    ("NicheHallN2", "niche", (16.5, 0.15, -103.12), 0),
+    ("NicheHallN3", "niche", (25.5, 0.15, -103.12), 0),
+    ("NicheHallN4", "niche", (34.5, 0.15, -103.12), 0),
+    ("NicheHallS1", "niche", (6.5, 0.15, -79.66), 180),
+    ("NicheHallS2", "niche", (15.5, 0.15, -79.66), 180),
+    ("NicheHallS3", "niche", (24.5, 0.15, -79.66), 180),
+    ("NicheHallS4", "niche", (33.5, 0.15, -79.66), 180),
+    ("NicheTmbE", "niche", (70.2, 0.15, -96.5), 90),
+    ("NicheTmbW", "niche", (43.36, 0.15, -86.5), -90),
+    ("Altar11", "altar", (52.8, 0.15, -91.5), 90),
+    ("RackHall1", "spearrack", (9.5, 0.15, -80.6), 0),
+    ("RackHall2", "spearrack", (18.5, 0.15, -80.6), 0),
 ]
 
 # ------------------------------------------------------------------- emit .tscn

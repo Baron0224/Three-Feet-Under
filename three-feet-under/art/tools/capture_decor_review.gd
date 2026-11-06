@@ -16,7 +16,7 @@ func capture() -> void:
 	output = OS.get_environment("TEMP").path_join("tfu_decor_review")
 	DirAccess.make_dir_recursive_absolute(output)
 	viewport = SubViewport.new()
-	viewport.size = Vector2i(1280, 720)
+	viewport.size = Vector2i(1920, 1080)
 	viewport.own_world_3d = true
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	viewport.msaa_3d = Viewport.MSAA_2X
@@ -44,6 +44,14 @@ func capture() -> void:
 		["lion_close", Vector3(-39.4, 1.25, -92.4), Vector3(-36.6, 0.85, -92.4)],
 		["guard_close", Vector3(5.0, 1.5, -98.6), Vector3(5.0, 1.3, -102.4)],
 		["hall_axis", Vector3(0.5, 2.0, -91.5), Vector3(36.0, 1.5, -91.5)],
+		["vessel_row", Vector3(17.5, 1.5, -97.5), Vector3(20.0, 0.5, -102.0)],
+		["vessel_close", Vector3(8.0, 1.35, -98.6), Vector3(8.0, 0.55, -102.0)],
+		["ding_close", Vector3(26.5, 1.25, -93.6), Vector3(26.5, 0.4, -96.8)],
+		["niche_close", Vector3(16.5, 1.45, -100.5), Vector3(16.5, 0.9, -103.0)],
+		["niche_tomb", Vector3(46.5, 1.45, -86.5), Vector3(43.4, 0.9, -86.5)],
+		["altar_shot", Vector3(50.4, 1.7, -91.5), Vector3(52.8, 0.8, -91.5)],
+		["rack_close", Vector3(9.5, 1.45, -84.8), Vector3(9.5, 0.85, -80.6)],
+		["tomb_vessel", Vector3(53.0, 1.4, -101.0), Vector3(46.0, 0.5, -103.0)],
 	]
 	for shot in shots:
 		camera.position = shot[1]

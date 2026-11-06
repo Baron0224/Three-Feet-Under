@@ -170,3 +170,29 @@ Static dressing added on top of the 1.5x architecture, matching the demo layout
   scaled (prop scale 0.2-3.0, never exactly 1.5) instead of requiring 1.5.
 - Visual review: `art/tools/capture_decor_review.gd` renders 06/09 seal rooms, the
   tomb chamber, lion and guard close-ups and the hall axis into TEMP/tfu_decor_review.
+
+## Decor v2: vessels, dings, niches, altars, spear racks (2026-11-06)
+
+Second dressing pass on top of the 1.5x architecture, same pipeline and rules as v1:
+
+- `props/decor_details.tscn` now holds 49 placements / 67 de-duplicated meshes / 406
+  MeshInstance3D parts, still under the single unit-scale `DecorDetails` root.
+- New groups: `BurialVessels` (13 clay urns, ~0.65 m), `BronzeDings` (4 bronze
+  tripods, ~0.42 m), `WallNiches` (10 inset alcoves with figurine + offering bowl),
+  `OfferingAltar` (1 clay-and-bronze offering table, west of the sarcophagus),
+  `SpearRacks` (2 racks of 2 spears each, south hall wall between guards).
+- New material `materials/clay.tres` (albedo 0.62,0.42,0.28, metallic 0.02,
+  roughness 0.88) for the urns and altar; dings reuse the bronze preset, niches
+  reuse trim/bronze/rock mixes.
+- Placement: hall north/south walls get urn rows and inset niches; the tomb chamber
+  corners get urns; dings stand between the hall columns; the offering table faces
+  the tomb entrance; spear racks flank the hall guards.
+- Regenerate with `art/tools/build_decor_details.py` (still idempotent; re-hooks the
+  existing `DecorDetails` node, no duplicate).
+- `art/tools/capture_decor_review.gd` renders 14 shots at 1920x1080 with 2x MSAA
+  (added vessel_row/vessel_close/ding_close/niche_close/niche_tomb/altar_shot/
+  rack_close/tomb_vessel) into TEMP/tfu_decor_review.
+- Headless check: scale audit now reports 875 assertions / 375 architectural+tablet
+  meshes / 413 human-scale decor meshes, failures=0; every DecorDetails mesh (v1 and
+  v2 alike) is excluded from the environment-scale assertion and gets a human-scale
+  range check instead (0.2-3.0, never exactly 1.5).
