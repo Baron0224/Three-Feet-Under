@@ -20,6 +20,7 @@ func run() -> void:
 	check(is_equal_approx(player.capsule.radius,.3) and is_equal_approx(player.capsule.height,1.8),"world player capsule radius/height")
 	check(is_equal_approx(player.camera.position.y,1.6),"eye height 1.6m")
 	check(player.MOVE_SPEED==3.0 and player.SNEAK_SPEED==1.2 and player.CROUCH_SPEED==1.0 and player.JUMP_VELOCITY==3.8,"person speed/jump constants")
+	check(player.SPRINT_SPEED==5.2,"sprint toggle speed 5.2 m/s")
 	check(is_equal_approx(player.get_node("Camera3D/SpotLight3D").spot_range,12),"flashlight remains 12m")
 	check(spawn.is_equal_approx(Vector3(0,2.41,17.55)),"adapted entrance spawn, not player scale")
 	var meshes := 0
@@ -55,7 +56,8 @@ func run() -> void:
 	for frame in range(16): await physics_frame
 	check(abs(player.position.y-2.31)<.03,"spawn settles on expanded entrance landing")
 	# Actually jump off C in the expanded eastern half, outside both old x/z limits.
-	player.position = Vector3(43.5,.16,-30)
+	# Drop south of the new Chasm07 stone bridge deck (z -35..-25), still inside the abyss.
+	player.position = Vector3(43.5,.16,-38)
 	player.velocity = Vector3.ZERO
 	player.rotation = Vector3.ZERO
 	for frame in range(4): await physics_frame

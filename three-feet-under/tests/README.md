@@ -7,7 +7,8 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --fixed-fps 60 --scrip
 ```
 
 Checks the live shared controller in main.tscn and tomb_corridor.tscn with synthetic
-InputMap actions/key events and real CharacterBody3D physics. Temporary low ceilings
+InputMap actions/key events and real CharacterBody3D physics. It now also covers the
+CapsLock sprint toggle (5.2 m/s, indicator on/off, back to 3.0 m/s), 70 assertions total. Temporary low ceilings
 exist only in the test scene tree. The check reloads the tomb scene on purpose.
 It exits 0 when all assertions pass. The missing-current-scene failure case deliberately
 emits one `Level restart failed: Unconfigured` warning before testing R-key recovery.
@@ -37,6 +38,10 @@ eye offset, speed or jump height. main.tscn remains 1.0x. New commands:
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --fixed-fps 60 --script res://tests/environment_scale_check.gd
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --fixed-fps 60 --script res://tests/side_wings_check.gd
 ```
+
+Scale audit also asserts the sprint constant and that decor props never inherit the
+1.5x environment scale. Abyss fall probes now drop south of the new Chasm07 stone
+bridge deck (z -35..-25), so the fall itself still reaches the death volume.
 
 Scale audit checks world transforms (including nested wings and art), real room sizes,
 human physics/flashlight/tablet range, material block sizes and an actual fall from the

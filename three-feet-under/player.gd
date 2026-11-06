@@ -7,6 +7,7 @@
 extends CharacterBody3D
 
 const MOVE_SPEED := 3.0
+const SPRINT_SPEED := 5.2
 const SNEAK_SPEED := 1.2
 const CROUCH_SPEED := 1.0
 const JUMP_VELOCITY := 3.8
@@ -22,6 +23,7 @@ const ABYSS_DEATH_Y := -5.0
 @onready var body_collision: CollisionShape3D = $CollisionShape3D
 
 var is_crouching := false
+var sprint_enabled := false
 var is_dead := false
 var is_reading := false
 var mouse_captured := false
@@ -32,6 +34,7 @@ var standing_probe: CapsuleShape3D
 var has_abyss := false
 var death_overlay: ColorRect
 var death_message: Label
+var sprint_indicator: Label
 ## Ignore FOCUS_OUT for a short grace period after play starts (editor F6 focus flicker).
 var _capture_grace_until_msec := 0
 
@@ -104,12 +107,33 @@ func _wants_capture_mouse(event: InputEvent) -> bool:
 	return false
 
 
+func _wants_toggle_sprint(event: InputEvent) -> bool:
+	# CapsLock is a toggle key: one press switches sprint on, the next switches it off.
+	if event is InputEventKey and event.pressed and not event.echo:
+		return event.keycode == KEY_CAPSLOCK or event.physical_keycode == KEY_CAPSLOCK
+	return false
+
+
+func toggle_sprint() -> void:
+	sprint_enabled = not sprint_enabled
+	if sprint_indicator != null:
+		if sprint_enabled:
+			sprint_indicator.text = "疾跑：开（再按 CapsLock 关闭）"
+			sprint_indicator.show()
+		else:
+			sprint_indicator.text = ""
+			sprint_indicator.hide()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead:
 		if reload_failed and event.is_action_pressed("retry_level") and not event.is_echo():
 			_try_reload()
 		return
-	if _wants_release_mouse(event):
+	if _wants_toggle_sprint(event):
+		toggle_sprint()
+		get_viewport().set_input_as_handled()
+	elif _wants_release_mouse(event):
 		_set_mouse_capture(false)
 		is_reading = false
 		get_viewport().set_input_as_handled()
@@ -156,6 +180,8 @@ func _physics_process(delta: float) -> void:
 		speed = CROUCH_SPEED
 	elif Input.is_action_pressed("sneak"):
 		speed = SNEAK_SPEED
+	elif sprint_enabled:
+		speed = SPRINT_SPEED
 	velocity.x = direction_2d.x * speed
 	velocity.z = direction_2d.y * speed
 	move_and_slide()
@@ -241,7 +267,25 @@ func _create_controls_hud() -> void:
 	controls.add_theme_color_override("font_shadow_color", Color.BLACK)
 	controls.add_theme_constant_override("shadow_offset_x", 2)
 	controls.add_theme_constant_override("shadow_offset_y", 2)
-	controls.text = "WASD 移动 · 按住 Shift 静步 · 按住 Ctrl 蹲下 · 空格 跳跃\nE 阅读/关闭石板 · Esc 释放鼠标 · 单击重新控制"
+	controls.text = "WASD 移动 · CapsLock 切换疾跑 · 按住 Shift 静步 · 按住 Ctrl 蹲下 · 空格 跳跃\nE 阅读/关闭石板 · Esc 释放鼠标 · 单击重新控制"
+	sprint_indicator = Label.new()
+	sprint_indicator.name = "SprintIndicator"
+	layer.add_child(sprint_indicator)
+	sprint_indicator.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	sprint_indicator.offset_left = -420.0
+	sprint_indicator.offset_top = -104.0
+	sprint_indicator.offset_right = -20.0
+	sprint_indicator.offset_bottom = -72.0
+	sprint_indicator.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	sprint_indicator.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	sprint_indicator.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	sprint_indicator.add_theme_font_size_override("font_size", 18)
+	sprint_indicator.add_theme_color_override("font_color", Color(0.95, 0.86, 0.62))
+	sprint_indicator.add_theme_color_override("font_shadow_color", Color.BLACK)
+	sprint_indicator.add_theme_constant_override("shadow_offset_x", 2)
+	sprint_indicator.add_theme_constant_override("shadow_offset_y", 2)
+	sprint_indicator.text = ""
+	sprint_indicator.hide()
 	death_overlay = ColorRect.new()
 	death_overlay.name = "DeathOverlay"
 	layer.add_child(death_overlay)

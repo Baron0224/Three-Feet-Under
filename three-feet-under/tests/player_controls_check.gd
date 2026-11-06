@@ -71,6 +71,24 @@ func run() -> void:
 		var walk_distance: float = start_z-player.position.z
 		clear_actions()
 		expect(abs(player.velocity.z+3.0)<.01 and abs(walk_distance-2.0)<.12, path+": walk 3 m/s")
+		# CapsLock toggles sprint: first press 5.2 m/s, second press back to 3 m/s.
+		await teleport(Vector3(0,ground_y+.01,0))
+		start_z = player.position.z
+		await key_tap(KEY_CAPSLOCK)
+		expect(player.sprint_enabled, path+": CapsLock turns sprint on")
+		expect(player.get_node("PlayerControlsHUD/SprintIndicator").visible, path+": sprint indicator visible")
+		Input.action_press("move_forward")
+		await ticks(40)
+		var sprint_distance: float = start_z-player.position.z
+		clear_actions()
+		expect(abs(player.velocity.z+5.2)<.01 and sprint_distance>walk_distance*1.5, path+": sprint 5.2 m/s")
+		await key_tap(KEY_CAPSLOCK)
+		expect(not player.sprint_enabled, path+": CapsLock turns sprint off")
+		expect(not player.get_node("PlayerControlsHUD/SprintIndicator").visible, path+": sprint indicator hidden")
+		Input.action_press("move_forward")
+		await ticks(40)
+		clear_actions()
+		expect(abs(player.velocity.z+3.0)<.01, path+": sprint off restores walk 3 m/s")
 		await teleport(Vector3(0,ground_y+.01,0))
 		start_z = player.position.z
 		Input.action_press("move_forward")
@@ -175,8 +193,8 @@ func run() -> void:
 	await ticks(int(320*scene_scale))
 	clear_actions()
 	expect(player.position.z>11*scene_scale and abs(player.position.y-1.54*scene_scale)<.05, "stairs back up")
-	# Try an ordinary running jump from A: it must fall, never reach C.
-	await teleport(Vector3(15*scene_scale,ground_y+.01,-20*scene_scale))
+	# Step off the chasm rim beside the bridge: it must fall, never reach C.
+	await teleport(Vector3(15*scene_scale,ground_y+.01,-38)) # clear of the Chasm07 bridge deck (z -35..-25)
 	Input.action_press("move_right")
 	Input.action_press("jump")
 	await ticks(1)
