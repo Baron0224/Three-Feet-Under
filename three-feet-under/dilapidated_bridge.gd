@@ -13,9 +13,9 @@ signal collapse_requested  # for future A→B→C sequence
 	set(v):
 		bridge_length = maxf(6.0, v)
 		_request_rebuild()
-## World Z opening at Chasm07 heads: To07Landing / WestBankA / EastBankC
-## floor Z=3 under EastWing scale 1.5 → 4.5; wall inner faces match that gap.
-@export var bridge_width := 4.5:
+## Target width = OUTER span of BankA/CFrame shoulders at Chasm07 heads
+## (local Z -23.30..-16.70, EastWing*1.5 → world 9.9), not the 4.5 corridor inner opening.
+@export var bridge_width := 9.9:
 	set(v):
 		bridge_width = maxf(1.5, v)
 		_request_rebuild()
