@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ca2l7dub1clt5" path="res://dual_seal_door.tscn" id="DualSealDoor"]
 [ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
 [ext_resource type="PackedScene" uid="uid://csv0ck667006g" path="res://torch_lever_wall.tscn" id="TorchLeverWall"]
+[ext_resource type="PackedScene" path="res://art/props/decor_details.tscn" id="40_decor"]
 
 [sub_resource type="BoxMesh" id="Mesh_Floor01"]
 size = Vector3(3, 0.2, 8)
@@ -6015,7 +6016,7 @@ shape = SubResource("Shape_Final_CentralCoffinPlinth")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 1.05, -61)
 material_override = ExtResource("Art_coffin")
 mesh = SubResource("Mesh_Final_GreyboxCoffin")
-
+visible = false
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/GreyboxCoffin" unique_id=385254465]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FinalWing/Tomb11/GreyboxCoffin/StaticBody3D" unique_id=1543156443]
@@ -6288,3 +6289,5 @@ omni_range = 12.0
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Candles" parent="." unique_id=53156746 instance=ExtResource("30_candles")]
+
+[node name="DecorDetails" parent="." instance=ExtResource("40_decor")]

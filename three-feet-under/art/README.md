@@ -144,3 +144,29 @@ original 58 controller checks all still report failures=0. MultiMesh world AABB 
 x -59.8..82.2, z -108.5..2.2, y 0.11..0.54, i.e. the props sit on the real floors.
 Visual checks used the real OpenGL renderer (`capture_review.gd`): wide shots in
 TEMP/tfu_scale_review_1_5 and close-ups in TEMP/tfu_candle_review.
+
+
+## Decor props: lions, seals, sarcophagus, guards (2026-11-06)
+
+Static dressing added on top of the 1.5x architecture, matching the demo layout
+(石狮 at the two seal rooms, 石棺 in the main tomb, 守卫 lining the hall walls):
+
+- `props/decor_details.tscn`: root `DecorDetails`, unit scale, positions authored in
+  world meters. It must never inherit the 1.5x building scale, so `tomb_corridor.tscn`
+  instances it as one node (`DecorDetails`) next to `Candles`.
+- Groups: `StoneLions` (4, scale 1.4), `SealPedestals` (2), `Sarcophagus` (1),
+  `HallGuards` (8), `TombLampStands` (4) — 19 placements, 46 de-duplicated meshes,
+  241 MeshInstance3D parts, all collision-free, unlit, script-free.
+- Materials: `materials/seal_gold.tres` (albedo 0.86,0.63,0.26, metallic 0.75,
+  roughness 0.3) and `seal_blue.tres` (0.18,0.46,0.86, metallic 0.55, roughness 0.24)
+  give the seals their only bright accent in the dark rooms; everything else reuses
+  the existing coffin/trim/bronze presets.
+- The old greybox coffin keeps its collision but is hidden (`visible = false`) so the
+  new sarcophagus replaces it visually without changing traversal.
+- Regenerate with `art/tools/build_decor_details.py` (idempotent; writes the .tscn and
+  hooks the node into `tomb_corridor.tscn`). Intermediate box dumps stay in the OS
+  temp directory.
+- `tests/environment_scale_check.gd` now asserts decor props are *not* environment-
+  scaled (prop scale 0.2-3.0, never exactly 1.5) instead of requiring 1.5.
+- Visual review: `art/tools/capture_decor_review.gd` renders 06/09 seal rooms, the
+  tomb chamber, lion and guard close-ups and the hall axis into TEMP/tfu_decor_review.

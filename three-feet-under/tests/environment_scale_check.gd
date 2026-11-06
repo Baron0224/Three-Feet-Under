@@ -23,10 +23,19 @@ func run() -> void:
 	check(is_equal_approx(player.get_node("Camera3D/SpotLight3D").spot_range,12),"flashlight remains 12m")
 	check(spawn.is_equal_approx(Vector3(0,2.41,17.55)),"adapted entrance spawn, not player scale")
 	var meshes := 0
+	var decor_meshes := 0
 	for mesh in scene.find_children("*","MeshInstance3D",true,false):
-		var expected := Vector3.ONE if mesh.name=="ClueTablet" else Vector3.ONE*1.5
-		check(mesh.global_basis.get_scale().is_equal_approx(expected),"mesh world scale exactly once "+str(mesh.get_path()))
-		meshes += 1
+		var path := str(mesh.get_path())
+		var sc: Vector3 = mesh.global_basis.get_scale()
+		if path.contains("DecorDetails"):
+			# Human-scale props are authored in world meters with their own prop scale,
+			# so they must never inherit the environment's 1.5x.
+			check(not sc.is_equal_approx(Vector3.ONE*1.5) and sc.x>0.2 and sc.x<3.0,"decor prop not environment-scaled "+path)
+			decor_meshes += 1
+		else:
+			var expected := Vector3.ONE if mesh.name=="ClueTablet" else Vector3.ONE*1.5
+			check(sc.is_equal_approx(expected),"mesh world scale exactly once "+path)
+			meshes += 1
 	for batch in scene.get_node("ArtDetails").find_children("*","MultiMeshInstance3D",true,false):
 		check(batch.global_basis.get_scale().is_equal_approx(Vector3.ONE*1.5),"art inherits scale exactly once "+str(batch.name))
 	for light in scene.find_children("*","OmniLight3D",true,false):
@@ -67,5 +76,5 @@ func run() -> void:
 	var restarted = current_scene.get_node("player")
 	for frame in range(12): await physics_frame
 	check(restarted.get_instance_id()!=old_id and abs(restarted.position.z-17.55)<.03 and abs(restarted.position.y-2.31)<.04,"eastern abyss death reloads to scaled entrance")
-	print("SCALE AUDIT: ",assertions," assertions, ",meshes," architectural/tablet meshes, failures=",failures)
+	print("SCALE AUDIT: ",assertions," assertions, ",meshes," architectural/tablet meshes, ",decor_meshes," human-scale decor meshes, failures=",failures)
 	quit(0 if failures==0 else 1)
