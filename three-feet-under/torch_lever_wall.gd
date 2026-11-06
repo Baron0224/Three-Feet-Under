@@ -30,7 +30,7 @@ signal wall_blocked_needs_torch
 @export var allow_debug_interact := true
 @export var require_torch_item := false
 @export var prompt_path: NodePath = NodePath("../HUD/InteractPrompt")
-@export var lever_on_right := true
+@export var lever_on_right := false
 
 var _opened := false
 var _opening := false
@@ -357,7 +357,8 @@ func _build_geometry(gen: int) -> void:
 	var side := 1.0 if lever_on_right else -1.0
 	var lever_root := Node3D.new()
 	lever_root.name = "Gen_TorchLever"
-	lever_root.position = Vector3(side * (opening_width * 0.5 + 0.55), opening_height * 0.28, 0.35)
+	# Left of doorway when facing the slab; low (waist/chest); proud of wall toward player.
+	lever_root.position = Vector3(side * (opening_width * 0.5 + 0.42), 1.15, 0.55)
 
 	# Ornate bronze pivot plate
 	_mesh_box(lever_root, "Plate", Vector3(0.55, 0.7, 0.08), Vector3(0, 0, -0.05), _bronze_dark)
@@ -374,13 +375,13 @@ func _build_geometry(gen: int) -> void:
 	_mesh_cyl(arm, "Cup", 0.12, 0.14, 0.16, Vector3(0, 0.85, 0.12), _bronze_dark, 14)
 	# Torch stick in cup
 	_mesh_cyl(arm, "TorchStick", 0.035, 0.04, 0.55, Vector3(0, 1.15, 0.12), _stone_dark, 8)
-	_mesh_cyl(arm, "Flame", 0.05, 0.02, 0.22, Vector3(0, 1.48, 0.12), _flame_mat, 8)
+	_mesh_cyl(arm, "Flame", 0.07, 0.025, 0.28, Vector3(0, 1.48, 0.12), _flame_mat, 8)
 
 	var light := OmniLight3D.new()
 	light.name = "FlameLight"
 	light.light_color = Color(1.0, 0.55, 0.25)
-	light.light_energy = 1.4
-	light.omni_range = 5.0
+	light.light_energy = 2.2
+	light.omni_range = 6.5
 	light.position = Vector3(0, 1.5, 0.12)
 	arm.add_child(light)
 	_flame_light = light
