@@ -116,6 +116,60 @@ func _process(delta: float) -> void:
 		_deck_root.position.z = move_toward(_deck_root.position.z, 0.0, delta * 0.08)
 
 
+
+func _clear_generated() -> void:
+	for c in get_children():
+		var n := String(c.name)
+		if n.begins_with("Gen_") or n.ends_with("_old"):
+			c.name = n + "_old"
+			remove_child(c)
+			c.queue_free()
+	_deck_root = null
+	_mid_area = null
+	_player_on_mid = false
+
+
+func _rebuild_geometry() -> void:
+	if not is_inside_tree():
+		return
+	_build_gen += 1
+	var gen: int = _build_gen
+	_clear_generated()
+	_make_materials()
+	_build_geometry(gen)
+
+
+func _attach(node: Node, gen: int) -> void:
+	call_deferred("_attach_now", node, gen)
+
+
+func _attach_now(node: Node, gen: int) -> void:
+	if gen != _build_gen:
+		if is_instance_valid(node):
+			node.free()
+		return
+	if not is_inside_tree() or not is_instance_valid(node):
+		return
+	if node.get_parent() == self:
+		return
+	if node.get_parent() != null:
+		node.get_parent().remove_child(node)
+	add_child.call_deferred(node)
+
+
+func _mesh_box(parent: Node, name: String, size: Vector3, pos: Vector3, mat: Material, rot_deg: Vector3 = Vector3.ZERO) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.name = name
+	var box := BoxMesh.new()
+	box.size = size
+	mi.mesh = box
+	mi.material_override = mat
+	mi.position = pos
+	mi.rotation_degrees = rot_deg
+	parent.add_child(mi)
+	return mi
+
+
 func _make_materials() -> void:
 	var floor_mat := load("res://art/materials/floor.tres")
 	var wall_mat := load("res://art/materials/wall.tres")
