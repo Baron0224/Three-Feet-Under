@@ -13,6 +13,8 @@ signal collapse_requested  # for future A→B→C sequence
 	set(v):
 		bridge_length = maxf(6.0, v)
 		_request_rebuild()
+## World Z opening at Chasm07 heads: To07Landing / WestBankA / EastBankC
+## floor Z=3 under EastWing scale 1.5 → 4.5; wall inner faces match that gap.
 @export var bridge_width := 4.5:
 	set(v):
 		bridge_width = maxf(1.5, v)
@@ -81,9 +83,9 @@ func _boot_rebuild_async() -> void:
 		return
 	_rebuild_geometry()
 	if Engine.is_editor_hint():
-		print("DilapidatedBridge: editor preview len=", bridge_length, " at ", global_position)
+		print("DilapidatedBridge: editor preview len=", bridge_length, " width=", bridge_width, " at ", global_position)
 	else:
-		print("DilapidatedBridge: ready len=", bridge_length, " at ", global_position)
+		print("DilapidatedBridge: ready len=", bridge_length, " width=", bridge_width, " at ", global_position)
 
 
 func _rebuild_async_idle() -> void:
@@ -259,12 +261,14 @@ func _build_geometry(gen: int) -> void:
 		var side: float = -1.0 if side_i == 0 else 1.0
 		var z_rail: float = side * (half_w - rail_t * 0.5)  # flush with deck edge — uniform width
 		for i in range(segments):
-			# Leave both abutments clear — no lone brick stubs sitting on the landing edges.
-			if i == 0 or i == segments - 1:
-				continue
-			var present: bool = present_L[i] if side_i == 0 else present_R[i]
 			var x0: float = -half_l + (float(i) + 0.5) * seg_len
 			var y_arch: float = _arch_y(x0)
+			# Clear BOTH bridge heads only (桥两头) — keep mid-span dilapidated rails.
+			# ~2 segments each end so no lone stubs sit on the landing edge.
+			var end_clear: float = seg_len * 2.0
+			if x0 < -half_l + end_clear or x0 > half_l - end_clear:
+				continue
+			var present: bool = present_L[i] if side_i == 0 else present_R[i]
 			if not present:
 				# Broken tooth: leave a low jagged stump only
 				if i % 3 != 1:
@@ -300,12 +304,12 @@ func _build_geometry(gen: int) -> void:
 	_mesh_box(pillar, "Shaft", Vector3(1.5, 12.0, 1.5), Vector3(0, 0, 0), _stone_dark)
 	_mesh_box(pillar, "Cap", Vector3(2.2, 0.45, 2.2), Vector3(0, 6.15, 0), _stone)
 
-	# End abutments — same width as deck
+	# End supports under the deck only — same width as heads, nothing raised above the walkway.
 	for end_i in range(2):
 		var end_sign: float = -1.0 if end_i == 0 else 1.0
 		var x_end: float = end_sign * half_l
-		_mesh_box(root, "Abutment_%d" % end_i, Vector3(1.15, 1.0, bridge_width), Vector3(x_end, 0.35, 0), _stone_dark)
-		_mesh_box(root, "Step_%d" % end_i, Vector3(0.65, 0.2, bridge_width * 0.95), Vector3(x_end - end_sign * 0.5, 0.1, 0), _stone)
+		_mesh_box(root, "Abutment_%d" % end_i, Vector3(1.15, 0.45, bridge_width), Vector3(x_end, -0.1, 0), _stone_dark)
+		_mesh_box(root, "Step_%d" % end_i, Vector3(0.7, 0.16, bridge_width), Vector3(x_end - end_sign * 0.45, 0.08, 0), _stone)
 
 	# Mid-span detector
 	var area := Area3D.new()
