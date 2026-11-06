@@ -24,6 +24,8 @@ signal wall_blocked_needs_torch
 @export var rise_distance := 4.6
 @export var rise_speed := 1.6
 @export var lever_pull_speed := 90.0
+@export var lever_pull_degrees := 30.0
+@export var lever_rest_degrees := 10.0
 @export var interact_distance := 2.3
 @export var allow_debug_interact := true
 @export var require_torch_item := false
@@ -143,9 +145,11 @@ func _process(delta: float) -> void:
 		return
 
 	if _lever_animating and _lever_arm:
-		_lever_t = move_toward(_lever_t, 1.0, (lever_pull_speed / 90.0) * delta)
+		_lever_t = move_toward(_lever_t, 1.0, (lever_pull_speed / maxf(lever_pull_degrees, 1.0)) * delta)
 		# Up ~+45deg to down ~-45deg around local Z (arm swings in vertical plane).
-		var ang := deg_to_rad(lerpf(45.0, -45.0, _lever_t))
+		var start_ang := lever_rest_degrees
+		var end_ang := lever_rest_degrees - lever_pull_degrees
+		var ang := deg_to_rad(lerpf(start_ang, end_ang, _lever_t))
 		_lever_arm.rotation.z = ang
 		if _lever_t >= 1.0:
 			_lever_animating = false
@@ -353,7 +357,7 @@ func _build_geometry(gen: int) -> void:
 	var side := 1.0 if lever_on_right else -1.0
 	var lever_root := Node3D.new()
 	lever_root.name = "Gen_TorchLever"
-	lever_root.position = Vector3(side * (opening_width * 0.5 + 0.55), opening_height * 0.55, 0.35)
+	lever_root.position = Vector3(side * (opening_width * 0.5 + 0.55), opening_height * 0.28, 0.35)
 
 	# Ornate bronze pivot plate
 	_mesh_box(lever_root, "Plate", Vector3(0.55, 0.7, 0.08), Vector3(0, 0, -0.05), _bronze_dark)
@@ -362,7 +366,7 @@ func _build_geometry(gen: int) -> void:
 
 	var arm := Node3D.new()
 	arm.name = "LeverArm"
-	arm.rotation_degrees = Vector3(0, 0, 45) # resting up
+	arm.rotation_degrees = Vector3(0, 0, lever_rest_degrees) # resting slightly up
 	lever_root.add_child(arm)
 	_lever_arm = arm
 
