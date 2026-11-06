@@ -10,10 +10,10 @@
 [ext_resource type="Material" path="res://art/materials/rock.tres" id="Art_rock"]
 [ext_resource type="Material" path="res://art/materials/trim.tres" id="Art_trim"]
 [ext_resource type="Material" path="res://art/materials/wall.tres" id="Art_wall"]
-[ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
+[ext_resource type="PackedScene" uid="uid://baphag5jndjdw" path="res://dilapidated_bridge.tscn" id="DilapidatedBridge"]
 [ext_resource type="PackedScene" uid="uid://ca2l7dub1clt5" path="res://dual_seal_door.tscn" id="DualSealDoor"]
-[ext_resource type="PackedScene" uid="uid://ctorchleverwall01" path="res://torch_lever_wall.tscn" id="TorchLeverWall"]
-[ext_resource type="PackedScene" uid="uid://cdilapidatedbr01" path="res://dilapidated_bridge.tscn" id="DilapidatedBridge"]
+[ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
+[ext_resource type="PackedScene" uid="uid://csv0ck667006g" path="res://torch_lever_wall.tscn" id="TorchLeverWall"]
 
 [sub_resource type="BoxMesh" id="Mesh_Floor01"]
 size = Vector3(3, 0.2, 8)
@@ -2475,7 +2475,7 @@ omni_range = 22.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.0, 1.2, -27.0)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 1.2, -27)
 script = ExtResource("1_et3i4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2089584757]
@@ -4302,48 +4302,28 @@ shape = SubResource("Shape_West_HubShortcutLintel")
 
 [node name="SpikeCascadeTrap" parent="." unique_id=533142664 instance=ExtResource("SpikeCascade")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.25, 0.08, -6)
-corridor_length = 39.0
-corridor_width = 4.5
-segment_count = 12
-show_debug_label = false
-respawn_path = NodePath("../SpikeTrapRespawn")
 
 [node name="SpikeTrapRespawn" type="Marker3D" parent="." unique_id=1343085783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0.3, -12)
 
-[node name="DualSealDoor" parent="." instance=ExtResource("DualSealDoor")]
+[node name="DualSealDoor" parent="." unique_id=2081238755 instance=ExtResource("DualSealDoor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41.9)
-door_width = 5.6
-door_height = 4.2
-prompt_path = NodePath("../HUD/InteractPrompt")
-allow_debug_interact = true
 
-[node name="DualSealDoorTestSpawn" type="Marker3D" parent="."]
+[node name="DualSealDoorTestSpawn" type="Marker3D" parent="." unique_id=1154625595]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -36)
 
-[node name="TorchLeverWall" parent="." instance=ExtResource("TorchLeverWall")]
+[node name="TorchLeverWall" parent="." unique_id=537283547 instance=ExtResource("TorchLeverWall")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 12.35, 0, -30)
 opening_width = 4.3
-opening_height = 4.4
-prompt_path = NodePath("../HUD/InteractPrompt")
-allow_debug_interact = true
-require_torch_item = false
-lever_on_right = false
 
-[node name="TorchLeverWallTestSpawn" type="Marker3D" parent="."]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.0, 1.2, -27.0)
+[node name="TorchLeverWallTestSpawn" type="Marker3D" parent="." unique_id=937779223]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 1.2, -27)
 
-
-[node name="DilapidatedBridge" parent="." instance=ExtResource("DilapidatedBridge")]
+[node name="DilapidatedBridge" parent="." unique_id=490333024 instance=ExtResource("DilapidatedBridge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -30)
-bridge_length = 24.0
-bridge_width = 9.9
-arch_height = 0.55
-enable_midspan_shake = true
-allow_future_collapse = true
 
-[node name="DilapidatedBridgeTestSpawn" type="Marker3D" parent="."]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.0, 1.2, -27.0)
+[node name="DilapidatedBridgeTestSpawn" type="Marker3D" parent="." unique_id=1808916747]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 1.2, -27)
 
 [node name="EastWing" type="Node3D" parent="." unique_id=392047440]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
