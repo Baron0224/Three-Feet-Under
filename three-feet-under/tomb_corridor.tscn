@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
 [ext_resource type="PackedScene" uid="uid://ca2l7dub1clt5" path="res://dual_seal_door.tscn" id="DualSealDoor"]
 [ext_resource type="PackedScene" uid="uid://ctorchleverwall01" path="res://torch_lever_wall.tscn" id="TorchLeverWall"]
+[ext_resource type="PackedScene" uid="uid://cdilapidatedbr01" path="res://dilapidated_bridge.tscn" id="DilapidatedBridge"]
 
 [sub_resource type="BoxMesh" id="Mesh_Floor01"]
 size = Vector3(3, 0.2, 8)
@@ -2474,7 +2475,7 @@ omni_range = 22.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 8.5, 1.2, -30)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 18.5, 1.2, -30)
 script = ExtResource("1_et3i4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2089584757]
@@ -4330,7 +4331,19 @@ require_torch_item = false
 lever_on_right = false
 
 [node name="TorchLeverWallTestSpawn" type="Marker3D" parent="."]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 8.5, 1.2, -30)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 18.5, 1.2, -30)
+
+
+[node name="DilapidatedBridge" parent="." instance=ExtResource("DilapidatedBridge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -30)
+bridge_length = 24.0
+bridge_width = 3.4
+arch_height = 0.55
+enable_midspan_shake = true
+allow_future_collapse = true
+
+[node name="DilapidatedBridgeTestSpawn" type="Marker3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 18.5, 1.2, -30)
 
 [node name="EastWing" type="Node3D" parent="." unique_id=392047440]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
