@@ -4337,7 +4337,7 @@ transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 18.5, 1.2, -30)
 [node name="DilapidatedBridge" parent="." instance=ExtResource("DilapidatedBridge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -30)
 bridge_length = 24.0
-bridge_width = 3.4
+bridge_width = 4.5
 arch_height = 0.55
 enable_midspan_shake = true
 allow_future_collapse = true

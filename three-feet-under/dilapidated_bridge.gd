@@ -13,7 +13,7 @@ signal collapse_requested  # for future A→B→C sequence
 	set(v):
 		bridge_length = maxf(6.0, v)
 		_request_rebuild()
-@export var bridge_width := 3.4:
+@export var bridge_width := 4.5:
 	set(v):
 		bridge_width = maxf(1.5, v)
 		_request_rebuild()
@@ -219,28 +219,15 @@ func _build_geometry(gen: int) -> void:
 	for i in range(segments):
 		var x0: float = -half_l + (float(i) + 0.5) * seg_len
 		var y_arch: float = _arch_y(x0)
-		# Tiny wear dip only — keeps surface coherent, not scattered boxes.
-		var wear: float = 0.0
-		if i > 1 and i < segments - 2:
-			wear = sin(float(i) * 1.7) * 0.025
 		_mesh_box(
 			root,
 			"Deck_%d" % i,
 			Vector3(seg_len * 1.02, deck_thickness, bridge_width),
-			Vector3(x0, y_arch + deck_thickness * 0.5 + wear, 0.0),
+			Vector3(x0, y_arch + deck_thickness * 0.5, 0.0),
 			_stone
 		)
 
-	# Deep crack lines carved into the deck (dark recessed strips)
-	var crack_xs: Array[float] = [-half_l * 0.55, -half_l * 0.18, half_l * 0.12, half_l * 0.48]
-	for ci in range(crack_xs.size()):
-		var cx: float = crack_xs[ci]
-		var cy: float = _arch_y(cx) + deck_thickness + 0.01
-		_mesh_box(root, "CrackV_%d" % ci, Vector3(0.045, 0.04, bridge_width * 0.82), Vector3(cx, cy, 0.0), _stone_dark)
-	# Longitudinal spider cracks
-	_mesh_box(root, "CrackH_main", Vector3(bridge_length * 0.72, 0.035, 0.05), Vector3(0.0, _arch_y(0.0) + deck_thickness + 0.015, 0.15), _stone_dark)
-	_mesh_box(root, "CrackH_2", Vector3(bridge_length * 0.4, 0.03, 0.04), Vector3(-half_l * 0.2, _arch_y(-half_l * 0.2) + deck_thickness + 0.015, -0.35), _stone_dark)
-	_mesh_box(root, "CrackDiag", Vector3(bridge_length * 0.28, 0.03, 0.04), Vector3(half_l * 0.25, _arch_y(half_l * 0.25) + deck_thickness + 0.015, 0.45), _stone_dark, Vector3(0, 28, 0))
+	# Deck kept flat/regular — no raised crack/trim strips on the walkway.
 
 	# Walkable collision — same uniform width, stepped to follow arch
 	var body := StaticBody3D.new()
@@ -272,6 +259,9 @@ func _build_geometry(gen: int) -> void:
 		var side: float = -1.0 if side_i == 0 else 1.0
 		var z_rail: float = side * (half_w - rail_t * 0.5)  # flush with deck edge — uniform width
 		for i in range(segments):
+			# Leave both abutments clear — no lone brick stubs sitting on the landing edges.
+			if i == 0 or i == segments - 1:
+				continue
 			var present: bool = present_L[i] if side_i == 0 else present_R[i]
 			var x0: float = -half_l + (float(i) + 0.5) * seg_len
 			var y_arch: float = _arch_y(x0)
@@ -314,7 +304,7 @@ func _build_geometry(gen: int) -> void:
 	for end_i in range(2):
 		var end_sign: float = -1.0 if end_i == 0 else 1.0
 		var x_end: float = end_sign * half_l
-		_mesh_box(root, "Abutment_%d" % end_i, Vector3(1.15, 1.0, bridge_width + 0.15), Vector3(x_end, 0.35, 0), _stone_dark)
+		_mesh_box(root, "Abutment_%d" % end_i, Vector3(1.15, 1.0, bridge_width), Vector3(x_end, 0.35, 0), _stone_dark)
 		_mesh_box(root, "Step_%d" % end_i, Vector3(0.65, 0.2, bridge_width * 0.95), Vector3(x_end - end_sign * 0.5, 0.1, 0), _stone)
 
 	# Mid-span detector
