@@ -2862,6 +2862,7 @@ material_override = ExtResource("Art_rock")
 mesh = SubResource("Mesh_EntranceRubble1")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble1" unique_id=844152295]
+metadata/surface_type = "gravel"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceRubble1/StaticBody3D" unique_id=1329215761]
 shape = SubResource("Shape_EntranceRubble1")
@@ -2872,6 +2873,7 @@ material_override = ExtResource("Art_rock")
 mesh = SubResource("Mesh_EntranceRubble2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble2" unique_id=1274742739]
+metadata/surface_type = "gravel"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceRubble2/StaticBody3D" unique_id=1264464636]
 shape = SubResource("Shape_EntranceRubble2")
@@ -2882,6 +2884,7 @@ material_override = ExtResource("Art_rock")
 mesh = SubResource("Mesh_EntranceRubble3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble3" unique_id=2065858190]
+metadata/surface_type = "gravel"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceRubble3/StaticBody3D" unique_id=1000633080]
 shape = SubResource("Shape_EntranceRubble3")
@@ -2892,6 +2895,7 @@ material_override = ExtResource("Art_rock")
 mesh = SubResource("Mesh_EntranceRubble4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble4" unique_id=1574865611]
+metadata/surface_type = "gravel"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceRubble4/StaticBody3D" unique_id=1384521760]
 shape = SubResource("Shape_EntranceRubble4")
@@ -2902,6 +2906,7 @@ material_override = ExtResource("Art_rock")
 mesh = SubResource("Mesh_EntranceRubble5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble5" unique_id=2047251244]
+metadata/surface_type = "gravel"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceRubble5/StaticBody3D" unique_id=220910750]
 shape = SubResource("Shape_EntranceRubble5")
@@ -2912,6 +2917,7 @@ material_override = ExtResource("Art_rock")
 mesh = SubResource("Mesh_EntranceRubble6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EntranceRubble6" unique_id=917898753]
+metadata/surface_type = "gravel"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntranceRubble6/StaticBody3D" unique_id=1486043122]
 shape = SubResource("Shape_EntranceRubble6")
@@ -4319,6 +4325,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -36)
 [node name="TorchLeverWall" parent="." unique_id=537283547 instance=ExtResource("TorchLeverWall")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 12.35, 0, -30)
 opening_width = 4.3
+use_brick = true
 
 [node name="TorchLeverWallTestSpawn" type="Marker3D" parent="." unique_id=937779223]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 1.2, -27)
@@ -4326,6 +4333,7 @@ transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 1.2, -27)
 [node name="TorchLeverWallWestShortcut" parent="." unique_id=1847293651 instance=ExtResource("TorchLeverWall")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -12.35, 0, -37.5)
 opening_width = 4.0
+use_brick = true
 opening_height = 3.9
 rise_distance = 4.1
 lever_on_inner_wall = true

@@ -1,6 +1,8 @@
 @tool
 extends Node3D
 
+const BRICK_MAT := preload("res://art/materials/brick.tres")
+
 ## Torch-lever rising stone wall (concept A).
 ## E on the torch sconce pulls the lever down; the slab slides upward into the frame.
 ## require_torch_item=false for now; set true later when inventory torch exists.
@@ -33,6 +35,7 @@ signal wall_blocked_needs_torch
 @export var lever_on_right := false
 @export var lever_on_inner_wall := false
 @export var lever_on_passage_side := false
+@export var use_brick := false
 
 var _opened := false
 var _opening := false
@@ -51,8 +54,8 @@ var _flame_light: OmniLight3D
 var _prompt: Label
 var _player: Node3D
 
-var _stone: StandardMaterial3D
-var _stone_dark: StandardMaterial3D
+var _stone: Material
+var _stone_dark: Material
 var _bronze: StandardMaterial3D
 var _bronze_dark: StandardMaterial3D
 var _flame_mat: StandardMaterial3D
@@ -220,14 +223,20 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _make_materials() -> void:
-	_stone = StandardMaterial3D.new()
-	_stone.albedo_color = Color(0.32, 0.30, 0.28)
-	_stone.roughness = 0.92
-	_stone.metallic = 0.05
+	if use_brick:
+		_stone = BRICK_MAT
+		_stone_dark = BRICK_MAT
+		# Keep bronze/lever materials even when matching a brick wall;
+		# only the slab/frame become brick.
+	else:
+		_stone = StandardMaterial3D.new()
+		_stone.albedo_color = Color(0.32, 0.30, 0.28)
+		_stone.roughness = 0.92
+		_stone.metallic = 0.05
 
-	_stone_dark = StandardMaterial3D.new()
-	_stone_dark.albedo_color = Color(0.18, 0.17, 0.16)
-	_stone_dark.roughness = 0.95
+		_stone_dark = StandardMaterial3D.new()
+		_stone_dark.albedo_color = Color(0.18, 0.17, 0.16)
+		_stone_dark.roughness = 0.95
 
 	_bronze = StandardMaterial3D.new()
 	_bronze.albedo_color = Color(0.30, 0.20, 0.10)
