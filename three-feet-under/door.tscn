@@ -1,5 +1,5 @@
 [gd_scene format=3 uid="uid://f5uxa8cr48de"]
-[ext_resource type="Material" path="res://art/materials/brick.tres" id="2_brick"]
+[ext_resource type="Material" path="res://art/materials/plain_wall.tres" id="2_brick"]
 
 [ext_resource type="Script" uid="uid://ds0ihg5vxcx0p" path="res://door.gd" id="1_ba8gm"]
 

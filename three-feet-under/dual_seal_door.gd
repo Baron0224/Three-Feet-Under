@@ -2,7 +2,7 @@
 extends Node3D
 
 const STONE_DOOR := preload("res://audio/sfx/stone_door.ogg")
-const BRICK_MAT := preload("res://art/materials/brick.tres")
+const WALL_MAT := preload("res://art/materials/wall.tres")
 
 ## Hub dual-seal bronze double door (双印门).
 ## Left = yellow/gold seal, Right = blue seal. Both must unlock before doors open.
@@ -282,7 +282,7 @@ func _make_materials() -> void:
 	_socket_well.metallic = 0.3
 	_socket_well.roughness = 0.9
 
-	_stone = BRICK_MAT
+	_stone = WALL_MAT
 
 	_yellow_emit = StandardMaterial3D.new()
 	_yellow_emit.albedo_color = Color(0.95, 0.72, 0.18)
