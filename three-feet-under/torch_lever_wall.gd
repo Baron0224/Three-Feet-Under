@@ -336,19 +336,29 @@ func _build_geometry(gen: int) -> void:
 	_mesh_box(frame, "JambR", Vector3(0.45, opening_height + 0.5, 0.7), Vector3(opening_width * 0.5 + 0.25, opening_height * 0.5, 0.0), _stone_dark)
 	_mesh_box(frame, "Lintel", Vector3(opening_width + 1.1, 0.55, 0.75), Vector3(0.0, opening_height + 0.15, 0.0), _stone)
 	_mesh_box(frame, "Threshold", Vector3(opening_width + 0.8, 0.2, 0.7), Vector3(0.0, 0.1, 0.05), _stone_dark)
-	# Meander / fret suggestion on lintel face
-	_mesh_box(frame, "LintelCarve", Vector3(opening_width * 0.85, 0.18, 0.12), Vector3(0.0, opening_height + 0.15, 0.38), _bronze_dark)
+	# Meander / fret suggestion on lintel face; skip when masquerading as a brick wall.
+	if not use_brick:
+		_mesh_box(frame, "LintelCarve", Vector3(opening_width * 0.85, 0.18, 0.12), Vector3(0.0, opening_height + 0.15, 0.38), _bronze_dark)
 	_attach(frame, gen)
 
 	# Rising slab
 	var slab := Node3D.new()
 	slab.name = "Gen_Slab"
 	slab.position = Vector3(0.0, opening_height * 0.5, 0.0)
-	_mesh_box(slab, "SlabBody", Vector3(opening_width * 0.96, opening_height * 0.98, slab_thickness), Vector3.ZERO, _stone)
-	# Cracks (dark recessed strips)
-	_mesh_box(slab, "CrackV", Vector3(0.04, opening_height * 0.7, slab_thickness * 1.05), Vector3(-0.35, 0.1, 0.0), _stone_dark)
-	_mesh_box(slab, "CrackH", Vector3(opening_width * 0.55, 0.04, slab_thickness * 1.05), Vector3(0.2, -0.4, 0.0), _stone_dark)
-	_mesh_box(slab, "CrackV2", Vector3(0.035, opening_height * 0.4, slab_thickness * 1.05), Vector3(0.55, 0.5, 0.0), _stone_dark)
+	# In hidden brick mode, fill the opening completely so no seam shows.
+	var slab_size := Vector3(opening_width * 0.96, opening_height * 0.98, slab_thickness)
+	var slab_pos := Vector3.ZERO
+	if use_brick:
+		slab_size = Vector3(opening_width + 0.04, opening_height + 0.04, 0.75)
+		slab_pos = Vector3(0.0, 0.0, 0.0)
+		# Ensure the slab sits flush with the frame front face.
+		# (The frame pieces are centered around z≈0; lintel depth 0.75 centers at z=0.)
+	_mesh_box(slab, "SlabBody", slab_size, slab_pos, _stone)
+	# Cracks (dark recessed strips) only on plain stone doors.
+	if not use_brick:
+		_mesh_box(slab, "CrackV", Vector3(0.04, opening_height * 0.7, slab_thickness * 1.05), Vector3(-0.35, 0.1, 0.0), _stone_dark)
+		_mesh_box(slab, "CrackH", Vector3(opening_width * 0.55, 0.04, slab_thickness * 1.05), Vector3(0.2, -0.4, 0.0), _stone_dark)
+		_mesh_box(slab, "CrackV2", Vector3(0.035, opening_height * 0.4, slab_thickness * 1.05), Vector3(0.55, 0.5, 0.0), _stone_dark)
 
 	var body := StaticBody3D.new()
 	body.name = "StaticBody3D"
@@ -356,8 +366,9 @@ func _build_geometry(gen: int) -> void:
 	body.collision_mask = 1
 	var cs := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
-	shape.size = Vector3(opening_width * 0.96, opening_height * 0.98, slab_thickness)
+	shape.size = slab_size
 	cs.shape = shape
+	cs.position = slab_pos
 	body.add_child(cs)
 	slab.add_child(body)
 	_slab = slab
