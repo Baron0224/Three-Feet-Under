@@ -299,3 +299,44 @@ over v3.1). Two additions:
   passes.
 - Render: 6 new 1080p shots (`v5_pigpen/hunping/erbei_altar/erbei_floor/
   stopper_tomb/stopper09`) archived in 项目进度刻画图片/11-明器二轮-20261107/.
+
+## Round geometry + aging shaders (2026-11-07)
+
+User feedback: props looked too boxy/"not real". Two programmatic changes (no
+external models, no textures), same idempotent generator pipeline:
+
+- **Rounded geometry** (`props/decor_details.tscn`): added 2 CapsuleMesh and 5
+  SphereMesh parts for round surfaces that were formerly boxes (figurine head,
+  hunping lid knobs, boshan burner tops, vessel lid knobs); cylinder radial
+  segments raised from 8-16 to 24 (48 places). Resource mix is now 114 BoxMesh +
+  2 CapsuleMesh + 5 SphereMesh + 41 CylinderMesh across 112 placements / 162
+  de-duplicated meshes.
+- **Aging clay** (`shaders/world_clay.gdshader` + `materials/clay.tres` now a
+  ShaderMaterial): world-space mottling (kiln color variance), drying cracks and
+  soft bumps via the same derivative-gradient bump technique as world_stone.
+  Uniforms: `clay_color`, `dark_color`, `wear=0.6`, `scale_m`.
+- **Aging bronze** (`shaders/world_bronze.gdshader` + `materials/bronze.tres`
+  now a ShaderMaterial): world-space bronze-green patina mottling, scratches and
+  a drier specular (METALLIC falls 0.55 -> 0.15 with rust amount). Uniforms:
+  `bronze_color`, `patina_color`, `wear=0.65`, `scale_m`.
+- **Rougher candle surfaces**: candle body/dish/pool/wick roughness raised;
+  generator segments now 20/20/10/24 in `tools/write_candle_batches.py`.
+- Candle 279-count, room layout and all placement rules unchanged.
+
+Review & checks:
+
+- Headless scale audit: 1582 assertions / 375 architectural meshes / 1120
+  human-scale decor meshes, failures=0; player_controls 70 checks failures=0.
+- `tools/capture_round_review.gd` renders 6 close-ups (pigpen, hunping,
+  figurine, boshan, erbei, bronze) at 1920x1080 2xMSAA to the OS temp dir given
+  by env var `TFU_ROUND_OUTPUT`. Like rebuild_details it requires a real OpenGL
+  window (quit(1) under headless) — use a hidden process / normal window, not
+  `--headless`.
+- Archived: 6 close-ups + 21 panorama re-renders in
+  项目进度刻画图片/12-曲面材质验收-20261107-133459/ (全景- prefix marks the
+  re-rendered panoramas, comparable to 07 folder archives), and 9 before/after
+  comparison sheets (3 of them same-camera) in 项目进度刻画图片/13-曲面圆润对比-20261107/.
+
+Still coarse: procedural low-poly (visible facets up close), procedural noise
+instead of scanned textures, no weathering on the vermilion/gold/stone materials,
+no human playtest.
