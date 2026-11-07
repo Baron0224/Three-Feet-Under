@@ -9,5 +9,5 @@ boulder_radius = 1.75
 ceiling_height = 4.8
 hatch_length = 5.5
 drop_local_x = 0.0
-rest_local_x = -3.0
-trigger_local_x = 2.5
+rest_local_x = -29.0
+trigger_local_x = 0.0
