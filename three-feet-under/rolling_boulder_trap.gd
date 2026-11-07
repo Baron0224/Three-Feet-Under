@@ -454,4 +454,4 @@ func _respawn(body: Node) -> void:
 		_prompt.visible = true
 		_prompt.text = "Crushed! Sent back."
 	await get_tree().create_timer(respawn_cooldown).timeout
-	_respawn_busy = false\n
+	_respawn_busy = false
