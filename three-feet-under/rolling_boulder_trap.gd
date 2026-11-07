@@ -1,7 +1,7 @@
 @tool
 extends Node3D
 
-## West Corridor05 Floor003 rolling boulder trap.
+## West Corridor05 Floor005 T-junction rolling boulder trap.
 ## One sideways-sliding ceiling hatch -> boulder drops -> rolls E->W -> blocks west corner.
 ## Must sit under unscaled tomb_corridor root (WestWing is x1.5).
 
@@ -12,7 +12,7 @@ extends Node3D
 @export var hatch_width := 4.3
 @export var panel_thickness := 0.18
 @export var drop_local_x := 0.0
-@export var rest_local_x := -29.0
+@export var rest_local_x := -27.0
 @export var trigger_local_x := 0.0
 @export var trigger_size := Vector3(4.0, 2.4, 4.0)
 @export var slide_distance := 4.6
@@ -27,7 +27,7 @@ extends Node3D
 @export var respawn_path: NodePath = NodePath("../BoulderTrapRespawn")
 @export var prompt_path: NodePath
 @export var respawn_cooldown := 0.9
-@export var disable_ceiling_path: NodePath = NodePath("../WestWing/Corridor05/Ceiling003")
+@export var disable_ceiling_path: NodePath = NodePath("../WestWing/Corridor05/Ceiling005")
 
 var _triggered := false
 var _sliding := false
