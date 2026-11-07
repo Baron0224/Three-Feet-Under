@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=3]
+[gd_scene load_steps=175 format=3]
 
 [ext_resource type="Material" path="res://art/materials/wall.tres" id="m_wall"]
 [ext_resource type="Material" path="res://art/materials/trim.tres" id="m_trim"]
@@ -469,93 +469,165 @@ radial_segments = 8
 size = Vector3(0.66, 0.03, 0.04)
 
 [sub_resource type="BoxMesh" id="Mesh_117"]
-size = Vector3(6, 1.02, 0.1)
+size = Vector3(1.3, 0.06, 1)
 
 [sub_resource type="BoxMesh" id="Mesh_118"]
-size = Vector3(0.12, 1.06, 0.14)
+size = Vector3(0.08, 0.28, 1.06)
 
 [sub_resource type="BoxMesh" id="Mesh_119"]
-size = Vector3(6, 0.12, 0.14)
+size = Vector3(1.3, 0.28, 0.08)
 
 [sub_resource type="BoxMesh" id="Mesh_120"]
-size = Vector3(0.8, 0.8, 0.16)
+size = Vector3(1, 0.2, 0.08)
 
 [sub_resource type="BoxMesh" id="Mesh_121"]
-size = Vector3(1.3, 0.55, 0.14)
+size = Vector3(0.9, 0.06, 0.14)
 
 [sub_resource type="BoxMesh" id="Mesh_122"]
-size = Vector3(1.8, 0.1, 0.1)
+size = Vector3(0.34, 0.2, 0.2)
 
 [sub_resource type="BoxMesh" id="Mesh_123"]
-size = Vector3(1.6, 0.62, 0.16)
+size = Vector3(0.12, 0.1, 0.1)
 
 [sub_resource type="BoxMesh" id="Mesh_124"]
-size = Vector3(0.55, 0.4, 0.14)
+size = Vector3(0.3, 0.17, 0.17)
 
 [sub_resource type="BoxMesh" id="Mesh_125"]
-size = Vector3(0.14, 0.55, 0.12)
+size = Vector3(0.11, 0.09, 0.09)
 
-[sub_resource type="BoxMesh" id="Mesh_126"]
-size = Vector3(0.35, 0.75, 0.14)
+[sub_resource type="CylinderMesh" id="Mesh_126"]
+top_radius = 0.22
+bottom_radius = 0.18
+height = 0.34
+radial_segments = 12
 
-[sub_resource type="BoxMesh" id="Mesh_127"]
-size = Vector3(0.14, 0.14, 0.08)
+[sub_resource type="CylinderMesh" id="Mesh_127"]
+top_radius = 0.17
+bottom_radius = 0.17
+height = 0.05
+radial_segments = 12
 
-[sub_resource type="BoxMesh" id="Mesh_128"]
-size = Vector3(0.55, 0.3, 0.14)
+[sub_resource type="CylinderMesh" id="Mesh_128"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.1
+radial_segments = 12
 
-[sub_resource type="BoxMesh" id="Mesh_129"]
-size = Vector3(0.42, 0.34, 0.14)
+[sub_resource type="CylinderMesh" id="Mesh_129"]
+top_radius = 0.07
+bottom_radius = 0.07
+height = 0.06
+radial_segments = 8
 
-[sub_resource type="BoxMesh" id="Mesh_130"]
-size = Vector3(0.24, 0.2, 0.14)
+[sub_resource type="CylinderMesh" id="Mesh_130"]
+top_radius = 0.09
+bottom_radius = 0.09
+height = 0.12
+radial_segments = 8
 
 [sub_resource type="BoxMesh" id="Mesh_131"]
-size = Vector3(0.14, 0.14, 0.14)
+size = Vector3(0.24, 0.05, 0.15)
 
 [sub_resource type="BoxMesh" id="Mesh_132"]
-size = Vector3(0.09, 0.09, 0.09)
+size = Vector3(0.26, 0.012, 0.17)
 
 [sub_resource type="BoxMesh" id="Mesh_133"]
-size = Vector3(0.42, 0.4, 0.14)
+size = Vector3(0.05, 0.03, 0.09)
 
 [sub_resource type="BoxMesh" id="Mesh_134"]
-size = Vector3(0.7, 0.72, 0.16)
+size = Vector3(0.5, 2.4, 0.34)
 
 [sub_resource type="BoxMesh" id="Mesh_135"]
-size = Vector3(0.3, 0.55, 0.14)
+size = Vector3(0.7, 0.1, 0.7)
 
 [sub_resource type="BoxMesh" id="Mesh_136"]
-size = Vector3(0.08, 1.1, 0.1)
+size = Vector3(6, 1.02, 0.1)
 
 [sub_resource type="BoxMesh" id="Mesh_137"]
+size = Vector3(0.12, 1.06, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_138"]
+size = Vector3(6, 0.12, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_139"]
+size = Vector3(0.8, 0.8, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_140"]
+size = Vector3(1.3, 0.55, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_141"]
+size = Vector3(1.8, 0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="Mesh_142"]
+size = Vector3(1.6, 0.62, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_143"]
+size = Vector3(0.55, 0.4, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_144"]
+size = Vector3(0.14, 0.55, 0.12)
+
+[sub_resource type="BoxMesh" id="Mesh_145"]
+size = Vector3(0.35, 0.75, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_146"]
+size = Vector3(0.14, 0.14, 0.08)
+
+[sub_resource type="BoxMesh" id="Mesh_147"]
+size = Vector3(0.55, 0.3, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_148"]
+size = Vector3(0.42, 0.34, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_149"]
+size = Vector3(0.24, 0.2, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_150"]
+size = Vector3(0.14, 0.14, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_151"]
+size = Vector3(0.09, 0.09, 0.09)
+
+[sub_resource type="BoxMesh" id="Mesh_152"]
+size = Vector3(0.42, 0.4, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_153"]
+size = Vector3(0.7, 0.72, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_154"]
+size = Vector3(0.3, 0.55, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_155"]
+size = Vector3(0.08, 1.1, 0.1)
+
+[sub_resource type="BoxMesh" id="Mesh_156"]
 size = Vector3(0.74, 0.05, 0.1)
 
-[sub_resource type="CylinderMesh" id="Mesh_138"]
+[sub_resource type="CylinderMesh" id="Mesh_157"]
 top_radius = 0.3
 bottom_radius = 0.3
 height = 0.1
 radial_segments = 12
 
-[sub_resource type="CylinderMesh" id="Mesh_139"]
+[sub_resource type="CylinderMesh" id="Mesh_158"]
 top_radius = 0.34
 bottom_radius = 0.34
 height = 0.035
 radial_segments = 12
 
-[sub_resource type="CylinderMesh" id="Mesh_140"]
+[sub_resource type="CylinderMesh" id="Mesh_159"]
 top_radius = 0.22
 bottom_radius = 0.22
 height = 0.1
 radial_segments = 12
 
-[sub_resource type="BoxMesh" id="Mesh_141"]
+[sub_resource type="BoxMesh" id="Mesh_160"]
 size = Vector3(0.3, 0.12, 4)
 
-[sub_resource type="BoxMesh" id="Mesh_142"]
+[sub_resource type="BoxMesh" id="Mesh_161"]
 size = Vector3(5.7, 0.08, 3.9)
 
-[sub_resource type="CylinderMesh" id="Mesh_143"]
+[sub_resource type="CylinderMesh" id="Mesh_162"]
 top_radius = 0.11
 bottom_radius = 0.11
 height = 0.025
@@ -3525,6 +3597,337 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, -0.25)
 mesh = SubResource("Mesh_116")
 material_override = ExtResource("m_gold_ink")
 
+[node name="Pigpens" type="Node3D" parent="."]
+
+[node name="Pigpen06" type="Node3D" parent="Pigpens"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -49, 0.15, -94)
+
+[node name="Floor" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+mesh = SubResource("Mesh_117")
+material_override = ExtResource("m_clay")
+
+[node name="WallL" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, 0.17, 0)
+mesh = SubResource("Mesh_118")
+material_override = ExtResource("m_clay")
+
+[node name="WallR" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.61, 0.17, 0)
+mesh = SubResource("Mesh_118")
+material_override = ExtResource("m_clay")
+
+[node name="WallB" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, -0.46)
+mesh = SubResource("Mesh_119")
+material_override = ExtResource("m_clay")
+
+[node name="WallF" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0.46)
+mesh = SubResource("Mesh_120")
+material_override = ExtResource("m_clay")
+
+[node name="Trough" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.36)
+mesh = SubResource("Mesh_121")
+material_override = ExtResource("m_trim")
+
+[node name="Pig1Body" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.27, -0.12)
+mesh = SubResource("Mesh_122")
+material_override = ExtResource("m_clay")
+
+[node name="Pig1Head" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.3, 0.02)
+mesh = SubResource("Mesh_123")
+material_override = ExtResource("m_clay")
+
+[node name="Pig2Body" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, -0.2)
+mesh = SubResource("Mesh_124")
+material_override = ExtResource("m_clay")
+
+[node name="Pig2Head" type="MeshInstance3D" parent="Pigpens/Pigpen06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.28, -0.08)
+mesh = SubResource("Mesh_125")
+material_override = ExtResource("m_clay")
+
+[node name="Pigpen09" type="Node3D" parent="Pigpens"]
+transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 51.5, 0.15, -63)
+
+[node name="Floor" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+mesh = SubResource("Mesh_117")
+material_override = ExtResource("m_clay")
+
+[node name="WallL" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, 0.17, 0)
+mesh = SubResource("Mesh_118")
+material_override = ExtResource("m_clay")
+
+[node name="WallR" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.61, 0.17, 0)
+mesh = SubResource("Mesh_118")
+material_override = ExtResource("m_clay")
+
+[node name="WallB" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17, -0.46)
+mesh = SubResource("Mesh_119")
+material_override = ExtResource("m_clay")
+
+[node name="WallF" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0.46)
+mesh = SubResource("Mesh_120")
+material_override = ExtResource("m_clay")
+
+[node name="Trough" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.36)
+mesh = SubResource("Mesh_121")
+material_override = ExtResource("m_trim")
+
+[node name="Pig1Body" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.27, -0.12)
+mesh = SubResource("Mesh_122")
+material_override = ExtResource("m_clay")
+
+[node name="Pig1Head" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.3, 0.02)
+mesh = SubResource("Mesh_123")
+material_override = ExtResource("m_clay")
+
+[node name="Pig2Body" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, -0.2)
+mesh = SubResource("Mesh_124")
+material_override = ExtResource("m_clay")
+
+[node name="Pig2Head" type="MeshInstance3D" parent="Pigpens/Pigpen09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.28, -0.08)
+mesh = SubResource("Mesh_125")
+material_override = ExtResource("m_clay")
+
+[node name="Hunpings" type="Node3D" parent="."]
+
+[node name="Hunping04" type="Node3D" parent="Hunpings"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -49, 0.15, -38.5)
+
+[node name="JarBody" type="MeshInstance3D" parent="Hunpings/Hunping04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("Mesh_126")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="Hunpings/Hunping04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48, 0)
+mesh = SubResource("Mesh_127")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="Hunpings/Hunping04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+mesh = SubResource("Mesh_128")
+material_override = ExtResource("m_clay")
+
+[node name="LidTop" type="MeshInstance3D" parent="Hunpings/Hunping04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63, 0)
+mesh = SubResource("Mesh_129")
+material_override = ExtResource("m_bronze")
+
+[node name="MiniN" type="MeshInstance3D" parent="Hunpings/Hunping04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.17)
+mesh = SubResource("Mesh_130")
+material_override = ExtResource("m_clay")
+
+[node name="MiniS" type="MeshInstance3D" parent="Hunpings/Hunping04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.17)
+mesh = SubResource("Mesh_130")
+material_override = ExtResource("m_clay")
+
+[node name="MiniE" type="MeshInstance3D" parent="Hunpings/Hunping04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17, 0.5, 0)
+mesh = SubResource("Mesh_130")
+material_override = ExtResource("m_clay")
+
+[node name="MiniW" type="MeshInstance3D" parent="Hunpings/Hunping04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17, 0.5, 0)
+mesh = SubResource("Mesh_130")
+material_override = ExtResource("m_clay")
+
+[node name="Hunping09" type="Node3D" parent="Hunpings"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 67.5, 0.15, -55.5)
+
+[node name="JarBody" type="MeshInstance3D" parent="Hunpings/Hunping09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("Mesh_126")
+material_override = ExtResource("m_clay")
+
+[node name="Rim" type="MeshInstance3D" parent="Hunpings/Hunping09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.48, 0)
+mesh = SubResource("Mesh_127")
+material_override = ExtResource("m_clay")
+
+[node name="Lid" type="MeshInstance3D" parent="Hunpings/Hunping09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+mesh = SubResource("Mesh_128")
+material_override = ExtResource("m_clay")
+
+[node name="LidTop" type="MeshInstance3D" parent="Hunpings/Hunping09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63, 0)
+mesh = SubResource("Mesh_129")
+material_override = ExtResource("m_bronze")
+
+[node name="MiniN" type="MeshInstance3D" parent="Hunpings/Hunping09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.17)
+mesh = SubResource("Mesh_130")
+material_override = ExtResource("m_clay")
+
+[node name="MiniS" type="MeshInstance3D" parent="Hunpings/Hunping09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.17)
+mesh = SubResource("Mesh_130")
+material_override = ExtResource("m_clay")
+
+[node name="MiniE" type="MeshInstance3D" parent="Hunpings/Hunping09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17, 0.5, 0)
+mesh = SubResource("Mesh_130")
+material_override = ExtResource("m_clay")
+
+[node name="MiniW" type="MeshInstance3D" parent="Hunpings/Hunping09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17, 0.5, 0)
+mesh = SubResource("Mesh_130")
+material_override = ExtResource("m_clay")
+
+[node name="Erbeis" type="Node3D" parent="."]
+
+[node name="ErbeiAltarA" type="Node3D" parent="Erbeis"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 51.1, 0.745, -91.5)
+
+[node name="Cup" type="MeshInstance3D" parent="Erbeis/ErbeiAltarA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+mesh = SubResource("Mesh_131")
+material_override = ExtResource("m_vermilion")
+
+[node name="Rim" type="MeshInstance3D" parent="Erbeis/ErbeiAltarA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.053, 0)
+mesh = SubResource("Mesh_132")
+material_override = ExtResource("m_gold_ink")
+
+[node name="EarL" type="MeshInstance3D" parent="Erbeis/ErbeiAltarA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145, 0.04, 0)
+mesh = SubResource("Mesh_133")
+material_override = ExtResource("m_trim")
+
+[node name="EarR" type="MeshInstance3D" parent="Erbeis/ErbeiAltarA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.145, 0.04, 0)
+mesh = SubResource("Mesh_133")
+material_override = ExtResource("m_trim")
+
+[node name="ErbeiAltarB" type="Node3D" parent="Erbeis"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 54.5, 0.745, -91.5)
+
+[node name="Cup" type="MeshInstance3D" parent="Erbeis/ErbeiAltarB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+mesh = SubResource("Mesh_131")
+material_override = ExtResource("m_vermilion")
+
+[node name="Rim" type="MeshInstance3D" parent="Erbeis/ErbeiAltarB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.053, 0)
+mesh = SubResource("Mesh_132")
+material_override = ExtResource("m_gold_ink")
+
+[node name="EarL" type="MeshInstance3D" parent="Erbeis/ErbeiAltarB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145, 0.04, 0)
+mesh = SubResource("Mesh_133")
+material_override = ExtResource("m_trim")
+
+[node name="EarR" type="MeshInstance3D" parent="Erbeis/ErbeiAltarB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.145, 0.04, 0)
+mesh = SubResource("Mesh_133")
+material_override = ExtResource("m_trim")
+
+[node name="Erbei06" type="Node3D" parent="Erbeis"]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, -35.6, 0.175, -87.8)
+
+[node name="Cup" type="MeshInstance3D" parent="Erbeis/Erbei06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+mesh = SubResource("Mesh_131")
+material_override = ExtResource("m_vermilion")
+
+[node name="Rim" type="MeshInstance3D" parent="Erbeis/Erbei06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.053, 0)
+mesh = SubResource("Mesh_132")
+material_override = ExtResource("m_gold_ink")
+
+[node name="EarL" type="MeshInstance3D" parent="Erbeis/Erbei06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145, 0.04, 0)
+mesh = SubResource("Mesh_133")
+material_override = ExtResource("m_trim")
+
+[node name="EarR" type="MeshInstance3D" parent="Erbeis/Erbei06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.145, 0.04, 0)
+mesh = SubResource("Mesh_133")
+material_override = ExtResource("m_trim")
+
+[node name="Erbei09" type="Node3D" parent="Erbeis"]
+transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 59.8, 0.175, -62.2)
+
+[node name="Cup" type="MeshInstance3D" parent="Erbeis/Erbei09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+mesh = SubResource("Mesh_131")
+material_override = ExtResource("m_vermilion")
+
+[node name="Rim" type="MeshInstance3D" parent="Erbeis/Erbei09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.053, 0)
+mesh = SubResource("Mesh_132")
+material_override = ExtResource("m_gold_ink")
+
+[node name="EarL" type="MeshInstance3D" parent="Erbeis/Erbei09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145, 0.04, 0)
+mesh = SubResource("Mesh_133")
+material_override = ExtResource("m_trim")
+
+[node name="EarR" type="MeshInstance3D" parent="Erbeis/Erbei09"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.145, 0.04, 0)
+mesh = SubResource("Mesh_133")
+material_override = ExtResource("m_trim")
+
+[node name="DoorStops" type="Node3D" parent="."]
+
+[node name="StopperTombN" type="Node3D" parent="DoorStops"]
+transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 52, 0.15, -104.4)
+
+[node name="Bar" type="MeshInstance3D" parent="DoorStops/StopperTombN"]
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 1.2, 0)
+mesh = SubResource("Mesh_134")
+material_override = ExtResource("m_rock")
+
+[node name="Chock" type="MeshInstance3D" parent="DoorStops/StopperTombN"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("Mesh_135")
+material_override = ExtResource("m_trim")
+
+[node name="Stopper09S" type="Node3D" parent="DoorStops"]
+transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 60, 0.15, -53.4)
+
+[node name="Bar" type="MeshInstance3D" parent="DoorStops/Stopper09S"]
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 1.2, 0)
+mesh = SubResource("Mesh_134")
+material_override = ExtResource("m_rock")
+
+[node name="Chock" type="MeshInstance3D" parent="DoorStops/Stopper09S"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("Mesh_135")
+material_override = ExtResource("m_trim")
+
+[node name="Stopper11W" type="Node3D" parent="DoorStops"]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 44.3, 0.15, -91.5)
+
+[node name="Bar" type="MeshInstance3D" parent="DoorStops/Stopper11W"]
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 1.2, 0)
+mesh = SubResource("Mesh_134")
+material_override = ExtResource("m_rock")
+
+[node name="Chock" type="MeshInstance3D" parent="DoorStops/Stopper11W"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("Mesh_135")
+material_override = ExtResource("m_trim")
+
 [node name="WallReliefs" type="Node3D" parent="."]
 
 [node name="ReliefBand02" type="Node3D" parent="WallReliefs"]
@@ -3532,82 +3935,82 @@ transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 20, 0, -103.43)
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="WheelL" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="WheelR" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="Cart" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, 3.42, 0.06)
-mesh = SubResource("Mesh_121")
+mesh = SubResource("Mesh_140")
 material_override = ExtResource("m_vermilion")
 
 [node name="Shaft" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.1, 0.06)
-mesh = SubResource("Mesh_122")
+mesh = SubResource("Mesh_141")
 material_override = ExtResource("m_wall")
 
 [node name="HorseBody" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 3.1, 0.06)
-mesh = SubResource("Mesh_123")
+mesh = SubResource("Mesh_142")
 material_override = ExtResource("m_wall")
 
 [node name="HorseHead" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 3.25, 0.06)
-mesh = SubResource("Mesh_124")
+mesh = SubResource("Mesh_143")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg1" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg2" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="Driver" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_126")
+mesh = SubResource("Mesh_145")
 material_override = ExtResource("m_vermilion")
 
 [node name="HubL" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="HubR" type="MeshInstance3D" parent="WallReliefs/ReliefBand02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand05" type="Node3D" parent="WallReliefs"]
@@ -3615,82 +4018,82 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 10, 0,
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="WheelL" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="WheelR" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="Cart" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, 3.42, 0.06)
-mesh = SubResource("Mesh_121")
+mesh = SubResource("Mesh_140")
 material_override = ExtResource("m_vermilion")
 
 [node name="Shaft" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.1, 0.06)
-mesh = SubResource("Mesh_122")
+mesh = SubResource("Mesh_141")
 material_override = ExtResource("m_wall")
 
 [node name="HorseBody" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 3.1, 0.06)
-mesh = SubResource("Mesh_123")
+mesh = SubResource("Mesh_142")
 material_override = ExtResource("m_wall")
 
 [node name="HorseHead" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 3.25, 0.06)
-mesh = SubResource("Mesh_124")
+mesh = SubResource("Mesh_143")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg1" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg2" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="Driver" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_126")
+mesh = SubResource("Mesh_145")
 material_override = ExtResource("m_vermilion")
 
 [node name="HubL" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="HubR" type="MeshInstance3D" parent="WallReliefs/ReliefBand05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand08" type="Node3D" parent="WallReliefs"]
@@ -3698,82 +4101,82 @@ transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 37.43, 0
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="WheelL" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="WheelR" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="Cart" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, 3.42, 0.06)
-mesh = SubResource("Mesh_121")
+mesh = SubResource("Mesh_140")
 material_override = ExtResource("m_vermilion")
 
 [node name="Shaft" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.1, 0.06)
-mesh = SubResource("Mesh_122")
+mesh = SubResource("Mesh_141")
 material_override = ExtResource("m_wall")
 
 [node name="HorseBody" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 3.1, 0.06)
-mesh = SubResource("Mesh_123")
+mesh = SubResource("Mesh_142")
 material_override = ExtResource("m_wall")
 
 [node name="HorseHead" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 3.25, 0.06)
-mesh = SubResource("Mesh_124")
+mesh = SubResource("Mesh_143")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg1" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg2" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="Driver" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_126")
+mesh = SubResource("Mesh_145")
 material_override = ExtResource("m_vermilion")
 
 [node name="HubL" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="HubR" type="MeshInstance3D" parent="WallReliefs/ReliefBand08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand11" type="Node3D" parent="WallReliefs"]
@@ -3781,82 +4184,82 @@ transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -7.43, 0
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="WheelL" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="WheelR" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="Cart" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, 3.42, 0.06)
-mesh = SubResource("Mesh_121")
+mesh = SubResource("Mesh_140")
 material_override = ExtResource("m_vermilion")
 
 [node name="Shaft" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.1, 0.06)
-mesh = SubResource("Mesh_122")
+mesh = SubResource("Mesh_141")
 material_override = ExtResource("m_wall")
 
 [node name="HorseBody" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 3.1, 0.06)
-mesh = SubResource("Mesh_123")
+mesh = SubResource("Mesh_142")
 material_override = ExtResource("m_wall")
 
 [node name="HorseHead" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 3.25, 0.06)
-mesh = SubResource("Mesh_124")
+mesh = SubResource("Mesh_143")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg1" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg2" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="Driver" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_126")
+mesh = SubResource("Mesh_145")
 material_override = ExtResource("m_vermilion")
 
 [node name="HubL" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="HubR" type="MeshInstance3D" parent="WallReliefs/ReliefBand11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand14" type="Node3D" parent="WallReliefs"]
@@ -3864,82 +4267,82 @@ transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 65, 0, -104.93)
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="WheelL" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="WheelR" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="Cart" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, 3.42, 0.06)
-mesh = SubResource("Mesh_121")
+mesh = SubResource("Mesh_140")
 material_override = ExtResource("m_vermilion")
 
 [node name="Shaft" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.1, 0.06)
-mesh = SubResource("Mesh_122")
+mesh = SubResource("Mesh_141")
 material_override = ExtResource("m_wall")
 
 [node name="HorseBody" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 3.1, 0.06)
-mesh = SubResource("Mesh_123")
+mesh = SubResource("Mesh_142")
 material_override = ExtResource("m_wall")
 
 [node name="HorseHead" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 3.25, 0.06)
-mesh = SubResource("Mesh_124")
+mesh = SubResource("Mesh_143")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg1" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg2" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="Driver" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_126")
+mesh = SubResource("Mesh_145")
 material_override = ExtResource("m_vermilion")
 
 [node name="HubL" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="HubR" type="MeshInstance3D" parent="WallReliefs/ReliefBand14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand17" type="Node3D" parent="WallReliefs"]
@@ -3947,82 +4350,82 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 65, 0,
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="WheelL" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="WheelR" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="Cart" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, 3.42, 0.06)
-mesh = SubResource("Mesh_121")
+mesh = SubResource("Mesh_140")
 material_override = ExtResource("m_vermilion")
 
 [node name="Shaft" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.1, 0.06)
-mesh = SubResource("Mesh_122")
+mesh = SubResource("Mesh_141")
 material_override = ExtResource("m_wall")
 
 [node name="HorseBody" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 3.1, 0.06)
-mesh = SubResource("Mesh_123")
+mesh = SubResource("Mesh_142")
 material_override = ExtResource("m_wall")
 
 [node name="HorseHead" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 3.25, 0.06)
-mesh = SubResource("Mesh_124")
+mesh = SubResource("Mesh_143")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg1" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg2" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="Driver" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_126")
+mesh = SubResource("Mesh_145")
 material_override = ExtResource("m_vermilion")
 
 [node name="HubL" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="HubR" type="MeshInstance3D" parent="WallReliefs/ReliefBand17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand20" type="Node3D" parent="WallReliefs"]
@@ -4030,82 +4433,82 @@ transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 70.43, 0
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="WheelL" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="WheelR" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.06)
-mesh = SubResource("Mesh_120")
+mesh = SubResource("Mesh_139")
 material_override = ExtResource("m_wall")
 
 [node name="Cart" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, 3.42, 0.06)
-mesh = SubResource("Mesh_121")
+mesh = SubResource("Mesh_140")
 material_override = ExtResource("m_vermilion")
 
 [node name="Shaft" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.1, 0.06)
-mesh = SubResource("Mesh_122")
+mesh = SubResource("Mesh_141")
 material_override = ExtResource("m_wall")
 
 [node name="HorseBody" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 3.1, 0.06)
-mesh = SubResource("Mesh_123")
+mesh = SubResource("Mesh_142")
 material_override = ExtResource("m_wall")
 
 [node name="HorseHead" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35, 3.25, 0.06)
-mesh = SubResource("Mesh_124")
+mesh = SubResource("Mesh_143")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg1" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="HorseLeg2" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2.85, 0.06)
-mesh = SubResource("Mesh_125")
+mesh = SubResource("Mesh_144")
 material_override = ExtResource("m_wall")
 
 [node name="Driver" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_126")
+mesh = SubResource("Mesh_145")
 material_override = ExtResource("m_vermilion")
 
 [node name="HubL" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="HubR" type="MeshInstance3D" parent="WallReliefs/ReliefBand20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.1, 0.1)
-mesh = SubResource("Mesh_127")
+mesh = SubResource("Mesh_146")
 material_override = ExtResource("m_gold_ink")
 
 [node name="WallReliefs_cloud" type="Node3D" parent="."]
@@ -4115,127 +4518,127 @@ transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 2.5, 0, -103.43)
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="CloudA0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand03" type="Node3D" parent="WallReliefs_cloud"]
@@ -4243,127 +4646,127 @@ transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 27, 0, -103.43)
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="CloudA0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand06" type="Node3D" parent="WallReliefs_cloud"]
@@ -4371,127 +4774,127 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 17, 0,
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="CloudA0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand09" type="Node3D" parent="WallReliefs_cloud"]
@@ -4499,127 +4902,127 @@ transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 37.43, 0
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="CloudA0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand12" type="Node3D" parent="WallReliefs_cloud"]
@@ -4627,127 +5030,127 @@ transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 49, 0, -104.93)
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="CloudA0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand15" type="Node3D" parent="WallReliefs_cloud"]
@@ -4755,127 +5158,127 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 49, 0,
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="CloudA0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand18" type="Node3D" parent="WallReliefs_cloud"]
@@ -4883,127 +5286,127 @@ transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 43.57, 0
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="CloudA0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="ReliefBand21" type="Node3D" parent="WallReliefs_cloud"]
@@ -5011,127 +5414,127 @@ transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 70.43, 0
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="CloudA0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.63, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot0" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot1" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot2" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="CloudA3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 3.3, 0.06)
-mesh = SubResource("Mesh_128")
+mesh = SubResource("Mesh_147")
 material_override = ExtResource("m_wall")
 
 [node name="CloudB3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67, 3.12, 0.06)
-mesh = SubResource("Mesh_129")
+mesh = SubResource("Mesh_148")
 material_override = ExtResource("m_wall")
 
 [node name="CloudC3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 3.48, 0.06)
-mesh = SubResource("Mesh_130")
+mesh = SubResource("Mesh_149")
 material_override = ExtResource("m_vermilion")
 
 [node name="CloudD3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27, 3.05, 0.06)
-mesh = SubResource("Mesh_131")
+mesh = SubResource("Mesh_150")
 material_override = ExtResource("m_wall")
 
 [node name="CloudDot3" type="MeshInstance3D" parent="WallReliefs_cloud/ReliefBand21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79, 3.28, 0.1)
-mesh = SubResource("Mesh_132")
+mesh = SubResource("Mesh_151")
 material_override = ExtResource("m_gold_ink")
 
 [node name="WallReliefs_guardian" type="Node3D" parent="."]
@@ -5141,92 +5544,92 @@ transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 9, 0, -103.43)
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="GHead0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="GHead1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Sun" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 0.06)
-mesh = SubResource("Mesh_138")
+mesh = SubResource("Mesh_157")
 material_override = ExtResource("m_vermilion")
 
 [node name="SunRim" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57, 0.06)
-mesh = SubResource("Mesh_139")
+mesh = SubResource("Mesh_158")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Moon" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86, 0.06)
-mesh = SubResource("Mesh_140")
+mesh = SubResource("Mesh_159")
 material_override = ExtResource("m_wall")
 
 [node name="ReliefBand04" type="Node3D" parent="WallReliefs_guardian"]
@@ -5234,92 +5637,92 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 3, 0, 
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="GHead0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="GHead1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Sun" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 0.06)
-mesh = SubResource("Mesh_138")
+mesh = SubResource("Mesh_157")
 material_override = ExtResource("m_vermilion")
 
 [node name="SunRim" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57, 0.06)
-mesh = SubResource("Mesh_139")
+mesh = SubResource("Mesh_158")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Moon" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86, 0.06)
-mesh = SubResource("Mesh_140")
+mesh = SubResource("Mesh_159")
 material_override = ExtResource("m_wall")
 
 [node name="ReliefBand07" type="Node3D" parent="WallReliefs_guardian"]
@@ -5327,92 +5730,92 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 31, 0,
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="GHead0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="GHead1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Sun" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 0.06)
-mesh = SubResource("Mesh_138")
+mesh = SubResource("Mesh_157")
 material_override = ExtResource("m_vermilion")
 
 [node name="SunRim" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57, 0.06)
-mesh = SubResource("Mesh_139")
+mesh = SubResource("Mesh_158")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Moon" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86, 0.06)
-mesh = SubResource("Mesh_140")
+mesh = SubResource("Mesh_159")
 material_override = ExtResource("m_wall")
 
 [node name="ReliefBand10" type="Node3D" parent="WallReliefs_guardian"]
@@ -5420,92 +5823,92 @@ transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -7.43, 0
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="GHead0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="GHead1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Sun" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 0.06)
-mesh = SubResource("Mesh_138")
+mesh = SubResource("Mesh_157")
 material_override = ExtResource("m_vermilion")
 
 [node name="SunRim" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57, 0.06)
-mesh = SubResource("Mesh_139")
+mesh = SubResource("Mesh_158")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Moon" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86, 0.06)
-mesh = SubResource("Mesh_140")
+mesh = SubResource("Mesh_159")
 material_override = ExtResource("m_wall")
 
 [node name="ReliefBand13" type="Node3D" parent="WallReliefs_guardian"]
@@ -5513,92 +5916,92 @@ transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 57, 0, -104.93)
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="GHead0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="GHead1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Sun" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 0.06)
-mesh = SubResource("Mesh_138")
+mesh = SubResource("Mesh_157")
 material_override = ExtResource("m_vermilion")
 
 [node name="SunRim" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57, 0.06)
-mesh = SubResource("Mesh_139")
+mesh = SubResource("Mesh_158")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Moon" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86, 0.06)
-mesh = SubResource("Mesh_140")
+mesh = SubResource("Mesh_159")
 material_override = ExtResource("m_wall")
 
 [node name="ReliefBand16" type="Node3D" parent="WallReliefs_guardian"]
@@ -5606,92 +6009,92 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 57, 0,
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="GHead0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="GHead1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Sun" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 0.06)
-mesh = SubResource("Mesh_138")
+mesh = SubResource("Mesh_157")
 material_override = ExtResource("m_vermilion")
 
 [node name="SunRim" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57, 0.06)
-mesh = SubResource("Mesh_139")
+mesh = SubResource("Mesh_158")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Moon" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86, 0.06)
-mesh = SubResource("Mesh_140")
+mesh = SubResource("Mesh_159")
 material_override = ExtResource("m_wall")
 
 [node name="ReliefBand19" type="Node3D" parent="WallReliefs_guardian"]
@@ -5699,92 +6102,92 @@ transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 43.57, 0
 
 [node name="Slab" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 0)
-mesh = SubResource("Mesh_117")
+mesh = SubResource("Mesh_136")
 material_override = ExtResource("m_trim")
 
 [node name="RimL" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimR" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94, 3.1, 0)
-mesh = SubResource("Mesh_118")
+mesh = SubResource("Mesh_137")
 material_override = ExtResource("m_bronze")
 
 [node name="RimT" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.62, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="RimB" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.58, 0)
-mesh = SubResource("Mesh_119")
+mesh = SubResource("Mesh_138")
 material_override = ExtResource("m_bronze")
 
 [node name="GHead0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem0" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="GHead1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.48, 0.06)
-mesh = SubResource("Mesh_133")
+mesh = SubResource("Mesh_152")
 material_override = ExtResource("m_wall")
 
 [node name="GBody1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 3.1, 0.06)
-mesh = SubResource("Mesh_134")
+mesh = SubResource("Mesh_153")
 material_override = ExtResource("m_wall")
 
 [node name="GArm1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.31, 3.12, 0.06)
-mesh = SubResource("Mesh_135")
+mesh = SubResource("Mesh_154")
 material_override = ExtResource("m_wall")
 
 [node name="GShaft1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86, 3.1, 0.06)
-mesh = SubResource("Mesh_136")
+mesh = SubResource("Mesh_155")
 material_override = ExtResource("m_vermilion")
 
 [node name="GHem1" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86, 2.74, 0.08)
-mesh = SubResource("Mesh_137")
+mesh = SubResource("Mesh_156")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Sun" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 0.06)
-mesh = SubResource("Mesh_138")
+mesh = SubResource("Mesh_157")
 material_override = ExtResource("m_vermilion")
 
 [node name="SunRim" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.57, 0.06)
-mesh = SubResource("Mesh_139")
+mesh = SubResource("Mesh_158")
 material_override = ExtResource("m_gold_ink")
 
 [node name="Moon" type="MeshInstance3D" parent="WallReliefs_guardian/ReliefBand19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.86, 0.06)
-mesh = SubResource("Mesh_140")
+mesh = SubResource("Mesh_159")
 material_override = ExtResource("m_wall")
 
 [node name="VaultRibs" type="Node3D" parent="."]
@@ -5794,317 +6197,317 @@ transform = Transform3D(1, 0, -0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Rib45_0" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, -0.163542, 0, 0.163542, 0.986536, 45, 6.54749, -103.07)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib45_1" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, -0.108981, 0, 0.108981, 0.994044, 45, 7.07862, -99.21)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib45_2" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, -0.0545613, 0, 0.0545613, 0.99851, 45, 7.39462, -95.36)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib45_3" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 7.5, -91.5)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib45_4" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, 0.0545613, 0, -0.0545613, 0.99851, 45, 7.39462, -87.64)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib45_5" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, 0.108981, 0, -0.108981, 0.994044, 45, 7.07862, -83.79)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib45_6" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, 0.163542, 0, -0.163542, 0.986536, 45, 6.54749, -79.93)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib51_0" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, -0.163542, 0, 0.163542, 0.986536, 51, 6.54749, -103.07)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib51_1" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, -0.108981, 0, 0.108981, 0.994044, 51, 7.07862, -99.21)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib51_2" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, -0.0545613, 0, 0.0545613, 0.99851, 51, 7.39462, -95.36)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib51_3" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 7.5, -91.5)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib51_4" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, 0.0545613, 0, -0.0545613, 0.99851, 51, 7.39462, -87.64)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib51_5" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, 0.108981, 0, -0.108981, 0.994044, 51, 7.07862, -83.79)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib51_6" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, 0.163542, 0, -0.163542, 0.986536, 51, 6.54749, -79.93)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib57_0" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, -0.163542, 0, 0.163542, 0.986536, 57, 6.54749, -103.07)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib57_1" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, -0.108981, 0, 0.108981, 0.994044, 57, 7.07862, -99.21)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib57_2" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, -0.0545613, 0, 0.0545613, 0.99851, 57, 7.39462, -95.36)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib57_3" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57, 7.5, -91.5)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib57_4" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, 0.0545613, 0, -0.0545613, 0.99851, 57, 7.39462, -87.64)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib57_5" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, 0.108981, 0, -0.108981, 0.994044, 57, 7.07862, -83.79)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib57_6" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, 0.163542, 0, -0.163542, 0.986536, 57, 6.54749, -79.93)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib63_0" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, -0.163542, 0, 0.163542, 0.986536, 63, 6.54749, -103.07)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib63_1" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, -0.108981, 0, 0.108981, 0.994044, 63, 7.07862, -99.21)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib63_2" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, -0.0545613, 0, 0.0545613, 0.99851, 63, 7.39462, -95.36)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib63_3" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 7.5, -91.5)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib63_4" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, 0.0545613, 0, -0.0545613, 0.99851, 63, 7.39462, -87.64)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib63_5" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, 0.108981, 0, -0.108981, 0.994044, 63, 7.07862, -83.79)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib63_6" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, 0.163542, 0, -0.163542, 0.986536, 63, 6.54749, -79.93)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib69_0" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, -0.163542, 0, 0.163542, 0.986536, 69, 6.54749, -103.07)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib69_1" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, -0.108981, 0, 0.108981, 0.994044, 69, 7.07862, -99.21)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib69_2" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, -0.0545613, 0, 0.0545613, 0.99851, 69, 7.39462, -95.36)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib69_3" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, 7.5, -91.5)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib69_4" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, 0.0545613, 0, -0.0545613, 0.99851, 69, 7.39462, -87.64)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib69_5" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, 0.108981, 0, -0.108981, 0.994044, 69, 7.07862, -83.79)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib69_6" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, 0.163542, 0, -0.163542, 0.986536, 69, 6.54749, -79.93)
-mesh = SubResource("Mesh_141")
+mesh = SubResource("Mesh_160")
 material_override = ExtResource("m_brick")
 
 [node name="Rib48_0" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, -0.163542, 0, 0.163542, 0.986536, 48, 6.54749, -103.07)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib48_1" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, -0.108981, 0, 0.108981, 0.994044, 48, 7.07862, -99.21)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib48_2" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, -0.0545613, 0, 0.0545613, 0.99851, 48, 7.39462, -95.36)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib48_3" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 7.5, -91.5)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib48_4" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, 0.0545613, 0, -0.0545613, 0.99851, 48, 7.39462, -87.64)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib48_5" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, 0.108981, 0, -0.108981, 0.994044, 48, 7.07862, -83.79)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib48_6" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, 0.163542, 0, -0.163542, 0.986536, 48, 6.54749, -79.93)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib54_0" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, -0.163542, 0, 0.163542, 0.986536, 54, 6.54749, -103.07)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib54_1" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, -0.108981, 0, 0.108981, 0.994044, 54, 7.07862, -99.21)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib54_2" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, -0.0545613, 0, 0.0545613, 0.99851, 54, 7.39462, -95.36)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib54_3" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 7.5, -91.5)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib54_4" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, 0.0545613, 0, -0.0545613, 0.99851, 54, 7.39462, -87.64)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib54_5" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, 0.108981, 0, -0.108981, 0.994044, 54, 7.07862, -83.79)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib54_6" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, 0.163542, 0, -0.163542, 0.986536, 54, 6.54749, -79.93)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib60_0" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, -0.163542, 0, 0.163542, 0.986536, 60, 6.54749, -103.07)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib60_1" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, -0.108981, 0, 0.108981, 0.994044, 60, 7.07862, -99.21)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib60_2" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, -0.0545613, 0, 0.0545613, 0.99851, 60, 7.39462, -95.36)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib60_3" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 7.5, -91.5)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib60_4" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, 0.0545613, 0, -0.0545613, 0.99851, 60, 7.39462, -87.64)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib60_5" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, 0.108981, 0, -0.108981, 0.994044, 60, 7.07862, -83.79)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib60_6" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, 0.163542, 0, -0.163542, 0.986536, 60, 6.54749, -79.93)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib66_0" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, -0.163542, 0, 0.163542, 0.986536, 66, 6.54749, -103.07)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib66_1" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, -0.108981, 0, 0.108981, 0.994044, 66, 7.07862, -99.21)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib66_2" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, -0.0545613, 0, 0.0545613, 0.99851, 66, 7.39462, -95.36)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib66_3" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 7.5, -91.5)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib66_4" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.99851, 0.0545613, 0, -0.0545613, 0.99851, 66, 7.39462, -87.64)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib66_5" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.994044, 0.108981, 0, -0.108981, 0.994044, 66, 7.07862, -83.79)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="Rib66_6" type="MeshInstance3D" parent="VaultRibs/VaultTomb"]
 transform = Transform3D(1, 0, 0, 0, 0.986536, 0.163542, 0, -0.163542, 0.986536, 66, 6.54749, -79.93)
-mesh = SubResource("Mesh_142")
+mesh = SubResource("Mesh_161")
 material_override = ExtResource("m_brick")
 
 [node name="CoinScatter" type="Node3D" parent="."]
@@ -6114,7 +6517,7 @@ transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin00"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin01" type="Node3D" parent="CoinScatter"]
@@ -6122,7 +6525,7 @@ transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, 
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin01"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin02" type="Node3D" parent="CoinScatter"]
@@ -6130,7 +6533,7 @@ transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin02"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin03" type="Node3D" parent="CoinScatter"]
@@ -6138,7 +6541,7 @@ transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 52.1, 0.16
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin03"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin04" type="Node3D" parent="CoinScatter"]
@@ -6146,7 +6549,7 @@ transform = Transform3D(0.0871557, 0, -0.996195, 0, 1, 0, 0.996195, 0, 0.0871557
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin04"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin05" type="Node3D" parent="CoinScatter"]
@@ -6154,7 +6557,7 @@ transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin05"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin06" type="Node3D" parent="CoinScatter"]
@@ -6162,7 +6565,7 @@ transform = Transform3D(-0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, -0.939693, 
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin06"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin07" type="Node3D" parent="CoinScatter"]
@@ -6170,7 +6573,7 @@ transform = Transform3D(-0.642788, 0, -0.766044, 0, 1, 0, 0.766044, 0, -0.642788
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin07"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin08" type="Node3D" parent="CoinScatter"]
@@ -6178,7 +6581,7 @@ transform = Transform3D(-0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, -0.34202, 
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin08"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin09" type="Node3D" parent="CoinScatter"]
@@ -6186,7 +6589,7 @@ transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin09"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin10" type="Node3D" parent="CoinScatter"]
@@ -6194,7 +6597,7 @@ transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 46
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin11" type="Node3D" parent="CoinScatter"]
@@ -6202,7 +6605,7 @@ transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin12" type="Node3D" parent="CoinScatter"]
@@ -6210,7 +6613,7 @@ transform = Transform3D(-1, 0, -1.22465e-16, 0, 1, 0, 1.22465e-16, 0, -1, 46.9, 
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")
 
 [node name="Coin13" type="Node3D" parent="CoinScatter"]
@@ -6218,5 +6621,5 @@ transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 45.8, 0.
 
 [node name="CoinDisc" type="MeshInstance3D" parent="CoinScatter/Coin13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("Mesh_143")
+mesh = SubResource("Mesh_162")
 material_override = ExtResource("m_bronze")

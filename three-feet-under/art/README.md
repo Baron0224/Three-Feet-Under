@@ -275,3 +275,27 @@ over v3.1). Two additions:
   probe (test renamed from `_decor_v4_probe.gd`, removed after passing) fails=0.
 - Render: 8 new 1080p shots (`v4_room04/granary/well/stove/room08/tower/
   gold_hall/gold_tomb`) archived in 项目进度刻画图片/10-明器描金-20261107/.
+
+## Decor v5: mingqi round 2 — pigpen, hunping, erbei, door stop (2026-11-07)
+
+- Scene now 163 meshes / 112 placements (v4 144/101). Four new groups:
+  - `Pigpens` x2 (Room06 west corner, Room09 west edge): clay pigpen
+    ~1.3x1.0m with low walls, trough, and two stacked clay pigs (10 parts each).
+  - `Hunpings` x2 (Room04, Room09 NE): five-jar soul jar ~0.6m tall —
+    clay jar body + rim + lid + bronze lid knob + 4 mini jars on the shoulder.
+  - `Erbeis` x4: vermilion lacquer ear cups with gold rim — 2 on the Room11
+    offering altar top (y 0.745) flanking the bronze bowls, 1 on the floor by
+    the Room06 seal pedestal, 1 by the Room09 one.
+  - `DoorStops` x3: anti-tomb-raider stone bars leaning against walls —
+    vertical bar (0.5x2.4x0.34, rock) tilted pitch 25° so the top tips toward
+    the wall + trim chock at the foot (part-level pitch support reused from the
+    vault ribs). Room11 north wall / Room09 south wall / Room11 west wall.
+- Generator: four new part lists (`PIGPEN`, `HUNPING`, `ERBEI`, `STOPPER`), four
+  `GROUPS` entries, 11 new `PLACEMENTS` rows. STOPPER's bar demonstrates
+  per-part pitch inside the (name, spec) tuple, e.g.
+  `("Bar", ("box", (0.5,2.4,0.34), (0,1.2,0), "rock", 0.0, 25.0))`.
+- Headless checks: scale audit 1582 / 375 / 1120, failures=0; v5 structural
+  probe (58 meshes across the 4 groups, no missing materials, world AABBs sane)
+  passes.
+- Render: 6 new 1080p shots (`v5_pigpen/hunping/erbei_altar/erbei_floor/
+  stopper_tomb/stopper09`) archived in 项目进度刻画图片/11-明器二轮-20261107/.

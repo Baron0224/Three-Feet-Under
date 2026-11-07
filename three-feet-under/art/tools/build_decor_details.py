@@ -338,6 +338,47 @@ STOVE = [
     ("GiltFront", ("box", (0.66, 0.03, 0.04), (0, 0.22, -0.25), "gold_ink")),
 ]
 
+# ---- 陶猪圈（东汉明器：圈栏 + 食槽 + 两头陶猪）约 1.3 x 1.0 m ----
+PIGPEN = [
+    ("Floor", ("box", (1.3, 0.06, 1.0), (0, 0.03, 0), "clay")),
+    ("WallL", ("box", (0.08, 0.28, 1.06), (-0.61, 0.17, 0), "clay")),
+    ("WallR", ("box", (0.08, 0.28, 1.06), (0.61, 0.17, 0), "clay")),
+    ("WallB", ("box", (1.3, 0.28, 0.08), (0, 0.17, -0.46), "clay")),
+    ("WallF", ("box", (1.0, 0.20, 0.08), (0, 0.13, 0.46), "clay")),
+    ("Trough", ("box", (0.9, 0.06, 0.14), (0, 0.09, 0.36), "trim")),
+    ("Pig1Body", ("box", (0.34, 0.20, 0.20), (-0.15, 0.27, -0.12), "clay")),
+    ("Pig1Head", ("box", (0.12, 0.10, 0.10), (-0.02, 0.30, 0.02), "clay")),
+    ("Pig2Body", ("box", (0.30, 0.17, 0.17), (0.25, 0.25, -0.20), "clay")),
+    ("Pig2Head", ("box", (0.11, 0.09, 0.09), (0.37, 0.28, -0.08), "clay")),
+]
+
+# ---- 谷仓罐/魂瓶（东汉堆塑五联罐）约 0.6 m ----
+HUNPING = [
+    ("JarBody", ("cyl", (0.34, 0.22, 0.18, 12), (0, 0.28, 0), "clay")),
+    ("Rim", ("cyl", (0.05, 0.17, 0.17, 12), (0, 0.48, 0), "clay")),
+    ("Lid", ("cyl", (0.10, 0.20, 0.20, 12), (0, 0.55, 0), "clay")),
+    ("LidTop", ("cyl", (0.06, 0.07, 0.07, 8), (0, 0.63, 0), "bronze")),
+    ("MiniN", ("cyl", (0.12, 0.09, 0.09, 8), (0, 0.50, -0.17), "clay")),
+    ("MiniS", ("cyl", (0.12, 0.09, 0.09, 8), (0, 0.50, 0.17), "clay")),
+    ("MiniE", ("cyl", (0.12, 0.09, 0.09, 8), (0.17, 0.50, 0), "clay")),
+    ("MiniW", ("cyl", (0.12, 0.09, 0.09, 8), (-0.17, 0.50, 0), "clay")),
+]
+
+# ---- 漆耳杯（朱漆描金，汉代饮酒器，单件）约 0.3 m ----
+ERBEI = [
+    ("Cup", ("box", (0.24, 0.05, 0.15), (0, 0.025, 0), "vermilion")),
+    ("Rim", ("box", (0.26, 0.012, 0.17), (0, 0.053, 0), "gold_ink")),
+    ("EarL", ("box", (0.05, 0.03, 0.09), (-0.145, 0.04, 0), "trim")),
+    ("EarR", ("box", (0.05, 0.03, 0.09), (0.145, 0.04, 0), "trim")),
+]
+
+# ---- 顶门石（防盗石杠：竖直石杠绕 X 倾斜 25°，底部贴地、顶部倒向墙）约 2.4 m ----
+# 注意：pitch>0 时顶部倒向局部 +z；放置 yaw 需让局部 +z 指向墙面方向。
+STOPPER = [
+    ("Bar", ("box", (0.5, 2.4, 0.34), (0, 1.2, 0), "rock", 0.0, 25.0)),
+    ("Chock", ("box", (0.7, 0.1, 0.7), (0, 0.05, 0), "trim")),
+]
+
 
 GROUPS = {
     "lion": ("StoneLions", LION),
@@ -357,6 +398,10 @@ GROUPS = {
     "tower": ("Towers", TOWER),
     "well": ("Wells", WELL),
     "stove": ("Stoves", STOVE),
+    "pigpen": ("Pigpens", PIGPEN),
+    "hunping": ("Hunpings", HUNPING),
+    "erbei": ("Erbeis", ERBEI),
+    "stopper": ("DoorStops", STOPPER),
     "relief_procession": ("WallReliefs", relief_band(6.0, "procession")),
     "relief_cloud": ("WallReliefs", relief_band(6.0, "cloud")),
     "relief_guardian": ("WallReliefs", relief_band(6.0, "guardian")),
@@ -508,6 +553,25 @@ for i, (x, z, yaw) in enumerate([(58.0, -25.5, 20), (62.5, -35.0, -15)]):
 # 06 封印室西侧空角 / 09 封印室北侧空角：陶灶各一
 PLACEMENTS.append(("Stove06", "stove", (-51.5, 0.15, -85.0), 45))
 PLACEMENTS.append(("Stove09", "stove", (52.5, 0.15, -54.0), 90))
+
+# ---- 第二轮明器：陶猪圈 / 谷仓罐魂瓶 / 漆耳杯 / 顶门石 ----
+# 猪圈：06 西北空角 + 09 西南空角
+PLACEMENTS.append(("Pigpen06", "pigpen", (-49.0, 0.15, -94.0), 30))
+PLACEMENTS.append(("Pigpen09", "pigpen", (51.5, 0.15, -63.0), -20))
+# 魂瓶：04 东侧空地 + 09 东北角
+PLACEMENTS.append(("Hunping04", "hunping", (-49.0, 0.15, -38.5), 15))
+PLACEMENTS.append(("Hunping09", "hunping", (67.5, 0.15, -55.5), -30))
+# 漆耳杯：祭案台面（Altar11 顶面 0.72）两杯 + 封印台前地面两杯（y=0.175 贴地 0.15）
+PLACEMENTS.append(("ErbeiAltarA", "erbei", (51.1, 0.745, -91.5), 90))
+PLACEMENTS.append(("ErbeiAltarB", "erbei", (54.5, 0.745, -91.5), 90))
+PLACEMENTS.append(("Erbei06", "erbei", (-35.6, 0.175, -87.8), 10))
+PLACEMENTS.append(("Erbei09", "erbei", (59.8, 0.175, -62.2), -20))
+# 顶门石（石杠斜靠墙）：局部 +z 指向墙面方向。
+# 11 北墙内面 z=-105.0 → 墙在 -z，yaw=180；09 南墙内面 z=-52.5 → 墙在 +z，yaw=0；
+# 11 西墙内面 x=43.5 → 墙在 -x，yaw=-90。
+PLACEMENTS.append(("StopperTombN", "stopper", (52.0, 0.15, -104.4), 180))
+PLACEMENTS.append(("Stopper09S", "stopper", (60.0, 0.15, -53.4), 0))
+PLACEMENTS.append(("Stopper11W", "stopper", (44.3, 0.15, -91.5), -90))
 
 # ------------------------------------------------------------------- emit .tscn
 sub_by_key = {}
