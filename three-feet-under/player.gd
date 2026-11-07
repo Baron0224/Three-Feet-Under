@@ -19,6 +19,7 @@ const MOUSE_SENSITIVITY := 0.002
 const RESTART_DELAY := 1.2
 const ABYSS_DEATH_Y := -5.0
 const FootstepSFX := preload("res://footsteps.gd")
+const TombAmbience := preload("res://ambience.gd")
 
 @onready var camera: Camera3D = $Camera3D
 @onready var body_collision: CollisionShape3D = $CollisionShape3D
@@ -41,6 +42,7 @@ var _capture_grace_until_msec := 0
 var _footsteps: AudioStreamPlayer3D
 var _step_accum := 0.0
 var _was_airborne := false
+var _ambience: Node
 
 
 func _ready() -> void:
@@ -57,6 +59,9 @@ func _ready() -> void:
 	_footsteps = FootstepSFX.new()
 	_footsteps.name = "FootstepSFX"
 	add_child(_footsteps)
+	_ambience = TombAmbience.new()
+	_ambience.name = "TombAmbience"
+	add_child(_ambience)
 	# Editor F6 often fires FOCUS_OUT during startup; grace + deferred capture keeps look working.
 	_capture_grace_until_msec = Time.get_ticks_msec() + 750
 	call_deferred("_set_mouse_capture", true)
@@ -193,6 +198,10 @@ func _physics_process(delta: float) -> void:
 	velocity.x = direction_2d.x * speed
 	velocity.z = direction_2d.y * speed
 	move_and_slide()
+	var ambience := _ambience as TombAmbience
+	if ambience:
+		# Downward speed -> whoosh intensity (0 on the ground, ramps in a fall).
+		ambience.set_fall_speed(maxf(-fall_speed, 0.0))
 	if _in_abyss_death_zone():
 		_die()
 

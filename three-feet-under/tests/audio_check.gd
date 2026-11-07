@@ -21,9 +21,11 @@ func _init() -> void:
 		_check_stream(path)
 	_check_stream("res://audio/sfx/stone_door.ogg")
 	_check_footstep_script()
-	_check_source_hook("res://player.gd", ["FootstepSFX", "play_kind", "_step_accum"])
-	_check_source_hook("res://door.gd", ["stone_door.ogg", "_sfx.play"])
-	_check_source_hook("res://dual_seal_door.gd", ["stone_door.ogg", "_sfx.play"])
+	_check_ambience_script()
+	_check_source_hook("res://player.gd", ["FootstepSFX", "play_kind", "_step_accum", "TombAmbience", "set_fall_speed"])
+	_check_source_hook("res://door.gd", ["stone_door.ogg", "_sfx.play", "_sfx_thud"])
+	_check_source_hook("res://dual_seal_door.gd", ["stone_door.ogg", "_sfx.play", "_sfx_thud"])
+	_check_source_hook("res://clue_tablet.gd", ["TABLET_SCRAPE", "_sfx.play", "pitch_scale = 0.55 if reading"])
 	print("AUDIO CHECK: %d assertions, failures=%d" % [_checks, _failures])
 	quit(1 if _failures > 0 else 0)
 
@@ -55,6 +57,25 @@ func _check_footstep_script() -> void:
 	if not node.has_method("play_kind"):
 		_failures += 1
 		printerr("AUDIO FAIL: footsteps.gd lacks play_kind()")
+	node.free()
+
+
+func _check_ambience_script() -> void:
+	_checks += 1
+	var script := load("res://ambience.gd")
+	if script == null or not (script is GDScript):
+		_failures += 1
+		printerr("AUDIO FAIL: ambience.gd did not load")
+		return
+	var node: Node = (script as GDScript).new()
+	_checks += 1
+	if not (node is AudioStreamPlayer):
+		_failures += 1
+		printerr("AUDIO FAIL: ambience.gd does not extend AudioStreamPlayer")
+	_checks += 1
+	if not node.has_method("set_fall_speed"):
+		_failures += 1
+		printerr("AUDIO FAIL: ambience.gd lacks set_fall_speed()")
 	node.free()
 
 

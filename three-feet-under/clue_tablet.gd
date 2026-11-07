@@ -1,5 +1,7 @@
 extends MeshInstance3D
 
+const TABLET_SCRAPE := preload("res://audio/sfx/footstep/footstep_stone_1.ogg")
+
 @export var read_distance: float = 2.0
 @export var leave_distance: float = 2.2
 @export var door_path: NodePath = NodePath("../Door")
@@ -10,10 +12,16 @@ extends MeshInstance3D
 var can_read := false
 var reading := false
 var _door_unlocked := false
+var _sfx: AudioStreamPlayer3D
 
 
 func _ready() -> void:
 	prompt.visible = false
+	_sfx = AudioStreamPlayer3D.new()
+	_sfx.stream = TABLET_SCRAPE
+	_sfx.volume_db = -4.0
+	_sfx.max_distance = 8.0
+	add_child(_sfx)
 
 
 func _process(_delta: float) -> void:
@@ -63,6 +71,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if reading or can_read:
 			reading = not reading
 			player.set_reading(reading)
+			# Stone scrape: deep slow pitch when opening, shorter when closing.
+			if _sfx:
+				_sfx.pitch_scale = 0.55 if reading else 0.85
+				_sfx.play()
 			if reading and not _door_unlocked:
 				_unlock_door()
 			get_viewport().set_input_as_handled()

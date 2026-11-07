@@ -49,6 +49,7 @@ var _blue_area: Area3D
 var _prompt: Label
 var _player: Node3D
 var _sfx: AudioStreamPlayer3D
+var _sfx_thud: AudioStreamPlayer3D
 
 var _bronze: StandardMaterial3D
 var _bronze_dark: StandardMaterial3D
@@ -67,6 +68,13 @@ func _ready() -> void:
 		_sfx.pitch_scale = 0.75
 		_sfx.max_distance = 28.0
 		add_child(_sfx)
+		# Low-pitched finish thud when both leaves stop in place.
+		_sfx_thud = AudioStreamPlayer3D.new()
+		_sfx_thud.stream = STONE_DOOR
+		_sfx_thud.volume_db = -1.0
+		_sfx_thud.pitch_scale = 0.42
+		_sfx_thud.max_distance = 28.0
+		add_child(_sfx_thud)
 
 
 func _notification(what: int) -> void:
@@ -197,6 +205,8 @@ func _process(delta: float) -> void:
 			if _right_body:
 				_right_body.collision_layer = 0
 				_right_body.collision_mask = 0
+			if _sfx_thud:
+				_sfx_thud.play()
 			door_opened.emit()
 		return
 

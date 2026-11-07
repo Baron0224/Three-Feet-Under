@@ -18,7 +18,17 @@ authors here anyway.
 - **Stone Door** by bonebrah, **CC0** — a short, deep stone-door slide, good
   for a stone door or hidden room.
 - Source: https://opengameart.org/content/stone-door
-- Used: sliding doors (`door.gd`, `dual_seal_door.gd`).
+- Used: sliding doors (`door.gd`, `dual_seal_door.gd`), plus pitch-shifted
+  (0.42×) as the finish thud when a door stops in place, and (0.55–0.85×)
+  replicas are reused from the footstep samples for the tablet scrape.
+
+## Procedural ambience (no samples)
+
+`ambience.gd` generates the tomb ambience at runtime with an
+`AudioStreamGenerator` (no audio files): a low brown-noise rumble with a
+16-second swell, random water drips (decaying sine pings) and a fall-whoosh
+driven by the player's downward speed. It is original code by this project and
+needs no attribution.
 
 ## License
 
