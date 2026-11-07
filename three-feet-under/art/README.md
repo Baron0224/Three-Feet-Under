@@ -340,3 +340,56 @@ Review & checks:
 Still coarse: procedural low-poly (visible facets up close), procedural noise
 instead of scanned textures, no weathering on the vermilion/gold/stone materials,
 no human playtest.
+
+## Wall decoration fit pass (2026-11-07)
+
+Playtest report: several wall decorations read as "a slab sticking out of the
+wall". Root causes and fixes, all in `tools/build_decor_details.py` unless noted:
+
+- **Relief bands no longer hover.** The band is a single 6 m panel; it used to be
+  placed every 6 m regardless of door openings, so HallS (x=3) hung 2.8 m and
+  TombE (x=70.43, z=-101) 2.31 m over corridor gaps. Placement is now a `RELIEF_SPOTS`
+  list (28 bands) validated against `WALL_RUNS`: `check_band_fit()` keeps 0.3 m of
+  solid wall at both ends and raises `SystemExit` at build time if a band would
+  cross an opening.
+- **Shallow, inset relief.** Slab is now 5 cm thick, back face -0.03 (buried 3 cm
+  in the wall), front face +0.02; bronze rims shrink to 6 cm; motifs are scaled to
+  4.5 cm thick at `z = 0.015 + 0.3 * old_z`. Total protrusion dropped from ~20 cm
+  to 9.7 cm. The sun/moon discs used to be cylinders lying flat (axis on Y, radius
+  0.30) poking 30 cm through the wall; they are now thin discs pitched 90 degrees
+  flat against the face.
+- **Niches sit on the wall.** Frame depth 16 -> 8 cm, back plate 3 cm flush,
+  origin on the wall face (total 11 cm). `NicheTmbE`/`NicheTmbW` yaw were wrong
+  (one faced into the wall, one whole niche was buried).
+- **Door headers fill the void above doors.** Doorways are full-height openings
+  while corridors stop at 4.65 m and halls at 7.65 m, so from inside a hall you
+  looked straight into a black void above each door. Six headers
+  (`doorhead_*`, y 4.60-7.65, 0.38 thick, `wall` material) plus a `trim`+`bronze`
+  lintel now close them; generated from `DOOR_GAPS`.
+- **Door stop moved out of the doorway**: `Stopper11W` (44.3, -87.5), and the
+  cold-grey `rock` material replaced by warm `materials/stone_dark.tres` for both
+  the stop bar and niche backs (it read as blue metal under torch light).
+- **New material `materials/relief.tres`**: world_stone with `stone_color`
+  (0.44, 0.41, 0.36), 4.0x1.4 m blocks and 4 mm joints — a dressed panel one step
+  lighter than the wall, without the small-brick pattern that moired at distance.
+- **Shader AA** (`shaders/world_stone.gdshader`): high-frequency grain is faded by
+  `fwidth` before it feeds the bump, and block seams fade out when a cell covers
+  under ~1 px (`cell_px` 0.28-1.1). Both removed a regular diagonal stripe artifact
+  on grazing/thin surfaces.
+- **Shadow acne**: the player torch `shadow_bias` went 0.1 -> 0.4 in
+  `tomb_corridor.tscn` and `main.tscn`; stripes on thin wall-mounted panels are
+  gone, shadows are still cast.
+
+Checks:
+
+- New `tests/decor_wall_fit_check.gd` loads `tomb_corridor.tscn`, treats 2-9 m
+  tall BoxMeshes as walls (183), takes the subtree AABB of every `ReliefBand*` /
+  `Niche*` (38 targets), samples 25x3 points per side 0.012 m off the face and
+  requires >= 0.995 wall coverage with protrusion <= 0.15 m. Latest:
+  `DECOR FIT: targets=38 walls=183 unsupported=0 oversized=0`.
+- Headless scale audit: 1718 assertions / 375 architectural meshes / 1256
+  human-scale decor meshes, failures=0; player_controls 70 checks failures=0.
+- `tools/capture_wall_fix.gd` (env `TFU_WALLFIX_OUTPUT`, real OpenGL window only)
+  renders 8 shots: hall south/north door, hall south wall, tomb east/west door,
+  niche close-up, band close-up, door stop. Archived in
+  项目进度刻画图片/14-墙面装饰贴合修复-20261107/.

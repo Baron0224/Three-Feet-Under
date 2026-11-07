@@ -2490,6 +2490,7 @@ current = true
 [node name="SpotLight3D" type="SpotLight3D" parent="player/Camera3D" unique_id=1471761672]
 light_energy = 3.0
 shadow_enabled = true
+shadow_bias = 0.4
 spot_range = 12.0
 
 [node name="InteractRay" type="RayCast3D" parent="player/Camera3D" unique_id=2079870308]
