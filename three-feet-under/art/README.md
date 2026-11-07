@@ -196,3 +196,36 @@ Second dressing pass on top of the 1.5x architecture, same pipeline and rules as
   meshes / 413 human-scale decor meshes, failures=0; every DecorDetails mesh (v1 and
   v2 alike) is excluded from the environment-scale assertion and gets a human-scale
   range check instead (0.2-3.0, never exactly 1.5).
+
+## Decor v3: Eastern-Han Chinese style (2026-11-07)
+
+Third pass turns the tomb chamber and great hall toward an Eastern Han feel, same
+pipeline and rules; `decor_details.tscn` now holds 93 placements / 103
+de-duplicated meshes (v3 adds 44 placements / 36 meshes / 499 parts).
+
+- **Barrel vault ribs (`VaultRibs`)**: five stone rib bands (x=45..69) plus four
+  narrower clay-trim infill boards, each following a circular arch (spring 6.2 m,
+  rise 1.3 m, apex 7.5 m, half-span 13.5 m) across the 27x27 m tomb chamber. Each
+  segment is a pitch-rotated box; pieces carry their own yaw/pitch in the scene
+  (new `part_tform()` in the generator).
+- **Pictorial relief bands (`WallReliefs`)**: 22 cast-stone bands (6.0 x 1.02 x
+  0.10 m, trims + bronze rims, motifs protruding 0.06 m) at ~2.5-3.7 m height on
+  the great hall walls (north/south/east/west) and tomb chamber walls, three
+  rotating patterns: `procession` (chariot + horse + driver), `cloud` (4 S-curves),
+  `guardian` (paired door guards with spears + sun/moon discs).
+- **Boshan censers (`BoshanBurners`)**: 2 bronze hill-censer altars (base, stem,
+  bowl, layered lid + knob + fins, ~0.84 m), one on the hall column base, one in
+  the tomb chamber.
+- **Clay figurines (`ClayFigurines`)**: 5 clay tomb figurines (~0.6 m; base,
+  skirt, body, head, hat, arms), two on hall column bases, three lining the tomb
+  chamber walls.
+- **Coin scatter (`CoinScatter`)**: 14 bronze wuzhu-style coins (0.025 m-thick
+  discs, 0.11 m radius, lying flat at floor level), scattered near the offering
+  altar and tomb chamber west.
+- Placement notes: relief bands hug inner wall faces with a 0.02 m standoff
+  (yaw 0/90/-90 face inward; yaw 180 places origin 0.07 m inside the wall);
+  column-base props sit at y=0.605 (top of the 2.1 m column base).
+- `art/tools/capture_decor_review.gd` now renders 21 shots (added tomb_axis,
+  vault_look, relief_hall, relief_tomb, boshan_close, figurine_close, coin_close).
+- Headless check: scale audit now reports 1374 assertions / 375 architectural
+  meshes / 912 human-scale decor meshes, failures=0.

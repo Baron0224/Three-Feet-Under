@@ -52,6 +52,13 @@ func capture() -> void:
 		["altar_shot", Vector3(50.4, 1.7, -91.5), Vector3(52.8, 0.8, -91.5)],
 		["rack_close", Vector3(9.5, 1.45, -84.8), Vector3(9.5, 0.85, -80.6)],
 		["tomb_vessel", Vector3(53.0, 1.4, -101.0), Vector3(46.0, 0.5, -103.0)],
+		["tomb_axis", Vector3(44.5, 2.2, -91.5), Vector3(64.0, 2.6, -91.5)],
+		["vault_look", Vector3(57.0, 3.0, -91.5), Vector3(57.0, 7.0, -91.5)],
+		["relief_hall", Vector3(20.0, 3.4, -99.0), Vector3(20.0, 3.1, -103.43)],
+		["relief_tomb", Vector3(65.0, 3.4, -91.5), Vector3(69.0, 3.1, -91.5)],
+		["boshan_close", Vector3(1.5, 1.0, -94.3), Vector3(1.5, 0.65, -98.25)],
+		["figurine_close", Vector3(29.0, 1.0, -88.5), Vector3(28.5, 0.6, -84.75)],
+		["coin_close", Vector3(51.9, 0.9, -89.0), Vector3(52.6, 0.17, -89.5)],
 	]
 	for shot in shots:
 		camera.position = shot[1]

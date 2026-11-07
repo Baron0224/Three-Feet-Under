@@ -181,6 +181,89 @@ GUARD = [
     ("SpearBase", ("cyl", (0.08, 0.06, 0.06, 8), (0.46, 0.15, 0.08), "bronze")),
 ]
 
+# ---- 东汉画像石浮雕带：墙面长条浮雕板 + 立体纹样 ----
+# 每段面板宽 w（沿墙方向），高约 1.0m，厚度 0.10m，侧面压出纹样方块。
+def relief_band(w, pattern):
+    """w: band width in metres. pattern: 'procession' | 'cloud' | 'guardian'.
+    Returns parts in local coords: origin at wall face, +z 朝室内（由 yaw 决定）."""
+    parts = [
+        ("Slab", ("box", (w, 1.02, 0.10), (0, 3.10, 0), "trim")),
+        ("RimL", ("box", (0.12, 1.06, 0.14), (-w / 2 + 0.06, 3.10, 0), "bronze")),
+        ("RimR", ("box", (0.12, 1.06, 0.14), (w / 2 - 0.06, 3.10, 0), "bronze")),
+        ("RimT", ("box", (w, 0.12, 0.14), (0, 3.62, 0), "bronze")),
+        ("RimB", ("box", (w, 0.12, 0.14), (0, 2.58, 0), "bronze")),
+    ]
+    if pattern == "procession":
+        # 车马出行：两轮车 + 一马 + 驭者，块状剪影，沿墙方向排开
+        parts += [
+            ("WheelL", ("box", (0.80, 0.80, 0.16), (-w / 2 + 1.1, 3.10, 0.06), "wall")),
+            ("WheelR", ("box", (0.80, 0.80, 0.16), (-w / 2 + 2.2, 3.10, 0.06), "wall")),
+            ("Cart", ("box", (1.30, 0.55, 0.14), (-w / 2 + 1.65, 3.42, 0.06), "wall")),
+            ("Shaft", ("box", (1.8, 0.10, 0.10), (0.1, 3.10, 0.06), "wall")),
+            ("HorseBody", ("box", (1.6, 0.62, 0.16), (1.35, 3.10, 0.06), "wall")),
+            ("HorseHead", ("box", (0.55, 0.40, 0.14), (2.35, 3.25, 0.06), "wall")),
+            ("HorseLeg1", ("box", (0.14, 0.55, 0.12), (1.0, 2.85, 0.06), "wall")),
+            ("HorseLeg2", ("box", (0.14, 0.55, 0.12), (1.7, 2.85, 0.06), "wall")),
+            ("Driver", ("box", (0.35, 0.75, 0.14), (2.5, 3.30, 0.06), "wall")),
+        ]
+    elif pattern == "cloud":
+        # 云气纹：四组 S 形云头 + 小圆点，抽象回旋
+        n = 4
+        step = (w - 0.8) / n
+        for i in range(n):
+            cx = -w / 2 + 0.65 + i * step
+            parts += [
+                ("CloudA%d" % i, ("box", (0.55, 0.30, 0.14), (cx - 0.15, 3.30, 0.06), "wall")),
+                ("CloudB%d" % i, ("box", (0.42, 0.34, 0.14), (cx + 0.12, 3.12, 0.06), "wall")),
+                ("CloudC%d" % i, ("box", (0.24, 0.20, 0.14), (cx + 0.05, 3.48, 0.06), "wall")),
+                ("CloudD%d" % i, ("box", (0.14, 0.14, 0.14), (cx - 0.28, 3.05, 0.06), "wall")),
+            ]
+    elif pattern == "guardian":
+        # 双武士/门吏剪影：左右对称
+        cx = w / 2
+        for sign in (1, -1):
+            ox = sign * cx * 0.62
+            parts += [
+                ("GHead%d" % (0 if sign > 0 else 1), ("box", (0.42, 0.40, 0.14), (ox, 3.48, 0.06), "wall")),
+                ("GBody%d" % (0 if sign > 0 else 1), ("box", (0.70, 0.72, 0.16), (ox, 3.10, 0.06), "wall")),
+                ("GArm%d" % (0 if sign > 0 else 1), ("box", (0.30, 0.55, 0.14), (ox + sign * 0.45, 3.12, 0.06), "wall")),
+                ("GShaft%d" % (0 if sign > 0 else 1), ("box", (0.08, 1.1, 0.10), (ox + sign * 1.0, 3.10, 0.06), "bronze")),
+            ]
+        parts += [
+            ("Sun", ("cyl", (0.10, 0.30, 0.30, 12), (0, 3.45, 0.06), "wall")),
+            ("Moon", ("cyl", (0.10, 0.22, 0.22, 12), (0, 2.86, 0.06), "wall")),
+        ]
+    return parts
+
+
+# ---- 博山炉（汉代熏香炉）：底盘 + 立柱 + 炉身 + 仙山峰形盖 ----
+BOSHAN = [
+    ("Base", ("cyl", (0.06, 0.30, 0.30, 14), (0, 0.03, 0), "bronze")),
+    ("Stem", ("cyl", (0.34, 0.05, 0.05, 8), (0, 0.23, 0), "bronze")),
+    ("Bowl", ("cyl", (0.16, 0.20, 0.12, 12), (0, 0.46, 0), "bronze")),
+    ("LidLow", ("cyl", (0.12, 0.22, 0.18, 12), (0, 0.60, 0), "bronze")),
+    ("LidPeak", ("cyl", (0.16, 0.12, 0.08, 10), (0, 0.72, 0), "bronze")),
+    ("Knob", ("cyl", (0.06, 0.04, 0.04, 8), (0, 0.84, 0), "bronze")),
+    ("FinL", ("box", (0.06, 0.14, 0.06), (-0.12, 0.66, 0), "bronze")),
+    ("FinR", ("box", (0.06, 0.14, 0.06), (0.12, 0.66, 0), "bronze")),
+]
+
+# ---- 陶俑（随葬小人）----
+FIGURINE = [
+    ("Base", ("box", (0.16, 0.05, 0.16), (0, 0.025, 0), "clay")),
+    ("Skirt", ("box", (0.13, 0.22, 0.12), (0, 0.14, 0), "clay")),
+    ("Body", ("box", (0.10, 0.22, 0.09), (0, 0.35, 0), "clay")),
+    ("Head", ("box", (0.09, 0.11, 0.09), (0, 0.50, 0), "clay")),
+    ("Hat", ("box", (0.11, 0.035, 0.11), (0, 0.57, 0), "clay")),
+    ("ArmL", ("box", (0.03, 0.16, 0.08), (-0.07, 0.36, 0), "clay")),
+    ("ArmR", ("box", (0.03, 0.16, 0.08), (0.07, 0.36, 0), "clay")),
+]
+
+# ---- 五铢钱（几枚小铜钱平铺，局部 yaw 旋转、pitch 90° 平放）----
+def coin(x, z, ry):
+    return ("Coin", ("cyl", (0.025, 0.11, 0.11, 12), (x, 0.16, z), "bronze"), ry, 90)
+
+
 GROUPS = {
     "lion": ("StoneLions", LION),
     "pedestal_gold": ("SealPedestals", PEDESTAL_GOLD),
@@ -193,7 +276,53 @@ GROUPS = {
     "niche": ("WallNiches", NICHE),
     "altar": ("OfferingAltar", ALTAR),
     "spearrack": ("SpearRacks", SPEARRACK),
+    "boshan": ("BoshanBurners", BOSHAN),
+    "figurine": ("ClayFigurines", FIGURINE),
+    "relief_procession": ("WallReliefs", relief_band(6.0, "procession")),
+    "relief_cloud": ("WallReliefs", relief_band(6.0, "cloud")),
+    "relief_guardian": ("WallReliefs", relief_band(6.0, "guardian")),
 }
+
+# ---- 券顶（拱券肋骨，画在 11 主墓室天花下）----
+# 拱：半跨 s=13.5（墓室宽 27 的中间段），矢高 rise=1.3，起拱线 y_spring=6.2，
+# 圆心在 (z_mid, y_spring - d)，R = d + rise，s^2 = R^2 - d^2。
+def vault_rib_parts(x_r, segment_centers, spring=6.2, rise=1.3, half_span=13.5,
+                    rib_len=0.30, seg_w=4.0, seg_h=0.12, mat="wall", z_center=0.0):
+    """Return parts of one arch rib at x=x_r (world X). segment_centers: z offsets."""
+    s = half_span
+    d = (s * s - rise * rise) / (2.0 * rise)
+    R = d + rise
+    parts = []
+    for k, zk in enumerate(segment_centers):
+        yk = spring + (math.sqrt(R * R - zk * zk) - d)  # arc height at zk
+        pitch = math.degrees(math.atan(zk / math.sqrt(R * R - zk * zk)))
+        parts.append(("Rib%d_%d" % (int(round(x_r)), k),
+                      ("box", (rib_len, seg_h, seg_w), (x_r, yk, z_center + zk), mat,
+                       0.0, pitch)))
+    return parts
+
+
+VAULT_Z = [-11.57, -7.71, -3.86, 0.0, 3.86, 7.71, 11.57]
+# 五条肋骨（x=45/51/57/63/69）+ 四条肋间抹板（x=48/54/60/66），连成连续拱面
+# 拱心 z => 墓室中心 z=-91.5（z_center 平移全部肋段），x 已是世界绝对 X
+VAULT_RIBS = []
+for xr in (45.0, 51.0, 57.0, 63.0, 69.0):
+    VAULT_RIBS += vault_rib_parts(xr, VAULT_Z, seg_w=4.0, z_center=-91.5)
+for xm in (48.0, 54.0, 60.0, 66.0):
+    VAULT_RIBS += vault_rib_parts(xm, VAULT_Z, rib_len=5.7, seg_h=0.08, seg_w=3.9,
+                                  mat="trim", z_center=-91.5)
+
+# 券顶组（肋段坐标已是世界绝对 X/Z，故组原点放在 (0,0,0)）
+GROUPS["vault"] = ("VaultRibs", VAULT_RIBS)
+# 五铢钱：平放铜钱（薄圆柱，轴沿 Y，无需旋转）
+GROUPS["coin"] = ("CoinScatter", [("CoinDisc", ("cyl", (0.025, 0.11, 0.11, 12), (0, 0.0, 0), "bronze"))])
+
+COIN_SCATTER = [
+    (51.9, -89.4, 40), (52.6, -90.6, -25), (53.3, -92.2, 15), (52.1, -93.5, -60),
+    (50.8, -90.2, 85), (53.9, -91.0, -15), (52.5, -88.9, 200), (53.1, -93.9, 130),
+    (51.5, -92.4, -110), (53.6, -88.6, 320),
+    (46.6, -95.6, 20), (46.0, -96.8, -40), (46.9, -98.0, 180), (45.8, -94.7, 90),
+]
 
 # name, kind, world position (x, y, z), yaw degrees
 PLACEMENTS = [
@@ -246,7 +375,47 @@ PLACEMENTS = [
     ("Altar11", "altar", (52.8, 0.15, -91.5), 90),
     ("RackHall1", "spearrack", (9.5, 0.15, -80.6), 0),
     ("RackHall2", "spearrack", (18.5, 0.15, -80.6), 0),
+    # 博山炉 & 陶俑 & 五铢钱（柱基顶 y=0.605）
+    ("BoshanHall", "boshan", (1.5, 0.605, -98.25), 45),
+    ("BoshanTmb", "boshan", (54.5, 0.15, -95.8), -30),
+    ("FigurineHallA", "figurine", (10.5, 0.605, -98.25), 90),
+    ("FigurineHallB", "figurine", (28.5, 0.605, -84.75), -90),
+    ("FigurineTmbA", "figurine", (49.0, 0.15, -80.0), 0),
+    ("FigurineTmbB", "figurine", (65.0, 0.15, -80.0), 180),
+    ("FigurineTmbC", "figurine", (65.0, 0.15, -101.0), 0),
 ]
+
+# 画像石浮雕带（沿墙长条，局部 y=3.10 中心；纹样在局部 +z 面，突出 slab 0.08）
+# 墙面内面：大厅 z=-103.5(北)/-79.5(南)、x=37.5(东)/-7.5(西)；
+#          墓室 z=-105.0(北)/-78.0(南)、x=70.5(东)/43.5(西)；slab 厚 0.10，后脸离墙 0.02
+# yaw 0/90/-90：纹样朝房间；yaw 180：纹样（翻转后）朝房间，故原点置于墙面内侧 0.07
+for i, (x, z, yaw) in enumerate([
+    # 大厅北墙（z=-103.5，yaw 0 → 纹样朝 +z 室内）
+    (2.5, -103.43, 0), (9.0, -103.43, 0), (20.0, -103.43, 0), (27.0, -103.43, 0),
+    # 大厅南墙（z=-79.5，yaw 180 → 纹样朝 -z 室内）
+    (3.0, -79.57, 180), (10.0, -79.57, 180), (17.0, -79.57, 180), (31.0, -79.57, 180),
+    # 大厅东墙（x=37.5，yaw -90 → 纹样朝 -x 室内）
+    (37.43, -100.0, -90), (37.43, -84.0, -90),
+    # 大厅西墙（x=-7.5，yaw 90 → 纹样朝 +x 室内）
+    (-7.43, -99.0, 90), (-7.43, -84.0, 90),
+    # 墓室北墙（z=-105.0，yaw 0）
+    (49.0, -104.93, 0), (57.0, -104.93, 0), (65.0, -104.93, 0),
+    # 墓室南墙（z=-78.0，yaw 180）
+    (49.0, -78.07, 180), (57.0, -78.07, 180), (65.0, -78.07, 180),
+    # 墓室西墙（x=43.5，yaw 90 → +x 室内；避开 08 通道缺口 z -93.57..-89.43）
+    (43.57, -100.0, 90), (43.57, -85.0, 90),
+    # 墓室东墙（x=70.5，yaw -90 → -x 室内）
+    (70.43, -101.0, -90), (70.43, -84.0, -90),
+]):
+    kind = ("relief_cloud", "relief_guardian", "relief_procession")[i % 3]
+    PLACEMENTS.append(("ReliefBand%02d" % i, kind, (x, 0.0, z), yaw, 1.0))
+
+# 五铢钱：散落在地面（薄圆柱轴沿 Y，y=0.163 使底面贴地 0.15）
+for i, (cx, cz, ry) in enumerate(COIN_SCATTER):
+    PLACEMENTS.append(("Coin%02d" % i, "coin", (cx, 0.163, cz), ry, 1.0))
+
+# 券顶：一组即可（组原点 (0,0,0)，所有肋段已是世界坐标）
+PLACEMENTS.append(("VaultTomb", "vault", (0.0, 0.0, 0.0), 0))
 
 # ------------------------------------------------------------------- emit .tscn
 sub_by_key = {}
@@ -280,6 +449,29 @@ def xform(pos, yaw_deg, scale=1.0):
         c, -s, scale, s, c, pos[0], pos[1], pos[2])
 
 
+def part_tform(pos, yaw_deg, pitch_deg):
+    """Transform for a part with optional yaw (around Y) and pitch (around X).
+
+    Composition: R = Ry(yaw) * Rx(pitch). With column-vector convention and
+    Godot's Transform3D(xx,xy,xz, yx,yy,yz, zx,zy,zz, ox,oy,oz) where the
+    first three numbers are basis.x, etc. We compute basis columns as
+    Ry * (Rx column), matching the convention used in xform() above.
+    """
+    cy = math.cos(math.radians(yaw_deg))
+    sy = math.sin(math.radians(yaw_deg))
+    cp = math.cos(math.radians(pitch_deg))
+    sp = math.sin(math.radians(pitch_deg))
+    # Rx columns: x=(1,0,0), y=(0,cp,sp), z=(0,-sp,cp)
+    # Ry(v): (cy*vx + sy*vz, vy, -sy*vx + cy*vz)
+    cols = []
+    for v in ((1.0, 0.0, 0.0), (0.0, cp, sp), (0.0, -sp, cp)):
+        cols.append((cy * v[0] + sy * v[2], v[1], -sy * v[0] + cy * v[2]))
+    flat = [f for col in cols for f in col]
+    return "Transform3D(%g, %g, %g, %g, %g, %g, %g, %g, %g, %g, %g, %g)" % (
+        flat[0], flat[1], flat[2], flat[3], flat[4], flat[5],
+        flat[6], flat[7], flat[8], pos[0], pos[1], pos[2])
+
+
 body = []
 emitted_groups = []
 for kind, (gname, parts) in GROUPS.items():
@@ -297,11 +489,16 @@ for kind, (gname, parts) in GROUPS.items():
             shape = (spec[0], spec[1])
             ppos = spec[2]
             mat = spec[3]
+            pyaw = spec[4] if len(spec) > 4 else 0.0
+            ppitch = spec[5] if len(spec) > 5 else 0.0
             sid = mesh_sub(shape)
             body.append('\n[node name="%s" type="MeshInstance3D" parent="%s/%s"]'
                         % (pname, unique_gname, name))
-            body.append("transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, %g, %g, %g)"
-                        % (ppos[0], ppos[1], ppos[2]))
+            if pyaw or ppitch:
+                body.append("transform = %s" % part_tform(ppos, pyaw, ppitch))
+            else:
+                body.append("transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, %g, %g, %g)"
+                            % (ppos[0], ppos[1], ppos[2]))
             body.append('mesh = SubResource("%s")' % sid)
             body.append('material_override = ExtResource("m_%s")' % mat)
 
