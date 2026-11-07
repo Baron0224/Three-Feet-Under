@@ -31,6 +31,8 @@ signal wall_blocked_needs_torch
 @export var require_torch_item := false
 @export var prompt_path: NodePath = NodePath("../HUD/InteractPrompt")
 @export var lever_on_right := false
+@export var lever_on_inner_wall := false
+@export var lever_on_passage_side := false
 
 var _opened := false
 var _opening := false
@@ -357,8 +359,26 @@ func _build_geometry(gen: int) -> void:
 	var side := 1.0 if lever_on_right else -1.0
 	var lever_root := Node3D.new()
 	lever_root.name = "Gen_TorchLever"
-	# Left of doorway when facing the slab; low (waist/chest); proud of wall toward player.
-	lever_root.position = Vector3(side * (opening_width * 0.5 + 0.42), 1.15, 0.55)
+	# Local +Z is tomb/hub face; local -Z is passage/corridor side.
+	# Passage side sits deeper into corridor (-1.15) and is yaw-flipped 180° from hub mount.
+	var depth := -1.15 if lever_on_passage_side else 0.42
+	if lever_on_inner_wall:
+		# Mount on INNER side wall of doorway (jamb), on chosen face.
+		# Passage: push slightly INTO the brick (+0.06 past opening edge) so plate sits flush, no float gap.
+		# Hub face: small inset so bracket clears jamb lip.
+		var lateral := (opening_width * 0.5 + 0.06) if lever_on_passage_side else (opening_width * 0.5 - 0.04)
+		lever_root.position = Vector3(side * lateral, 1.15, depth)
+		# Face into the corridor volume from the side wall; +180 when on passage side.
+		if lever_on_passage_side:
+			lever_root.rotation_degrees.y = side * 90.0 + 180.0
+		else:
+			lever_root.rotation_degrees.y = -side * 90.0
+	else:
+		# Outside jamb; default hub face, or passage face when requested.
+		var outer_depth := -1.15 if lever_on_passage_side else 0.55
+		lever_root.position = Vector3(side * (opening_width * 0.5 + 0.42), 1.15, outer_depth)
+		if lever_on_passage_side:
+			lever_root.rotation_degrees.y = 0.0  # was 180; +180 flip from prior passage mount
 
 	# Ornate bronze pivot plate
 	_mesh_box(lever_root, "Plate", Vector3(0.55, 0.7, 0.08), Vector3(0, 0, -0.05), _bronze_dark)

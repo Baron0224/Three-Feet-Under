@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://baphag5jndjdw" path="res://dilapidated_bridge.tscn" id="DilapidatedBridge"]
 [ext_resource type="PackedScene" uid="uid://ca2l7dub1clt5" path="res://dual_seal_door.tscn" id="DualSealDoor"]
 [ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
+[ext_resource type="PackedScene" uid="uid://nmgcgm1wxi5y" path="res://rolling_boulder_trap.tscn" id="RollingBoulder"]
 [ext_resource type="PackedScene" uid="uid://csv0ck667006g" path="res://torch_lever_wall.tscn" id="TorchLeverWall"]
 [ext_resource type="PackedScene" path="res://art/props/decor_details.tscn" id="40_decor"]
 
@@ -2476,7 +2477,7 @@ omni_range = 22.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.5, 1.2, -37.5)
 script = ExtResource("1_et3i4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2089584757]
@@ -2516,7 +2517,7 @@ offset_top = 20.0
 offset_right = 118.0
 offset_bottom = 43.0
 theme_override_font_sizes/font_size = 24
-text = "按 E 阅读石板"
+text = "鎸?E 闃呰鐭虫澘"
 
 [node name="EntranceStep01" type="MeshInstance3D" parent="." unique_id=292910911]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.06, 8.5875)
@@ -4320,6 +4321,18 @@ opening_width = 4.3
 
 [node name="TorchLeverWallTestSpawn" type="Marker3D" parent="." unique_id=937779223]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 1.2, -27)
+
+[node name="TorchLeverWallWestShortcut" parent="." unique_id=1847293651 instance=ExtResource("TorchLeverWall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -12.35, 0, -37.5)
+opening_width = 4.0
+opening_height = 3.9
+rise_distance = 4.1
+lever_on_inner_wall = true
+lever_on_passage_side = true
+lever_on_right = false
+
+[node name="TorchLeverWallWestShortcutTestSpawn" type="Marker3D" parent="." unique_id=1847293652]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.5, 1.2, -37.5)
 
 [node name="DilapidatedBridge" parent="." unique_id=490333024 instance=ExtResource("DilapidatedBridge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -30)
@@ -6285,6 +6298,15 @@ light_color = Color(1, 0.68, 0.37, 1)
 light_energy = 0.868
 light_specular = 0.3
 omni_range = 12.0
+
+[node name="RollingBoulderTrap" parent="." instance=ExtResource("RollingBoulder")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.0, 0.0, -61.5)
+
+[node name="BoulderTrapRespawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.0, 1.2, -68.0)
+
+[node name="BoulderTrapTestSpawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.0, 1.2, -64.0)
 
 [node name="ArtDetails" parent="." unique_id=959751455 instance=ExtResource("Art_details")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)

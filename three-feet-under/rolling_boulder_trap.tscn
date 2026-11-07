@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://nmgcgm1wxi5y"]
+
+[ext_resource type="Script" uid="uid://crollboulder01" path="res://rolling_boulder_trap.gd" id="1_boulder"]
+
+[node name="RollingBoulderTrap" type="Node3D"]
+script = ExtResource("1_boulder")
+corridor_width = 4.5
+boulder_radius = 1.75
+ceiling_height = 4.8
+hatch_length = 5.5
+drop_local_x = 0.0
+rest_local_x = -27.0
+trigger_local_x = 0.0
