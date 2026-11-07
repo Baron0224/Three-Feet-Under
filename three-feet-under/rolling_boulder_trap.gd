@@ -37,7 +37,8 @@ var _shake_left := 0.0
 var _shake_amp := 0.0
 var _player: Node3D
 var _player_cam: Camera3D
-var _cam_base := Vector3.ZEROvar _built := false
+var _cam_base := Vector3.ZERO
+var _built := false
 var _rebuild_queued := false
 var _boot_done := false
 var _build_gen := 0
