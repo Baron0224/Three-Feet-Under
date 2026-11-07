@@ -2477,7 +2477,7 @@ omni_range = 22.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -16.5, 1.2, -30)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.5, 1.2, -37.5)
 script = ExtResource("1_et3i4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2089584757]
@@ -4321,17 +4321,17 @@ opening_width = 4.3
 [node name="TorchLeverWallTestSpawn" type="Marker3D" parent="." unique_id=937779223]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 1.2, -27)
 
-[node name="TorchLeverWallWestCorridor" parent="." unique_id=1847293651 instance=ExtResource("TorchLeverWall")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -12.35, 0, -30)
-opening_width = 4.3
-opening_height = 4.4
-rise_distance = 4.6
+[node name="TorchLeverWallWestShortcut" parent="." unique_id=1847293651 instance=ExtResource("TorchLeverWall")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -12.35, 0, -37.5)
+opening_width = 4.0
+opening_height = 3.9
+rise_distance = 4.1
 lever_on_inner_wall = true
 lever_on_passage_side = true
 lever_on_right = true
 
-[node name="TorchLeverWallWestCorridorTestSpawn" type="Marker3D" parent="." unique_id=1847293652]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -16.5, 1.2, -30)
+[node name="TorchLeverWallWestShortcutTestSpawn" type="Marker3D" parent="." unique_id=1847293652]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.5, 1.2, -37.5)
 
 [node name="DilapidatedBridge" parent="." unique_id=490333024 instance=ExtResource("DilapidatedBridge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -30)
