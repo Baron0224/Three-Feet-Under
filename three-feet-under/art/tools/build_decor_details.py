@@ -22,6 +22,8 @@ MAT = {
     "gold": "res://art/materials/seal_gold.tres",
     "blue": "res://art/materials/seal_blue.tres",
     "clay": "res://art/materials/clay.tres",
+    "brick": "res://art/materials/brick.tres",
+    "vermilion": "res://art/materials/vermilion.tres",
 }
 
 NEW_MATERIALS = {
@@ -198,16 +200,16 @@ def relief_band(w, pattern):
         parts += [
             ("WheelL", ("box", (0.80, 0.80, 0.16), (-w / 2 + 1.1, 3.10, 0.06), "wall")),
             ("WheelR", ("box", (0.80, 0.80, 0.16), (-w / 2 + 2.2, 3.10, 0.06), "wall")),
-            ("Cart", ("box", (1.30, 0.55, 0.14), (-w / 2 + 1.65, 3.42, 0.06), "wall")),
+            ("Cart", ("box", (1.30, 0.55, 0.14), (-w / 2 + 1.65, 3.42, 0.06), "vermilion")),
             ("Shaft", ("box", (1.8, 0.10, 0.10), (0.1, 3.10, 0.06), "wall")),
             ("HorseBody", ("box", (1.6, 0.62, 0.16), (1.35, 3.10, 0.06), "wall")),
             ("HorseHead", ("box", (0.55, 0.40, 0.14), (2.35, 3.25, 0.06), "wall")),
             ("HorseLeg1", ("box", (0.14, 0.55, 0.12), (1.0, 2.85, 0.06), "wall")),
             ("HorseLeg2", ("box", (0.14, 0.55, 0.12), (1.7, 2.85, 0.06), "wall")),
-            ("Driver", ("box", (0.35, 0.75, 0.14), (2.5, 3.30, 0.06), "wall")),
+            ("Driver", ("box", (0.35, 0.75, 0.14), (2.5, 3.30, 0.06), "vermilion")),
         ]
     elif pattern == "cloud":
-        # 云气纹：四组 S 形云头 + 小圆点，抽象回旋
+        # 云气纹：四组 S 形云头 + 小圆点，抽象回旋；云头尖涂朱
         n = 4
         step = (w - 0.8) / n
         for i in range(n):
@@ -215,11 +217,11 @@ def relief_band(w, pattern):
             parts += [
                 ("CloudA%d" % i, ("box", (0.55, 0.30, 0.14), (cx - 0.15, 3.30, 0.06), "wall")),
                 ("CloudB%d" % i, ("box", (0.42, 0.34, 0.14), (cx + 0.12, 3.12, 0.06), "wall")),
-                ("CloudC%d" % i, ("box", (0.24, 0.20, 0.14), (cx + 0.05, 3.48, 0.06), "wall")),
+                ("CloudC%d" % i, ("box", (0.24, 0.20, 0.14), (cx + 0.05, 3.48, 0.06), "vermilion")),
                 ("CloudD%d" % i, ("box", (0.14, 0.14, 0.14), (cx - 0.28, 3.05, 0.06), "wall")),
             ]
     elif pattern == "guardian":
-        # 双武士/门吏剪影：左右对称
+        # 双武士/门吏剪影：左右对称；日轮与矛杆涂朱
         cx = w / 2
         for sign in (1, -1):
             ox = sign * cx * 0.62
@@ -227,10 +229,10 @@ def relief_band(w, pattern):
                 ("GHead%d" % (0 if sign > 0 else 1), ("box", (0.42, 0.40, 0.14), (ox, 3.48, 0.06), "wall")),
                 ("GBody%d" % (0 if sign > 0 else 1), ("box", (0.70, 0.72, 0.16), (ox, 3.10, 0.06), "wall")),
                 ("GArm%d" % (0 if sign > 0 else 1), ("box", (0.30, 0.55, 0.14), (ox + sign * 0.45, 3.12, 0.06), "wall")),
-                ("GShaft%d" % (0 if sign > 0 else 1), ("box", (0.08, 1.1, 0.10), (ox + sign * 1.0, 3.10, 0.06), "bronze")),
+                ("GShaft%d" % (0 if sign > 0 else 1), ("box", (0.08, 1.1, 0.10), (ox + sign * 1.0, 3.10, 0.06), "vermilion")),
             ]
         parts += [
-            ("Sun", ("cyl", (0.10, 0.30, 0.30, 12), (0, 3.45, 0.06), "wall")),
+            ("Sun", ("cyl", (0.10, 0.30, 0.30, 12), (0, 3.45, 0.06), "vermilion")),
             ("Moon", ("cyl", (0.10, 0.22, 0.22, 12), (0, 2.86, 0.06), "wall")),
         ]
     return parts
@@ -307,10 +309,10 @@ VAULT_Z = [-11.57, -7.71, -3.86, 0.0, 3.86, 7.71, 11.57]
 # 拱心 z => 墓室中心 z=-91.5（z_center 平移全部肋段），x 已是世界绝对 X
 VAULT_RIBS = []
 for xr in (45.0, 51.0, 57.0, 63.0, 69.0):
-    VAULT_RIBS += vault_rib_parts(xr, VAULT_Z, seg_w=4.0, z_center=-91.5)
+    VAULT_RIBS += vault_rib_parts(xr, VAULT_Z, seg_w=4.0, z_center=-91.5, mat="brick")
 for xm in (48.0, 54.0, 60.0, 66.0):
     VAULT_RIBS += vault_rib_parts(xm, VAULT_Z, rib_len=5.7, seg_h=0.08, seg_w=3.9,
-                                  mat="trim", z_center=-91.5)
+                                  mat="brick", z_center=-91.5)
 
 # 券顶组（肋段坐标已是世界绝对 X/Z，故组原点放在 (0,0,0)）
 GROUPS["vault"] = ("VaultRibs", VAULT_RIBS)

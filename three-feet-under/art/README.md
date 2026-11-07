@@ -229,3 +229,22 @@ de-duplicated meshes (v3 adds 44 placements / 36 meshes / 499 parts).
   vault_look, relief_hall, relief_tomb, boshan_close, figurine_close, coin_close).
 - Headless check: scale audit now reports 1374 assertions / 375 architectural
   meshes / 912 human-scale decor meshes, failures=0.
+
+## Decor v3.1: vermilion paint + brick vault (2026-11-07)
+
+Tightening pass on the Chinese style, same generator run (93 placements / 103
+meshes unchanged):
+
+- **Brick vault (`art/shaders/world_brick.gdshader` + `art/materials/brick.tres`)**:
+  the tomb chamber arch ribs *and* infill boards now use a brick shader — world
+  space projection (brick 0.62 x 0.30 m, running-bond offset every other row),
+  so brick size and seams stay fixed at 1.5x environment scale just like wall
+  stone. Replaces the previous clay-trim infill look; the entire ceiling reads
+  as Han brick voussoirs.
+- **Vermilion paint (`art/materials/vermilion.tres`)**: meter-scale vermilion
+  (朱砂红, albedo 0.62/0.13/0.10) painted onto the pictoral relief motifs —
+  chariot cart + driver (procession bands), cloud-tip curls (cloud bands),
+  sun disc + spear shafts (guardian bands). 68 painted parts across the 22 bands.
+- Generator: `MAT` dict gained `brick` / `vermilion` keys (referenced as
+  `m_brick` / `m_vermilion`); vault ribs + infill pass `mat="brick"`.
+- Headless check unchanged: scale audit 1374 / 375 / 912, failures=0.
