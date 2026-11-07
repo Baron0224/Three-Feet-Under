@@ -12,6 +12,10 @@ authors here anyway.
 - Source: https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
 - Used: the 6 stone steps (`StoneL1–3`, `StoneR1–3`), renamed to
   `footstep_stone_1..6.ogg`.
+- Post-processing (2026-11-07, FFmpeg, for realism): highpass 55 Hz, dual-tap
+  room echo (16/32 ms reflections) to simulate the stone corridor, 110 Hz bass
+  lift for body impact, limiter + loudnorm (-21 LUFS). The raw samples on their
+  own sounded too "game-y" (dry, no room); the processed files are what ships.
 
 ## Stone door (`sfx/stone_door.ogg`)
 

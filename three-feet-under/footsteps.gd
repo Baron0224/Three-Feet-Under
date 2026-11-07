@@ -27,20 +27,23 @@ func _ready() -> void:
 
 
 ## kind: KIND_WALK / KIND_SPRINT / KIND_CROUCH / KIND_LAND
+## Pitches stay near 1.0 (a real walker's steps barely vary in pitch — wide
+## random shifts were what made the old footsteps sound game-like).
 func play_kind(kind: int) -> void:
-	var pitch := 0.9 + randf() * 0.15
-	var db := -8.0
+	var pitch := 0.99 + randf() * 0.02
+	var db := -9.0
 	match kind:
 		KIND_CROUCH:
-			pitch = 0.82 + randf() * 0.12
+			pitch = 0.96 + randf() * 0.03
 			db = -13.0
 		KIND_SPRINT:
-			pitch = 1.06 + randf() * 0.14
+			pitch = 1.0 + randf() * 0.02
 			db = -4.0
 		KIND_LAND:
-			pitch = 0.66 + randf() * 0.1
-			db = -5.0
-	_play_sample(db, pitch)
+			pitch = 0.86 + randf() * 0.07
+			db = -4.0
+	# Real steps differ in loudness as much as in pitch; add natural variation.
+	_play_sample(db + randf_range(-1.5, 1.0), pitch)
 
 
 func play_land() -> void:
