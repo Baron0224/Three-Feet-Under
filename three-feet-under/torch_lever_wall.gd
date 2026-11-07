@@ -31,6 +31,7 @@ signal wall_blocked_needs_torch
 @export var require_torch_item := false
 @export var prompt_path: NodePath = NodePath("../HUD/InteractPrompt")
 @export var lever_on_right := false
+@export var lever_on_inner_wall := false
 
 var _opened := false
 var _opening := false
@@ -357,8 +358,13 @@ func _build_geometry(gen: int) -> void:
 	var side := 1.0 if lever_on_right else -1.0
 	var lever_root := Node3D.new()
 	lever_root.name = "Gen_TorchLever"
-	# Left of doorway when facing the slab; low (waist/chest); proud of wall toward player.
-	lever_root.position = Vector3(side * (opening_width * 0.5 + 0.42), 1.15, 0.55)
+	if lever_on_inner_wall:
+		# Mount on INNER alcove side wall (jamb inside opening), not outer hub face.
+		lever_root.position = Vector3(side * (opening_width * 0.5 - 0.18), 1.15, 0.42)
+		lever_root.rotation_degrees.y = -side * 90.0
+	else:
+		# Outside jamb on hub face; low (waist/chest); proud of wall toward player.
+		lever_root.position = Vector3(side * (opening_width * 0.5 + 0.42), 1.15, 0.55)
 
 	# Ornate bronze pivot plate
 	_mesh_box(lever_root, "Plate", Vector3(0.55, 0.7, 0.08), Vector3(0, 0, -0.05), _bronze_dark)

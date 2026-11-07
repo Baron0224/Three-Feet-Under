@@ -2477,7 +2477,7 @@ omni_range = 22.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.0, 1.2, -64.0)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 8.5, 1.2, -22.5)
 script = ExtResource("1_et3i4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2089584757]
@@ -2516,7 +2516,7 @@ offset_top = 20.0
 offset_right = 118.0
 offset_bottom = 43.0
 theme_override_font_sizes/font_size = 24
-text = "按 E 阅读石板"
+text = "鎸?E 闃呰鐭虫澘"
 
 [node name="EntranceStep01" type="MeshInstance3D" parent="." unique_id=292910911]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.06, 8.5875)
@@ -4320,6 +4320,17 @@ opening_width = 4.3
 
 [node name="TorchLeverWallTestSpawn" type="Marker3D" parent="." unique_id=937779223]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 1.2, -27)
+
+[node name="TorchLeverWallEastShortcut" parent="." unique_id=1847293651 instance=ExtResource("TorchLeverWall")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 12.5, 0, -22.5)
+opening_width = 4.3
+opening_height = 3.9
+rise_distance = 4.1
+lever_on_inner_wall = true
+lever_on_right = true
+
+[node name="TorchLeverWallEastShortcutTestSpawn" type="Marker3D" parent="." unique_id=1847293652]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 8.5, 1.2, -22.5)
 
 [node name="DilapidatedBridge" parent="." unique_id=490333024 instance=ExtResource("DilapidatedBridge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -30)

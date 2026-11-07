@@ -9,3 +9,4 @@ opening_height = 4.4
 allow_debug_interact = true
 require_torch_item = false
 lever_on_right = false
+lever_on_inner_wall = false
