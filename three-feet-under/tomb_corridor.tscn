@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://baphag5jndjdw" path="res://dilapidated_bridge.tscn" id="DilapidatedBridge"]
 [ext_resource type="PackedScene" uid="uid://ca2l7dub1clt5" path="res://dual_seal_door.tscn" id="DualSealDoor"]
 [ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
+[ext_resource type="PackedScene" uid="uid://crollboulderts" path="res://rolling_boulder_trap.tscn" id="RollingBoulder"]
 [ext_resource type="PackedScene" uid="uid://csv0ck667006g" path="res://torch_lever_wall.tscn" id="TorchLeverWall"]
 [ext_resource type="PackedScene" path="res://art/props/decor_details.tscn" id="40_decor"]
 
@@ -2476,7 +2477,7 @@ omni_range = 22.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -28, 1.2, -76.5)
 script = ExtResource("1_et3i4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2089584757]
@@ -6284,6 +6285,15 @@ light_color = Color(1, 0.68, 0.37, 1)
 light_energy = 0.868
 light_specular = 0.3
 omni_range = 12.0
+
+[node name="RollingBoulderTrap" parent="." instance=ExtResource("RollingBoulder")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -76.5)
+
+[node name="BoulderTrapRespawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 1.2, -72)
+
+[node name="BoulderTrapTestSpawn" type="Marker3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -28, 1.2, -76.5)
 
 [node name="ArtDetails" parent="." unique_id=959751455 instance=ExtResource("Art_details")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
