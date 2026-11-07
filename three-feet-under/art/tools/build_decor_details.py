@@ -44,12 +44,15 @@ metallic = 0.55
 metallic_specular = 0.65
 roughness = 0.24
 """,
-    "res://art/materials/clay.tres": """[gd_resource type="StandardMaterial3D" format=3]
+    "res://art/materials/clay.tres": """[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://art/shaders/world_clay.gdshader" id="1_shader"]
 
 [resource]
-albedo_color = Color(0.62, 0.42, 0.28, 1)
-metallic = 0.02
-roughness = 0.88
+shader = ExtResource("1_shader")
+shader_parameter/clay_color = Color(0.62, 0.42, 0.28, 1)
+shader_parameter/dark_color = Color(0.46, 0.30, 0.20, 1)
+shader_parameter/scale_m = 1.0
 """,
     "res://art/materials/gold_ink.tres": """[gd_resource type="StandardMaterial3D" format=3]
 
@@ -258,8 +261,8 @@ BOSHAN = [
     ("Stem", ("cyl", (0.34, 0.05, 0.05, 8), (0, 0.23, 0), "bronze")),
     ("Bowl", ("cyl", (0.16, 0.20, 0.12, 12), (0, 0.46, 0), "bronze")),
     ("LidLow", ("cyl", (0.12, 0.22, 0.18, 12), (0, 0.60, 0), "bronze")),
-    ("LidPeak", ("cyl", (0.16, 0.12, 0.08, 10), (0, 0.72, 0), "bronze")),
-    ("Knob", ("cyl", (0.06, 0.04, 0.04, 8), (0, 0.84, 0), "bronze")),
+    ("LidPeak", ("sphere", (0.11, 24, 12), (0, 0.72, 0), "bronze")),
+    ("Knob", ("sphere", (0.035, 24, 12), (0, 0.84, 0), "bronze")),
     ("FinL", ("box", (0.06, 0.14, 0.06), (-0.12, 0.66, 0), "bronze")),
     ("FinR", ("box", (0.06, 0.14, 0.06), (0.12, 0.66, 0), "bronze")),
 ]
@@ -269,7 +272,7 @@ FIGURINE = [
     ("Base", ("box", (0.16, 0.05, 0.16), (0, 0.025, 0), "clay")),
     ("Skirt", ("box", (0.13, 0.22, 0.12), (0, 0.14, 0), "clay")),
     ("Body", ("box", (0.10, 0.22, 0.09), (0, 0.35, 0), "clay")),
-    ("Head", ("box", (0.09, 0.11, 0.09), (0, 0.50, 0), "clay")),
+    ("Head", ("sphere", (0.05, 24, 12), (0, 0.50, 0), "clay")),
     ("Hat", ("box", (0.11, 0.035, 0.11), (0, 0.57, 0), "clay")),
     ("ArmL", ("box", (0.03, 0.16, 0.08), (-0.07, 0.36, 0), "clay")),
     ("ArmR", ("box", (0.03, 0.16, 0.08), (0.07, 0.36, 0), "clay")),
@@ -346,10 +349,10 @@ PIGPEN = [
     ("WallB", ("box", (1.3, 0.28, 0.08), (0, 0.17, -0.46), "clay")),
     ("WallF", ("box", (1.0, 0.20, 0.08), (0, 0.13, 0.46), "clay")),
     ("Trough", ("box", (0.9, 0.06, 0.14), (0, 0.09, 0.36), "trim")),
-    ("Pig1Body", ("box", (0.34, 0.20, 0.20), (-0.15, 0.27, -0.12), "clay")),
-    ("Pig1Head", ("box", (0.12, 0.10, 0.10), (-0.02, 0.30, 0.02), "clay")),
-    ("Pig2Body", ("box", (0.30, 0.17, 0.17), (0.25, 0.25, -0.20), "clay")),
-    ("Pig2Head", ("box", (0.11, 0.09, 0.09), (0.37, 0.28, -0.08), "clay")),
+    ("Pig1Body", ("capsule", (0.10, 0.14, 24, 8), (-0.15, 0.27, -0.12), "clay", 0.0, 90.0)),
+    ("Pig1Head", ("sphere", (0.06, 24, 12), (-0.02, 0.30, 0.02), "clay")),
+    ("Pig2Body", ("capsule", (0.09, 0.12, 24, 8), (0.25, 0.25, -0.20), "clay", 0.0, 90.0)),
+    ("Pig2Head", ("sphere", (0.055, 24, 12), (0.37, 0.28, -0.08), "clay")),
 ]
 
 # ---- 谷仓罐/魂瓶（东汉堆塑五联罐）约 0.6 m ----
@@ -357,7 +360,7 @@ HUNPING = [
     ("JarBody", ("cyl", (0.34, 0.22, 0.18, 12), (0, 0.28, 0), "clay")),
     ("Rim", ("cyl", (0.05, 0.17, 0.17, 12), (0, 0.48, 0), "clay")),
     ("Lid", ("cyl", (0.10, 0.20, 0.20, 12), (0, 0.55, 0), "clay")),
-    ("LidTop", ("cyl", (0.06, 0.07, 0.07, 8), (0, 0.63, 0), "bronze")),
+    ("LidTop", ("sphere", (0.055, 24, 12), (0, 0.63, 0), "bronze")),
     ("MiniN", ("cyl", (0.12, 0.09, 0.09, 8), (0, 0.50, -0.17), "clay")),
     ("MiniS", ("cyl", (0.12, 0.09, 0.09, 8), (0, 0.50, 0.17), "clay")),
     ("MiniE", ("cyl", (0.12, 0.09, 0.09, 8), (0.17, 0.50, 0), "clay")),
@@ -587,14 +590,26 @@ def mesh_sub(shape):
     sub_counter[0] += 1
     sid = "Mesh_%d" % idx
     sub_by_key[key] = sid
-    if shape[0] == "box":
+    kind = shape[0]
+    p = shape[1]
+    if kind == "box":
         sub_lines.append('[sub_resource type="BoxMesh" id="%s"]\nsize = Vector3(%g, %g, %g)\n'
-                         % (sid, shape[1][0], shape[1][1], shape[1][2]))
+                         % (sid, p[0], p[1], p[2]))
+    elif kind == "sphere":
+        # sphere: (radius, radial_segments, rings)
+        sub_lines.append('[sub_resource type="SphereMesh" id="%s"]\n'
+                         'radius = %g\nheight = %g\nradial_segments = %d\nrings = %d\n'
+                         % (sid, p[0], p[0] * 2.0, max(p[1], 24), max(p[2], 12)))
+    elif kind == "capsule":
+        # capsule: (radius, height_of_cylinder_body, radial_segments, rings)
+        sub_lines.append('[sub_resource type="CapsuleMesh" id="%s"]\n'
+                         'radius = %g\nheight = %g\nradial_segments = %d\nrings = %d\n'
+                         % (sid, p[0], p[1] + 2.0 * p[0], max(p[2], 24), max(p[3], 8)))
     else:
         h, tr, br, seg = shape[1]
         sub_lines.append('[sub_resource type="CylinderMesh" id="%s"]\n'
                          'top_radius = %g\nbottom_radius = %g\nheight = %g\nradial_segments = %d\n'
-                         % (sid, tr, br, h, seg))
+                         % (sid, tr, br, h, max(seg, 24)))
     return sid
 
 

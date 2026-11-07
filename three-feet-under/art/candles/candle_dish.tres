@@ -4,5 +4,5 @@
 top_radius = 1.0
 bottom_radius = 0.86
 height = 1.0
-radial_segments = 14
-rings = 1
+radial_segments = 24
+rings = 2

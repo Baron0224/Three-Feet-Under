@@ -1,6 +1,9 @@
-[gd_resource type="StandardMaterial3D" format=3]
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://art/shaders/world_clay.gdshader" id="1_shader"]
 
 [resource]
-albedo_color = Color(0.62, 0.42, 0.28, 1)
-metallic = 0.02
-roughness = 0.88
+shader = ExtResource("1_shader")
+shader_parameter/clay_color = Color(0.62, 0.42, 0.28, 1)
+shader_parameter/dark_color = Color(0.46, 0.30, 0.20, 1)
+shader_parameter/scale_m = 1.0

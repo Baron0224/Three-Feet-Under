@@ -82,8 +82,8 @@ write(os.path.join(ROOT, "art/candles/candle_body.tres"), """[gd_resource type="
 top_radius = 0.82
 bottom_radius = 1.0
 height = 1.0
-radial_segments = 10
-rings = 1
+radial_segments = 20
+rings = 2
 """)
 
 write(os.path.join(ROOT, "art/candles/candle_pool.tres"), """[gd_resource type="CylinderMesh" format=3]
@@ -92,8 +92,8 @@ write(os.path.join(ROOT, "art/candles/candle_pool.tres"), """[gd_resource type="
 top_radius = 0.94
 bottom_radius = 1.0
 height = 1.0
-radial_segments = 10
-rings = 1
+radial_segments = 20
+rings = 2
 """)
 
 write(os.path.join(ROOT, "art/candles/candle_wick.tres"), """[gd_resource type="CylinderMesh" format=3]
@@ -102,7 +102,7 @@ write(os.path.join(ROOT, "art/candles/candle_wick.tres"), """[gd_resource type="
 top_radius = 0.55
 bottom_radius = 1.0
 height = 1.0
-radial_segments = 6
+radial_segments = 10
 rings = 1
 """)
 
@@ -112,8 +112,8 @@ write(os.path.join(ROOT, "art/candles/candle_dish.tres"), """[gd_resource type="
 top_radius = 1.0
 bottom_radius = 0.86
 height = 1.0
-radial_segments = 14
-rings = 1
+radial_segments = 24
+rings = 2
 """)
 
 # ---- materials ----

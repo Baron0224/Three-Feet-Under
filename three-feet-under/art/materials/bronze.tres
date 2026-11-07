@@ -1,6 +1,10 @@
-[gd_resource type="StandardMaterial3D" format=3]
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://art/shaders/world_bronze.gdshader" id="1_shader"]
 
 [resource]
-albedo_color = Color(0.16,0.12,0.075,1)
-metallic = 0.65
-roughness = 0.78
+shader = ExtResource("1_shader")
+shader_parameter/bronze_color = Color(0.16, 0.12, 0.075, 1)
+shader_parameter/patina_color = Color(0.13, 0.24, 0.19, 1)
+shader_parameter/wear = 0.65
+shader_parameter/scale_m = 1.0
