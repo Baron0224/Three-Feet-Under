@@ -77,7 +77,8 @@ func _request_rebuild(from_boot: bool = false) -> void:
 func _boot_rebuild_async() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
-	_rebuild_queued = false	_boot_done = true
+	_rebuild_queued = false
+	_boot_done = true
 	if not is_inside_tree():
 		return
 	_rebuild_geometry()
@@ -235,7 +236,8 @@ func _build_geometry(gen: int) -> void:
 	_boulder.add_child(mesh)
 	var bcs := CollisionShape3D.new()
 	var bsh := SphereShape3D.new()
-	bsh.radius = boulder_radius	bcs.shape = bsh
+	bsh.radius = boulder_radius
+	bcs.shape = bsh
 	_boulder.add_child(bcs)
 	_boulder_kill = Area3D.new()
 	_boulder_kill.name = "KillArea"
