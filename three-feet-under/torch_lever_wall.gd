@@ -328,31 +328,33 @@ func _mesh_cyl(parent: Node, name: String, r_top: float, r_bot: float, height: f
 
 
 func _build_geometry(gen: int) -> void:
-	var frame := Node3D.new()
-	frame.name = "Gen_Frame"
-
-	# Carved stone frame (jambs + lintel + threshold)
-	_mesh_box(frame, "JambL", Vector3(0.45, opening_height + 0.5, 0.7), Vector3(-(opening_width * 0.5 + 0.25), opening_height * 0.5, 0.0), _stone_dark)
-	_mesh_box(frame, "JambR", Vector3(0.45, opening_height + 0.5, 0.7), Vector3(opening_width * 0.5 + 0.25, opening_height * 0.5, 0.0), _stone_dark)
-	_mesh_box(frame, "Lintel", Vector3(opening_width + 1.1, 0.55, 0.75), Vector3(0.0, opening_height + 0.15, 0.0), _stone)
-	_mesh_box(frame, "Threshold", Vector3(opening_width + 0.8, 0.2, 0.7), Vector3(0.0, 0.1, 0.05), _stone_dark)
-	# Meander / fret suggestion on lintel face; skip when masquerading as a brick wall.
+	# In hidden/brick mode we don't want a protruding door frame; the slab is
+	# just a thin wall section flush with the surrounding wall, so the bricks
+	# line up and no edge is visible.
 	if not use_brick:
+		var frame := Node3D.new()
+		frame.name = "Gen_Frame"
+
+		# Carved stone frame (jambs + lintel + threshold)
+		_mesh_box(frame, "JambL", Vector3(0.45, opening_height + 0.5, 0.7), Vector3(-(opening_width * 0.5 + 0.25), opening_height * 0.5, 0.0), _stone_dark)
+		_mesh_box(frame, "JambR", Vector3(0.45, opening_height + 0.5, 0.7), Vector3(opening_width * 0.5 + 0.25, opening_height * 0.5, 0.0), _stone_dark)
+		_mesh_box(frame, "Lintel", Vector3(opening_width + 1.1, 0.55, 0.75), Vector3(0.0, opening_height + 0.15, 0.0), _stone)
+		_mesh_box(frame, "Threshold", Vector3(opening_width + 0.8, 0.2, 0.7), Vector3(0.0, 0.1, 0.05), _stone_dark)
+		# Meander / fret suggestion on lintel face.
 		_mesh_box(frame, "LintelCarve", Vector3(opening_width * 0.85, 0.18, 0.12), Vector3(0.0, opening_height + 0.15, 0.38), _bronze_dark)
-	_attach(frame, gen)
+		_attach(frame, gen)
 
 	# Rising slab
 	var slab := Node3D.new()
 	slab.name = "Gen_Slab"
 	slab.position = Vector3(0.0, opening_height * 0.5, 0.0)
-	# In hidden brick mode, fill the opening completely so no seam shows.
+	# In hidden brick mode the slab is a thin wall section flush with the wall,
+	# so no frame edge can give away the door.
 	var slab_size := Vector3(opening_width * 0.96, opening_height * 0.98, slab_thickness)
 	var slab_pos := Vector3.ZERO
 	if use_brick:
-		slab_size = Vector3(opening_width + 0.04, opening_height + 0.04, 0.75)
-		slab_pos = Vector3(0.0, 0.0, 0.0)
-		# Ensure the slab sits flush with the frame front face.
-		# (The frame pieces are centered around z≈0; lintel depth 0.75 centers at z=0.)
+		slab_size = Vector3(opening_width + 0.02, opening_height + 0.02, 0.05)
+		slab_pos = Vector3.ZERO
 	_mesh_box(slab, "SlabBody", slab_size, slab_pos, _stone)
 	# Cracks (dark recessed strips) only on plain stone doors.
 	if not use_brick:
