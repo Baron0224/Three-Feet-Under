@@ -1,4 +1,5 @@
 [gd_scene format=3 uid="uid://f5uxa8cr48de"]
+[ext_resource type="Material" path="res://art/materials/brick.tres" id="2_brick"]
 
 [ext_resource type="Script" uid="uid://ds0ihg5vxcx0p" path="res://door.gd" id="1_ba8gm"]
 
@@ -12,6 +13,7 @@ size = Vector3(2.5, 2.2, 0.2)
 script = ExtResource("1_ba8gm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=455637581]
+surface_material_override/0 = ExtResource("2_brick")
 mesh = SubResource("BoxMesh_t2dwb")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=266090383]

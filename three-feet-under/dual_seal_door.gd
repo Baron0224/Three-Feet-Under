@@ -2,6 +2,7 @@
 extends Node3D
 
 const STONE_DOOR := preload("res://audio/sfx/stone_door.ogg")
+const BRICK_MAT := preload("res://art/materials/brick.tres")
 
 ## Hub dual-seal bronze double door (双印门).
 ## Left = yellow/gold seal, Right = blue seal. Both must unlock before doors open.
@@ -30,6 +31,7 @@ signal door_opened
 @export var allow_debug_interact := true
 @export var prompt_path: NodePath = NodePath("../HUD/InteractPrompt")
 @export var auto_open_when_both_unlocked := true
+@export var hidden_mode := false
 
 var _yellow_unlocked := false
 var _blue_unlocked := false
@@ -56,6 +58,7 @@ var _bronze_dark: StandardMaterial3D
 var _patina: StandardMaterial3D
 var _yellow_emit: StandardMaterial3D
 var _blue_emit: StandardMaterial3D
+var _stone: Material
 var _socket_well: StandardMaterial3D
 
 
@@ -279,6 +282,8 @@ func _make_materials() -> void:
 	_socket_well.metallic = 0.3
 	_socket_well.roughness = 0.9
 
+	_stone = BRICK_MAT
+
 	_yellow_emit = StandardMaterial3D.new()
 	_yellow_emit.albedo_color = Color(0.95, 0.72, 0.18)
 	_yellow_emit.emission_enabled = true
@@ -480,9 +485,10 @@ func _build_leaf(is_left: bool, gen: int) -> void:
 	_build_knocker(leaf, Vector3(cx, -door_height * 0.28, 0))
 
 	# Side hinge barrels
-	for i in range(3):
-		var hy := lerpf(-door_height * 0.38, door_height * 0.38, float(i) / 2.0)
-		_mesh_cyl(leaf, "Hinge_%d" % i, 0.07, 0.07, 0.28, Vector3(0.0, hy, 0.0), _bronze_dark, 10)
+	if not hidden_mode:
+		for i in range(3):
+			var hy := lerpf(-door_height * 0.38, door_height * 0.38, float(i) / 2.0)
+			_mesh_cyl(leaf, "Hinge_%d" % i, 0.07, 0.07, 0.28, Vector3(0.0, hy, 0.0), _bronze_dark, 10)
 
 	var body := _add_collision(leaf, Vector3(leaf_w, door_height, door_thickness), Vector3(panel_center_x, 0, 0))
 	if is_left:

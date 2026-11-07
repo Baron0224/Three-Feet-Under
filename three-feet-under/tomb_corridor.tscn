@@ -4311,6 +4311,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0.3, -12)
 
 [node name="DualSealDoor" parent="." unique_id=2081238755 instance=ExtResource("DualSealDoor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41.9)
+hidden_mode = true
 
 [node name="DualSealDoorTestSpawn" type="Marker3D" parent="." unique_id=1154625595]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -36)
