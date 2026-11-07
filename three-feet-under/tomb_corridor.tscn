@@ -6287,10 +6287,10 @@ light_specular = 0.3
 omni_range = 12.0
 
 [node name="RollingBoulderTrap" parent="." instance=ExtResource("RollingBoulder")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -76.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -76.5)
 
 [node name="BoulderTrapRespawn" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 1.2, -72)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 1.2, -76.5)
 
 [node name="BoulderTrapTestSpawn" type="Marker3D" parent="."]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -28, 1.2, -76.5)
