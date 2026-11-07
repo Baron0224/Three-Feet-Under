@@ -25,6 +25,8 @@ MAT = {
     "brick": "res://art/materials/brick.tres",
     "vermilion": "res://art/materials/vermilion.tres",
     "gold_ink": "res://art/materials/gold_ink.tres",
+    "relief": "res://art/materials/relief.tres",
+    "dark": "res://art/materials/stone_dark.tres",
 }
 
 NEW_MATERIALS = {
@@ -61,6 +63,34 @@ albedo_color = Color(0.93, 0.78, 0.30, 1)
 metallic = 0.8
 metallic_specular = 0.6
 roughness = 0.25
+""",
+    # 画像石面板：比墙石料亮一档的浅灰暖石，让"嵌进墙里的浮雕"自己读得出来
+    "res://art/materials/relief.tres": """[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://art/shaders/world_stone.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/stone_color = Color(0.44, 0.41, 0.36, 1)
+shader_parameter/block_size = Vector2(4.0, 1.4)
+shader_parameter/joint_width = 0.004
+shader_parameter/relief = 0.008
+shader_parameter/rock_mode = 0
+shader_parameter/wear = 0.55
+""",
+    # 深色暖灰石：顶门石、壁龛内壁（原来用冷灰 rock，在火光下发蓝像金属）
+    "res://art/materials/stone_dark.tres": """[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://art/shaders/world_stone.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/stone_color = Color(0.30, 0.27, 0.23, 1)
+shader_parameter/block_size = Vector2(1, 1)
+shader_parameter/joint_width = 0.018
+shader_parameter/relief = 0.012
+shader_parameter/rock_mode = 1
+shader_parameter/wear = 0.75
 """,
 }
 
@@ -144,14 +174,15 @@ DING = [
 ]
 
 # wall niche: trim frame + dark recess + little figurine and offering bowl
+# 原点在墙面：框只凸出 10cm，背板贴在墙面上（不再整只壁龛浮空 8–30cm）
 NICHE = [
-    ("Top", ("box", (1.02, 0.09, 0.16), (0, 0.95, 0), "trim")),
-    ("Bottom", ("box", (1.02, 0.09, 0.16), (0, 0.045, 0), "trim")),
-    ("PostL", ("box", (0.09, 0.86, 0.16), (-0.465, 0.5, 0), "trim")),
-    ("PostR", ("box", (0.09, 0.86, 0.16), (0.465, 0.5, 0), "trim")),
-    ("Back", ("box", (1.02, 0.86, 0.06), (0, 0.5, -0.05), "rock")),
-    ("Figurine", ("box", (0.10, 0.22, 0.10), (0, 0.30, 0.04), "rock")),
-    ("Bowl", ("cyl", (0.10, 0.11, 0.06, 12), (0, 0.16, 0.05), "bronze")),
+    ("Top", ("box", (1.02, 0.09, 0.08), (0, 0.95, 0.04), "trim")),
+    ("Bottom", ("box", (1.02, 0.09, 0.08), (0, 0.045, 0.04), "trim")),
+    ("PostL", ("box", (0.09, 0.86, 0.08), (-0.465, 0.5, 0.04), "trim")),
+    ("PostR", ("box", (0.09, 0.86, 0.08), (0.465, 0.5, 0.04), "trim")),
+    ("Back", ("box", (1.02, 0.86, 0.03), (0, 0.5, 0.012), "dark")),
+    ("Figurine", ("box", (0.10, 0.22, 0.06), (0, 0.30, 0.055), "trim")),
+    ("Bowl", ("cyl", (0.05, 0.055, 0.055, 12), (0, 0.16, 0.045), "bronze")),
 ]
 
 # stone offering table in front of the sarcophagus
@@ -195,17 +226,20 @@ GUARD = [
     ("SpearBase", ("cyl", (0.08, 0.06, 0.06, 8), (0.46, 0.15, 0.08), "bronze")),
 ]
 
-# ---- 东汉画像石浮雕带：墙面长条浮雕板 + 立体纹样 ----
-# 每段面板宽 w（沿墙方向），高约 1.0m，厚度 0.10m，侧面压出纹样方块。
+# ---- 东汉画像石浮雕带：嵌进墙里的浅浮雕长条 + 低凸纹样 ----
+# 每段面板宽 w（沿墙方向）、高 1.02m。石板只 5cm 厚、3cm 埋进墙里、只凸出 2cm，
+# 纹样再压在 4.5cm 浅层上（合计外凸不到 6cm）——看上去像"刻在墙上"，
+# 而不是一块浮离墙面 20cm、隔着缝的黑板。
 def relief_band(w, pattern):
     """w: band width in metres. pattern: 'procession' | 'cloud' | 'guardian'.
-    Returns parts in local coords: origin at wall face, +z 朝室内（由 yaw 决定）."""
+    Returns parts in local coords: origin on the wall face, +z 朝室内（由 yaw 决定）."""
     parts = [
-        ("Slab", ("box", (w, 1.02, 0.10), (0, 3.10, 0), "trim")),
-        ("RimL", ("box", (0.12, 1.06, 0.14), (-w / 2 + 0.06, 3.10, 0), "bronze")),
-        ("RimR", ("box", (0.12, 1.06, 0.14), (w / 2 - 0.06, 3.10, 0), "bronze")),
-        ("RimT", ("box", (w, 0.12, 0.14), (0, 3.62, 0), "bronze")),
-        ("RimB", ("box", (w, 0.12, 0.14), (0, 2.58, 0), "bronze")),
+        # 石板：后脸 -0.03（埋进墙 3cm），前脸 +0.02（凸出 2cm）
+        ("Slab", ("box", (w, 1.02, 0.05), (0, 3.10, -0.005), "relief")),
+        ("RimL", ("box", (0.10, 1.06, 0.06), (-w / 2 + 0.05, 3.10, 0.005), "bronze")),
+        ("RimR", ("box", (0.10, 1.06, 0.06), (w / 2 - 0.05, 3.10, 0.005), "bronze")),
+        ("RimT", ("box", (w, 0.10, 0.06), (0, 3.63, 0.005), "bronze")),
+        ("RimB", ("box", (w, 0.10, 0.06), (0, 2.57, 0.005), "bronze")),
     ]
     if pattern == "procession":
         # 车马出行：两轮车 + 一马 + 驭者，块状剪影，沿墙方向排开
@@ -248,11 +282,24 @@ def relief_band(w, pattern):
                 ("GHem%d" % (0 if sign > 0 else 1), ("box", (0.74, 0.05, 0.10), (ox, 2.74, 0.08), "gold_ink")),
             ]
         parts += [
-            ("Sun", ("cyl", (0.10, 0.30, 0.30, 12), (0, 3.45, 0.06), "vermilion")),
-            ("SunRim", ("cyl", (0.035, 0.34, 0.34, 12), (0, 3.57, 0.06), "gold_ink")),
-            ("Moon", ("cyl", (0.10, 0.22, 0.22, 12), (0, 2.86, 0.06), "wall")),
+            # 日轮/月轮：薄圆盘立起来贴墙（pitch 90 把圆柱轴从 Y 转到 Z），否则会平躺着扎出墙 30cm
+            ("Sun", ("cyl", (0.045, 0.16, 0.16, 12), (0, 3.42, 0.10), "vermilion", 0.0, 90.0)),
+            ("SunRim", ("cyl", (0.045, 0.19, 0.19, 12), (0, 3.42, 0.04), "gold_ink", 0.0, 90.0)),
+            ("Moon", ("cyl", (0.045, 0.13, 0.13, 12), (0, 2.86, 0.04), "wall", 0.0, 90.0)),
         ]
-    return parts
+    # 纹样压成浅浮雕：厚度统一 4.5cm，出墙偏移 = 0.015 + 原偏移*0.3（原 0.06→0.033）
+    shallow = []
+    for name, spec in parts:
+        kind, size, pos, mat = spec[0], spec[1], spec[2], spec[3]
+        extra = spec[4:]
+        if mat not in ("trim", "relief"):
+            if kind == "box":
+                size = (size[0], size[1], 0.045)
+            else:
+                size = (0.045,) + tuple(size[1:])
+            pos = (pos[0], pos[1], 0.015 + pos[2] * 0.3)
+        shallow.append((name, (kind, size, pos, mat) + tuple(extra)))
+    return shallow
 
 
 # ---- 博山炉（汉代熏香炉）：底盘 + 立柱 + 炉身 + 仙山峰形盖 ----
@@ -378,7 +425,7 @@ ERBEI = [
 # ---- 顶门石（防盗石杠：竖直石杠绕 X 倾斜 25°，底部贴地、顶部倒向墙）约 2.4 m ----
 # 注意：pitch>0 时顶部倒向局部 +z；放置 yaw 需让局部 +z 指向墙面方向。
 STOPPER = [
-    ("Bar", ("box", (0.5, 2.4, 0.34), (0, 1.2, 0), "rock", 0.0, 25.0)),
+    ("Bar", ("box", (0.5, 2.4, 0.34), (0, 1.2, 0), "dark", 0.0, 25.0)),
     ("Chock", ("box", (0.7, 0.1, 0.7), (0, 0.05, 0), "trim")),
 ]
 
@@ -409,6 +456,34 @@ GROUPS = {
     "relief_cloud": ("WallReliefs", relief_band(6.0, "cloud")),
     "relief_guardian": ("WallReliefs", relief_band(6.0, "guardian")),
 }
+
+# ---- 门额（门洞上方补齐墙体）----
+# 主墓道各门的门洞是全高度的洞：走廊顶 4.65、墓室/主厅顶 7.65，中间那段本来是空的，
+# 从厅里看就是门上一个黑洞。补一块与墙同厚同材质的门额把它封上，并在洞口上沿加一条门楣。
+DOOR_HEAD_TOP = 7.65
+DOOR_HEAD_BOTTOM = 4.60
+
+
+def door_header(w):
+    h = DOOR_HEAD_TOP - DOOR_HEAD_BOTTOM
+    return [
+        ("Head", ("box", (w + 0.04, h, 0.38), (0, (DOOR_HEAD_BOTTOM + DOOR_HEAD_TOP) * 0.5, 0), "wall")),
+        ("Lintel", ("box", (w + 0.40, 0.22, 0.10), (0, DOOR_HEAD_BOTTOM + 0.15, 0.20), "trim")),
+        ("LintelRib", ("box", (w + 0.40, 0.05, 0.14), (0, DOOR_HEAD_BOTTOM + 0.02, 0.21), "bronze")),
+    ]
+
+
+# (kind, x, z, yaw, 门洞净宽)
+DOOR_GAPS = [
+    ("doorhead_halln", 15.00, -103.50, 0, 4.12),
+    ("doorhead_halls", 0.00, -79.50, 180, 5.62),
+    ("doorhead_halle", 37.50, -91.50, -90, 4.12),
+    ("doorhead_tombw", 43.50, -91.50, 90, 4.12),
+    ("doorhead_tombe", 70.50, -98.25, -90, 4.12),
+    ("doorhead_tombe_gate", 70.50, -72.75, -90, 10.12),
+]
+for _kind, _x, _z, _yaw, _w in DOOR_GAPS:
+    GROUPS[_kind] = ("DoorHeaders", door_header(_w))
 
 # ---- 券顶（拱券肋骨，画在 11 主墓室天花下）----
 # 拱：半跨 s=13.5（墓室宽 27 的中间段），矢高 rise=1.3，起拱线 y_spring=6.2，
@@ -489,16 +564,16 @@ PLACEMENTS = [
     ("DingHall2", "ding", (26.5, 0.15, -96.8), 0),
     ("DingTmb1", "ding", (66.5, 0.15, -84.0), 0),
     ("DingTmb2", "ding", (47.5, 0.15, -98.0), 90),
-    ("NicheHallN1", "niche", (7.5, 0.15, -103.12), 0),
-    ("NicheHallN2", "niche", (16.5, 0.15, -103.12), 0),
-    ("NicheHallN3", "niche", (25.5, 0.15, -103.12), 0),
-    ("NicheHallN4", "niche", (34.5, 0.15, -103.12), 0),
-    ("NicheHallS1", "niche", (6.5, 0.15, -79.66), 180),
-    ("NicheHallS2", "niche", (15.5, 0.15, -79.66), 180),
-    ("NicheHallS3", "niche", (24.5, 0.15, -79.66), 180),
-    ("NicheHallS4", "niche", (33.5, 0.15, -79.66), 180),
-    ("NicheTmbE", "niche", (70.2, 0.15, -96.5), 90),
-    ("NicheTmbW", "niche", (43.36, 0.15, -86.5), -90),
+    ("NicheHallN1", "niche", (-2.0, 0.15, -103.5), 0),
+    ("NicheHallN2", "niche", (6.0, 0.15, -103.5), 0),
+    ("NicheHallN3", "niche", (21.5, 0.15, -103.5), 0),
+    ("NicheHallN4", "niche", (30.0, 0.15, -103.5), 0),
+    ("NicheHallS1", "niche", (6.5, 0.15, -79.5), 180),
+    ("NicheHallS2", "niche", (15.5, 0.15, -79.5), 180),
+    ("NicheHallS3", "niche", (24.5, 0.15, -79.5), 180),
+    ("NicheHallS4", "niche", (33.5, 0.15, -79.5), 180),
+    ("NicheTmbE", "niche", (70.5, 0.15, -91.0), -90),
+    ("NicheTmbW", "niche", (43.5, 0.15, -86.5), 90),
     ("Altar11", "altar", (52.8, 0.15, -91.5), 90),
     ("RackHall1", "spearrack", (9.5, 0.15, -80.6), 0),
     ("RackHall2", "spearrack", (18.5, 0.15, -80.6), 0),
@@ -512,30 +587,64 @@ PLACEMENTS = [
     ("FigurineTmbC", "figurine", (65.0, 0.15, -101.0), 0),
 ]
 
-# 画像石浮雕带（沿墙长条，局部 y=3.10 中心；纹样在局部 +z 面，突出 slab 0.08）
+# 画像石浮雕带：浅浮雕嵌墙（石板凸 2cm + 纹样 3.5cm），原点落在墙面。
 # 墙面内面：大厅 z=-103.5(北)/-79.5(南)、x=37.5(东)/-7.5(西)；
-#          墓室 z=-105.0(北)/-78.0(南)、x=70.5(东)/43.5(西)；slab 厚 0.10，后脸离墙 0.02
-# yaw 0/90/-90：纹样朝房间；yaw 180：纹样（翻转后）朝房间，故原点置于墙面内侧 0.07
-for i, (x, z, yaw) in enumerate([
-    # 大厅北墙（z=-103.5，yaw 0 → 纹样朝 +z 室内）
-    (2.5, -103.43, 0), (9.0, -103.43, 0), (20.0, -103.43, 0), (27.0, -103.43, 0),
-    # 大厅南墙（z=-79.5，yaw 180 → 纹样朝 -z 室内）
-    (3.0, -79.57, 180), (10.0, -79.57, 180), (17.0, -79.57, 180), (31.0, -79.57, 180),
-    # 大厅东墙（x=37.5，yaw -90 → 纹样朝 -x 室内）
-    (37.43, -100.0, -90), (37.43, -84.0, -90),
-    # 大厅西墙（x=-7.5，yaw 90 → 纹样朝 +x 室内）
-    (-7.43, -99.0, 90), (-7.43, -84.0, 90),
-    # 墓室北墙（z=-105.0，yaw 0）
-    (49.0, -104.93, 0), (57.0, -104.93, 0), (65.0, -104.93, 0),
-    # 墓室南墙（z=-78.0，yaw 180）
-    (49.0, -78.07, 180), (57.0, -78.07, 180), (65.0, -78.07, 180),
-    # 墓室西墙（x=43.5，yaw 90 → +x 室内；避开 08 通道缺口 z -93.57..-89.43）
-    (43.57, -100.0, 90), (43.57, -85.0, 90),
-    # 墓室东墙（x=70.5，yaw -90 → -x 室内）
-    (70.43, -101.0, -90), (70.43, -84.0, -90),
-]):
+#          墓室 z=-105.0(北)/-78.0(南)、x=70.5(东)/43.5(西)
+# 硬约束：6m 整段必须落在一段连续墙面上、两端各留 ≥0.3m，绝不跨门洞。
+# 上一版 #4/#20 跨门洞悬空 2.8m/2.3m，就是"墙里戳出一块黑板"的根源。
+RELIEF_SPOTS = [
+    # 大厅北墙：门洞(-12.94..-17.06 之外)两段各三块
+    (-3.81, -103.5, 0), (2.62, -103.5, 0), (9.06, -103.5, 0),
+    (20.94, -103.5, 0), (27.38, -103.5, 0), (33.81, -103.5, 0),
+    # 大厅南墙：门洞右侧 34.9m 连续段，五块均布
+    (6.92, -79.5, 180), (13.59, -79.5, 180), (20.25, -79.5, 180),
+    (26.91, -79.5, 180), (33.58, -79.5, 180),
+    # 大厅东墙 / 西墙
+    (37.5, -98.62, -90), (37.5, -84.37, -90),
+    (-7.5, -99.10, 90), (-7.5, -91.50, 90), (-7.5, -83.90, 90),
+    # 墓室北墙 / 南墙
+    (47.26, -105.0, 0), (53.75, -105.0, 0), (60.25, -105.0, 0), (66.74, -105.0, 0),
+    (47.26, -78.0, 180), (53.75, -78.0, 180), (60.25, -78.0, 180), (66.74, -78.0, 180),
+    # 墓室西墙 / 东墙（避开 08 通道缺口：西 -93.56..-89.44、东 -100.31..-96.19）
+    (43.5, -99.37, 90), (43.5, -83.62, 90),
+    (70.5, -90.91, -90), (70.5, -83.09, -90),
+]
+
+# 墙段运行区间（y 2.6–3.6 实测，见 tools/audit_wall_decor.py），生成时强制校验
+WALL_RUNS = {
+    ("z", -103.5): [(-7.69, 12.94), (17.06, 37.69)],
+    ("z", -79.5): [(-56.44, -21.38), (-7.69, -2.81), (2.81, 37.69)],
+    ("x", 37.5): [(-103.69, -93.56), (-89.44, -79.31)],
+    ("x", -7.5): [(-103.69, -79.31)],
+    ("z", -105.0): [(43.31, 70.69)],
+    ("z", -78.0): [(43.31, 70.69)],
+    ("x", 70.5): [(-105.19, -100.31), (-96.19, -77.81), (-67.69, -52.31)],
+    ("x", 43.5): [(-105.19, -93.56), (-89.44, -77.81)],
+}
+BAND_MARGIN = 0.3
+
+
+def check_band_fit(x, z, yaw, w=6.0):
+    axis = "x" if abs(yaw) == 90 else "z"
+    plane = x if axis == "x" else z
+    span = (z - w / 2, z + w / 2) if axis == "x" else (x - w / 2, x + w / 2)
+    for lo, hi in WALL_RUNS.get((axis, plane), []):
+        if span[0] >= lo + BAND_MARGIN and span[1] <= hi - BAND_MARGIN:
+            return True
+    return False
+
+
+for i, (x, z, yaw) in enumerate(RELIEF_SPOTS):
+    if not check_band_fit(x, z, yaw):
+        raise SystemExit("relief band crosses an opening: #%d (%.2f, %.2f, yaw %d) span %.2f..%.2f"
+                         % (i, x, z, yaw, (z if abs(yaw) == 90 else x) - 3.0,
+                            (z if abs(yaw) == 90 else x) + 3.0))
     kind = ("relief_cloud", "relief_guardian", "relief_procession")[i % 3]
     PLACEMENTS.append(("ReliefBand%02d" % i, kind, (x, 0.0, z), yaw, 1.0))
+
+# 门额：把各门洞上方的空档补成墙（见 DOOR_GAPS）
+for _kind, _x, _z, _yaw, _w in DOOR_GAPS:
+    PLACEMENTS.append(("%sHead" % _kind.split("_")[-1].upper(), _kind, (_x, 0.0, _z), _yaw))
 
 # 五铢钱：散落在地面（薄圆柱轴沿 Y，y=0.163 使底面贴地 0.15）
 for i, (cx, cz, ry) in enumerate(COIN_SCATTER):
@@ -574,7 +683,7 @@ PLACEMENTS.append(("Erbei09", "erbei", (59.8, 0.175, -62.2), -20))
 # 11 西墙内面 x=43.5 → 墙在 -x，yaw=-90。
 PLACEMENTS.append(("StopperTombN", "stopper", (52.0, 0.15, -104.4), 180))
 PLACEMENTS.append(("Stopper09S", "stopper", (60.0, 0.15, -53.4), 0))
-PLACEMENTS.append(("Stopper11W", "stopper", (44.3, 0.15, -91.5), -90))
+PLACEMENTS.append(("Stopper11W", "stopper", (44.3, 0.15, -87.5), -90))
 
 # ------------------------------------------------------------------- emit .tscn
 sub_by_key = {}

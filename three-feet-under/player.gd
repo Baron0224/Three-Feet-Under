@@ -18,6 +18,8 @@ const CROUCH_EYE_HEIGHT := 0.95
 const MOUSE_SENSITIVITY := 0.002
 const RESTART_DELAY := 1.2
 const ABYSS_DEATH_Y := -5.0
+const FootstepSFX := preload("res://footsteps.gd")
+const TombAmbience := preload("res://ambience.gd")
 
 @onready var camera: Camera3D = $Camera3D
 @onready var body_collision: CollisionShape3D = $CollisionShape3D
@@ -37,6 +39,10 @@ var death_message: Label
 var sprint_indicator: Label
 ## Ignore FOCUS_OUT for a short grace period after play starts (editor F6 focus flicker).
 var _capture_grace_until_msec := 0
+var _footsteps: AudioStreamPlayer3D
+var _step_accum := 0.0
+var _was_airborne := false
+var _ambience: Node
 
 
 func _ready() -> void:
@@ -50,6 +56,12 @@ func _ready() -> void:
 	floor_snap_length = 0.3
 	has_abyss = get_parent().has_node("EastWing/Chasm07")
 	_create_controls_hud()
+	_footsteps = FootstepSFX.new()
+	_footsteps.name = "FootstepSFX"
+	add_child(_footsteps)
+	_ambience = TombAmbience.new()
+	_ambience.name = "TombAmbience"
+	add_child(_ambience)
 	# Editor F6 often fires FOCUS_OUT during startup; grace + deferred capture keeps look working.
 	_capture_grace_until_msec = Time.get_ticks_msec() + 750
 	call_deferred("_set_mouse_capture", true)
@@ -169,6 +181,7 @@ func _physics_process(delta: float) -> void:
 	# Adapted upstream non-continuous jump: one press, on floor, not ascending.
 	if controls_enabled and Input.is_action_just_pressed("jump") and is_on_floor() and velocity.y <= 0.0 and not is_crouching:
 		velocity.y += JUMP_VELOCITY
+	var fall_speed := velocity.y
 
 	# Adapted upstream direct movement, without sprint or animation dependencies.
 	var input_dir := Vector2.ZERO
@@ -185,8 +198,33 @@ func _physics_process(delta: float) -> void:
 	velocity.x = direction_2d.x * speed
 	velocity.z = direction_2d.y * speed
 	move_and_slide()
+	var ambience := _ambience as TombAmbience
+	if ambience:
+		# Downward speed -> whoosh intensity (0 on the ground, ramps in a fall).
+		ambience.set_fall_speed(maxf(-fall_speed, 0.0))
 	if _in_abyss_death_zone():
 		_die()
+
+	if controls_enabled and _footsteps:
+		# Stride-paced footsteps: accumulate horizontal distance, step when the
+		# per-gait stride length is reached (crouch/sneak short, sprint long).
+		_step_accum += Vector2(velocity.x, velocity.z).length() * delta
+		var stride := 0.62
+		var kind := FootstepSFX.KIND_WALK
+		if is_crouching:
+			stride = 0.45
+			kind = FootstepSFX.KIND_CROUCH
+		elif sprint_enabled:
+			stride = 1.0
+			kind = FootstepSFX.KIND_SPRINT
+		elif Input.is_action_pressed("sneak"):
+			stride = 0.5
+		if is_on_floor() and _step_accum >= stride:
+			_step_accum = fmod(_step_accum, stride)
+			_footsteps.play_kind(kind)
+		if _was_airborne and is_on_floor() and fall_speed < -3.0:
+			_footsteps.play_land()
+	_was_airborne = not is_on_floor()
 
 
 func _set_crouching(value: bool) -> void:
