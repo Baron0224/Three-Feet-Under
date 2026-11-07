@@ -12,8 +12,8 @@ extends Node3D
 @export var hatch_width := 4.3
 @export var panel_thickness := 0.18
 @export var drop_local_x := 0.0
-@export var rest_local_x := -26.5
-@export var trigger_local_x := 0.0
+@export var rest_local_x := -3.0
+@export var trigger_local_x := 2.5
 @export var trigger_size := Vector3(4.0, 2.4, 4.0)
 @export var slide_distance := 4.6
 @export var slide_seconds := 0.55
