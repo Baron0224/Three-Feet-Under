@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://baphag5jndjdw" path="res://dilapidated_bridge.tscn" id="DilapidatedBridge"]
 [ext_resource type="PackedScene" uid="uid://ca2l7dub1clt5" path="res://dual_seal_door.tscn" id="DualSealDoor"]
 [ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
-[ext_resource type="PackedScene" uid="uid://crollboulderts" path="res://rolling_boulder_trap.tscn" id="RollingBoulder"]
+[ext_resource type="PackedScene" uid="uid://nmgcgm1wxi5y" path="res://rolling_boulder_trap.tscn" id="RollingBoulder"]
 [ext_resource type="PackedScene" uid="uid://csv0ck667006g" path="res://torch_lever_wall.tscn" id="TorchLeverWall"]
 [ext_resource type="PackedScene" path="res://art/props/decor_details.tscn" id="40_decor"]
 
