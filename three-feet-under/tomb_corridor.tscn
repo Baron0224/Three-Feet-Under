@@ -4328,7 +4328,7 @@ opening_height = 3.9
 rise_distance = 4.1
 lever_on_inner_wall = true
 lever_on_passage_side = true
-lever_on_right = true
+lever_on_right = false
 
 [node name="TorchLeverWallWestShortcutTestSpawn" type="Marker3D" parent="." unique_id=1847293652]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.5, 1.2, -37.5)
