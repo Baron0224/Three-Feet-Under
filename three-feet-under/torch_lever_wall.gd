@@ -364,7 +364,10 @@ func _build_geometry(gen: int) -> void:
 	var depth := -1.15 if lever_on_passage_side else 0.42
 	if lever_on_inner_wall:
 		# Mount on INNER side wall of doorway (jamb), on chosen face.
-		lever_root.position = Vector3(side * (opening_width * 0.5 - 0.18), 1.15, depth)
+		# Passage: push slightly INTO the brick (+0.06 past opening edge) so plate sits flush, no float gap.
+		# Hub face: small inset so bracket clears jamb lip.
+		var lateral := (opening_width * 0.5 + 0.06) if lever_on_passage_side else (opening_width * 0.5 - 0.04)
+		lever_root.position = Vector3(side * lateral, 1.15, depth)
 		# Face into the corridor volume from the side wall; +180 when on passage side.
 		if lever_on_passage_side:
 			lever_root.rotation_degrees.y = side * 90.0 + 180.0
