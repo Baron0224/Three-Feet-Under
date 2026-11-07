@@ -1,5 +1,7 @@
 extends Node3D
 
+const STONE_DOOR := preload("res://audio/sfx/stone_door.ogg")
+
 @export var open_distance := 2.0
 @export var open_amount := 2.5
 @export var open_speed := 2.0
@@ -13,6 +15,7 @@ var _opening := false
 var _opened := false
 var _start_x := 0.0
 var _player: Node3D
+var _sfx: AudioStreamPlayer3D
 
 @onready var _body: StaticBody3D = $StaticBody3D
 @onready var _prompt: Label = get_node_or_null(prompt_path)
@@ -21,12 +24,20 @@ var _player: Node3D
 func _ready() -> void:
 	_start_x = position.x
 	_player = get_tree().get_first_node_in_group("player")
+	_sfx = AudioStreamPlayer3D.new()
+	_sfx.stream = STONE_DOOR
+	_sfx.volume_db = -6.0
+	_sfx.pitch_scale = 0.92
+	_sfx.max_distance = 24.0
+	add_child(_sfx)
 
 
 func unlock() -> void:
 	_unlocked = true
 	if auto_open_on_unlock and not _opened and not _opening:
 		_opening = true
+		if _sfx:
+			_sfx.play()
 		if _prompt:
 			_prompt.visible = false
 

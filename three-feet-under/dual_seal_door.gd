@@ -1,6 +1,8 @@
 @tool
 extends Node3D
 
+const STONE_DOOR := preload("res://audio/sfx/stone_door.ogg")
+
 ## Hub dual-seal bronze double door (双印门).
 ## Left = yellow/gold seal, Right = blue seal. Both must unlock before doors open.
 ## West/east puzzle scripts can call unlock_yellow_seal() / unlock_blue_seal().
@@ -46,6 +48,7 @@ var _yellow_area: Area3D
 var _blue_area: Area3D
 var _prompt: Label
 var _player: Node3D
+var _sfx: AudioStreamPlayer3D
 
 var _bronze: StandardMaterial3D
 var _bronze_dark: StandardMaterial3D
@@ -57,6 +60,13 @@ var _socket_well: StandardMaterial3D
 
 func _ready() -> void:
 	_request_rebuild(true)
+	if not Engine.is_editor_hint():
+		_sfx = AudioStreamPlayer3D.new()
+		_sfx.stream = STONE_DOOR
+		_sfx.volume_db = -2.0
+		_sfx.pitch_scale = 0.75
+		_sfx.max_distance = 28.0
+		add_child(_sfx)
 
 
 func _notification(what: int) -> void:
@@ -161,6 +171,8 @@ func _begin_open() -> void:
 	if _opened or _opening:
 		return
 	_opening = true
+	if _sfx:
+		_sfx.play()
 	if _prompt:
 		_prompt.visible = false
 	print("DualSealDoor: opening")
