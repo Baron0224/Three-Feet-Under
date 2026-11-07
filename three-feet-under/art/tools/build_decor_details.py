@@ -24,6 +24,7 @@ MAT = {
     "clay": "res://art/materials/clay.tres",
     "brick": "res://art/materials/brick.tres",
     "vermilion": "res://art/materials/vermilion.tres",
+    "gold_ink": "res://art/materials/gold_ink.tres",
 }
 
 NEW_MATERIALS = {
@@ -49,6 +50,14 @@ roughness = 0.24
 albedo_color = Color(0.62, 0.42, 0.28, 1)
 metallic = 0.02
 roughness = 0.88
+""",
+    "res://art/materials/gold_ink.tres": """[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+albedo_color = Color(0.93, 0.78, 0.30, 1)
+metallic = 0.8
+metallic_specular = 0.6
+roughness = 0.25
 """,
 }
 
@@ -207,9 +216,11 @@ def relief_band(w, pattern):
             ("HorseLeg1", ("box", (0.14, 0.55, 0.12), (1.0, 2.85, 0.06), "wall")),
             ("HorseLeg2", ("box", (0.14, 0.55, 0.12), (1.7, 2.85, 0.06), "wall")),
             ("Driver", ("box", (0.35, 0.75, 0.14), (2.5, 3.30, 0.06), "vermilion")),
+            ("HubL", ("box", (0.14, 0.14, 0.08), (-w / 2 + 1.1, 3.10, 0.10), "gold_ink")),
+            ("HubR", ("box", (0.14, 0.14, 0.08), (-w / 2 + 2.2, 3.10, 0.10), "gold_ink")),
         ]
     elif pattern == "cloud":
-        # 云气纹：四组 S 形云头 + 小圆点，抽象回旋；云头尖涂朱
+        # 云气纹：四组 S 形云头 + 小圆点，抽象回旋；云头尖涂朱、云心点金
         n = 4
         step = (w - 0.8) / n
         for i in range(n):
@@ -219,9 +230,10 @@ def relief_band(w, pattern):
                 ("CloudB%d" % i, ("box", (0.42, 0.34, 0.14), (cx + 0.12, 3.12, 0.06), "wall")),
                 ("CloudC%d" % i, ("box", (0.24, 0.20, 0.14), (cx + 0.05, 3.48, 0.06), "vermilion")),
                 ("CloudD%d" % i, ("box", (0.14, 0.14, 0.14), (cx - 0.28, 3.05, 0.06), "wall")),
+                ("CloudDot%d" % i, ("box", (0.09, 0.09, 0.09), (cx + 0.24, 3.28, 0.10), "gold_ink")),
             ]
     elif pattern == "guardian":
-        # 双武士/门吏剪影：左右对称；日轮与矛杆涂朱
+        # 双武士/门吏剪影：左右对称；日轮与矛杆涂朱、日轮描金边
         cx = w / 2
         for sign in (1, -1):
             ox = sign * cx * 0.62
@@ -230,9 +242,11 @@ def relief_band(w, pattern):
                 ("GBody%d" % (0 if sign > 0 else 1), ("box", (0.70, 0.72, 0.16), (ox, 3.10, 0.06), "wall")),
                 ("GArm%d" % (0 if sign > 0 else 1), ("box", (0.30, 0.55, 0.14), (ox + sign * 0.45, 3.12, 0.06), "wall")),
                 ("GShaft%d" % (0 if sign > 0 else 1), ("box", (0.08, 1.1, 0.10), (ox + sign * 1.0, 3.10, 0.06), "vermilion")),
+                ("GHem%d" % (0 if sign > 0 else 1), ("box", (0.74, 0.05, 0.10), (ox, 2.74, 0.08), "gold_ink")),
             ]
         parts += [
             ("Sun", ("cyl", (0.10, 0.30, 0.30, 12), (0, 3.45, 0.06), "vermilion")),
+            ("SunRim", ("cyl", (0.035, 0.34, 0.34, 12), (0, 3.57, 0.06), "gold_ink")),
             ("Moon", ("cyl", (0.10, 0.22, 0.22, 12), (0, 2.86, 0.06), "wall")),
         ]
     return parts
@@ -266,6 +280,65 @@ def coin(x, z, ry):
     return ("Coin", ("cyl", (0.025, 0.11, 0.11, 12), (x, 0.16, z), "bronze"), ry, 90)
 
 
+# ---- 陶仓（东汉明器：圆身带顶盖粮仓）约 1.05 m 高 ----
+GRANARY = [
+    ("Base", ("box", (0.88, 0.10, 0.88), (0, 0.05, 0), "clay")),
+    ("RimBase", ("cyl", (0.10, 0.45, 0.50, 14), (0, 0.18, 0), "clay")),
+    ("Body", ("cyl", (0.62, 0.34, 0.42, 14), (0, 0.55, 0), "clay")),
+    ("GirthL", ("cyl", (0.05, 0.35, 0.43, 14), (0, 0.55, 0), "trim")),
+    ("GirthU", ("cyl", (0.05, 0.33, 0.35, 14), (0, 0.82, 0), "trim")),
+    ("Door", ("box", (0.14, 0.22, 0.06), (0, 0.45, 0.46), "brick")),
+    ("Vent", ("box", (0.08, 0.08, 0.05), (0.24, 0.68, 0.45), "trim")),
+    ("RoofLid", ("cyl", (0.16, 0.40, 0.44, 14), (0, 0.95, 0), "clay")),
+    ("RoofPeak", ("cyl", (0.12, 0.14, 0.14, 10), (0, 1.03, 0), "bronze")),
+    ("Knob", ("cyl", (0.04, 0.05, 0.05, 8), (0, 1.11, 0), "gold_ink")),
+]
+
+# ---- 陶楼（东汉明器：三檐望楼/宝塔式陶楼）约 2.0 m 高 ----
+TOWER = [
+    ("Base", ("box", (1.30, 0.12, 1.30), (0, 0.06, 0), "clay")),
+    ("Floor1", ("box", (1.00, 0.62, 1.00), (0, 0.40, 0), "clay")),
+    ("Door1", ("box", (0.20, 0.34, 0.07), (0, 0.38, 0.51), "brick")),
+    ("Eave1", ("box", (1.44, 0.08, 1.44), (0, 0.78, 0), "trim")),
+    ("Floor2", ("box", (0.84, 0.52, 0.84), (0, 1.05, 0), "clay")),
+    ("Window2", ("box", (0.16, 0.16, 0.06), (0.22, 1.08, 0.43), "brick")),
+    ("Eave2", ("box", (1.24, 0.08, 1.24), (0, 1.38, 0), "trim")),
+    ("Floor3", ("box", (0.68, 0.46, 0.68), (0, 1.60, 0), "clay")),
+    ("Eave3", ("box", (1.04, 0.08, 1.04), (0, 1.92, 0), "trim")),
+    ("Roof", ("box", (0.30, 0.22, 0.30), (0, 2.04, 0), "clay")),
+    ("Finial", ("box", (0.08, 0.14, 0.08), (0, 2.22, 0), "bronze")),
+    ("GiltBand1", ("box", (1.02, 0.045, 1.02), (0, 0.70, 0.01), "gold_ink")),
+    ("GiltBand2", ("box", (0.86, 0.045, 0.86), (0, 1.28, 0.01), "gold_ink")),
+]
+
+# ---- 陶井（东汉明器：井栏 + 木架 + 小井亭）约 1.0 m ----
+WELL = [
+    ("Base", ("box", (1.06, 0.10, 1.06), (0, 0.05, 0), "clay")),
+    ("RimL", ("cyl", (0.28, 0.46, 0.40, 14), (0, 0.26, 0), "clay")),
+    ("RimTop", ("cyl", (0.05, 0.50, 0.50, 14), (0, 0.44, 0), "trim")),
+    ("PostA", ("box", (0.07, 0.62, 0.07), (-0.30, 0.72, 0.30), "trim")),
+    ("PostB", ("box", (0.07, 0.62, 0.07), (0.30, 0.72, 0.30), "trim")),
+    ("PostC", ("box", (0.07, 0.62, 0.07), (-0.30, 0.72, -0.30), "trim")),
+    ("PostD", ("box", (0.07, 0.62, 0.07), (0.30, 0.72, -0.30), "trim")),
+    ("Roof", ("box", (0.98, 0.06, 0.98), (0, 1.08, 0), "trim")),
+    ("RoofPeak", ("box", (0.36, 0.10, 0.36), (0, 1.16, 0), "clay")),
+    ("Winch", ("box", (0.08, 0.06, 0.34), (0.42, 0.95, 0.0), "trim")),
+]
+
+# ---- 陶灶（东汉明器：灶台 + 灶眼 + 釜炊）约 0.5 m ----
+STOVE = [
+    ("Base", ("box", (0.94, 0.12, 0.66), (0, 0.06, 0), "clay")),
+    ("Top", ("box", (0.78, 0.06, 0.50), (0, 0.16, 0), "clay")),
+    ("Hearth", ("box", (0.62, 0.22, 0.34), (0, 0.28, 0.02), "clay")),
+    ("HoleL", ("cyl", (0.06, 0.16, 0.16, 10), (-0.15, 0.34, 0.10), "wall")),
+    ("HoleR", ("cyl", (0.06, 0.16, 0.16, 10), (0.15, 0.34, 0.10), "wall")),
+    ("PotL", ("cyl", (0.20, 0.16, 0.16, 12), (-0.15, 0.50, 0.10), "bronze")),
+    ("PotR", ("cyl", (0.20, 0.16, 0.16, 12), (0.15, 0.50, 0.10), "bronze")),
+    ("Chimney", ("cyl", (0.30, 0.07, 0.09, 8), (0.42, 0.48, -0.12), "clay")),
+    ("GiltFront", ("box", (0.66, 0.03, 0.04), (0, 0.22, -0.25), "gold_ink")),
+]
+
+
 GROUPS = {
     "lion": ("StoneLions", LION),
     "pedestal_gold": ("SealPedestals", PEDESTAL_GOLD),
@@ -280,6 +353,10 @@ GROUPS = {
     "spearrack": ("SpearRacks", SPEARRACK),
     "boshan": ("BoshanBurners", BOSHAN),
     "figurine": ("ClayFigurines", FIGURINE),
+    "granary": ("Granaries", GRANARY),
+    "tower": ("Towers", TOWER),
+    "well": ("Wells", WELL),
+    "stove": ("Stoves", STOVE),
     "relief_procession": ("WallReliefs", relief_band(6.0, "procession")),
     "relief_cloud": ("WallReliefs", relief_band(6.0, "cloud")),
     "relief_guardian": ("WallReliefs", relief_band(6.0, "guardian")),
@@ -418,6 +495,19 @@ for i, (cx, cz, ry) in enumerate(COIN_SCATTER):
 
 # 券顶：一组即可（组原点 (0,0,0)，所有肋段已是世界坐标）
 PLACEMENTS.append(("VaultTomb", "vault", (0.0, 0.0, 0.0), 0))
+
+# ---- 明器：陶仓/陶楼/陶井/陶灶（04/08 空房间与 06/09 空角落）----
+# 04 房间 (-60..-48, -52.5..-37.5)：陶仓×2 + 陶井×1 + 陶灶×1
+for i, (x, z, yaw) in enumerate([(-56.5, -41.0, 0), (-51.5, -45.5, 25)]):
+    PLACEMENTS.append(("Granary04%d" % i, "granary", (x, 0.15, z), yaw, 1.0))
+PLACEMENTS.append(("Well04", "well", (-53.0, 0.15, -39.5), 90))
+PLACEMENTS.append(("Stove04", "stove", (-57.5, 0.15, -50.0), 90))
+# 08 房间 (54..66, -40.5..-19.5)：陶楼×2
+for i, (x, z, yaw) in enumerate([(58.0, -25.5, 20), (62.5, -35.0, -15)]):
+    PLACEMENTS.append(("Tower08%d" % i, "tower", (x, 0.15, z), yaw, 1.0))
+# 06 封印室西侧空角 / 09 封印室北侧空角：陶灶各一
+PLACEMENTS.append(("Stove06", "stove", (-51.5, 0.15, -85.0), 45))
+PLACEMENTS.append(("Stove09", "stove", (52.5, 0.15, -54.0), 90))
 
 # ------------------------------------------------------------------- emit .tscn
 sub_by_key = {}

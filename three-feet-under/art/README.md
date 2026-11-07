@@ -248,3 +248,30 @@ meshes unchanged):
 - Generator: `MAT` dict gained `brick` / `vermilion` keys (referenced as
   `m_brick` / `m_vermilion`); vault ribs + infill pass `mat="brick"`.
 - Headless check unchanged: scale audit 1374 / 375 / 912, failures=0.
+
+## Decor v4: mingqi + gold ink (2026-11-07)
+
+Fourth decor pass (now 101 placements / 144 meshes, +8 placements / +41 meshes
+over v3.1). Two additions:
+
+- **Mingqi 明器** (Eastern Han burial goods) in the previously empty rooms:
+  - `Granaries` 陶仓 x2 (#04 room): round-sided grain store, clay body with trim
+    girth bands, brick door + vent, roof lid + bronze peak + gold knob (~1.11 m).
+  - `Towers` 陶楼 x2 (#08 room): three-eave watchtower, clay floors + trim
+    eaves, brick door/window, bronze finial, gold gilt bands under each eave
+    (~2.28 m — safely below the 4.65 m hall ceiling).
+  - `Wells` 陶井 x1 (#04): clay rim + trim posts/roof + winch (~1.21 m).
+  - `Stoves` 陶灶 x3 (#04 / #06 west corner / #09 north corner): clay hearth
+    with two cooking holes + bronze pots + chimney + gold front strip (~0.5 m).
+- **Gold-ink 描金** accents (`art/materials/gold_ink.tres`, albedo 0.93/0.78/0.30,
+  metallic 0.8): applied to the painterly relief bands — wheel hubs + cloud-knot
+  dots + guardian hems + a gold rim around the sun disc: 67 gold-ink parts across
+  the 22 bands (procession 7x2, cloud 8x4, guardian 7x3) plus granary knob /
+  tower gilt bands / stove front strip.
+- Generator: three new part lists (`GRANARY`, `TOWER`, `WELL`, `STOVE`), four new
+  `GROUPS` entries, `gold_ink` material key, and 8 new `PLACEMENTS` rows (Room04
+  x3, Room08 x2, Room06/09 x1 each, all on floor y=0.15).
+- Headless checks: scale audit 1524 / 375 / 1062, failures=0; decor v4 structural
+  probe (test renamed from `_decor_v4_probe.gd`, removed after passing) fails=0.
+- Render: 8 new 1080p shots (`v4_room04/granary/well/stove/room08/tower/
+  gold_hall/gold_tomb`) archived in 项目进度刻画图片/10-明器描金-20261107/.
