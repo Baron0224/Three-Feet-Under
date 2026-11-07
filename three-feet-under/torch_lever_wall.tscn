@@ -10,3 +10,4 @@ allow_debug_interact = true
 require_torch_item = false
 lever_on_right = false
 lever_on_inner_wall = false
+lever_on_passage_side = false
