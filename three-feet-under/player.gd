@@ -197,6 +197,7 @@ func _physics_process(delta: float) -> void:
 		speed = SPRINT_SPEED
 	velocity.x = direction_2d.x * speed
 	velocity.z = direction_2d.y * speed
+	var step_start := global_position
 	move_and_slide()
 	var ambience := _ambience as TombAmbience
 	if ambience:
@@ -205,25 +206,34 @@ func _physics_process(delta: float) -> void:
 	if _in_abyss_death_zone():
 		_die()
 
-	if controls_enabled and _footsteps:
-		# Stride-paced footsteps: accumulate horizontal distance, step when the
-		# per-gait stride length is reached (crouch/sneak short, sprint long).
-		_step_accum += Vector2(velocity.x, velocity.z).length() * delta
-		var stride := 0.62
+	_update_footsteps(step_start, controls_enabled, fall_speed)
+
+
+func _update_footsteps(step_start: Vector3, controls_enabled: bool, fall_speed: float) -> void:
+	var landed := _was_airborne and is_on_floor()
+	var distance := Vector2(global_position.x - step_start.x, global_position.z - step_start.z).length()
+	if is_dead or not controls_enabled or not is_on_floor() or distance < 0.0001 or distance > 0.5:
+		_step_accum = 0.0
+	if landed:
+		_step_accum = 0.0
+		if not is_dead and fall_speed < -1.5:
+			_footsteps.play_land(_footsteps.probe_floor(self), -fall_speed)
+	elif controls_enabled and not is_dead and is_on_floor() and distance >= 0.0001 and distance <= 0.5:
+		var stride := 1.5 # 3 m/s / 1.5 = 2 steps/s.
 		var kind := FootstepSFX.KIND_WALK
 		if is_crouching:
-			stride = 0.45
+			stride = 0.8
 			kind = FootstepSFX.KIND_CROUCH
-		elif sprint_enabled:
-			stride = 1.0
-			kind = FootstepSFX.KIND_SPRINT
 		elif Input.is_action_pressed("sneak"):
-			stride = 0.5
-		if is_on_floor() and _step_accum >= stride:
+			stride = 0.9
+			kind = FootstepSFX.KIND_SNEAK
+		elif sprint_enabled:
+			stride = 1.9
+			kind = FootstepSFX.KIND_SPRINT
+		_step_accum += distance
+		if _step_accum >= stride:
 			_step_accum = fmod(_step_accum, stride)
-			_footsteps.play_kind(kind)
-		if _was_airborne and is_on_floor() and fall_speed < -3.0:
-			_footsteps.play_land()
+			_footsteps.play_kind(kind, _footsteps.probe_floor(self))
 	_was_airborne = not is_on_floor()
 
 
@@ -259,6 +269,8 @@ func _die() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	_step_accum = 0.0
+	_footsteps.stop_all()
 	is_reading = false
 	velocity = Vector3.ZERO
 	_set_mouse_capture(false)

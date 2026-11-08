@@ -2,7 +2,7 @@
 extends Node3D
 
 ## Dilapidated but complete stone bridge across Chasm07 (深渊断桥).
-## Spans end-to-end with cracked uneven slabs and broken rails.
+## Continuous bevelled stone arch, matching triangular collision and broken parapets.
 ## Hooks for later collapse / rope swing — not triggered yet.
 
 signal player_entered_midspan
@@ -27,8 +27,14 @@ signal collapse_requested  # for future A→B→C sequence
 	set(v):
 		slab_rows = maxi(2, v)
 		_request_rebuild()
-@export var arch_height := 0.55
-@export var deck_thickness := 0.28
+@export var arch_height := 2.0:
+	set(v):
+		arch_height = clampf(v, 0.0, 2.2)
+		_request_rebuild()
+@export var deck_thickness := 0.72:
+	set(v):
+		deck_thickness = clampf(v, 0.4, 1.2)
+		_request_rebuild()
 @export var enable_midspan_shake := true
 @export var shake_amplitude := 0.018
 @export var allow_future_collapse := true
@@ -200,9 +206,61 @@ func _make_materials() -> void:
 
 
 func _arch_y(x: float) -> float:
-	# Slight humpback: 0 at ends, arch_height at center.
-	var t: float = clampf((x / maxf(bridge_length * 0.5, 0.001) + 1.0) * 0.5, 0.0, 1.0)
-	return sin(t * PI) * arch_height
+	# Zero grade at both banks; smooth rise and descent without stair steps.
+	var t := clampf((x / (bridge_length * 0.5) + 1.0) * 0.5, 0.0, 1.0)
+	return 0.15 + arch_height * pow(sin(t * PI), 2.0)
+
+
+func _arch_slope(x: float) -> float:
+	var t := clampf((x / (bridge_length * 0.5) + 1.0) * 0.5, 0.0, 1.0)
+	return arch_height * PI / bridge_length * sin(2.0 * PI * t)
+
+
+# Closed swept bevelled section. Top, arch belly and bevels share positions;
+# analytic normals follow the continuous curve. The collision uses THESE triangles.
+func _curved_stone(parent: Node3D, label: String, x0: float, x1: float, z0: float, z1: float, low: float, high: float, material: Material, solid: bool, bevel: float = 0.06) -> void:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var b := minf(bevel, minf((z1-z0)*0.24, (high-low)*0.24))
+	var section := [Vector2(z0+b,high), Vector2(z1-b,high), Vector2(z1,high-b), Vector2(z1,low+b), Vector2(z1-b,low), Vector2(z0+b,low), Vector2(z0,low+b), Vector2(z0,high-b)]
+	var normals := [Vector2(-0.3827,0.9239), Vector2(0.3827,0.9239), Vector2(0.9239,0.3827), Vector2(0.9239,-0.3827), Vector2(0.3827,-0.9239), Vector2(-0.3827,-0.9239), Vector2(-0.9239,-0.3827), Vector2(-0.9239,0.3827)]
+	var count := maxi(8, int(ceil((x1-x0)/0.20)))
+	for i in count:
+		var xa := lerpf(x0,x1,float(i)/count)
+		var xb := lerpf(x0,x1,float(i+1)/count)
+		for j in 8:
+			var k := (j+1)%8
+			for corner in [Vector2i(0,j),Vector2i(1,k),Vector2i(0,k),Vector2i(0,j),Vector2i(1,j),Vector2i(1,k)]:
+				var x := xa if corner.x == 0 else xb
+				var q: Vector2 = section[corner.y]
+				var n: Vector2 = normals[corner.y]
+				st.set_normal(Vector3(-_arch_slope(x)*n.y,n.y,n.x).normalized())
+				st.set_uv(Vector2(x,q.x))
+				st.add_vertex(Vector3(x,_arch_y(x)+q.y,q.x))
+	# End caps below the bank surface; fan winding faces out along X.
+	for end in 2:
+		var x := x0 if end == 0 else x1
+		for j in range(1,7):
+			var order := [0,j+1,j] if end == 0 else [0,j,j+1]
+			for index in order:
+				var q: Vector2 = section[index]
+				st.set_normal(Vector3.LEFT if end == 0 else Vector3.RIGHT)
+				st.set_uv(q)
+				st.add_vertex(Vector3(x,_arch_y(x)+q.y,q.x))
+	var mesh := st.commit()
+	var visual := MeshInstance3D.new()
+	visual.name = label
+	visual.mesh = mesh
+	visual.material_override = material
+	parent.add_child(visual)
+	if solid:
+		var body := StaticBody3D.new()
+		body.name = label + "Body"
+		body.set_meta("surface_type", "stone")
+		var shape := CollisionShape3D.new()
+		shape.shape = mesh.create_trimesh_shape()
+		body.add_child(shape)
+		parent.add_child(body)
 
 
 func _build_geometry(gen: int) -> void:
@@ -210,106 +268,23 @@ func _build_geometry(gen: int) -> void:
 	root.name = "Gen_Bridge"
 	_deck_root = root
 	_deck_base_y = 0.0
-
-	var half_l: float = bridge_length * 0.5
-	var half_w: float = bridge_width * 0.5
-	var segments: int = maxi(slab_cols, 8)
-	var seg_len: float = bridge_length / float(segments)
-
-	# --- Continuous dark deck (uniform width) ---
-	# One structural plate per segment so the arch reads, but same width end-to-end.
-	for i in range(segments):
-		var x0: float = -half_l + (float(i) + 0.5) * seg_len
-		var y_arch: float = _arch_y(x0)
-		_mesh_box(
-			root,
-			"Deck_%d" % i,
-			Vector3(seg_len * 1.02, deck_thickness, bridge_width),
-			Vector3(x0, y_arch + deck_thickness * 0.5, 0.0),
-			_stone
-		)
-
-	# Deck kept flat/regular — no raised crack/trim strips on the walkway.
-
-	# Walkable collision — same uniform width, stepped to follow arch
-	var body := StaticBody3D.new()
-	body.name = "DeckBody"
-	body.collision_layer = 1
-	body.collision_mask = 1
-	root.add_child(body)
-	for i in range(segments):
-		var x0: float = -half_l + (float(i) + 0.5) * seg_len
-		var y_arch: float = _arch_y(x0)
-		var cs := CollisionShape3D.new()
-		var shape := BoxShape3D.new()
-		shape.size = Vector3(seg_len * 1.02, deck_thickness + 0.1, bridge_width)
-		cs.shape = shape
-		cs.position = Vector3(x0, y_arch + deck_thickness * 0.5, 0.0)
-		body.add_child(cs)
-
-	# --- Low thick parapets: solid curb with intentional missing teeth ---
-	# Pattern of present/missing per side so both rails share same outer width.
-	var rail_h: float = 0.62
-	var rail_t: float = 0.38
-	var present_L: Array[bool] = [true, true, false, true, true, true, false, true, false, true, true, true, false, true]
-	var present_R: Array[bool] = [true, false, true, true, false, true, true, true, true, false, true, false, true, true]
-	while present_L.size() < segments:
-		present_L.append(true)
-		present_R.append(true)
-
-	for side_i in range(2):
-		var side: float = -1.0 if side_i == 0 else 1.0
-		var z_rail: float = side * (half_w - rail_t * 0.5)  # flush with deck edge — uniform width
-		for i in range(segments):
-			var x0: float = -half_l + (float(i) + 0.5) * seg_len
-			var y_arch: float = _arch_y(x0)
-			# Clear BOTH bridge heads only (桥两头) — keep mid-span dilapidated rails.
-			# ~2 segments each end so no lone stubs sit on the landing edge.
-			var end_clear: float = seg_len * 2.0
-			if x0 < -half_l + end_clear or x0 > half_l - end_clear:
-				continue
-			var present: bool = present_L[i] if side_i == 0 else present_R[i]
-			if not present:
-				# Broken tooth: leave a low jagged stump only
-				if i % 3 != 1:
-					_mesh_box(
-						root,
-						"RailStub_%d_%d" % [side_i, i],
-						Vector3(seg_len * 0.55, rail_h * 0.28, rail_t * 0.9),
-						Vector3(x0, y_arch + deck_thickness + rail_h * 0.14, z_rail),
-						_stone_dark
-					)
-				continue
-			_mesh_box(
-				root,
-				"Rail_%d_%d" % [side_i, i],
-				Vector3(seg_len * 0.98, rail_h, rail_t),
-				Vector3(x0, y_arch + deck_thickness + rail_h * 0.5, z_rail),
-				_stone_dark if (i % 4 == 0) else _stone
-			)
-			# Coping on intact sections
-			_mesh_box(
-				root,
-				"Coping_%d_%d" % [side_i, i],
-				Vector3(seg_len * 0.92, 0.1, rail_t * 1.15),
-				Vector3(x0, y_arch + deck_thickness + rail_h + 0.05, z_rail),
-				_moss if (i % 5 == 2) else _stone_dark
-			)
-
-	# Center support pillar into the mist
-	var pillar := Node3D.new()
-	pillar.name = "CenterPillar"
-	pillar.position = Vector3(0.0, -6.0, 0.0)
-	root.add_child(pillar)
-	_mesh_box(pillar, "Shaft", Vector3(1.5, 12.0, 1.5), Vector3(0, 0, 0), _stone_dark)
-	_mesh_box(pillar, "Cap", Vector3(2.2, 0.45, 2.2), Vector3(0, 6.15, 0), _stone)
-
-	# End supports under the deck only — same width as heads, nothing raised above the walkway.
-	for end_i in range(2):
-		var end_sign: float = -1.0 if end_i == 0 else 1.0
-		var x_end: float = end_sign * half_l
-		_mesh_box(root, "Abutment_%d" % end_i, Vector3(1.15, 0.45, bridge_width), Vector3(x_end, -0.1, 0), _stone_dark)
-		_mesh_box(root, "Step_%d" % end_i, Vector3(0.7, 0.16, bridge_width), Vector3(x_end - end_sign * 0.45, 0.08, 0), _stone)
+	var half_l := bridge_length * 0.5
+	var half_w := bridge_width * 0.5
+	_curved_stone(root,"Deck",-half_l,half_l,-half_w,half_w,-deck_thickness,0.0,_stone,true,0.07)
+	# Continuous arch fascia defines the load-bearing belly; narrow coping has a rounded arris.
+	for side in [-1.0,1.0]:
+		var edge: float = side*half_w
+		var za := minf(edge, edge-side*0.42)
+		var zb := maxf(edge, edge-side*0.42)
+		_curved_stone(root,"Fascia%s" % side,-half_l,half_l,za,zb,-deck_thickness-0.12,-deck_thickness,_stone_dark,false,0.07)
+		# Leave bank approaches clear; small missing lengths affect only parapets.
+		var ranges := [Vector2(-8.5,-3.2),Vector2(-2.6,3.8),Vector2(4.4,8.5)] if side < 0 else [Vector2(-8.5,-1.4),Vector2(-0.8,5.0),Vector2(5.6,8.5)]
+		for i in ranges.size():
+			var span: Vector2 = ranges[i]
+			_curved_stone(root,"Parapet%s_%s" % [side,i],span.x,span.y,za,zb,0.0,0.62,_stone_dark,true,0.06)
+			_curved_stone(root,"Coping%s_%s" % [side,i],span.x,span.y,za,zb,0.62,0.72,_stone,true,0.04)
+	for sign_x in [-1.0,1.0]:
+		_mesh_box(root,"Abutment%s" % sign_x,Vector3(1.2,1.5,bridge_width),Vector3(sign_x*(half_l-0.2),-0.85,0),_stone_dark)
 
 	# Mid-span detector
 	var area := Area3D.new()
