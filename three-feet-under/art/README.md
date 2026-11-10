@@ -393,3 +393,28 @@ Checks:
   renders 8 shots: hall south/north door, hall south wall, tomb east/west door,
   niche close-up, band close-up, door stop. Archived in
   项目进度刻画图片/14-墙面装饰贴合修复-20261107/.
+
+## Eastern Han lacquered coffin (2026-11-10)
+
+- User installed Blender 5.2.3 LTS; style locked to **Eastern Han (a.d. 25–220)**
+  per user, referencing 盗墓笔记; see [STYLE_ANCHOR.md](STYLE_ANCHOR.md) — the
+  permanent art anchor card (brick-chamber tomb + pictogram bricks, oil-lamp-only
+  lighting, low-sat earth palette, PBR specs, forbidden list, build order,
+  dispatch workflow).
+- `tools/build_coffin_han.py` (Blender 4+ is **Z-up**: height along Z)
+  procedurally builds the coffin and joins one mesh `Coffin_Han`: stone plinth
+  4.7x2.2x0.20, trapezoid casket body (head wider/taller than foot: HEAD_W 1.82 /
+  FOOT_W 1.56, HEAD_H 0.92 / FOOT_H 0.78, bevel 0.10/5seg), two vermilion
+  lacquer bands (0.012 thick), arched (barrel) lid = cylinder half (48 seg,
+  bisected z>0, scaled LEN/RISE 0.42). Materials: BLACK_LACQ
+  (0.030,0.024,0.024 rough0.30 clearcoat0.8) / VERMILION (0.72,0.16,0.10) /
+  STONE (0.24,0.20,0.16). Exported `models/coffin_heavy.glb` (dims 4.6x1.49x2.02,
+  origin at geometric center z=0.747).
+- Generator `build_decor_details.py` gained a `"glb"` part kind: emits a plain
+  instanced node from an ExtResource; emission and reference must share one hash
+  id. `Sarcophagus11` (57, 0.75, -91.5) yaw 90 now instantiates the coffin.
+- `tools/capture_coffin.gd` (env `TFU_COFFIN_OUTPUT`, real window) renders 4
+  shots (front/three-qtr/head/side). Comparison vs old boxy stone coffin
+  archived in 项目进度刻画图片/15-中式髹漆木棺-20261110/.
+- Checks: player_controls 70/0; environment_scale 1708 assertions failures=3
+  (pre-existing, same on committed 1718 version).
