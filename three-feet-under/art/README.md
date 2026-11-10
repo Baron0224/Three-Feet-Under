@@ -418,3 +418,31 @@ Checks:
   archived in 项目进度刻画图片/15-中式髹漆木棺-20261110/.
 - Checks: player_controls 70/0; environment_scale 1708 assertions failures=3
   (pre-existing, same on committed 1718 version).
+
+## Eastern Han strip brick wall pilot (2026-11-11) — dispatch 01
+
+Style-anchor dispatch 01: give ONE corridor wall a real Han brick material,
+without touching structure or any other decoration.
+
+- `shaders/world_hanbrick.gdshader`: world-space procedural Han strip brick
+  (东汉条砖). Long face ~4:1 (`brick_size` vec2(0.44, 0.11)), running bond
+  (every other row off by half a brick). Per-brick tone random between the
+  anchor palette 夯土黄 #8A6D4F and 砖灰 #6E6259 via per-cell hash. Mortar
+  joints carry accumulated dirt (groove darkened, in-joint grime noise), and
+  ~18% of bricks (per-cell `spall_chance`) have an eroded patch exposing the
+  earthen core (lighter `core_color` + recessed relief). Same world-space
+  planar projection and surface-gradient bump as world_brick/world_stone, so
+  brick size stays meter-accurate at 1.5x environment scale and there is no
+  tiling repetition. PBR: rough 0.92+, specular 0.1, no plastic sheen.
+- `materials/han_brick.tres`: ShaderMaterial instance bound to the palette
+  (brick_a 0.541/0.427/0.31, brick_b 0.431/0.384/0.349, mortar dark, core
+  0.6/0.5/0.35).
+- `tomb_corridor.tscn`: only `LeftWall` (main-corridor left wall,
+  mesh 0.3x3x17.5 @ x=-2.475, z=-4.875) overrides to `han_brick.tres`;
+  nothing else changed.
+- `tools/capture_brick_wall.gd` (env `TFU_BRICK_OUTPUT`, real OpenGL window):
+  two shots standing in the corridor at eye level facing the wall
+  (`brick_face` straight-on, `brick_angle` oblique). Archived
+  项目进度刻画图片/16-墓道砖墙试点-20261111/.
+- Checks: player_controls 70/0; environment_scale 1708 assertions failures=3
+  (pre-existing, same as coffin round).

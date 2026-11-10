@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://art/shaders/world_hanbrick.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/brick_a = Color(0.541, 0.427, 0.31, 1)
+shader_parameter/brick_b = Color(0.431, 0.384, 0.349, 1)
+shader_parameter/mortar_color = Color(0.18, 0.16, 0.14, 1)
+shader_parameter/core_color = Color(0.6, 0.5, 0.35, 1)
+shader_parameter/brick_size = Vector2(0.44, 0.11)
+shader_parameter/joint_width = 0.012
+shader_parameter/relief = 0.01
+shader_parameter/wear = 0.6
+shader_parameter/spall_chance = 0.18

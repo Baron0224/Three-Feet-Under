@@ -10,6 +10,7 @@
 [ext_resource type="Material" path="res://art/materials/rock.tres" id="Art_rock"]
 [ext_resource type="Material" path="res://art/materials/trim.tres" id="Art_trim"]
 [ext_resource type="Material" path="res://art/materials/wall.tres" id="Art_wall"]
+[ext_resource type="Material" path="res://art/materials/han_brick.tres" id="Art_hanbrick"]
 [ext_resource type="PackedScene" uid="uid://baphag5jndjdw" path="res://dilapidated_bridge.tscn" id="DilapidatedBridge"]
 [ext_resource type="PackedScene" uid="uid://ca2l7dub1clt5" path="res://dual_seal_door.tscn" id="DualSealDoor"]
 [ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
@@ -2232,7 +2233,7 @@ shape = SubResource("Shape_Floor02")
 
 [node name="LeftWall" type="MeshInstance3D" parent="." unique_id=1989651845]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.475, 2.4, -4.875)
-material_override = ExtResource("Art_wall")
+material_override = ExtResource("Art_hanbrick")
 mesh = SubResource("Mesh_LeftWall")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LeftWall" unique_id=1732632724]
