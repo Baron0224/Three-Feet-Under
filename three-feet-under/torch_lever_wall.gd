@@ -1,6 +1,8 @@
 @tool
 extends Node3D
 
+const BRICK_MAT := preload("res://art/materials/brick.tres")
+
 ## Torch-lever rising stone wall (concept A).
 ## E on the torch sconce pulls the lever down; the slab slides upward into the frame.
 ## require_torch_item=false for now; set true later when inventory torch exists.
@@ -41,6 +43,7 @@ signal lock_released
 ## World-space direction from the wall toward the hub interior.
 @export var hub_forward := Vector3(1, 0, 0)
 @export var hub_close_distance := 1.8
+@export var use_brick := false
 
 var _opened := false
 var _opening := false
@@ -61,8 +64,8 @@ var _flame_light: OmniLight3D
 var _prompt: Label
 var _player: Node3D
 
-var _stone: StandardMaterial3D
-var _stone_dark: StandardMaterial3D
+var _stone: Material
+var _stone_dark: Material
 var _bronze: StandardMaterial3D
 var _bronze_dark: StandardMaterial3D
 var _flame_mat: StandardMaterial3D
@@ -297,14 +300,20 @@ func _begin_close() -> void:
 
 
 func _make_materials() -> void:
-	_stone = StandardMaterial3D.new()
-	_stone.albedo_color = Color(0.32, 0.30, 0.28)
-	_stone.roughness = 0.92
-	_stone.metallic = 0.05
+	if use_brick:
+		_stone = BRICK_MAT
+		_stone_dark = BRICK_MAT
+		# Keep bronze/lever materials even when matching a brick wall;
+		# only the slab/frame become brick.
+	else:
+		_stone = StandardMaterial3D.new()
+		_stone.albedo_color = Color(0.32, 0.30, 0.28)
+		_stone.roughness = 0.92
+		_stone.metallic = 0.05
 
-	_stone_dark = StandardMaterial3D.new()
-	_stone_dark.albedo_color = Color(0.18, 0.17, 0.16)
-	_stone_dark.roughness = 0.95
+		_stone_dark = StandardMaterial3D.new()
+		_stone_dark.albedo_color = Color(0.18, 0.17, 0.16)
+		_stone_dark.roughness = 0.95
 
 	_bronze = StandardMaterial3D.new()
 	_bronze.albedo_color = Color(0.30, 0.20, 0.10)
@@ -396,27 +405,39 @@ func _mesh_cyl(parent: Node, name: String, r_top: float, r_bot: float, height: f
 
 
 func _build_geometry(gen: int) -> void:
-	var frame := Node3D.new()
-	frame.name = "Gen_Frame"
+	# In hidden/brick mode we don't want a protruding door frame; the slab is
+	# just a thin wall section flush with the surrounding wall, so the bricks
+	# line up and no edge is visible.
+	if not use_brick:
+		var frame := Node3D.new()
+		frame.name = "Gen_Frame"
 
-	# Carved stone frame (jambs + lintel + threshold)
-	_mesh_box(frame, "JambL", Vector3(0.45, opening_height + 0.5, 0.7), Vector3(-(opening_width * 0.5 + 0.25), opening_height * 0.5, 0.0), _stone_dark)
-	_mesh_box(frame, "JambR", Vector3(0.45, opening_height + 0.5, 0.7), Vector3(opening_width * 0.5 + 0.25, opening_height * 0.5, 0.0), _stone_dark)
-	_mesh_box(frame, "Lintel", Vector3(opening_width + 1.1, 0.55, 0.75), Vector3(0.0, opening_height + 0.15, 0.0), _stone)
-	_mesh_box(frame, "Threshold", Vector3(opening_width + 0.8, 0.2, 0.7), Vector3(0.0, 0.1, 0.05), _stone_dark)
-	# Meander / fret suggestion on lintel face
-	_mesh_box(frame, "LintelCarve", Vector3(opening_width * 0.85, 0.18, 0.12), Vector3(0.0, opening_height + 0.15, 0.38), _bronze_dark)
-	_attach(frame, gen)
+		# Carved stone frame (jambs + lintel + threshold)
+		_mesh_box(frame, "JambL", Vector3(0.45, opening_height + 0.5, 0.7), Vector3(-(opening_width * 0.5 + 0.25), opening_height * 0.5, 0.0), _stone_dark)
+		_mesh_box(frame, "JambR", Vector3(0.45, opening_height + 0.5, 0.7), Vector3(opening_width * 0.5 + 0.25, opening_height * 0.5, 0.0), _stone_dark)
+		_mesh_box(frame, "Lintel", Vector3(opening_width + 1.1, 0.55, 0.75), Vector3(0.0, opening_height + 0.15, 0.0), _stone)
+		_mesh_box(frame, "Threshold", Vector3(opening_width + 0.8, 0.2, 0.7), Vector3(0.0, 0.1, 0.05), _stone_dark)
+		# Meander / fret suggestion on lintel face.
+		_mesh_box(frame, "LintelCarve", Vector3(opening_width * 0.85, 0.18, 0.12), Vector3(0.0, opening_height + 0.15, 0.38), _bronze_dark)
+		_attach(frame, gen)
 
 	# Rising slab
 	var slab := Node3D.new()
 	slab.name = "Gen_Slab"
 	slab.position = Vector3(0.0, opening_height * 0.5, 0.0)
-	_mesh_box(slab, "SlabBody", Vector3(opening_width * 0.96, opening_height * 0.98, slab_thickness), Vector3.ZERO, _stone)
-	# Cracks (dark recessed strips)
-	_mesh_box(slab, "CrackV", Vector3(0.04, opening_height * 0.7, slab_thickness * 1.05), Vector3(-0.35, 0.1, 0.0), _stone_dark)
-	_mesh_box(slab, "CrackH", Vector3(opening_width * 0.55, 0.04, slab_thickness * 1.05), Vector3(0.2, -0.4, 0.0), _stone_dark)
-	_mesh_box(slab, "CrackV2", Vector3(0.035, opening_height * 0.4, slab_thickness * 1.05), Vector3(0.55, 0.5, 0.0), _stone_dark)
+	# In hidden brick mode the slab is a thin wall section flush with the wall,
+	# so no frame edge can give away the door.
+	var slab_size := Vector3(opening_width * 0.96, opening_height * 0.98, slab_thickness)
+	var slab_pos := Vector3.ZERO
+	if use_brick:
+		slab_size = Vector3(opening_width + 0.02, opening_height + 0.02, 0.05)
+		slab_pos = Vector3.ZERO
+	_mesh_box(slab, "SlabBody", slab_size, slab_pos, _stone)
+	# Cracks (dark recessed strips) only on plain stone doors.
+	if not use_brick:
+		_mesh_box(slab, "CrackV", Vector3(0.04, opening_height * 0.7, slab_thickness * 1.05), Vector3(-0.35, 0.1, 0.0), _stone_dark)
+		_mesh_box(slab, "CrackH", Vector3(opening_width * 0.55, 0.04, slab_thickness * 1.05), Vector3(0.2, -0.4, 0.0), _stone_dark)
+		_mesh_box(slab, "CrackV2", Vector3(0.035, opening_height * 0.4, slab_thickness * 1.05), Vector3(0.55, 0.5, 0.0), _stone_dark)
 
 	var body := StaticBody3D.new()
 	body.name = "StaticBody3D"
@@ -424,8 +445,9 @@ func _build_geometry(gen: int) -> void:
 	body.collision_mask = 1
 	var cs := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
-	shape.size = Vector3(opening_width * 0.96, opening_height * 0.98, slab_thickness)
+	shape.size = slab_size
 	cs.shape = shape
+	cs.position = slab_pos
 	body.add_child(cs)
 	slab.add_child(body)
 	_slab = slab

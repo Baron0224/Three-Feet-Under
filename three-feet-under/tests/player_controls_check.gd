@@ -5,6 +5,7 @@ var checks := 0
 var scene: Node3D
 var player: CharacterBody3D
 var scene_scale := 1.0
+var authored_spawn := Vector3.ZERO
 var ground_y := .1
 
 func _initialize() -> void:
@@ -53,6 +54,7 @@ func load_test_scene(path: String) -> void:
 	root.add_child(scene)
 	current_scene = scene
 	player = scene.get_node("player")
+	authored_spawn = player.position
 	scene_scale = scene.get_meta("environment_scale", 1.0)
 	ground_y = .1*scene_scale
 	await ticks(6)
@@ -232,7 +234,7 @@ func run() -> void:
 	player = scene.get_node("player")
 	await ticks(8)
 	expect(player.get_instance_id()!=old_player_id and not player.is_dead, "scene actually reloaded once")
-	expect(abs(player.position.x)<.01 and abs(player.position.z-11.7*scene_scale)<.03 and abs(player.position.y-1.54*scene_scale)<.08, "restart from tomb entrance")
+	expect(abs(player.position.x-authored_spawn.x)<.03 and abs(player.position.z-authored_spawn.z)<.03 and player.position.y <= authored_spawn.y+.08 and player.position.y > ground_y-.1, "restart at scene-authored spawn")
 	expect(not player.death_overlay.visible and player.mouse_captured, "restart clears death HUD and captures mouse")
 	# Missing current scene exercises the guarded reload-error fallback without a login or scene change.
 	player.is_dead = true

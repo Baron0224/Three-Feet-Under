@@ -1,0 +1,1 @@
+真实Godot OpenGL渲染，1920x1080，桥侧视与玩家视角；使用原场景和临时摄影机跟随灯，无图像生成或后期修饰。bridge_side展示拱腹，bridge_player_west与bridge_player_crown展示通行面。见项目进度2026-11-08连续石拱桥记录。

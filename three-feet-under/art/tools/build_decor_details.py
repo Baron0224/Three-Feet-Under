@@ -133,18 +133,13 @@ def pedestal(seal_mat):
 PEDESTAL_GOLD = pedestal("gold")
 PEDESTAL_BLUE = pedestal("blue")
 
+# Rounded coffin modeled in Blender (build_coffin_han.py -> coffin_heavy.glb).
+# The GLB is grounded at local y=0 and spans ~4.6 long (X) x 2.0 wide (Z) x 1.49 tall.
+# Original boxy SARCOPHAGUS replaced by a single packed-scene instance; the
+# "glb" part special-cases the writer to emit an instance node instead of a
+# MeshInstance3D built from primitives.
 SARCOPHAGUS = [
-    ("Base", ("box", (4.7, 0.26, 2.0), (0, 0.13, 0), "trim")),
-    ("Body", ("box", (4.3, 0.98, 1.72), (0, 0.75, 0), "coffin")),
-    ("Lid", ("box", (4.58, 0.20, 1.98), (0, 1.34, 0), "trim")),
-    ("LidTop", ("box", (4.2, 0.10, 1.66), (0, 1.49, 0), "coffin")),
-    ("PostA", ("box", (0.26, 1.34, 0.26), (-2.02, 0.67, -0.76), "trim")),
-    ("PostB", ("box", (0.26, 1.34, 0.26), (2.02, 0.67, -0.76), "trim")),
-    ("PostC", ("box", (0.26, 1.34, 0.26), (-2.02, 0.67, 0.76), "trim")),
-    ("PostD", ("box", (0.26, 1.34, 0.26), (2.02, 0.67, 0.76), "trim")),
-    ("PanelW", ("box", (0.06, 0.62, 1.40), (-2.17, 0.80, 0), "trim")),
-    ("PanelE", ("box", (0.06, 0.62, 1.40), (2.17, 0.80, 0), "trim")),
-    ("FootBlock", ("box", (1.1, 0.30, 1.9), (0, 0.15, 0), "rock")),
+    ("Coffin", ("glb", "res://art/models/coffin_heavy.glb", (0, 0.0, 0), "coffin")),
 ]
 
 LAMPSTAND = [
@@ -752,6 +747,14 @@ def part_tform(pos, yaw_deg, pitch_deg):
         flat[6], flat[7], flat[8], pos[0], pos[1], pos[2])
 
 
+glb_sub = set()
+
+
+def glb_ref_id(gpath):
+    glb_sub.add(gpath)
+    return "glb%d" % (hash(gpath) % 100000)
+
+
 body = []
 emitted_groups = []
 for kind, (gname, parts) in GROUPS.items():
@@ -766,7 +769,18 @@ for kind, (gname, parts) in GROUPS.items():
         body.append('\n[node name="%s" type="Node3D" parent="%s"]' % (name, unique_gname))
         body.append("transform = %s" % xform(pos, yaw, sc))
         for pname, spec in parts:
-            shape = (spec[0], spec[1])
+            pkind = spec[0]
+            if pkind == "glb":
+                # Packed-scene instance (rounded Blender model). GLB is grounded
+                # at local y=0, so keep the part at its placement's local origin.
+                glb_path = spec[1]
+                ppos = spec[2]
+                body.append('\n[node name="%s" parent="%s/%s" instance=ExtResource("p_%s")]'
+                            % (pname, unique_gname, name, glb_ref_id(glb_path)))
+                body.append("transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, %g, %g, %g)"
+                            % (ppos[0], ppos[1], ppos[2]))
+                continue
+            shape = (pkind, spec[1])
             ppos = spec[2]
             mat = spec[3]
             pyaw = spec[4] if len(spec) > 4 else 0.0
@@ -782,9 +796,12 @@ for kind, (gname, parts) in GROUPS.items():
             body.append('mesh = SubResource("%s")' % sid)
             body.append('material_override = ExtResource("m_%s")' % mat)
 
+
 ext_lines = []
 for key, path in MAT.items():
     ext_lines.append('[ext_resource type="Material" path="%s" id="m_%s"]' % (path, key))
+for gpath in sorted(glb_sub):
+    ext_lines.append('[ext_resource type="PackedScene" path="%s" id="p_%s"]' % (gpath, glb_ref_id(gpath)))
 
 load_steps = len(ext_lines) + len(sub_lines) + 1
 text = ('[gd_scene load_steps=%d format=3]\n\n' % load_steps

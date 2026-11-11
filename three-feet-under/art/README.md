@@ -393,3 +393,56 @@ Checks:
   renders 8 shots: hall south/north door, hall south wall, tomb east/west door,
   niche close-up, band close-up, door stop. Archived in
   项目进度刻画图片/14-墙面装饰贴合修复-20261107/.
+
+## Eastern Han lacquered coffin (2026-11-10)
+
+- User installed Blender 5.2.3 LTS; style locked to **Eastern Han (a.d. 25–220)**
+  per user, referencing 盗墓笔记; see [STYLE_ANCHOR.md](STYLE_ANCHOR.md) — the
+  permanent art anchor card (brick-chamber tomb + pictogram bricks, oil-lamp-only
+  lighting, low-sat earth palette, PBR specs, forbidden list, build order,
+  dispatch workflow).
+- `tools/build_coffin_han.py` (Blender 4+ is **Z-up**: height along Z)
+  procedurally builds the coffin and joins one mesh `Coffin_Han`: stone plinth
+  4.7x2.2x0.20, trapezoid casket body (head wider/taller than foot: HEAD_W 1.82 /
+  FOOT_W 1.56, HEAD_H 0.92 / FOOT_H 0.78, bevel 0.10/5seg), two vermilion
+  lacquer bands (0.012 thick), arched (barrel) lid = cylinder half (48 seg,
+  bisected z>0, scaled LEN/RISE 0.42). Materials: BLACK_LACQ
+  (0.030,0.024,0.024 rough0.30 clearcoat0.8) / VERMILION (0.72,0.16,0.10) /
+  STONE (0.24,0.20,0.16). Exported `models/coffin_heavy.glb` (dims 4.6x1.49x2.02,
+  origin at geometric center z=0.747).
+- Generator `build_decor_details.py` gained a `"glb"` part kind: emits a plain
+  instanced node from an ExtResource; emission and reference must share one hash
+  id. `Sarcophagus11` (57, 0.75, -91.5) yaw 90 now instantiates the coffin.
+- `tools/capture_coffin.gd` (env `TFU_COFFIN_OUTPUT`, real window) renders 4
+  shots (front/three-qtr/head/side). Comparison vs old boxy stone coffin
+  archived in 项目进度刻画图片/15-中式髹漆木棺-20261110/.
+- Checks: player_controls 70/0; environment_scale 1708 assertions failures=3
+  (pre-existing, same on committed 1718 version).
+
+## Eastern Han strip brick wall pilot (2026-11-11) — dispatch 01
+
+Style-anchor dispatch 01: give ONE corridor wall a real Han brick material,
+without touching structure or any other decoration.
+
+- `shaders/world_hanbrick.gdshader`: world-space procedural Han strip brick
+  (东汉条砖). Long face ~4:1 (`brick_size` vec2(0.44, 0.11)), running bond
+  (every other row off by half a brick). Per-brick tone random between the
+  anchor palette 夯土黄 #8A6D4F and 砖灰 #6E6259 via per-cell hash. Mortar
+  joints carry accumulated dirt (groove darkened, in-joint grime noise), and
+  ~18% of bricks (per-cell `spall_chance`) have an eroded patch exposing the
+  earthen core (lighter `core_color` + recessed relief). Same world-space
+  planar projection and surface-gradient bump as world_brick/world_stone, so
+  brick size stays meter-accurate at 1.5x environment scale and there is no
+  tiling repetition. PBR: rough 0.92+, specular 0.1, no plastic sheen.
+- `materials/han_brick.tres`: ShaderMaterial instance bound to the palette
+  (brick_a 0.541/0.427/0.31, brick_b 0.431/0.384/0.349, mortar dark, core
+  0.6/0.5/0.35).
+- `tomb_corridor.tscn`: only `LeftWall` (main-corridor left wall,
+  mesh 0.3x3x17.5 @ x=-2.475, z=-4.875) overrides to `han_brick.tres`;
+  nothing else changed.
+- `tools/capture_brick_wall.gd` (env `TFU_BRICK_OUTPUT`, real OpenGL window):
+  two shots standing in the corridor at eye level facing the wall
+  (`brick_face` straight-on, `brick_angle` oblique). Archived
+  项目进度刻画图片/16-墓道砖墙试点-20261111/.
+- Checks: player_controls 70/0; environment_scale 1708 assertions failures=3
+  (pre-existing, same as coffin round).
