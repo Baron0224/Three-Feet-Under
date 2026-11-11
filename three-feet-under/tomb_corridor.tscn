@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://csk36hqgr0qpy" path="res://player.gd" id="1_et3i4"]
 [ext_resource type="Script" uid="uid://bsu7qvfxp2gjy" path="res://clue_tablet.gd" id="2_mhnn8"]
 [ext_resource type="PackedScene" path="res://art/candles.tscn" id="30_candles"]
+[ext_resource type="PackedScene" path="res://art/props/decor_details.tscn" id="40_decor"]
 [ext_resource type="Material" path="res://art/materials/ceiling.tres" id="Art_ceiling"]
 [ext_resource type="Material" path="res://art/materials/coffin.tres" id="Art_coffin"]
 [ext_resource type="PackedScene" path="res://art/art_details.tscn" id="Art_details"]
@@ -12,10 +13,14 @@
 [ext_resource type="Material" path="res://art/materials/wall.tres" id="Art_wall"]
 [ext_resource type="PackedScene" uid="uid://baphag5jndjdw" path="res://dilapidated_bridge.tscn" id="DilapidatedBridge"]
 [ext_resource type="PackedScene" uid="uid://ca2l7dub1clt5" path="res://dual_seal_door.tscn" id="DualSealDoor"]
-[ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
+[ext_resource type="PackedScene" uid="uid://cblvyjrad00cy" path="res://east_seal_puzzle.tscn" id="EastSealPuzzle"]
+[ext_resource type="PackedScene" uid="uid://b2j4623h6jyme" path="res://shortcut_gate.tscn" id="EastShortcutGate"]
+[ext_resource type="PackedScene" uid="uid://dw86xjg2kl6ci" path="res://pressure_plate_puzzle.tscn" id="PressurePlatePuzzle"]
 [ext_resource type="PackedScene" uid="uid://nmgcgm1wxi5y" path="res://rolling_boulder_trap.tscn" id="RollingBoulder"]
+[ext_resource type="PackedScene" uid="uid://b7bo76j87112s" path="res://rotating_door_08.tscn" id="RotatingDoor08"]
+[ext_resource type="PackedScene" uid="uid://bb3wysvrok1mr" path="res://spike_cascade_trap.tscn" id="SpikeCascade"]
 [ext_resource type="PackedScene" uid="uid://csv0ck667006g" path="res://torch_lever_wall.tscn" id="TorchLeverWall"]
-[ext_resource type="PackedScene" path="res://art/props/decor_details.tscn" id="40_decor"]
+[ext_resource type="PackedScene" uid="uid://drqi6kl7kutue" path="res://west_seal_puzzle.tscn" id="WestSealPuzzle"]
 
 [sub_resource type="BoxMesh" id="Mesh_Floor01"]
 size = Vector3(3, 0.2, 8)
@@ -2477,7 +2482,7 @@ omni_range = 22.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41, 17.55)
 
 [node name="player" type="CharacterBody3D" parent="." unique_id=144523109]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.5, 1.2, -37.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 17.55)
 script = ExtResource("1_et3i4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=2089584757]
@@ -4329,10 +4334,18 @@ opening_height = 3.9
 rise_distance = 4.1
 lever_on_inner_wall = true
 lever_on_passage_side = true
-lever_on_right = false
+locked = true
+close_behind = true
 
 [node name="TorchLeverWallWestShortcutTestSpawn" type="Marker3D" parent="." unique_id=1847293652]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -15.5, 1.2, -37.5)
+
+[node name="PressurePlatePuzzle" parent="." unique_id=1360291466 instance=ExtResource("PressurePlatePuzzle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.8, 0.15, -47.2)
+correct_sequence = PackedInt32Array(0, 1, 2, 3)
+
+[node name="PressurePlatePuzzleTestSpawn" type="Marker3D" parent="." unique_id=280814267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.8, 1.2, -40.5)
 
 [node name="DilapidatedBridge" parent="." unique_id=490333024 instance=ExtResource("DilapidatedBridge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -30)
@@ -6028,9 +6041,10 @@ shape = SubResource("Shape_Final_CentralCoffinPlinth")
 
 [node name="GreyboxCoffin" type="MeshInstance3D" parent="FinalWing/Tomb11" unique_id=266230511]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 1.05, -61)
+visible = false
 material_override = ExtResource("Art_coffin")
 mesh = SubResource("Mesh_Final_GreyboxCoffin")
-visible = false
+
 [node name="StaticBody3D" type="StaticBody3D" parent="FinalWing/Tomb11/GreyboxCoffin" unique_id=385254465]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FinalWing/Tomb11/GreyboxCoffin/StaticBody3D" unique_id=1543156443]
@@ -6299,18 +6313,50 @@ light_energy = 0.868
 light_specular = 0.3
 omni_range = 12.0
 
-[node name="RollingBoulderTrap" parent="." instance=ExtResource("RollingBoulder")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.0, 0.0, -61.5)
+[node name="RollingBoulderTrap" parent="." unique_id=2039624954 instance=ExtResource("RollingBoulder")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, -61.5)
 
-[node name="BoulderTrapRespawn" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.0, 1.2, -68.0)
+[node name="BoulderTrapRespawn" type="Marker3D" parent="." unique_id=530554417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 1.2, -68)
 
-[node name="BoulderTrapTestSpawn" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.0, 1.2, -64.0)
+[node name="BoulderTrapTestSpawn" type="Marker3D" parent="." unique_id=2125940837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 1.2, -64)
+
+[node name="WestSealPuzzle" parent="." unique_id=1426473369 instance=ExtResource("WestSealPuzzle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5, 0.15, -90)
+
+[node name="Generated" type="Node3D" parent="WestSealPuzzle" unique_id=432540101]
+
+[node name="WestSealTestSpawn" type="Marker3D" parent="." unique_id=451374870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.5, 1.2, -86)
+
+[node name="EastSealPuzzle" parent="." unique_id=107583278 instance=ExtResource("EastSealPuzzle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0.15, -60)
+safe_path = PackedInt32Array(1, 1, 0, 2, 1)
+
+[node name="Generated" type="Node3D" parent="EastSealPuzzle" unique_id=1732111332]
+
+[node name="EastSealTestSpawn" type="Marker3D" parent="." unique_id=2058313548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 1.2, -53.5)
+
+[node name="EastShortcutGate" parent="." unique_id=1514910956 instance=ExtResource("EastShortcutGate")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 12.35, 0, -22.5)
+locked_prompt = "需先取得东侧封印"
+
+[node name="Generated" type="Node3D" parent="EastShortcutGate" unique_id=1441022154]
+
+[node name="EastShortcutGateTestSpawn" type="Marker3D" parent="." unique_id=1391166698]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 16.5, 1.2, -22.5)
+
+[node name="RotatingDoor08" parent="." unique_id=850673764 instance=ExtResource("RotatingDoor08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0.15, -30)
+
+[node name="Room08TestSpawn" type="Marker3D" parent="." unique_id=1721818612]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 51, 1.2, -30)
 
 [node name="ArtDetails" parent="." unique_id=959751455 instance=ExtResource("Art_details")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Candles" parent="." unique_id=53156746 instance=ExtResource("30_candles")]
 
-[node name="DecorDetails" parent="." instance=ExtResource("40_decor")]
+[node name="DecorDetails" parent="." unique_id=102193754 instance=ExtResource("40_decor")]

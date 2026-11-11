@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dw86xjg2kl6ci"]
+
+[ext_resource type="Script" uid="uid://cpressplatepuzgd" path="res://pressure_plate_puzzle.gd" id="1_ppp"]
+
+[node name="PressurePlatePuzzle" type="Node3D"]
+script = ExtResource("1_ppp")
+plate_spacing = 2.1
+gate_local_offset = Vector3(0.8, 0, -5.45)
+opening_width = 4.0
+opening_height = 3.8

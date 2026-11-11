@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b2j4623h6jyme"]
+
+[ext_resource type="Script" uid="uid://cshortcutgategd1" path="res://shortcut_gate.gd" id="1_sg"]
+
+[node name="ShortcutGate" type="Node3D"]
+script = ExtResource("1_sg")
+opening_width = 4.0
+opening_height = 3.9
+locked = true
+use_brick = true
+hub_forward = Vector3(-1, 0, 0)

@@ -8,6 +8,8 @@ extends Node3D
 signal lever_pulled
 signal wall_opened
 signal wall_blocked_needs_torch
+signal wall_blocked_locked
+signal lock_released
 
 @export var opening_width := 4.2:
 	set(v):
@@ -33,9 +35,17 @@ signal wall_blocked_needs_torch
 @export var lever_on_right := false
 @export var lever_on_inner_wall := false
 @export var lever_on_passage_side := false
+@export var locked := false
+@export var locked_prompt := "需先取得西侧封印"
+@export var close_behind := false
+## World-space direction from the wall toward the hub interior.
+@export var hub_forward := Vector3(1, 0, 0)
+@export var hub_close_distance := 1.8
 
 var _opened := false
 var _opening := false
+var _closing := false
+var _unlocked := true
 var _lever_animating := false
 var _lever_t := 0.0
 var _slab_start_y := 0.0
@@ -59,6 +69,7 @@ var _flame_mat: StandardMaterial3D
 
 
 func _ready() -> void:
+	_unlocked = not locked
 	_request_rebuild(true)
 
 
@@ -109,9 +120,25 @@ func is_open() -> bool:
 
 
 func open_wall() -> void:
-	if _opened or _opening:
+	if _opened or _opening or _closing:
 		return
 	_start_sequence()
+
+
+func is_unlocked() -> bool:
+	return _unlocked
+
+
+func release_lock() -> void:
+	if _unlocked:
+		return
+	_unlocked = true
+	locked = false
+	lock_released.emit()
+	if _prompt:
+		_prompt.visible = true
+		_prompt.text = "捷径已开，扳壁灯单向返回"
+	print("TorchLeverWall: lock released at ", global_position)
 
 
 func _player_has_torch() -> bool:
@@ -128,7 +155,13 @@ func _player_has_torch() -> bool:
 
 
 func _start_sequence() -> void:
-	if _opened or _opening or _lever_animating:
+	if _opened or _opening or _closing or _lever_animating:
+		return
+	if not _unlocked:
+		wall_blocked_locked.emit()
+		if _prompt:
+			_prompt.visible = true
+			_prompt.text = locked_prompt
 		return
 	if not _player_has_torch():
 		wall_blocked_needs_torch.emit()
@@ -173,7 +206,26 @@ func _process(delta: float) -> void:
 				_prompt.visible = false
 		return
 
+	if _closing and _slab:
+		var target_y := _slab_start_y
+		_slab.position.y = move_toward(_slab.position.y, target_y, rise_speed * delta)
+		if is_equal_approx(_slab.position.y, target_y):
+			_closing = false
+			_opened = false
+			_opening = false
+			_lever_animating = false
+			_lever_t = 0.0
+			if _lever_arm:
+				_lever_arm.rotation.z = deg_to_rad(lever_rest_degrees)
+			if _slab_body:
+				_slab_body.collision_layer = 1
+				_slab_body.collision_mask = 1
+			print("TorchLeverWall: closed behind player")
+		return
+
 	if _opened:
+		if close_behind and _player_on_hub_side():
+			_begin_close()
 		return
 
 	_update_prompt()
@@ -185,14 +237,16 @@ func _update_prompt() -> void:
 	if not (_player.has_method("can_interact") and _player.can_interact()):
 		return
 	if not _lever_near():
-		if _prompt.text.begins_with("E ") and ("壁灯" in _prompt.text or "火把" in _prompt.text):
+		if _prompt.text.begins_with("E ") and ("壁灯" in _prompt.text or "火把" in _prompt.text or "封印" in _prompt.text):
 			_prompt.visible = false
 		return
 	_prompt.visible = true
-	if require_torch_item and not _player_has_torch():
+	if not _unlocked:
+		_prompt.text = locked_prompt
+	elif require_torch_item and not _player_has_torch():
 		_prompt.text = "E 需要火把"
 	else:
-		_prompt.text = "E 扳下壁灯（调试）"
+		_prompt.text = "E 扳下壁灯，单向返回枢纽"
 
 
 func _lever_near() -> bool:
@@ -208,7 +262,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if not allow_debug_interact:
 		return
-	if _opened or _opening or _lever_animating:
+	if _opened or _opening or _closing or _lever_animating:
 		return
 	if _player == null or not (_player.has_method("can_interact") and _player.can_interact()):
 		return
@@ -217,6 +271,29 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _lever_near():
 		_start_sequence()
 		get_viewport().set_input_as_handled()
+
+
+func _player_on_hub_side() -> bool:
+	if _player == null:
+		return false
+	var d := hub_forward
+	d.y = 0.0
+	if d.length() < 0.01:
+		d = Vector3(1, 0, 0)
+	d = d.normalized()
+	var offset := _player.global_position - global_position
+	offset.y = 0.0
+	return offset.dot(d) > hub_close_distance
+
+
+func _begin_close() -> void:
+	if not _opened or _closing or _slab == null:
+		return
+	_closing = true
+	if _slab_body:
+		_slab_body.collision_layer = 1
+		_slab_body.collision_mask = 1
+	print("TorchLeverWall: closing behind player")
 
 
 func _make_materials() -> void:

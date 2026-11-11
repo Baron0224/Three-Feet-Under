@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b7bo76j87112s"]
+
+[ext_resource type="Script" uid="uid://crotatingdoor08g" path="res://rotating_door_08.gd" id="1_r08"]
+
+[node name="RotatingDoor08" type="Node3D"]
+script = ExtResource("1_r08")
+start_setting = 0
+gate_distance = 10.2

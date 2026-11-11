@@ -6,5 +6,10 @@
 script = ExtResource("1_bridge")
 bridge_length = 24.0
 bridge_width = 9.9
-arch_height = 0.55
+arch_height = 2.0
 enable_midspan_shake = true
+auto_collapse_on_midspan = true
+collapse_start_x = 0.8
+collapse_end_x = 7.2
+warn_seconds = 1.7
+enable_rescue_beam = true

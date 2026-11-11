@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cblvyjrad00cy"]
+
+[ext_resource type="Script" uid="uid://ceastsealpuzgd01" path="res://east_seal_puzzle.gd" id="1_esp"]
+
+[node name="EastSealPuzzle" type="Node3D"]
+script = ExtResource("1_esp")
